@@ -10,7 +10,7 @@ import Testing
 /// To test some extensions of `SwiftUI.Color`
 struct ColorExtensionsTests {
 
-    // See https://github.com/Orange-OpenSource/miso-ios/issues/667
+    // See https://github.com/Orange-OpenSource/ouds-ios/issues/667
     #if !os(iOS)
     private static let doesRunOniOS = false
     #else

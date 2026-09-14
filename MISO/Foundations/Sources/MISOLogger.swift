@@ -5,7 +5,7 @@ import Foundation
 import os
 
 /// To keep code smaller
-public typealias OL = MISOLogger
+public typealias ML = MISOLogger
 
 /// The `os.Logger` wrapper used in the *MISO iOS* library so as to logs things in standard output or elsewhere.
 ///
@@ -18,7 +18,7 @@ public typealias OL = MISOLogger
     private init() {}
 
     private static let logger = Logger()
-    private static let bullet: String = "🍊"
+    private static let bullet: String = "🍜"
     private static let prefix: String = "\(bullet) [MISO]"
 
     /// When `true`, debug and log level messages are written to the console.
