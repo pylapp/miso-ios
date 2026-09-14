@@ -57,12 +57,12 @@ extension WireframeThemeColorSemanticTokensProvider: ColorSemanticTokens {
 ## Architecture
 
 The *Multiples* objects are _composite class_ defined to pack double values for dedicated needs, like size classes management (_regular_ or _compact_ device modes), and also for color schemes management (_light_ and _dark_ modes).
-Such *composites* are not the same as the ones defined in the *Figma* design system, they are just utilities to handle tuple of values, without the syntax of tuples and with some helper functions.
+Such *composites* are not the same as the ones defined in the OUDS *Figma* design system, they are just utilities to handle tuple of values, without the syntax of tuples and with some helper functions.
 
 We would like to define one class for all combinations of things depending to light and dark modes, and another for regular and compact modes. However, it implies to use _Swift generics_ and it is not compatible with Objective-C runtime (we use through `@objc` keyword).
 
 There are also several *typealias* values used for the semantic tokens.
-Indeed these aliases are here to bring clarity and meanings in the library, and also to help users (i.e. developers) to know what kind of objects they handle with the same vocabulary as the one used in *Figma*, and in general, in the whole design system. They can be seen as a light level of abstraction with meanings, without having to define real types with `struct` or `class`.
+Indeed these aliases are here to bring clarity and meanings in the library, and also to help users (i.e. developers) to know what kind of objects they handle with the same vocabulary as the one used in OUDS *Figma*, and in general, in the whole design system. They can be seen as a light level of abstraction with meanings, without having to define real types with `struct` or `class`.
 Type aliases here point to raw tokens aliases, thus by transition they point to real types.
 
 The semantic tokens are declared through protocols. These protocols will be then implemented by the providers in higher level (i.e. theme level like *WireframeTheme*).
@@ -130,7 +130,7 @@ Because Figma cannot manage "optional" tokens, and because it will make heavier 
 This forbidden value is in tokenator side the "transparent red", i.e. #FF000000. 
 But in Swift package side, this value is converted to "miso-forbidden-color-value", and associated documentation updated. 
 
-> Important: Then, even if users use these tokens, even if not specified in theme and documentation and Figma specifications, this value won't be successfully parsed as color and program will crash. 
+> Important: Then, even if users use these tokens, even if not specified in theme and documentation and OUDS Figma specifications, this value won't be successfully parsed as color and program will crash. 
 
 ## How to use semantic tokens
 

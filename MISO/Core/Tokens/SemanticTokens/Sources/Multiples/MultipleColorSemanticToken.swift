@@ -203,29 +203,29 @@ extension MISOWCAG21Ratio {
         case .AA where target == .textual:
             let (textualPass, _) = ratio.requirementsAA
             if !textualPass {
-                OL.warning("👮 In \(source) the \(scheme) color '\(lhs)' on surface '\(rhs)' does not match contrast ratio for text 4.5:1 (WCAG 2.1 AA) (ratio \(ratio.ratio))")
+                ML.warning("👮 In \(source) the \(scheme) color '\(lhs)' on surface '\(rhs)' does not match contrast ratio for text 4.5:1 (WCAG 2.1 AA) (ratio \(ratio.ratio))")
             }
             return textualPass
         case .AA where target == .nonTextual:
             let (_, nonTextualPass) = ratio.requirementsAA
             if !nonTextualPass {
-                OL.warning("👮 In \(source) the \(scheme) color '\(lhs)' on surface '\(rhs)' does not match contrast ratio for non-text 3:1 (WCAG 2.1 AA) (ratio \(ratio.ratio))")
+                ML.warning("👮 In \(source) the \(scheme) color '\(lhs)' on surface '\(rhs)' does not match contrast ratio for non-text 3:1 (WCAG 2.1 AA) (ratio \(ratio.ratio))")
             }
             return nonTextualPass
         case .AAA where target == .textual:
             let (textualPass, _) = ratio.requirementsAAA
             if !textualPass {
-                OL.warning("👮 In \(source) the \(scheme) color '\(lhs)' on surface '\(rhs)' does not match contrast ratio for text 7:1 (WCAG 2.1 AAA) (ratio \(ratio.ratio))")
+                ML.warning("👮 In \(source) the \(scheme) color '\(lhs)' on surface '\(rhs)' does not match contrast ratio for text 7:1 (WCAG 2.1 AAA) (ratio \(ratio.ratio))")
             }
             return textualPass
         case .AAA where target == .nonTextual:
             let (_, nonTextualPass) = ratio.requirementsAAA
             if !nonTextualPass {
-                OL.warning("👮 In \(source) the \(scheme) color '\(lhs)' on surface '\(rhs)' does not match contrast ratio for nontext 4.5:1 (WCAG 2.1 AAA) (ratio \(ratio.ratio))")
+                ML.warning("👮 In \(source) the \(scheme) color '\(lhs)' on surface '\(rhs)' does not match contrast ratio for nontext 4.5:1 (WCAG 2.1 AAA) (ratio \(ratio.ratio))")
             }
             return nonTextualPass
         default:
-            OL.warning("👮 Contrast check requirements not managed!")
+            ML.warning("👮 Contrast check requirements not managed!")
             return false
         }
     }
