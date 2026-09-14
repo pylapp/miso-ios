@@ -11,7 +11,7 @@ min-deployment: iOS 15.0
 
 MISO is a Swift Package providing design tokens, themes and SwiftUI components, forked from ouds-ios.
 The demo application is called "Design System Toolbox".
-The project is open source (MIT) at https://github.com/Orange-OpenSource/miso-ios.
+The project is open source (MIT) at https://github.com/pylapp/miso-ios.
 Target platforms: iOS 15, iPadOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16. Language: Swift 6 / SwiftUI.
 
 ## Skills

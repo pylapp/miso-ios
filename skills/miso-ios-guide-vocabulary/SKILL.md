@@ -19,6 +19,7 @@ license: MIT
 | **component** | SwiftUI view shipped by MISO with well-defined layout and behaviour (buttons, switches, links, …) |
 | **view modifier** | Object which changes the style or look and feel of a component |
 | **typography** | Style applied on texts with font line height, letter spacing weight, size and family |
+| **OUDS** | The original proejct, usptream of MISO, which is a fork of OUDS but without Brand themes and assets |
 
 ## When to load which skill
 

@@ -27,8 +27,8 @@ let package = Package(
 
         // Embeds all libraries and all themes
         .library(
-            name: "MISO",
-            targets: ["MISO"]),
+            name: "MISOSwiftUI",
+            targets: ["MISOSwiftUI"]),
 
         // MARK: Atomic products
 
@@ -78,7 +78,7 @@ let package = Package(
         // MARK: Umbrella targets
 
         .target(
-            name: "MISO",
+            name: "MISOSwiftUI",
             dependencies: [
                 "MISOThemesWireframe",
                 "MISOThemesContract",
