@@ -10,7 +10,7 @@ Do not add @PageImage(purpose: card) because not managed for landing page of onl
 See https://github.com/swiftlang/swift-docc/issues/1283
 -->
 
-MISO: a SwiftUI library of components, forked from ouds-ios.
+🍜 MISO: a SwiftUI library of components, forked from ouds-ios.
 
 ## Overview
 
