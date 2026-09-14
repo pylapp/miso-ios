@@ -12,7 +12,7 @@ import MISOThemesContract
 /// *Tag inputs* components tokens are defined with semantic tokens of colors (from `AllColorSemanticTokensProvider`),
 /// and borders (from `AllBorderSemanticTokensProvider`).
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 open class WireframeThemeInputTagComponentTokensProvider: AllInputTagComponentTokensProvider {
 
     /// Provider of border semantic tokens to use for tag input borders

@@ -13,7 +13,7 @@ import MISOThemesContract
 /// spaces (from `AllSpaceSemanticTokensProvider`),  sizes (from `AllSizeSemanticTokensProvider`)
 /// and borders (from `AllBorderSemanticTokensProvider`).
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 open class WireframeThemeTagComponentTokensProvider: AllTagComponentTokensProvider {
 
     /// Provider of size semantic tokens to use for tag sizes

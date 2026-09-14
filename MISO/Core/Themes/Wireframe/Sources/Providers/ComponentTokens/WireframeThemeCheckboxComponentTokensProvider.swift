@@ -16,7 +16,7 @@ import MISOThemesContract
 /// borders (`BorderRadiusSemanticToken`, `BorderWidthSemanticToken`).
 /// These components share the same type of tokens which are all gathered here.
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 open class WireframeThemeCheckboxComponentTokensProvider: AllCheckboxComponentTokensProvider {
 
     /// Provider of size semantic tokens to use for checkbox sizes

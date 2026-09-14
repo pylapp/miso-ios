@@ -14,7 +14,7 @@ import MISOThemesContract
 /// *Badge* components tokens are defined with semantic tokens of dimensions (`AllDimensionSemanticTokensProvider`)
 /// and spaces (from `AllSpaceSemanticTokensProvider`).
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 open class WireframeThemeBadgeComponentTokensProvider: AllBadgeComponentTokensProvider {
 
     /// Provider of spaces semantic tokens to use for badge spaces

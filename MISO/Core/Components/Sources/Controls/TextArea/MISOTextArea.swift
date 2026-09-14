@@ -158,7 +158,7 @@ import SwiftUI
 /// ```
 ///
 /// - Version: 1.2.1 (Figma component design version)
-/// - Since: 1.4.0
+/// - Since: OUDS 1.4.0
 @available(iOS 15, macOS 13, visionOS 1, *)
 public struct MISOTextArea: View {
 
@@ -189,7 +189,7 @@ public struct MISOTextArea: View {
     ///     // Manage parsing of AttributedString on your side
     /// ```
     ///
-    /// - Since: 1.4.0
+    /// - Since: OUDS 1.4.0
     @frozen public enum Status: Equatable {
         /// The `enabled` status (default)
         case enabled
@@ -257,7 +257,7 @@ public struct MISOTextArea: View {
     ///     MISOTextArea(label: "Bio", text: $text, helperText: .charactersMaxCount(500))
     /// ```
     ///
-    /// - Since: 1.4.0
+    /// - Since: OUDS 1.4.0
     @frozen public enum HelperText {
         /// A plain helper string defined by the caller.
         case plain(String)
@@ -288,7 +288,7 @@ public struct MISOTextArea: View {
     // MARK: - Helper link
 
     /// Used to describe the helper link below the text area.
-    /// - Since: 1.4.0
+    /// - Since: OUDS 1.4.0
     @frozen public struct Helperlink {
         let text: String
         let action: () -> Void

@@ -14,7 +14,7 @@ import MISOThemesContract
 /// They are considered as "closed" tokens but still defined in this library so as to keep consistancy between Figma specifications
 /// and library. The tokens are not hidden from developers.
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 open class WireframeThemeDimensionSemanticTokensProvider: AllDimensionSemanticTokensProvider {
 
     #if DEBUG

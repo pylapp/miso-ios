@@ -12,7 +12,7 @@ import MISOTokensSemantic
 /// Declares all component tokens for switch components like `MISOSwitch`
 /// Use for tokens providers like `WireframeThemeSwitchComponentTokensProvider`.
 ///
-/// - Since: 0.10.0
+/// - Since: OUDS 0.10.0
 public protocol SwitchComponentTokens {
 
     // MARK: - Sizes

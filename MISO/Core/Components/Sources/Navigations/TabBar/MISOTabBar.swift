@@ -153,7 +153,7 @@ import SwiftUI
 /// ![A  tab bar component in dark mode without Liquid Glass effect and Wireframe theme](component_tabBar_Wireframe_dark)
 ///
 /// - Version: 1.0.0 (Figma component design version)
-/// - Since: 1.0.0
+/// - Since: OUDS 1.0.0
 @available(iOS 15, macOS 13, visionOS 1, *)
 public struct MISOTabBar<Content: View>: View {
 

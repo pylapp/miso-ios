@@ -13,7 +13,7 @@ import MISOThemesContract
 /// It implements also the protocol `SelectInputComponentTokens` so as to expose the component tokens for *select* through any `MISOTheme`.
 /// *Select input* components tokens are defined with semantic tokens of dimensions (from `AllDimensionSemanticTokensProvider`).
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 open class WireframeThemeSelectInputComponentTokensProvider: AllSelectInputComponentTokensProvider {
 
     /// Provider of dimensions semantic tokens to use for pin code input dimensions

@@ -176,7 +176,7 @@ import SwiftUI
 /// ```
 ///
 /// - Version: 1.4.1 (Figma component design version)
-/// - Since: 0.20.0
+/// - Since: OUDS 0.20.0
 @available(iOS 15, macOS 13, visionOS 1, *)
 public struct MISOTextInput: View {
 
@@ -207,7 +207,7 @@ public struct MISOTextInput: View {
     /// The action can be any action.
     ///
     /// For iOS 17+ it is possible to define a sensory feeback for the button.
-    /// - Since: 0.20.0
+    /// - Since: OUDS 0.20.0
     @frozen public struct TrailingAction {
 
         let icon: MISOImage
@@ -244,7 +244,7 @@ public struct MISOTextInput: View {
     // MARK: - Status
 
     /// Define all available status for the text input
-    /// - Since: 0.20.0
+    /// - Since: OUDS 0.20.0
     @frozen public enum Status: Equatable {
         /// The `enabled` status (default)
         case enabled
@@ -293,7 +293,7 @@ public struct MISOTextInput: View {
     // MARK: - Helper link
 
     /// Used to describe the helper link above the helper text.
-    /// - Since: 0.20.0
+    /// - Since: OUDS 0.20.0
     @frozen public struct Helperlink {
         let text: String
         let action: () -> Void

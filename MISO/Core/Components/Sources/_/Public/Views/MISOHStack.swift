@@ -20,7 +20,7 @@ import SwiftUI
 ///    }
 /// ```
 ///
-/// - Since: 1.3.0
+/// - Since: OUDS 1.3.0
 @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public struct MISOSHStack<Content: View>: View {
 

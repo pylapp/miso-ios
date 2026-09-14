@@ -13,7 +13,7 @@ import MISOThemesContract
 /// sizes (from `AllSizeSemanticTokensProvider`), borders (from `AllBorderSemanticTokensProvider`)
 /// and effects (from `AllEffectSemanticTokensProvider`).
 ///
-/// - Since: 0.22.0
+/// - Since: OUDS 0.22.0
 open class WireframeThemeBarComponentTokensProvider: AllBarComponentTokensProvider {
 
     /// Provider of sizes semantic tokens to use for bar sizes

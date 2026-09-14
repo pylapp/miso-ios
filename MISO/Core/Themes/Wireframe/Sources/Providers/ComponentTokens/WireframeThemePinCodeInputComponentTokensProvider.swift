@@ -14,7 +14,7 @@ import MISOThemesContract
 /// *Pint code input* components tokens are defined with semantic tokens of dimensions (from `AllDimensionSemanticTokensProvider`),
 /// ans spaces (from `AllSpaceSemanticTokensProvider`).
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 open class WireframeThemePinCodeInputComponentTokensProvider: AllPinCodeInputComponentTokensProvider {
 
     /// Provider of spaces semantic tokens to use for pin code input  spaces

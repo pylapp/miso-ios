@@ -106,7 +106,7 @@ import SwiftUI
 /// ```
 ///
 /// - Version: 1.3.0 (Figma component design version)
-/// - Since: 1.4.0
+/// - Since: OUDS 1.4.0
 @available(iOS 15, visionOS 1, *)
 public struct MISOPinCodeInput: View {
 
@@ -132,7 +132,7 @@ public struct MISOPinCodeInput: View {
     // MARK: - Length
 
     /// The type of layout to apply to the *pin code input* to define the size of the input
-    /// - Since: 1.4.0
+    /// - Since: OUDS 1.4.0
     @frozen public enum Length: Int {
         /// Four symbols required
         case four = 4
@@ -145,7 +145,7 @@ public struct MISOPinCodeInput: View {
     // MARK: - Status
 
     /// Define all available status for the PIN code input
-    /// - Since: 1.4.0
+    /// - Since: OUDS 1.4.0
     @frozen public enum Status: Equatable {
         /// The `enabled` status (default)
         case enabled

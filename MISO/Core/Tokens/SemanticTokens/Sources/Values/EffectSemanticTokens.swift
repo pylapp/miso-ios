@@ -11,7 +11,7 @@
 /// It defines all ``EffectSemanticToken`` a theme must have.
 /// Any effect semantic token must be declared there.
 ///
-/// - Since: 0.22.0
+/// - Since: OUDS 0.22.0
 public protocol EffectSemanticTokens {
 
     var blurBackdrop: EffectSemanticToken { get }

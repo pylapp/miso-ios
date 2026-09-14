@@ -3,7 +3,7 @@
 
 /// A checkbox indicator has three available states: `selected`, `unselected` and `indeterminate`
 ///
-/// - Since: 0.12.0
+/// - Since: OUDS 0.12.0
 @frozen public enum MISOCheckboxIndicatorState {
     /// The checkbox indicator is filled, a tick is inside, the user selected it
     case selected

@@ -13,7 +13,7 @@ import MISOThemesContract
 /// It implements also the protocol `DividerComponentTokens` so as to expose the component tokens for *divider* through any `MISOTheme`.
 /// *Divider* components tokens are defined with raw and semantic tokens of borders (from `AllBorderSemanticTokensProvider`).
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 open class WireframeThemeDividerComponentTokensProvider: AllDividerComponentTokensProvider {
 
     /// Provider of border semantic tokens to use for chip sizes

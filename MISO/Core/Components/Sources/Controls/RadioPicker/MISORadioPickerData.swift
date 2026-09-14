@@ -7,7 +7,7 @@ import SwiftUI
 /// The data to use to populate the picker of ``MISORadioItem`` objects.
 /// Each property in this ``MISORadioPickerData`` is used to define the suitable ``MISORadioItem``.
 ///
-/// - Since: 0.14.0
+/// - Since: OUDS 0.14.0
 public struct MISORadioPickerData<Tag> where Tag: Hashable {
 
     /// The identifier, supposed to be unique, to discriminate the element.

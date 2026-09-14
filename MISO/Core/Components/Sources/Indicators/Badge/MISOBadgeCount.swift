@@ -27,7 +27,7 @@ import SwiftUI
 ///
 /// A badge needs an accessibility label to decribe the meaning that will be vocalized.
 /// - Version: 1.2.0 (Figma component design version)
-/// - Since: 2.2.0
+/// - Since: OUDS 2.2.0
 @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public struct MISOBadgeCount: View {
 
@@ -41,7 +41,7 @@ public struct MISOBadgeCount: View {
     // MARK: - Configurations
 
     /// All available sizes of a badge as *count* type
-    /// - Since: 2.2.0
+    /// - Since: OUDS 2.2.0
     @frozen public enum Size {
 
         /// The default size, providing a balance between visibility and space efficiency, suitable for most use cases.

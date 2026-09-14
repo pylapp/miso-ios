@@ -11,7 +11,7 @@
 /// It defines all ``BorderWidthSemanticToken``, ``BorderRadiusSemanticToken`` and ``BorderStyleSemanticToken`` a theme must have.
 /// Any border semantic token must be declared there as providers like `MISOBorderSemanticTokensProvider` will then expose them through `MISOTheme`.
 ///
-/// - Since: 0.8.0
+/// - Since: OUDS 0.8.0
 public protocol BorderSemanticTokens {
 
     // MARK: - Semantic token - Border - Width

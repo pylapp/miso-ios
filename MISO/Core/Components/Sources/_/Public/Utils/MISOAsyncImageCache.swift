@@ -8,7 +8,7 @@ import SwiftUI
 /// Defines a cache, in memory and on disk, to store `AsyncImage` content.
 /// Backs the ``MISOAsyncImage`` View.
 ///
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public final class MISOAsyncImageCache: @unchecked Sendable {
 

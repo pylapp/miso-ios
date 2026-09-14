@@ -119,7 +119,7 @@ import SwiftUI
 /// If flags are used, do not suppose users know the flags and add in the texts parts of the `MISOStaticListItem` the country or region name.
 ///
 /// - Version: 1.0.0 (Figma component design version)
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public struct MISOStaticListItem: View {
 

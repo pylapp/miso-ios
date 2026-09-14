@@ -51,7 +51,7 @@ import SwiftUI
 ///     theme.colors.surfaceBrandPrimary.color(for: colorScheme)
 /// ```
 ///
-/// - Since: 0.8.0
+/// - Since: OUDS 0.8.0
 public final class MultipleColorSemanticToken: NSObject, Sendable {
 
     /// For **light** mode scheme
@@ -125,7 +125,7 @@ extension MISOWCAG21Ratio {
 
     /// Lists the type of elements under tests for constrat ratio check.
     /// Textual elements should have higher contrasts than non-textual ones.
-    /// - Since: 0.15.0
+    /// - Since: OUDS 0.15.0
     @frozen public enum Target {
         /// Contrast ratio must be computed for textual components (i.e. texts)
         case textual
@@ -134,7 +134,7 @@ extension MISOWCAG21Ratio {
     }
 
     /// The type of WCAG 2.1 requirements to consider
-    /// - Since: 0.15.0
+    /// - Since: OUDS 0.15.0
     @frozen public enum Criteria {
         /// Consider 4.5:1 for textual and 3:1 for non-textual
         case AA

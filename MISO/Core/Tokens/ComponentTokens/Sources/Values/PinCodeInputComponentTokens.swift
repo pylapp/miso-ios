@@ -12,7 +12,7 @@ import MISOTokensSemantic
 /// Declares all component tokens for input components like `MISOPinCodeInput`
 /// Use for tokens providers like `WireframeThemePinCodeInputComponentTokensProvider`.
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 public protocol PinCodeInputComponentTokens {
 
     var spaceColumnGapDigitInput: SpaceSemanticToken { get }

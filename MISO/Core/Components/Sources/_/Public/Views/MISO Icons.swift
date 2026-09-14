@@ -13,7 +13,7 @@ import SwiftUI
 ///   MISOFixedIcon(image: someOudsImage, size: someTokenOfSize)
 /// ```
 ///
-/// - Since: 2.3.0
+/// - Since: OUDS 2.3.0
 public struct MISOFixedIcon: View {
 
     let image: MISOImage
@@ -40,7 +40,7 @@ public struct MISOFixedIcon: View {
 ///   MISOScaledIcon(image: someOudsImage, size: someTokenOfSize)
 /// ```
 ///
-/// - Since: 2.3.0
+/// - Since: OUDS 2.3.0
 public struct MISOScaledIcon: View {
 
     let image: MISOImage

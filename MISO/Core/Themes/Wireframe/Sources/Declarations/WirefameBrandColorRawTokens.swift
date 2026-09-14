@@ -5,7 +5,7 @@
 /// Such tokens are packed in a _Swift enum_ so as to gather them in one object with the suitable namespace and avoid to have just constants in nothing else
 ///  (i.e. publicly accessible from everywhere). More optimized than dimensionstruct_.
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 @frozen public enum WireframeBrandColorRawTokens {
 
     // ଘ( ･ω･)_/ﾟ･:*:･｡☆

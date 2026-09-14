@@ -12,7 +12,7 @@ import MISOTokensSemantic
 /// Declares all component tokens for input components like `MISOQuantityInput`
 /// Used for tokens providers like `WireframeThemeQuantityInputComponentTokensProvider`.
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 public protocol QuantityInputComponentTokens {
 
     // MARK: - Spaces

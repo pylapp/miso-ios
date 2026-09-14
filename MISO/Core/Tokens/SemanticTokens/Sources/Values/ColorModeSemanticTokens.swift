@@ -11,7 +11,7 @@
 /// It defines all ``ColorModeSemanticToken``  a theme must have for surfaced colors.
 /// These tokens are then gathered inside ``MultipleColorModeSemanticToken`` defined in ``ColorModeMultipleSemanticTokens``.
 ///
-/// - Since: 0.13.0
+/// - Since: OUDS 0.13.0
 public protocol ColorModeSemanticTokens {
 
     // MARK: - On Background

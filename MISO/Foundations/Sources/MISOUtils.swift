@@ -5,7 +5,7 @@ import Foundation
 
 /// A set of utilities from MISO library shared with love ⸜(｡˃ ᵕ ˂)⸝♡♡♡
 ///
-/// - Since: 1.2.0
+/// - Since: OUDS 1.2.0
 @frozen public enum MYOUtils {
 
     // MARK: - Language detection

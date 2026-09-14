@@ -32,7 +32,7 @@ import SwiftUI
 ///         // It is recommended to use the higher level version as it is less error-prone.
 /// ```
 ///
-/// - Since: 0.8.0
+/// - Since: OUDS 0.8.0
 public final class MultipleSizeSemanticToken: NSObject, Sendable {
 
     /// For **extra-compact** and **compact** viewports

@@ -31,7 +31,7 @@ import SwiftUI
 /// A badge needs an accessibility label to decribe the meaning that will be vocalized.
 ///
 /// - Version: 1.2.0 (Figma component design version)
-/// - Since: 2.2.0
+/// - Since: OUDS 2.2.0
 @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public struct MISOBadgeStandard: View {
 
@@ -45,7 +45,7 @@ public struct MISOBadgeStandard: View {
     /// The status depends on the context of the information it represents.
     /// Badges components like ``MISOBadgeStandard`` and ``MISOBadgeCount`` share the sames status.
     ///
-    /// - Since: 2.2.0
+    /// - Since: OUDS 2.2.0
     @frozen public enum Status {
 
         /// Used for general labels without specific emphasis
@@ -69,7 +69,7 @@ public struct MISOBadgeStandard: View {
     }
 
     /// All available sizes of a badge as *standard* type
-    /// - Since: 2.2.0
+    /// - Since: OUDS 2.2.0
     @frozen public enum Size {
 
         /// A compact badge for minimal space usage, ideal for small UI elements like icons or tooltips.

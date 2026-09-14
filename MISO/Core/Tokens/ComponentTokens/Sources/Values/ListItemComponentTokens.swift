@@ -13,7 +13,7 @@ import MISOTokensSemantic
 /// Declares all component tokens for list item components like `MISOListItem` and `MISOSmallListItem`.
 /// Use for tokens providers like `WireframeThemeListItemComponentTokensProvider`.
 ///
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 public protocol ListItemComponentTokens {
 
     // MARK: - Colors

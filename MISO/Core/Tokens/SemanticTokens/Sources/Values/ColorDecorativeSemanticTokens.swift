@@ -11,7 +11,7 @@ import Foundation
 
 /// This is a group of semantic tokens for **color decorative**.
 ///
-/// - Since: 2.0.0
+/// - Since: OUDS 2.0.0
 public protocol ColorDecorativeSemanticTokens {
 
     var brandPrimary: ColorSemanticToken { get }

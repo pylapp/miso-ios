@@ -58,7 +58,7 @@ import SwiftUI
 ///     MISOChipPicker(title: "Select a drink", selections: $selections, chips: someDataToPopulate)
 /// ```
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 @available(iOS 15, macOS 13, visionOS 1, *)
 public struct MISOChipPicker<Tag: Hashable>: View {
 

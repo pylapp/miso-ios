@@ -12,7 +12,7 @@ import MISOTokensSemantic
 /// Declares all component tokens for tags components like `MISOToast`
 /// Used for tokens providers like `WireframeThemeToastComponentTokensProvider`.
 ///
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 public protocol ToastComponentTokens {
 
     // MARK: - Borders

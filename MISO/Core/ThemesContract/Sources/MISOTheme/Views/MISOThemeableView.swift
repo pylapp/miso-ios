@@ -53,7 +53,7 @@ extension EnvironmentValues {
 ///     }
 /// ```
 ///
-/// - Since: 0.8.0
+/// - Since: OUDS 0.8.0
 public struct MISOThemeableView<Content: View>: View {
 
     private let theme: MISOTheme

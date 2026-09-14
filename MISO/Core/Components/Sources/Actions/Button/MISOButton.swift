@@ -103,7 +103,7 @@ import SwiftUI
 /// For ecodesign reasons, if the device is in low power mode, the loading indicator does not move.
 ///
 /// - Version: 3.3.0 (Figma component design version)
-/// - Since: 0.10.0
+/// - Since: OUDS 0.10.0
 @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public struct MISOButton: View {
 
@@ -127,7 +127,7 @@ public struct MISOButton: View {
 
     /// Represents the appearance of an MISO button, i.e. a kind of type
     ///
-    /// - Since: 0.10.0
+    /// - Since: OUDS 0.10.0
     @frozen public enum Appearance {
         /// Default button is used for action
         case `default`
@@ -147,7 +147,7 @@ public struct MISOButton: View {
 
     /// Defines the style of the button, e.g. loading or not
     ///
-    /// - Since: 0.10.0
+    /// - Since: OUDS 0.10.0
     @frozen public enum Style: Equatable {
         /// The default style, the button could be in prossed, hover, disabled or enabled internal state
         case `default`
@@ -162,7 +162,7 @@ public struct MISOButton: View {
 
     /// Defines the size of the button,
     ///
-    /// - Since: 3.0.0
+    /// - Since: OUDS 3.0.0
     @frozen public enum Size {
         /// The default size the button
         case `default`

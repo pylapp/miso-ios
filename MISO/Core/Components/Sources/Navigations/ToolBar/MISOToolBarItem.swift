@@ -51,7 +51,7 @@ import SwiftUI
 ///     }
 /// ```
 ///
-/// - Since: 1.4.0
+/// - Since: OUDS 1.4.0
 @available(iOS 15, visionOS 1, *)
 public struct MISOToolBarItem: View, Identifiable {
 
@@ -67,7 +67,7 @@ public struct MISOToolBarItem: View, Identifiable {
 
     /// Defines the styling configuration for tooolbar items for iOS > 26
     ///
-    /// - Since: 1.4.0
+    /// - Since: OUDS 1.4.0
     @frozen public enum ActionStyle {
         case `default`
         case prominent
@@ -78,7 +78,7 @@ public struct MISOToolBarItem: View, Identifiable {
     /// Those items can be used at `.topLeading`, `.principal` and `.topTrailing` positions
     /// of a `toolBarTop(_:hasLargeTitle:subtitle:leadingItems:principalItem:trailingItems:)`
     ///
-    /// - Since: 1.4.0
+    /// - Since: OUDS 1.4.0
     @frozen public enum ActionType {
 
         /// Create an action wth label only that could be emphasized.
@@ -107,7 +107,7 @@ public struct MISOToolBarItem: View, Identifiable {
     /// **By default, the MISO badge component is used, but for iOS > 26, the system one is used, so its color, size and position
     /// can not be changed.**
     ///
-    /// - Since: 2.0.0
+    /// - Since: OUDS 2.0.0
     @frozen public enum BadgeType {
 
         /// The basic badge without any information
@@ -122,7 +122,7 @@ public struct MISOToolBarItem: View, Identifiable {
     /// Defines the built-in navigation type available for the toolbars. Those items must be used only on top leading position of `.toolBar`
     /// Each case maps to an image asset provided by the MISO package resources.
     ///
-    /// - Since: 1.4.0
+    /// - Since: OUDS 1.4.0
     @frozen public enum NavigationType {
 
         /// The back button that can be added manualy if need. According to our design system, in could be the case for a sheet.
@@ -265,7 +265,7 @@ public struct MISOToolBarItem: View, Identifiable {
 
 /// A result builder to group ``MISOToolBarItem`` instances.
 ///
-/// - Since: 1.4.0
+/// - Since: OUDS 1.4.0
 @resultBuilder
 public enum MISOToolBarItemsBuilder {
     /// Combines multiple `MISOToolBarItem` instances into a single array

@@ -15,7 +15,7 @@ import MISOThemesContract
 /// *Accordions* components tokens are defined with semantic tokens spaces (from `AllSpaceSemanticTokensProvider`)
 /// and sizes (from `AllSizeSemanticTokensProvider`).
 ///
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 open class WireframeThemeAccordionComponentTokensProvider: AllAccordionComponentTokensProvider {
 
     /// Provider of sizes semantic tokens to use for alert sizes

@@ -7,7 +7,7 @@ import SwiftUI
 /// The data to use to populate the picker of ``MISOCheckboxItem`` objects.
 /// Each property in this ``MISOCheckboxPickerData`` is used to define the suitable ``MISOCheckboxItem``.
 ///
-/// - Since: 0.14.0
+/// - Since: OUDS 0.14.0
 public struct MISOCheckboxPickerData<Tag> where Tag: Hashable {
 
     /// The identifier, supposed to be unique, to discriminate the element.

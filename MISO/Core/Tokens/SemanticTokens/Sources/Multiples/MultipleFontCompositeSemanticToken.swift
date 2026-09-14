@@ -32,7 +32,7 @@ import SwiftUI
 /// (i.e. raw tokens) instead of semantic tokens.
 /// In fact there is not "font composite semantic tokens" defined in the *Figma* kit.
 ///
-/// - Since: 0.22.0
+/// - Since: OUDS 0.22.0
 public final class MultipleFontCompositeSemanticToken: NSObject, Sendable, Comparable {
 
     /// For **extra-compact** and **compact** viewports

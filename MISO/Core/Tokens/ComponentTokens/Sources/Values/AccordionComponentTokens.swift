@@ -12,7 +12,7 @@ import MISOTokensSemantic
 /// Declares all component tokens for accordion components like `MISOAccordion`
 /// Used for tokens providers like `WireframeThemeAccordionComponentTokensProvider` etc.
 ///
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 public protocol AccordionComponentTokens {
 
     var spacePaddingBlockBottomExpandContainerSmall: SpaceSemanticToken { get }

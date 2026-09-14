@@ -8,7 +8,7 @@ import MISOTokensSemantic
 
 /// List of colors available for dividers (i.e. `MISOHorizontalDivider` or `MISOVerticalDivider`)
 ///
-/// - Since: 0.14.0
+/// - Since: OUDS 0.14.0
 @frozen public enum MISODividerColor {
     case `default`
     case muted

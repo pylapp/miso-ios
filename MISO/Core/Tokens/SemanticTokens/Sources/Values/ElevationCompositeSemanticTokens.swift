@@ -36,7 +36,7 @@
 ///     theme.elevations.raised.elevation(for: colorScheme)
 /// ```
 ///
-/// - Since: 0.8.0
+/// - Since: OUDS 0.8.0
 public protocol ElevationCompositeSemanticTokens {
 
     var none: ElevationCompositeSemanticToken { get }

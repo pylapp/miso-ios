@@ -13,7 +13,7 @@ import MISOTokensSemantic
 /// Declares all component tokens for bar components l
 /// Use for tokens providers like `WireframeThemeBarComponentTokensProvider`.
 ///
-/// - Since: 0.22.0
+/// - Since: OUDS 0.22.0
 public protocol BarComponentTokens {
 
     // MARK: - Colors

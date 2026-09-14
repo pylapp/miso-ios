@@ -11,7 +11,7 @@ import MISOTokensSemantic
 /// Declares all component tokens for categorical tag components like `MISOCategoricalTag`
 /// Used for tokens providers like `WireframeThemeCategoricalTagComponentTokensProvider` etc.
 ///
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 public protocol CategoricalTagComponentTokens {
 
     var colorBgCategory1: MultipleColorSemanticToken { get }

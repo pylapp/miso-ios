@@ -29,7 +29,7 @@ actor LowPowerModeActor {
 /// lowPowerModeObserver.isLowPowerModeEnabled
 /// ```
 ///
-/// - Since: 0.16.0
+/// - Since: OUDS 0.16.0
 @MainActor
 public final class MISOLowPowerModeObserver: ObservableObject {
 

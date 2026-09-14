@@ -12,7 +12,7 @@ import MISOTokensSemantic
 /// Declares all component tokens for skeleton components like `MISOSkeleton`
 /// Use for tokens providers like `WireframeThemeSkeletonComponentTokensProvider`.
 ///
-/// - Since: 0.10.0
+/// - Since: OUDS 0.10.0
 public protocol SkeletonComponentTokens {
 
     // MARK: - Color

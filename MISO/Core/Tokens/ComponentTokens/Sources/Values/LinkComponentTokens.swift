@@ -12,7 +12,7 @@ import MISOTokensSemantic
 /// Declares all component tokens for links components like `MISOLink`
 /// Use for tokens providers like `WireframeThemeLinkComponentTokensProvider`.
 ///
-/// - Since: 0.10.0
+/// - Since: OUDS 0.10.0
 public protocol LinkComponentTokens {
 
     // MARK: - Sizes

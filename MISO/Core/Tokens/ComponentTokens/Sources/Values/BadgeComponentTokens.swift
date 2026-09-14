@@ -12,7 +12,7 @@ import MISOTokensSemantic
 /// Declares all component tokens for badge components like `MISOBadgeStandard`, `MISOBadgeIcon` and `MISOBadgeCount`.
 /// Use for tokens providers like `WireframeThemeBadgeComponentTokensProvider`.
 ///
-/// - Since: 0.10.0
+/// - Since: OUDS 0.10.0
 public protocol BadgeComponentTokens {
 
     // MARK: - Sizes

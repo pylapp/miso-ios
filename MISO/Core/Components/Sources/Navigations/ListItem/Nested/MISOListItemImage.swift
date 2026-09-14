@@ -55,7 +55,7 @@ import SwiftUI
 ///     )
 /// ```
 ///
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public struct MISOListItemImage: View {
 
@@ -65,7 +65,7 @@ public struct MISOListItemImage: View {
     /// When the image is embedded in a list item with `.small` size, this parameter is ignored
     /// and a smallest size is always used.
     ///
-    /// - Since: 3.0.0
+    /// - Since: OUDS 3.0.0
     @frozen public enum Size {
         /// The medium size, used as the default in standard list items.
         case medium
@@ -79,7 +79,7 @@ public struct MISOListItemImage: View {
 
     /// Defines the aspect ratio of the image container.
     ///
-    /// - Since: 3.0.0
+    /// - Since: OUDS 3.0.0
     @frozen public enum Ratio {
         /// Use for square visual content such as products, logos, album covers or profile-related imagery.
         case square

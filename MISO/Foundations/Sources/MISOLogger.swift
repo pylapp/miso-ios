@@ -12,7 +12,7 @@ public typealias ML = MISOLogger
 /// By default, debug and log level messages are suppressed even in DEBUG builds.
 /// Set `MISOLogger.verbose = true` to enable them.
 ///
-/// - Since: 0.8.0
+/// - Since: OUDS 0.8.0
 @frozen public struct MISOLogger {
 
     private init() {}

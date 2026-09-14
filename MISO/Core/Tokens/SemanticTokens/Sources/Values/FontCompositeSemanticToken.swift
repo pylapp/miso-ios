@@ -12,7 +12,7 @@ infix operator <|
 /// Here a *font* thing is caracterized by a *font size*, a *line height*, a *font weight* and *letter spacing* values.
 /// All these elements are *raw tokens*, and together define a *composite raw token* for *font* thing.
 ///
-/// - Since: 0.22.0
+/// - Since: OUDS 0.22.0
 @frozen public struct FontCompositeSemanticToken: Equatable, Sendable {
 
     // Font family is not included here because this is the only thing which can vary

@@ -69,7 +69,7 @@ import SwiftUI
 /// ```
 ///
 /// - Version: 1.0.0
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 @available(iOS 18, macOS 15, visionOS 2, *) // Cannot be used for OS lower than 18 because of missing `Tab(value:)` API
 public struct MISOTabView<Content: TabContent>: View where Content.TabValue == Int {
 
@@ -179,7 +179,7 @@ public struct MISOTabView<Content: TabContent>: View where Content.TabValue == I
 /// ```
 ///
 /// - Version: 1.0.0
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 @available(iOS 26, macOS 26, visionOS 26, *)
 public struct MISOLiquidGlassTabView<Content: TabContent>: View where Content.TabValue == Never {
 

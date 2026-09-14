@@ -12,7 +12,7 @@ import MISOTokensSemantic
 /// Declares all component tokens for tags components like `MISOTag`
 /// Used for tokens providers like `WireframeThemeTagComponentTokensProvider`.
 ///
-/// - Since: 0.10.0
+/// - Since: OUDS 0.10.0
 public protocol TagComponentTokens {
 
     // MARK: - Borders

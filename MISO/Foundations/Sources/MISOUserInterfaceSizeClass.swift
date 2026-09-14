@@ -47,7 +47,7 @@ extension EnvironmentValues {
 ///     @Environment(\.misoVerticalSizeClass) var verticalSizeClass
 /// ```
 ///
-/// - Since: 0.8.0
+/// - Since: OUDS 0.8.0
 @frozen public enum MISOUserInterfaceSizeClass: String, Sendable {
     case extraCompact = "Extra Compact"
     case compact = "Compact"

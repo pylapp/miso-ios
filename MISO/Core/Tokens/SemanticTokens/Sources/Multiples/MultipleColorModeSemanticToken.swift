@@ -41,7 +41,7 @@ import SwiftUI
 ///         }
 /// ```
 ///
-/// - Since: 0.13.0
+/// - Since: OUDS 0.13.0
 public final class MultipleColorModeSemanticToken: NSObject, Sendable {
 
     /// Because such tokens can have the same light and dark values, a name can be used to identity them

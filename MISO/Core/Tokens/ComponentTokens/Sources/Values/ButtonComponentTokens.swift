@@ -12,7 +12,7 @@ import MISOTokensSemantic
 /// Declares all component tokens for buttons components like `MISOButton`
 /// Use for tokens providers like `WireframeThemeButtonComponentTokensProvider`.
 ///
-/// - Since: 0.9.0
+/// - Since: OUDS 0.9.0
 public protocol ButtonComponentTokens {
 
     // MARK: - Size

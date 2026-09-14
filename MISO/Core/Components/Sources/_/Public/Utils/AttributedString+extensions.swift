@@ -92,7 +92,7 @@ import SwiftUI
 /// Hyperlinks may be not accessible for Voice Over, Full Keyboard Access and Switch Control.
 /// Prefer use other components like `Text` from SwiftUI.
 ///
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 @frozen public struct AttributedStringUrlConfiguration {
 
     let text: String?

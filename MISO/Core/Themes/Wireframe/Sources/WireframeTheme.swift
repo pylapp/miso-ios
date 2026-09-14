@@ -45,7 +45,7 @@ import SwiftUI
 /// - Core Wireframe version: 1.5.0
 /// - Brand Wireframe version: 2.7.0
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 open class WireframeTheme: MISOTheme, @unchecked Sendable {
 
     /// The theme name ("Wireframe")

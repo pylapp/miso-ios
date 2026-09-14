@@ -15,7 +15,7 @@ import MISOThemesContract
 /// spaces (from `AllSpaceSemanticTokensProvider`), dimensions (`AllDimensionSemanticTokensProvider`),
 /// border  (from `AllBorderSemanticTokensProvider`) and sizes  (from `AllSizeSemanticTokensProvider`).
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 open class WireframeThemeChipComponentTokensProvider: AllChipComponentTokensProvider {
 
     /// Provider of size semantic tokens to use for chip sizes

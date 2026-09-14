@@ -12,7 +12,7 @@ import MISOTokensSemantic
 /// Declares all component tokens for buttons components like `MISOButton` in **monochrome mode**.
 /// Use for tokens providers like `WireframeThemeButtonComponentTokensProvider`.
 ///
-/// - Since: 0.16.0
+/// - Since: OUDS 0.16.0
 public protocol ButtonMonoComponentTokens {
 
     // NOTE: Tokens prefixed by "mono" even id redundant with tokens provider and protocol names

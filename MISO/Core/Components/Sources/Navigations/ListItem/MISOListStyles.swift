@@ -19,7 +19,7 @@ import SwiftUI
 ///         .misoListItemContainerAlignment(.top)
 /// ```
 ///
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 @frozen public enum MISOListItemContainersAlignment {
     /// Containers are aligned to the top of the list item row.
@@ -89,13 +89,13 @@ import SwiftUI
 ///         .misoListContentStyle(.item(divider: true, background: false))
 /// ```
 ///
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 @frozen public enum MISOListItemContentStyle {
 
     /// Defines the decoration (sub-styles) available for the ``MISOListItemContentStyle/card(_:)`` case.
     ///
-    /// - Since: 3.0.0
+    /// - Since: OUDS 3.0.0
     public enum CardDecoration {
 
         /// The oulined decoration of a card. A permanent border is drawn around the card. This border can be drawn only
@@ -155,7 +155,7 @@ import SwiftUI
 ///         .misoListItemSize(.small)
 /// ```
 ///
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 @frozen public enum MISOListItemSize {
     /// The default (i.e. standard) size of the list item.

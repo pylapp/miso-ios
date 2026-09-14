@@ -56,7 +56,7 @@ import SwiftUI
 /// Always check the results of rich text mode with high contrast, light and dark modes, and Voice Over vocalization.
 ///
 /// - Version: 1.1.1 (Figma component design version)
-/// - Since: 1.3.0
+/// - Since: OUDS 1.3.0
 @available(iOS 15, macOS 13, visionOS 1, tvOS 16, *)
 public struct MISOAlertMessage: View {
 

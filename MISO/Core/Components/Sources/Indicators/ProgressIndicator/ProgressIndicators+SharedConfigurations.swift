@@ -7,7 +7,7 @@ import SwiftUI
 
 /// The status of the progress indicator. It determines the color of the bar.
 ///
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 @frozen public enum MISOProgressIndicatorStatus: Sendable {
 
     /// Default status used when progress has no specific semantic meaning.
@@ -33,7 +33,7 @@ import SwiftUI
 
 /// The size of the gap between the progress bar and the track.
 ///
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 @frozen public enum MISOProgressIndicatorGapSize: Sendable {
 
     /// Standard gap size
@@ -50,7 +50,7 @@ import SwiftUI
 /// Allows customizing the name and state of the progress indicator for better
 /// vocalization.
 ///
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 @frozen public struct MISOAccessibilityConfiguration: Equatable, Sendable {
 
     /// The name of the component (e.g., "progress bar", "download bar").

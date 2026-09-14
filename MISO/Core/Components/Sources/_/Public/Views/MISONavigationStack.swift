@@ -7,7 +7,7 @@ import SwiftUI
 /// Use a navigation stack to present a stack of views over a root view.
 /// and let system applies theme colors on navigation bar appearance.
 ///
-/// - Since: 1.4.0
+/// - Since: OUDS 1.4.0
 public struct MISONavigationStack<Content: View>: View {
 
     // MARK: - Properties

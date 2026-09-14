@@ -13,7 +13,7 @@ import Foundation
 /// It defines all ``ColorSemanticToken``  a theme must have for charts.
 /// These tokens are then gathered inside ``MultipleColorSemanticToken`` objects defined in ``ColorMultipleSemanticTokens``.
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 public protocol ColorChartMultipleSemanticTokens {
 
     var border: MultipleColorSemanticToken { get }

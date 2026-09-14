@@ -137,7 +137,7 @@ import SwiftUI
 /// ignored.
 ///
 /// - Version: 1.2.0 (Figma component design version)
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public struct MISOCircularProgressIndicator: View { // TODO: #409 - Update documentation reference
 
@@ -153,7 +153,7 @@ public struct MISOCircularProgressIndicator: View { // TODO: #409 - Update docum
 
     /// The helper text can be added in **determinate** indicator
     ///
-    /// - Since: 3.0.0
+    /// - Since: OUDS 3.0.0
     @frozen public enum HelperTextType: Equatable {
 
         /// The helper text with a description without any information of progress.

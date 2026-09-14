@@ -13,7 +13,7 @@ import MISOThemesContract
 /// It implements also the protocol `CategoricalTagComponentTokens` so as to expose the component tokens for *categorical tags* through any `MISOTheme`.
 /// *Categorical tags* components tokens are defined with semantic tokens of colors (`AllColorSemanticTokensProvider`)
 ///
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 open class WireframeThemeCategoricalTagComponentTokensProvider: AllCategoricalTagComponentTokensProvider {
 
     /// Provider of color semantic tokens to use

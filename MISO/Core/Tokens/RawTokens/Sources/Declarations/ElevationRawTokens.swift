@@ -6,7 +6,7 @@
 /// These tokens are used to define these effects thanks to several types: the *blur*, the *X offset* and the *Y offset*, all of them being ``ElevationRawToken`` type.
 /// Combinations of these three values can be defined inside ``ElevationCompositeRawToken`` i.e. *composite tokens* defining a whil box shadow to use for elevation effect.
 ///
-/// - Since: 0.8.0
+/// - Since: OUDS 0.8.0
 @frozen public enum ElevationRawTokens {
 
     // Values are defined in *ElevationRawTokens+Values.swift* file updated by the tokenator and *ElevationRawTokens+Values.swift* updated manualy by the development team.

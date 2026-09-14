@@ -12,7 +12,7 @@ import MISOThemesContract
 /// *Text area* components tokens are defined with semantic tokens of sizes (from `AllSizeSemanticTokensProvider`)
 /// and spaces (from `AllSpaceSemanticTokensProvider`).
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 open class WireframeThemeTextAreaComponentTokensProvider: AllTextAreaComponentTokensProvider {
 
     /// Provider of sizes semantic tokens to use for text area sizes

@@ -16,7 +16,7 @@ import MISOThemesContract
 /// borders (`AllBorderSemanticTokensProvider`) , opacities (`AllOpacitySemanticTokensProvider`).
 /// and  sizes (`AllSizeSemanticTokensProvider`).
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 open class WireframeThemeSwitchComponentTokensProvider: AllSwitchComponentTokensProvider {
 
     /// Provider of size semantic tokens to use for switch sizes

@@ -14,7 +14,7 @@ import MISOThemesContract
 /// *Button* components tokens are defined with raw and semantic tokens of sizes (from `AllSizeSemanticTokensProvider`), borders
 /// spaces (from `AllSpaceSemanticTokensProvider`).
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 open class WireframeThemeButtonComponentTokensProvider: AllButtonComponentTokensProvider {
 
     /// Provider of size semantic tokens to use for button sizes

@@ -14,7 +14,7 @@ import MISOThemesContract
 /// *Inout text* components tokens are defined with raw and semantic tokens of sizes (from `AllSizeSemanticTokensProvider`), colors (`AllColorSemanticTokensProvider`)
 /// and spaces (from `AllSpaceSemanticTokensProvider`).
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 open class WireframeThemeTextInputComponentTokensProvider: AllTextInputComponentTokensProvider {
 
     /// Provider of size semantic tokens to use for text input sizes

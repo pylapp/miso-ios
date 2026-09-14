@@ -55,7 +55,7 @@ import SwiftUI
 /// In fact only the *color* of the elevation effect vary depending to the color scheme,
 /// but in the *Figma* kit this is composite raw tokens which are defined for ligh and dark mode as only one token.
 ///
-/// - Since: 0.8.0
+/// - Since: OUDS 0.8.0
 public final class MultipleElevationCompositeRawToken: NSObject, Sendable {
 
     /// For **light** mode scheme

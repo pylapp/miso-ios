@@ -35,7 +35,7 @@ extension EnvironmentValues {
 /// List some iPhone devices which can use MISO, i.e. supposed to support at least iOS 15.
 /// Helps to define some metrics like tab bar heights.
 ///
-/// - Since: 1.0.0
+/// - Since: OUDS 1.0.0
 public enum iPhoneDevice: CustomStringConvertible, Sendable {
 
     /*

@@ -113,7 +113,7 @@ import SwiftUI
 /// ```
 ///
 /// - Version: 1.5.0 (Figma component design version)
-/// - Since: 0.18.0
+/// - Since: OUDS 0.18.0
 @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public struct MISOTag: View {
 
@@ -145,7 +145,7 @@ public struct MISOTag: View {
 
     /// The status of an `MISOTag` determines the leading element, the background
     /// and the content colors of the tag according to the category.
-    /// - Since: 0.18.0
+    /// - Since: OUDS 0.18.0
     @frozen public struct Status {
 
         let leading: Self.Leading
@@ -153,7 +153,7 @@ public struct MISOTag: View {
         let customIcon: MISOImage?
 
         /// The leading element of the tag
-        /// - Since: 0.18.0
+        /// - Since: OUDS 0.18.0
         @frozen public enum Leading {
             /// Means no element
             case none
@@ -167,7 +167,7 @@ public struct MISOTag: View {
         }
 
         /// The category of the status.
-        /// - Since: 0.18.0
+        /// - Since: OUDS 0.18.0
         @frozen public enum Category {
             /// Default or inactive state. Used for standard labels, categories, or when no specific status needs to be communicated.
             case neutral
@@ -274,7 +274,7 @@ public struct MISOTag: View {
     }
 
     /// Represents the appearance of an `MISOTag`
-    /// - Since: 0.18.0
+    /// - Since: OUDS 0.18.0
     @frozen public enum Appearance {
 
         /// A tag with a solid, high-contrast background.
@@ -289,7 +289,7 @@ public struct MISOTag: View {
     }
 
     /// Defines the shape of an `MISOTag`
-    /// - Since: 0.18.0
+    /// - Since: OUDS 0.18.0
     @frozen public enum Shape {
         /// A tag with sharp, square corners.
         /// Squared tags provide a more formal, structured, or technical feel. They are often used in business contexts to label promotions, offers, or important notices.
@@ -301,7 +301,7 @@ public struct MISOTag: View {
     }
 
     /// Defines the size of an `MISOTag`
-    /// - Since: 0.18.0
+    /// - Since: OUDS 0.18.0
     @frozen public enum Size {
         /// The standard tag size, suitable for most use cases and offering good readability.
         case `default`

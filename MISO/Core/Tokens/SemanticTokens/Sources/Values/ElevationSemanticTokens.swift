@@ -14,7 +14,7 @@
 /// is not able to generate them yet, and they must be defined elsewhere to not be deleted.
 /// Any elevation semantic token must be declared there (except ``ElevationCompositeSemanticTokens``)
 ///
-/// - Since: 0.8.0
+/// - Since: OUDS 0.8.0
 public protocol ElevationSemanticTokens {
 
     // MARK: Semantic token - Elevation - X

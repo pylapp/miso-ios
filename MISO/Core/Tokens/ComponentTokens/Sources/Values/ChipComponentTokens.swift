@@ -12,7 +12,7 @@ import MISOTokensSemantic
 /// Declares all component tokens for chips components like `MISOFilterChip` and `MISOSuggestionChip`
 /// Use for tokens providers like `WireframeThemeChipComponentTokensProvider`.
 ///
-/// - Since: 0.10.0
+/// - Since: OUDS 0.10.0
 public protocol ChipComponentTokens {
 
     // MARK: - Sizes

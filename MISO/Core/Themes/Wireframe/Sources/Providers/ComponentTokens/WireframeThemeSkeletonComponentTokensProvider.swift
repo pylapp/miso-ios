@@ -13,7 +13,7 @@ import MISOThemesContract
 /// It implements also the protocol `SkeletonComponentTokens` so as to expose the component tokens for *skeleton* through any `MISOTheme`.
 /// *Skeleton* components tokens are defined with semantic tokens of colors (from `AllColorSemanticTokensProvider`).
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 open class WireframeThemeSkeletonComponentTokensProvider: AllSkeletonComponentTokensProvider {
 
     /// Provider of color semantic tokens to use for link colors

@@ -21,7 +21,7 @@ import SwiftUI
 ///     MISOImage(asset: Image("ic_heart"), accessibilityLabel: "Like", renderingMode: .original)
 /// ```
 ///
-/// - Since: 1.3.0
+/// - Since: OUDS 1.3.0
 public struct MISOImage: View {
 
     // MARK: Properties

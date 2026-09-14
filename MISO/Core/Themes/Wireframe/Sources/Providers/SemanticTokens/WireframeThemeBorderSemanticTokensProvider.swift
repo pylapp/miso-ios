@@ -10,7 +10,7 @@ import MISOThemesContract
 /// This provider should be integrated as a `AllBorderSemanticTokensProvider` implementation inside some `MISOTheme` so as to provide
 /// all tokens to the users.
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 open class WireframeThemeBorderSemanticTokensProvider: AllBorderSemanticTokensProvider {
 
     #if DEBUG

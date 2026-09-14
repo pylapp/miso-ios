@@ -34,7 +34,7 @@ import SwiftUI
 /// announce the text as a header.
 ///
 /// - Version: 1.0.0 (Figma component design version)
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public struct MISODisplay: View { // TODO: #1580 - Add reference to documentation when available
 
@@ -49,7 +49,7 @@ public struct MISODisplay: View { // TODO: #1580 - Add reference to documentatio
 
     /// Defines the size of the display text.
     ///
-    /// - Since: 3.0.0
+    /// - Since: OUDS 3.0.0
     @frozen public enum Size {
         /// The largest display size (default).
         case large

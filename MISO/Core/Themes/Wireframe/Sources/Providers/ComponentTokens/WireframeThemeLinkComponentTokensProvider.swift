@@ -15,7 +15,7 @@ import MISOThemesContract
 /// colors (from `AllColorSemanticTokensProvider`), spaces (from `AllSpaceSemanticTokensProvider`)
 /// and dimensions (from `AllDimensionSemanticTokensProvider`).
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 open class WireframeThemeLinkComponentTokensProvider: AllLinkComponentTokensProvider {
 
     /// Provider of size semantic tokens to use for link sizes

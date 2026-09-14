@@ -79,7 +79,7 @@ import SwiftUI
 /// vertically aligned using the ``SwiftUICore/View/misoListItemContainerAlignment(_:)`` view modifier
 /// (`.center` by default, or `.top`).
 ///
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public struct MISOListItemAvatar: View {
 
@@ -87,7 +87,7 @@ public struct MISOListItemAvatar: View {
 
     /// The type of badge displayed on the avatar.
     ///
-    /// - Since: 3.0.0
+    /// - Since: OUDS 3.0.0
     @frozen public enum BadgeType {
         /// A standard badge in its status.
         ///
@@ -106,7 +106,7 @@ public struct MISOListItemAvatar: View {
 
     /// The type of content displayed inside the avatar.
     ///
-    /// - Since: 3.0.0
+    /// - Since: OUDS 3.0.0
     @frozen public enum AvatarType {
         /// A custom image that fills the avatar circle.
         /// The image is resized to fill the avatar frame and clipped to a circular shape.
@@ -130,7 +130,7 @@ public struct MISOListItemAvatar: View {
     /// (via ``SwiftUICore/View/misoListItemSize(_:)``), this parameter is ignored
     /// and the smallest size is always used.
     ///
-    /// - Since: 3.0.0
+    /// - Since: OUDS 3.0.0
     @frozen public enum Size {
         /// The medium size, used as the default in standard list items.
         case medium

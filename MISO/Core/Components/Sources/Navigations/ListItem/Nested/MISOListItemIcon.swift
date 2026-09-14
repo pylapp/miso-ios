@@ -66,7 +66,7 @@ import SwiftUI
 ///     )
 /// ```
 ///
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public struct MISOListItemIcon: View {
 
@@ -75,7 +75,7 @@ public struct MISOListItemIcon: View {
     /// Defines the type of icon to display.
     /// Each type determines the icon asset and its semantic foreground color.
     ///
-    /// - Since: 3.0.0
+    /// - Since: OUDS 3.0.0
     @frozen public enum IconStatus {
         /// A custom icon from a provided `Image` asset, rendered with the default content color.
         ///
@@ -104,7 +104,7 @@ public struct MISOListItemIcon: View {
     /// When the icon is embedded in a list item with `.small` size, this parameter is ignored
     /// and a smallest size is always used.
     ///
-    /// - Since: 3.0.0
+    /// - Since: OUDS 3.0.0
     @frozen public enum Size {
         /// The default icon size.
         case medium

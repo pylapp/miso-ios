@@ -12,7 +12,7 @@ import MISOTokensSemantic
 /// Declares all component tokens for bullet list components like `MISOBulletList`
 /// Use for tokens providers like `WireframeThemeBulletListComponentTokensProvider`.
 ///
-/// - Since: 0.10.0
+/// - Since: OUDS 0.10.0
 public protocol BulletListComponentTokens {
 
     // MARK: - Spaces

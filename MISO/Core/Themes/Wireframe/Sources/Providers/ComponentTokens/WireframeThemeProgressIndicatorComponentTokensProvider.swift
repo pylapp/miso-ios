@@ -15,7 +15,7 @@ import MISOThemesContract
 /// *Progress indicators* components tokens are defined with semantic tokens spaces (from `AllSpaceSemanticTokensProvider`), sizes (from `AllSizeSemanticTokensProvider`),
 /// borders (from `AllBorderSemanticTokensProvider`) and colors (from `AllColorSemanticTokensProvider`).
 ///
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 open class WireframeThemeProgressIndicatorComponentTokensProvider: AllProgressIndicatorComponentTokensProvider {
 
     /// Provider of size semantic tokens to use for progress indicator  sizes

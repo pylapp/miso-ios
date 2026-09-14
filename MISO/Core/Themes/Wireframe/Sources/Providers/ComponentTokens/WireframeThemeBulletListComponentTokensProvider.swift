@@ -13,7 +13,7 @@ import MISOThemesContract
 /// It implements also the protocol `BulletListComponentTokens` so as to expose the component tokens for *bullet list* through any `MISOTheme`.
 /// *Bullet list* components tokens are defined with raw and semantic tokens of spaces (from `AllSpaceSemanticTokensProvider`).
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 open class WireframeThemeBulletListComponentTokensProvider: AllBulletListComponentTokensProvider {
 
     /// Provider of spaces semantic tokens to use for link spaces

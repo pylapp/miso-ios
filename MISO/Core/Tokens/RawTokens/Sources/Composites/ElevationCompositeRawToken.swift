@@ -9,7 +9,7 @@ import Foundation
 /// All these elements are *raw tokens*, and together define a *composite raw token* for *elevation* effect.
 /// It is defined as a `final class` and `NSObject` so as to be shared through `@objc` with extensions and protocols within modules.
 ///
-/// - Since: 0.8.0
+/// - Since: OUDS 0.8.0
 public final class ElevationCompositeRawToken: NSObject, Sendable { // NSObject for @objc compatibility
 
     /// The X offset for the elevation

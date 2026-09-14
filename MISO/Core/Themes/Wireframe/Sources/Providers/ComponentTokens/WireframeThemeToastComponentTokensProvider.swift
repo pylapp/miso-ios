@@ -14,7 +14,7 @@ import MISOThemesContract
 /// *Toast* components tokens are defined with semantic tokens of borders (`AllBorderSemanticTokensProvider`),
 /// dimensions (`AllDimensionSemanticTokensProvider`) and sizes (from `AllSizeSemanticTokensProvider`).
 ///
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 open class WireframeThemeToastComponentTokensProvider: AllToastComponentTokensProvider {
 
     /// Provider of borders semantic tokens to use for toast borders

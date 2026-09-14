@@ -28,7 +28,7 @@ import GameController
 ///
 /// In addition the badges colors will be the same and cannot be changed (except with token definition). These particular badges do not rely on MISO badge components.
 ///
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 @available(iOS 15, *)
 public struct MISOTabBarViewModifier: ViewModifier {
 

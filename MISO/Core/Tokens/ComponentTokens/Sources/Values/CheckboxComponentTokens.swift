@@ -12,7 +12,7 @@ import MISOTokensSemantic
 /// Declares all component tokens for checkboxes components like `MISOCheckbox` and `MISOCheckboxItem`.
 /// Used for tokens providers like `WireframeThemeCheckboxComponentTokensProvider`.
 ///
-/// - Since: 0.10.0
+/// - Since: OUDS 0.10.0
 public protocol CheckboxComponentTokens {
 
     // MARK: - Sizes

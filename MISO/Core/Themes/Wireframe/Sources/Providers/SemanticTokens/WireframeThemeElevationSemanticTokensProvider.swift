@@ -10,7 +10,7 @@ import MISOThemesContract
 /// This provider should be integrated as a `AllElevationSemanticTokensProvider` implementation inside `MISOTheme` so as to provide
 /// all tokens to the users.
 ///
-/// - Since: 0.22.0
+/// - Since: OUDS 0.22.0
 open class WireframeThemeElevationSemanticTokensProvider: AllElevationSemanticTokensProvider {
 
     #if DEBUG

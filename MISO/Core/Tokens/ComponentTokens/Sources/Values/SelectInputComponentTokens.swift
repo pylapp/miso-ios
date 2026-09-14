@@ -12,7 +12,7 @@ import MISOTokensSemantic
 /// Declares all component tokens for input components like `MISOSelectInput`
 /// Use for tokens providers like `WireframeThemeSelectInputComponentTokensProvider`.
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 public protocol SelectInputComponentTokens {
 
     var sizeMinWidth: SizeSemanticToken { get }

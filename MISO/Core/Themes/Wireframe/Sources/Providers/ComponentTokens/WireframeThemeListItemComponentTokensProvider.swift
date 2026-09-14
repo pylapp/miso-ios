@@ -16,7 +16,7 @@ import MISOThemesContract
 /// spaces (from `AllSpaceSemanticTokensProvider`), opacities (from `AllOpacitySemanticTokensProvider`)
 /// and dimensions (from `AllDimensionSemanticTokensProvider`).
 ///
-/// - Since: 0.18.0
+/// - Since: OUDS 0.18.0
 open class WireframeThemeListItemComponentTokensProvider: AllListItemComponentTokensProvider {
 
     /// Provider of size semantic tokens to use for list item sizes

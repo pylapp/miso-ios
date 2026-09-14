@@ -12,7 +12,7 @@ import MISOTokensSemantic
 /// Declares all component tokens for divider components like `MISOHorizontalDivider` and `MISOVerticalDivider`
 /// Use for tokens providers like `WireframeThemeDividerComponentTokensProvider`.
 ///
-/// - Since: 0.13.0
+/// - Since: OUDS 0.13.0
 public protocol DividerComponentTokens {
 
     var borderWidth: BorderWidthSemanticToken { get }

@@ -18,7 +18,7 @@ import SwiftUI
 ///     }
 /// ```
 ///
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 @available(iOS 15, *)
 public struct MISONavigationLink<Destination: View>: View {
 

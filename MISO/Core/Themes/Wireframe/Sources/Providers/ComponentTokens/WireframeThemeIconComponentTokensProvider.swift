@@ -13,7 +13,7 @@ import MISOThemesContract
 /// It implements also the protocol `IconomponentTokens` so as to expose the component tokens for *icons* through any `MISOTheme`.
 /// *Icons* components tokens are defined with raw and semantic tokens of colors (from `AllColorSemanticTokensProvider`).
 ///
-/// - Since: 0.20.0
+/// - Since: OUDS 0.20.0
 open class WireframeThemeIconComponentTokensProvider: AllIconComponentTokensProvider {
 
     /// Provider of color semantic tokens to use for link colors

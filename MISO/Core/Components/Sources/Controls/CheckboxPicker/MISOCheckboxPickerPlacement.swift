@@ -6,7 +6,7 @@ import Foundation
 
 /// Enumerates the types of layouts a ``MISOCheckboxPicker`` can have
 ///
-/// - Since: 0.14.0
+/// - Since: OUDS 0.14.0
 @frozen public enum MISOCheckboxPickerPlacement {
 
     /// A `RootLabel` is in the end a String
@@ -26,7 +26,7 @@ import Foundation
     // MARK: - Display Type
 
     /// The type of display for the root label in case of *vertical rooted* picker placement.
-    /// - Since: 0.14.0
+    /// - Since: OUDS 0.14.0
     @frozen public enum DisplayType {
 
         /// Display only the given root label

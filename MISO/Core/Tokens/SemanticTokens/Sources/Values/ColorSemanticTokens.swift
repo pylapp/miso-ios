@@ -16,7 +16,7 @@
 /// Thus if the token is still used, even if explained in the documentation it should not,
 /// this special value won't be successfully parsed as color and the app will crash like expected.
 ///
-/// - Since: 0.8.0
+/// - Since: OUDS 0.8.0
 public protocol ColorSemanticTokens {
 
     // MARK: - Color - Opacity

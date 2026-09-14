@@ -79,7 +79,7 @@ import SwiftUI
 /// ```
 ///
 /// - Version: 1.3.1 (Figma component design version)
-/// - Since: 1.2.0
+/// - Since: OUDS 1.2.0
 @available(iOS 15, macOS 13, visionOS 1, *)
 public struct MISOPasswordInput: View {
 

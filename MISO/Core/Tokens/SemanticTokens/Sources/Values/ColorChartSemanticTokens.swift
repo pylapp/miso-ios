@@ -11,7 +11,7 @@ import Foundation
 
 /// This is a group of semantic tokens for **color charts**.
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 public protocol ColorChartSemanticTokens {
 
     var gridlinesLight: ColorSemanticToken { get }

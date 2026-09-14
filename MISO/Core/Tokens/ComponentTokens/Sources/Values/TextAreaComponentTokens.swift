@@ -12,7 +12,7 @@ import MISOTokensSemantic
 /// Declares all component tokens for input components like `MISOTextArea`
 /// Used for tokens providers like `WireframeThemeTextAreaComponentTokensProvider`.
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 public protocol TextAreaComponentTokens {
 
     var spacePaddingBlock: SpaceSemanticToken { get }

@@ -79,7 +79,7 @@ import SwiftUI
 /// ```
 ///
 /// - Version: 1.1.0 (Figma component design version)
-/// - Since: 1.4.0
+/// - Since: OUDS 1.4.0
 @available(iOS 15, visionOS 1, *)
 public struct MISOToolBarTop: ViewModifier {
     // NOTE: As Swift DocC cannot build rich documention for methods, this struct does not the job

@@ -102,7 +102,7 @@ import SwiftUI
 /// - The extra label in ``TextType/labelAndExtraLabel(_:_:)`` is **ignored**.
 /// - The `.slot` element is not resized automatically and is **not displayed**.
 ///
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 @frozen public enum MISOListItemTrailing {
 
@@ -112,7 +112,7 @@ import SwiftUI
     ///
     /// Each variant controls the visual style and content of the text shown at the trailing position.
     ///
-    /// - Since: 3.0.0
+    /// - Since: OUDS 3.0.0
     @frozen public enum TextType {
         /// A default-styled label.
         case label(String)
@@ -134,7 +134,7 @@ import SwiftUI
 
     /// The type of badge displayed.
     ///
-    /// - Since: 3.0.0
+    /// - Since: OUDS 3.0.0
     @frozen public enum BadgeType {
         /// A standard badge
         case standard(MISOBadgeStandard)

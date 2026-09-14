@@ -13,7 +13,7 @@ import MISOTokensSemantic
 /// Declares all component tokens for components using icons (like `MISOTag`).
 /// Use for tokens providers like `WireframeThemeIconComponentTokensProvider`.
 ///
-/// - Since: 0.20.0
+/// - Since: OUDS 0.20.0
 public protocol IconComponentTokens {
 
     var colorContentStatusWarningExternalShape: MultipleColorSemanticToken { get }

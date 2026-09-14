@@ -21,7 +21,7 @@ import MISOTokensSemantic
 /// It contains plenty of *tokens provider* for semantic tokens and component tokens.
 /// Theme can have also non-provider properties like *font family* to apply.
 ///
-/// - Since: 0.8.0
+/// - Since: OUDS 0.8.0
 open class MISOTheme: @unchecked Sendable, Equatable {
 
     // MARK: - Semantic tokens

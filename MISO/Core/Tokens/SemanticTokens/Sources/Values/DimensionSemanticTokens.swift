@@ -15,7 +15,7 @@
 /// They are considered as "closed" tokens but still defined in this library so as to keep consistancy between Figma specifications
 /// and library. The tokens are not hidden from developers.
 ///
-/// - Since: 0.16.0
+/// - Since: OUDS 0.16.0
 public protocol DimensionSemanticTokens {
 
     // NOTE: To keep consistency in variable snames, start all of them by '_'

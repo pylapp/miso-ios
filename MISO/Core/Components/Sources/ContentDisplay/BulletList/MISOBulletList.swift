@@ -122,7 +122,7 @@ import SwiftUI
 /// Always check the results of rich text mode with high contrast, light and dark modes, and Voice Over vocalization.
 ///
 /// - Version: 1.1.0 (Figma component design version)
-/// - Since: 1.2.0
+/// - Since: OUDS 1.2.0
 @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public struct MISOBulletList: View {
 
@@ -252,7 +252,7 @@ public struct MISOBulletList: View {
     // MARK: - Unordered Icon
 
     /// The type of asset in the unordered list
-    /// - Since: 1.2.0
+    /// - Since: OUDS 1.2.0
     @frozen public enum UnorderedAsset {
         /// A bullet for unordered bullet list
         case bullet
@@ -271,7 +271,7 @@ public struct MISOBulletList: View {
     // MARK: - Type
 
     /// The visual type of the list
-    /// - Since: 1.2.0
+    /// - Since: OUDS 1.2.0
     @frozen public enum `Type` {
         /// Collects related items that don’t need to be in a specific order or sequence.
         /// List items are typically marked with bullets, but it is also possible to use a tick or any Solaris icon.
@@ -293,7 +293,7 @@ public struct MISOBulletList: View {
     // MARK: - Text Style
 
     /// The typography style for the list item
-    /// - Since: 1.2.0
+    /// - Since: OUDS 1.2.0
     @frozen public enum TextStyle {
         /// If the text accompanying the list component is the body large text.
         /// This variant is designed for more visual, engaging experiences.

@@ -68,7 +68,7 @@ import SwiftUI
 /// When the list item is displayed in small size (via ``SwiftUICore/View/misoListItemSize(_:)``), leading elements such as avatars and icons
 /// are rendered in their smallest available size. The `.slot` element is not resized automatically and is **not displayed** in small size.
 ///
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 @frozen public enum MISOListItemLeading {
     /// A status or custom icon displayed at the leading position.

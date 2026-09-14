@@ -11,7 +11,7 @@ import MISOThemesContract
 /// This provider should be integrated as a `AllQuantityInputComponentTokensProvider` implementation inside `MISOTheme` so as to provide
 /// all tokens to the users. It helps users to override some of the tokens and assign them to an `MISOTheme` implementation to use.
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 open class WireframeThemeQuantityInputComponentTokensProvider: AllQuantityInputComponentTokensProvider {
 
     /// Provider of size semantic tokens to use for quantity input component

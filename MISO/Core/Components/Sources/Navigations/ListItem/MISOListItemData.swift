@@ -110,7 +110,7 @@ import SwiftUI
 ///     .misoListItemSize(.small)
 /// ```
 ///
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public struct MISOListItemData {
 
@@ -123,7 +123,7 @@ public struct MISOListItemData {
     ///     MISOListItemData.Slot { Text("Some text") }
     /// ```
     ///
-    /// - Since: 3.0.0
+    /// - Since: OUDS 3.0.0
     @frozen public struct Slot {
         let view: AnyView
 
@@ -155,7 +155,7 @@ public struct MISOListItemData {
     /// for the list item text parts, ensuring Voice Over can vocalize the label even when it is
     /// an arbitrary view.
     ///
-    /// - Since: 3.0.0
+    /// - Since: OUDS 3.0.0
     public enum Label {
         /// A plain text string label.
         ///

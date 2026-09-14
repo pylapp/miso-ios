@@ -16,7 +16,7 @@ import MISOThemesContract
 /// borders (`BorderRadiusSemanticToken`, `BorderWidthSemanticToken`).
 /// These components share the same type of tokens which are all gathered here.                                        borders: CustomBorderSemanticTokensProvider()))
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 open class WireframeThemeRadioButtonComponentTokensProvider: AllRadioButtonComponentTokensProvider {
 
     /// Provider of size semantic tokens to use for check / radio sizes

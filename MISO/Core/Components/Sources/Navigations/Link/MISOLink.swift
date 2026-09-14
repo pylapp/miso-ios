@@ -51,7 +51,7 @@ import SwiftUI
 /// If link is placed on colored surface using `MISOColoredSurface`, the default colors (content text and icon or arrow) are automatically adjusted to switch to monochrom.
 ///
 /// - Version: 2.4.0 (Figma component design version)
-/// - Since: 0.11.0
+/// - Since: OUDS 0.11.0
 @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public struct MISOLink: View {
 
@@ -68,20 +68,20 @@ public struct MISOLink: View {
     @Environment(\.layoutDirection) private var layoutDirection
 
     /// Represents the size of an `MISOLink`.
-    /// - Since: 0.11.0
+    /// - Since: OUDS 0.11.0
     @frozen public enum Size {
         case small, `default`
     }
 
     /// Represents the type of density for an `MISOLink`.
     /// `.compact` can be used for interfaces with a lot of content to display.
-    /// - Since: 3.0.0
+    /// - Since: OUDS 3.0.0
     @frozen public enum Density {
         case `default`, compact
     }
 
     /// Represents the arrow / chevron / indicator of an `MISOLink`.
-    /// - Since: 0.11.0
+    /// - Since: OUDS 0.11.0
     @frozen public enum Indicator {
         case previous, next, external
     }

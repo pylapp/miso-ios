@@ -24,7 +24,7 @@ import SwiftUI
 ///         var onBrandPrimary: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken(onBrandPrimary) }
 /// ```
 ///
-/// - Since: 0.13.0
+/// - Since: OUDS 0.13.0
 public protocol ColorModeMultipleSemanticTokens {
 
     // MARK: - Multiple tokens

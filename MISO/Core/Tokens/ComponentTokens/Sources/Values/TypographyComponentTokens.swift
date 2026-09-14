@@ -13,7 +13,7 @@ import MISOTokensSemantic
 /// Declares all component tokens for input components like `MISOText`
 /// Use for tokens providers like `WireframeThemeTypographyComponentTokensProvider`.
 ///
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 public protocol TypographyComponentTokens {
 
     var spacePaddingBlockTopHeadingLargeMarker: SpaceSemanticToken { get }

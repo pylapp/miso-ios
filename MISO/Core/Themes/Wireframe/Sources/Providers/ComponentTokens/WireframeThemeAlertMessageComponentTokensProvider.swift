@@ -14,7 +14,7 @@ import MISOThemesContract
 /// *Alert* components tokens are defined with semantic tokens of borders (`AllBorderSemanticTokensProviders`),
 /// and spaces (from `AllSpaceSemanticTokensProvider`).
 ///
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 open class WireframeThemeAlertMessageComponentTokensProvider: AllAlertMessageComponentTokensProvider {
 
     /// Provider of borders semantic tokens to use for alert borders

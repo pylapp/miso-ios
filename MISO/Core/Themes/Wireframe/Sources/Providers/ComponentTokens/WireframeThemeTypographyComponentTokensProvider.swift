@@ -13,7 +13,7 @@ import MISOThemesContract
 /// It implements also the protocol `TypographyComponentTokens` so as to expose the component tokens for *typography* through any `MISOTheme`.
 /// *Typography* components tokens are defined with semantic tokens of spaces (from `AllSpaceSemanticTokensProvider`).
 ///
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 open class WireframeThemeTypographyComponentTokensProvider: AllTypographyComponentTokensProvider {
 
     /// Provider of spaces semantic tokens to use for button spaces

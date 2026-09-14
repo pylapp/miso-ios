@@ -29,7 +29,7 @@ import SwiftUI
 /// ```
 ///
 /// - Version: 1.5.0 (Figma component design version)
-/// - Since: 0.14.0
+/// - Since: OUDS 0.14.0
 @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public struct MISOSwitch: View {
 

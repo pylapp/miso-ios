@@ -10,7 +10,7 @@ import MISOThemesContract
 /// This provider should be integrated as a `AllOpacitySemanticTokensProvider` implementation inside `MISOTheme` so as to provide
 /// all tokens to the users.
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 open class WireframeThemeOpacitySemanticTokensProvider: AllOpacitySemanticTokensProvider {
 
     #if DEBUG

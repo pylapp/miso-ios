@@ -33,7 +33,7 @@
 ///         // (even if they are still able to use 'lower level' semantic tokens but it is more error-prone)
 /// ```
 ///
-/// - Since: 0.8.0
+/// - Since: OUDS 0.8.0
 public protocol ColorMultipleSemanticTokens {
 
     // NOTE: repository* color semantic tokens are closed

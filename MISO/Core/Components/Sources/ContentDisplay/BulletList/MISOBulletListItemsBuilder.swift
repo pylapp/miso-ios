@@ -22,7 +22,7 @@ import SwiftUI
 ///     }
 /// ```
 ///
-/// - Since: 1.2.0
+/// - Since: OUDS 1.2.0
 @resultBuilder
 @frozen public enum MISOBulletListItemBuilder {
 

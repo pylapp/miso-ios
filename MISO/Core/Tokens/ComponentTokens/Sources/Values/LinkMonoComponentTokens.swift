@@ -12,7 +12,7 @@ import MISOTokensSemantic
 /// Declares all component tokens for links components like `MISOLink` in **monochrome mode**.
 /// Used for tokens providers like `WireframeThemeLinkComponentTokensProvider`.
 ///
-/// - Since: 0.16.0
+/// - Since: OUDS 0.16.0
 public protocol LinkMonoComponentTokens {
 
     var monoColorContentEnabled: MultipleColorSemanticToken { get }

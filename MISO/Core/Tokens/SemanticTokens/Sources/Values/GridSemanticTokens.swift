@@ -11,7 +11,7 @@
 /// It defines all `GridSemanticToken` a theme must have.
 /// Any grid semantic token must be declared there.
 ///
-/// - Since: 0.8.0
+/// - Since: OUDS 0.8.0
 public protocol GridSemanticTokens {
 
     // MARK: Semantic token - Grid - iOS Extra compact

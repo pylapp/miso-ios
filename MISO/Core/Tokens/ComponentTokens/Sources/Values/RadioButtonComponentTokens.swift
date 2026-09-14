@@ -12,7 +12,7 @@ import MISOTokensSemantic
 /// Declares all component tokens for radio button components like `MISORadioButton` and `MISORadioButtonItem`.
 /// Use for tokens providers like `WireframeThemeRadioButtonComponentTokensProvider`.
 ///
-/// - Since: 0.12.0
+/// - Since: OUDS 0.12.0
 public protocol RadioButtonComponentTokens {
 
     // MARK: - Sizes

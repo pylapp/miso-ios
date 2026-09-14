@@ -65,7 +65,7 @@ import SwiftUI
 ///                     placement: .horitzontal(true))
 /// ```
 ///
-/// - Since: 0.14.0
+/// - Since: OUDS 0.14.0
 @available(iOS 15, macOS 13, visionOS 1, *)
 public struct MISORadioPicker<Tag>: View where Tag: Hashable {
 

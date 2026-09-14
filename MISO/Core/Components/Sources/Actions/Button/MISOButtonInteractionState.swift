@@ -39,7 +39,7 @@
 ///  }
 /// ```
 ///
-/// - Since: 2.3.0
+/// - Since: OUDS 2.3.0
 @frozen public enum MISOButtonInteractionState {
 
     /// User can interact with the component

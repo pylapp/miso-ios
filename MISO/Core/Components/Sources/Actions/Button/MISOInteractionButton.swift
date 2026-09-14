@@ -25,7 +25,7 @@ import SwiftUI
 /// }
 /// ```
 ///
-/// - Since: 2.3.0
+/// - Since: OUDS 2.3.0
 public struct MISOInteractionButton<Content>: View where Content: View {
 
     // MARK: Properties
@@ -101,7 +101,7 @@ public struct MISOInteractionButton<Content>: View where Content: View {
 /// }
 /// ```
 ///
-/// - Since: 2.3.0
+/// - Since: OUDS 2.3.0
 public struct MISOInteractionButtonStyle<Content>: ButtonStyle where Content: View {
 
     // MARK: Properties

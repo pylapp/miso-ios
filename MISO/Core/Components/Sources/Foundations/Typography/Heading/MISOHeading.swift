@@ -54,7 +54,7 @@ import SwiftUI
 /// announce the text as a header. When a marker is drawn, it is hidden from assistive technologies (decorative).
 ///
 /// - Version: 1.0.0 (Figma component design version)
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public struct MISOHeading: View {
 
@@ -72,7 +72,7 @@ public struct MISOHeading: View {
 
     /// Defines the size of the heading text.
     ///
-    /// - Since: 3.0.0
+    /// - Since: OUDS 3.0.0
     @frozen public enum Size {
         /// The largest heading size, e.g. for page titles.
         case xLarge

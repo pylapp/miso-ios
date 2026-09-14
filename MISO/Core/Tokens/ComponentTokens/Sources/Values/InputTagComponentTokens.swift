@@ -12,7 +12,7 @@ import MISOTokensSemantic
 /// Declares all component tokens for tags components like `MISOInputTag`
 /// Used for tokens providers like `WireframeThemeInputTagComponentTokensProvider`.
 ///
-/// - Since: 0.17.0
+/// - Since: OUDS 0.17.0
 public protocol InputTagComponentTokens {
 
     // MARK: - Colors

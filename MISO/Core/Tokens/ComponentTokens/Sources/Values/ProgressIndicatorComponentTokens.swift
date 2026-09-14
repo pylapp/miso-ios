@@ -12,7 +12,7 @@ import MISOTokensSemantic
 /// Declares all component tokens for input components like `MISOProgressIndicator`
 /// Use for tokens providers like `WireframeThemeProgressIndicatorComponentTokensProvider`.
 ///
-/// - Since: 3.0.0
+/// - Since: OUDS 3.0.0
 public protocol ProgressIndicatorComponentTokens {
 
     // MARK: - Colors

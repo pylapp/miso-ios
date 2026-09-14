@@ -11,7 +11,7 @@
 /// It defines all ``SizeSemanticToken`` a theme must have.
 /// Any size semantic token must be declared there.
 ///
-/// - Since: 0.8.0
+/// - Since: OUDS 0.8.0
 public protocol SizeSemanticTokens {
 
     // MARK: - Semantic token - Sizing - Icon with typography

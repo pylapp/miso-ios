@@ -11,7 +11,7 @@
 /// It defines all ``OpacitySemanticToken`` a theme must have.
 /// Any opacity semantic token must be declared there as providers like `WireframeThemeOpacitySemanticTokensProvider` will then expose them through `MISOTheme`.
 ///
-/// - Since: 0.8.0
+/// - Since: OUDS 0.8.0
 public protocol OpacitySemanticTokens {
 
     var invisible: OpacitySemanticToken { get }
