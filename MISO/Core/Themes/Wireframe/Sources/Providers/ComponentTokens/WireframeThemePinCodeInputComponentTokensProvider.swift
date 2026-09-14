@@ -15,7 +15,7 @@ import MISOThemesContract
 /// ans spaces (from `AllSpaceSemanticTokensProvider`).
 ///
 /// - Since: 0.17.0
-final class WireframeThemePinCodeInputComponentTokensProvider: AllPinCodeInputComponentTokensProvider {
+open class WireframeThemePinCodeInputComponentTokensProvider: AllPinCodeInputComponentTokensProvider {
 
     /// Provider of spaces semantic tokens to use for pin code input  spaces
     let spaces: AllSpaceSemanticTokensProvider
@@ -31,8 +31,8 @@ final class WireframeThemePinCodeInputComponentTokensProvider: AllPinCodeInputCo
     /// - Parameters:
     ///    - spaces: Provider for space semantic tokens. If nil, a default one will be used (``WireframeThemeSpaceSemanticTokensProvider``)
     ///    - dimensions: Provider for dimension semantic tokens. If nil, a default one will be used (``WireframeThemeDimensionSemanticTokensProvider``)
-    init(spaces: AllSpaceSemanticTokensProvider? = nil,
-         dimensions: AllDimensionSemanticTokensProvider? = nil)
+    public init(spaces: AllSpaceSemanticTokensProvider? = nil,
+                dimensions: AllDimensionSemanticTokensProvider? = nil)
     {
         ML.debug("Init of WireframeThemePinCodeInputComponentTokensProvider")
         self.spaces = (spaces ?? WireframeThemeSpaceSemanticTokensProvider())

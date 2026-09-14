@@ -17,7 +17,7 @@ import MISOThemesContract
 /// and  sizes (`AllSizeSemanticTokensProvider`).
 ///
 /// - Since: 0.17.0
-final class WireframeThemeSwitchComponentTokensProvider: AllSwitchComponentTokensProvider {
+open class WireframeThemeSwitchComponentTokensProvider: AllSwitchComponentTokensProvider {
 
     /// Provider of size semantic tokens to use for switch sizes
     let sizes: AllSizeSemanticTokensProvider
@@ -49,12 +49,12 @@ final class WireframeThemeSwitchComponentTokensProvider: AllSwitchComponentToken
     ///    - spaces: Provider for space semantic tokens. If nil, a default one will be used (``WireframeThemeSpaceSemanticTokensProvider``)
     ///    - opacities: Provider for opacity semantic tokens. If nil a default one will be used (``WireframeThemeOpacitySemanticTokensProvider``)
     ///    - dimensions: Provider for dimension semantic tokens. If nil, a default one will be used (``WireframeThemeDimensionSemanticTokensProvider``)
-    init(sizes: AllSizeSemanticTokensProvider? = nil,
-         borders: AllBorderSemanticTokensProvider? = nil,
-         colors: AllColorSemanticTokensProvider? = nil,
-         spaces: AllSpaceSemanticTokensProvider? = nil,
-         opacities: AllOpacitySemanticTokensProvider? = nil,
-         dimensions: AllDimensionSemanticTokensProvider? = nil)
+    public init(sizes: AllSizeSemanticTokensProvider? = nil,
+                borders: AllBorderSemanticTokensProvider? = nil,
+                colors: AllColorSemanticTokensProvider? = nil,
+                spaces: AllSpaceSemanticTokensProvider? = nil,
+                opacities: AllOpacitySemanticTokensProvider? = nil,
+                dimensions: AllDimensionSemanticTokensProvider? = nil)
     {
         ML.debug("Init of WireframeThemeSwitchComponentTokensProvider")
         self.sizes = (sizes ?? WireframeThemeSizeSemanticTokensProvider())

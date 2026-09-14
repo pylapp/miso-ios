@@ -6,5 +6,5 @@ import Foundation
 extension Bundle {
 
     /// The `Wireframe` theme bundle, useful to find resources
-    static let WireframeTheme = Bundle.module
+    public static let WireframeTheme = Bundle.module
 }

@@ -11,17 +11,17 @@ import MISOTokensSemantic
 
 extension WireframeThemeBulletListComponentTokensProvider: BulletListComponentTokens {
     /// Has for value token spaces.columnGapSmall (= 8)
-    @objc public final var spaceColumnGapBodyLarge: SpaceSemanticToken { spaces.columnGapSmall }
+    @objc open var spaceColumnGapBodyLarge: SpaceSemanticToken { spaces.columnGapSmall }
     /// Has for value token spaces.columnGapSmall (= 8)
-    @objc public final var spaceColumnGapBodyMedium: SpaceSemanticToken { spaces.columnGapSmall }
+    @objc open var spaceColumnGapBodyMedium: SpaceSemanticToken { spaces.columnGapSmall }
     /// Has for value token spaces.paddingBlock2xsmall (= 6)
-    @objc public final var spacePaddingBlockBodyLarge: SpaceSemanticToken { spaces.paddingBlock2xsmall }
+    @objc open var spacePaddingBlockBodyLarge: SpaceSemanticToken { spaces.paddingBlock2xsmall }
     /// Has for value token spaces.paddingBlock2xsmall (= 6)
-    @objc public final var spacePaddingBlockBodyMedium: SpaceSemanticToken { spaces.paddingBlock2xsmall }
+    @objc open var spacePaddingBlockBodyMedium: SpaceSemanticToken { spaces.paddingBlock2xsmall }
     /// Has for value token DimensionRawTokens._50 (= 4)
-    @objc public final var spacePaddingInlineLevel0: SpaceSemanticToken { DimensionRawTokens._50 }
+    @objc open var spacePaddingInlineLevel0: SpaceSemanticToken { DimensionRawTokens._50 }
     /// Has for value token DimensionRawTokens._450 (= 36)
-    @objc public final var spacePaddingInlineLevel1: SpaceSemanticToken { DimensionRawTokens._450 }
+    @objc open var spacePaddingInlineLevel1: SpaceSemanticToken { DimensionRawTokens._450 }
     /// Has for value token DimensionRawTokens._850 (= 68)
-    @objc public final var spacePaddingInlineLevel2: SpaceSemanticToken { DimensionRawTokens._850 }
+    @objc open var spacePaddingInlineLevel2: SpaceSemanticToken { DimensionRawTokens._850 }
 }

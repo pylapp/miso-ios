@@ -13,7 +13,7 @@ import MISOThemesContract
 /// and spaces (from `AllSpaceSemanticTokensProvider`).
 ///
 /// - Since: 0.17.0
-final class WireframeThemeTextAreaComponentTokensProvider: AllTextAreaComponentTokensProvider {
+open class WireframeThemeTextAreaComponentTokensProvider: AllTextAreaComponentTokensProvider {
 
     /// Provider of sizes semantic tokens to use for text area sizes
     let sizes: AllSizeSemanticTokensProvider
@@ -29,8 +29,8 @@ final class WireframeThemeTextAreaComponentTokensProvider: AllTextAreaComponentT
     /// - Parameters:
     ///    - sizes: Provider for sizes semantic tokens. If nil, a default one will be used (``WireframeThemeSizeSemanticTokensProvider``)
     ///    - spaces: Provider for space semantic tokens. If nil, a default one will be used (``WireframeThemeSpaceSemanticTokensProvider``)
-    init(sizes: AllSizeSemanticTokensProvider? = nil,
-         spaces: AllSpaceSemanticTokensProvider? = nil)
+    public init(sizes: AllSizeSemanticTokensProvider? = nil,
+                spaces: AllSpaceSemanticTokensProvider? = nil)
     {
         ML.debug("Init of WireframeThemeTextAreaComponentTokensProvider")
         self.sizes = (sizes ?? WireframeThemeSizeSemanticTokensProvider())

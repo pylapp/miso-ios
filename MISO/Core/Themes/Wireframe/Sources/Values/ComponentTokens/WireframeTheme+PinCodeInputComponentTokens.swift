@@ -10,9 +10,9 @@ import MISOTokensSemantic
 
 extension WireframeThemePinCodeInputComponentTokensProvider: PinCodeInputComponentTokens {
     /// Has for value token dimensions._3xlarge (= 56)
-    @objc public final var sizeMaxWidth: SizeSemanticToken { dimensions._3xlarge }
+    @objc open var sizeMaxWidth: SizeSemanticToken { dimensions._3xlarge }
     /// Has for value token dimensions._large (= 44)
-    @objc public final var sizeMinWidth: SizeSemanticToken { dimensions._large }
+    @objc open var sizeMinWidth: SizeSemanticToken { dimensions._large }
     /// Has for value token spaces.columnGapMedium (= 12)
-    @objc public final var spaceColumnGapDigitInput: SpaceSemanticToken { spaces.columnGapMedium }
+    @objc open var spaceColumnGapDigitInput: SpaceSemanticToken { spaces.columnGapMedium }
 }

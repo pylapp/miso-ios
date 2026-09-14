@@ -11,14 +11,14 @@ import MISOThemesContract
 /// all tokens to the users.
 ///
 /// - Since: 0.17.0
-final class WireframeThemeOpacitySemanticTokensProvider: AllOpacitySemanticTokensProvider {
+open class WireframeThemeOpacitySemanticTokensProvider: AllOpacitySemanticTokensProvider {
 
     #if DEBUG
     nonisolated(unsafe) private static var instanceCount: Int = 0
     #endif
 
     /// Intializes the provider
-    init() {
+    public init() {
         ML.debug("Init of WireframeThemeOpacitySemanticTokensProvider")
         #if DEBUG
         Self.instanceCount++

@@ -16,7 +16,7 @@ import MISOThemesContract
 /// border  (from `AllBorderSemanticTokensProvider`) and sizes  (from `AllSizeSemanticTokensProvider`).
 ///
 /// - Since: 0.17.0
-final class WireframeThemeChipComponentTokensProvider: AllChipComponentTokensProvider {
+open class WireframeThemeChipComponentTokensProvider: AllChipComponentTokensProvider {
 
     /// Provider of size semantic tokens to use for chip sizes
     let sizes: AllSizeSemanticTokensProvider
@@ -44,11 +44,11 @@ final class WireframeThemeChipComponentTokensProvider: AllChipComponentTokensPro
     ///    - colors: Provider for color semantic tokens. If nil, a default one will be used (``WireframeThemeColorSemanticTokensProvider``)
     ///    - spaces: Provider for space semantic tokens. If nil, a default one will be used (``WireframeThemeSpaceSemanticTokensProvider``)
     ///    - dimensions: Provider for dimension semantic tokens. If nil, a default one will be used (``WireframeThemeDimensionSemanticTokensProvider``)
-    init(sizes: AllSizeSemanticTokensProvider? = nil,
-         borders: AllBorderSemanticTokensProvider? = nil,
-         colors: AllColorSemanticTokensProvider? = nil,
-         spaces: AllSpaceSemanticTokensProvider? = nil,
-         dimensions: AllDimensionSemanticTokensProvider? = nil)
+    public init(sizes: AllSizeSemanticTokensProvider? = nil,
+                borders: AllBorderSemanticTokensProvider? = nil,
+                colors: AllColorSemanticTokensProvider? = nil,
+                spaces: AllSpaceSemanticTokensProvider? = nil,
+                dimensions: AllDimensionSemanticTokensProvider? = nil)
     {
         ML.debug("Init of WireframeThemeChipComponentTokensProvider")
         self.sizes = (sizes ?? WireframeThemeSizeSemanticTokensProvider())

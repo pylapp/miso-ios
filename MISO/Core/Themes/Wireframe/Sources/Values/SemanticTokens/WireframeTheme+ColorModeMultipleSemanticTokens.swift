@@ -18,45 +18,45 @@ extension WireframeThemeColorModeSemanticTokensProvider: ColorModeMultipleSemant
 
     // MARK: - Multiple tokens
 
-    @objc public final var onBgPrimary: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onBgPrimary", light: onBgPrimaryLight, dark: onBgPrimaryDark) }
+    @objc open var onBgPrimary: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onBgPrimary", light: onBgPrimaryLight, dark: onBgPrimaryDark) }
 
-    @objc public final var onBgSecondary: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onBgSecondary", light: onBgSecondaryLight, dark: onBgSecondaryDark) }
+    @objc open var onBgSecondary: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onBgSecondary", light: onBgSecondaryLight, dark: onBgSecondaryDark) }
 
-    @objc public final var onBgTertiary: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onBgTertiary", light: onBgTertiaryLight, dark: onBgTertiaryDark) }
+    @objc open var onBgTertiary: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onBgTertiary", light: onBgTertiaryLight, dark: onBgTertiaryDark) }
 
-    @objc public final var onBrandPrimary: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onBrandPrimary", light: onBrandPrimaryLight, dark: onBrandPrimaryDark) }
+    @objc open var onBrandPrimary: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onBrandPrimary", light: onBrandPrimaryLight, dark: onBrandPrimaryDark) }
 
-    @objc public final var onBrandSecondary: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onBrandSecondary", light: onBrandSecondaryLight, dark: onBrandSecondaryDark) }
+    @objc open var onBrandSecondary: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onBrandSecondary", light: onBrandSecondaryLight, dark: onBrandSecondaryDark) }
 
-    @objc public final var onBrandTertiary: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onBrandTertiary", light: onBrandTertiaryLight, dark: onBrandTertiaryDark) }
+    @objc open var onBrandTertiary: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onBrandTertiary", light: onBrandTertiaryLight, dark: onBrandTertiaryDark) }
 
-    @objc public final var onOverlayModal: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onModalOverlay", light: onOverlayModalLight, dark: onOverlayModalDark) }
+    @objc open var onOverlayModal: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onModalOverlay", light: onOverlayModalLight, dark: onOverlayModalDark) }
 
-    @objc public final var onOverlayDropdown: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onOverlayDropdown", light: onOverlayDropdownLight, dark: onOverlayDropdownDark) }
+    @objc open var onOverlayDropdown: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onOverlayDropdown", light: onOverlayDropdownLight, dark: onOverlayDropdownDark) }
 
-    @objc public final var onOverlayTooltip: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onOverlayTooltip", light: onOverlayTooltipLight, dark: onOverlayTooltipDark) }
+    @objc open var onOverlayTooltip: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onOverlayTooltip", light: onOverlayTooltipLight, dark: onOverlayTooltipDark) }
 
-    @objc public final var onStatusAccentEmphasized: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onStatusAccentEmphasized", light: onStatusAccentEmphasizedLight, dark: onStatusAccentEmphasizedDark) }
+    @objc open var onStatusAccentEmphasized: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onStatusAccentEmphasized", light: onStatusAccentEmphasizedLight, dark: onStatusAccentEmphasizedDark) }
 
-    @objc public final var onStatusAccentMuted: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onStatusAccentMuted", light: onStatusAccentMutedLight, dark: onStatusAccentMutedDark) }
+    @objc open var onStatusAccentMuted: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onStatusAccentMuted", light: onStatusAccentMutedLight, dark: onStatusAccentMutedDark) }
 
-    @objc public final var onStatusInfoEmphasized: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onStatusInfoEmphasized", light: onStatusInfoEmphasizedLight, dark: onStatusInfoEmphasizedDark) }
+    @objc open var onStatusInfoEmphasized: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onStatusInfoEmphasized", light: onStatusInfoEmphasizedLight, dark: onStatusInfoEmphasizedDark) }
 
-    @objc public final var onStatusInfoMuted: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onStatusInfoMuted", light: onStatusInfoMutedLight, dark: onStatusInfoMutedDark) }
+    @objc open var onStatusInfoMuted: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onStatusInfoMuted", light: onStatusInfoMutedLight, dark: onStatusInfoMutedDark) }
 
-    @objc public final var onStatusNegativeEmphasized: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onStatusNegativeEmphasized", light: onStatusNegativeEmphasizedLight, dark: onStatusNegativeEmphasizedDark) }
+    @objc open var onStatusNegativeEmphasized: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onStatusNegativeEmphasized", light: onStatusNegativeEmphasizedLight, dark: onStatusNegativeEmphasizedDark) }
 
-    @objc public final var onStatusNegativeMuted: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onStatusNegativeMuted", light: onStatusNegativeMutedLight, dark: onStatusNegativeMutedDark) }
+    @objc open var onStatusNegativeMuted: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onStatusNegativeMuted", light: onStatusNegativeMutedLight, dark: onStatusNegativeMutedDark) }
 
-    @objc public final var onStatusPositiveEmphasized: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onStatusPositiveEmphasized", light: onStatusPositiveEmphasizedLight, dark: onStatusPositiveEmphasizedDark) }
+    @objc open var onStatusPositiveEmphasized: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onStatusPositiveEmphasized", light: onStatusPositiveEmphasizedLight, dark: onStatusPositiveEmphasizedDark) }
 
-    @objc public final var onStatusPositiveMuted: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onStatusPositiveMuted", light: onStatusPositiveMutedLight, dark: onStatusPositiveMutedDark) }
+    @objc open var onStatusPositiveMuted: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onStatusPositiveMuted", light: onStatusPositiveMutedLight, dark: onStatusPositiveMutedDark) }
 
-    @objc public final var onStatusWarningEmphasized: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onStatusWarningEmphasized", light: onStatusWarningEmphasizedLight, dark: onStatusWarningEmphasizedDark) }
+    @objc open var onStatusWarningEmphasized: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onStatusWarningEmphasized", light: onStatusWarningEmphasizedLight, dark: onStatusWarningEmphasizedDark) }
 
-    @objc public final var onStatusWarningMuted: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onStatusWarningMuted", light: onStatusWarningMutedLight, dark: onStatusWarningMutedDark) }
+    @objc open var onStatusWarningMuted: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("onStatusWarningMuted", light: onStatusWarningMutedLight, dark: onStatusWarningMutedDark) }
 
-    @objc public final var navigationBar: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("navigationBarDark", light: navigationBarLight, dark: navigationBarDark) }
+    @objc open var navigationBar: MultipleColorModeSemanticToken { MultipleColorModeSemanticToken("navigationBarDark", light: navigationBarLight, dark: navigationBarDark) }
 
     // MARK: - Additional rules
 

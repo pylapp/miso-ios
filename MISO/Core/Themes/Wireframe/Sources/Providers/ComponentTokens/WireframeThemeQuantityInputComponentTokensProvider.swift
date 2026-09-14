@@ -12,7 +12,7 @@ import MISOThemesContract
 /// all tokens to the users. It helps users to override some of the tokens and assign them to an `MISOTheme` implementation to use.
 ///
 /// - Since: 0.17.0
-final class WireframeThemeQuantityInputComponentTokensProvider: AllQuantityInputComponentTokensProvider {
+open class WireframeThemeQuantityInputComponentTokensProvider: AllQuantityInputComponentTokensProvider {
 
     /// Provider of size semantic tokens to use for quantity input component
     let sizes: AllSizeSemanticTokensProvider
@@ -28,8 +28,8 @@ final class WireframeThemeQuantityInputComponentTokensProvider: AllQuantityInput
     /// - Parameters:
     ///    - sizes: Provider for borders semantic tokens. If nil, a default one will be used (``WireframeThemeSizeSemanticTokensProvider``)
     ///    - spaces: Provider for _ semantic tokens. If nil, a default one will be used (``WireframeThemeSpaceSemanticTokensProvider``)
-    init(sizes: AllSizeSemanticTokensProvider? = nil,
-         spaces: AllSpaceSemanticTokensProvider? = nil)
+    public init(sizes: AllSizeSemanticTokensProvider? = nil,
+                spaces: AllSpaceSemanticTokensProvider? = nil)
     {
         ML.debug("Init of WireframeThemeQuantityInputComponentTokensProvider")
         self.sizes = (sizes ?? WireframeThemeSizeSemanticTokensProvider())

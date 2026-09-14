@@ -16,7 +16,7 @@ import MISOThemesContract
 /// and sizes (from `AllSizeSemanticTokensProvider`).
 ///
 /// - Since: 3.0.0
-final class WireframeThemeAccordionComponentTokensProvider: AllAccordionComponentTokensProvider {
+open class WireframeThemeAccordionComponentTokensProvider: AllAccordionComponentTokensProvider {
 
     /// Provider of sizes semantic tokens to use for alert sizes
     let sizes: AllSizeSemanticTokensProvider
@@ -32,8 +32,8 @@ final class WireframeThemeAccordionComponentTokensProvider: AllAccordionComponen
     /// - Parameters:
     ///    - sizes: Provider for size semantic tokens, if nil, a default one will be used (``WireframeThemeSizeSemanticTokensProvider``)
     ///    - spaces: Provider for space semantic tokens, if nil, a default one will be used (``WireframeThemeSpaceSemanticTokensProvider``)
-    init(sizes: AllSizeSemanticTokensProvider? = nil,
-         spaces: AllSpaceSemanticTokensProvider? = nil)
+    public init(sizes: AllSizeSemanticTokensProvider? = nil,
+                spaces: AllSpaceSemanticTokensProvider? = nil)
     {
         ML.debug("Init of WireframeThemeAccordionComponentTokensProvider")
         self.sizes = (sizes ?? WireframeThemeSizeSemanticTokensProvider())

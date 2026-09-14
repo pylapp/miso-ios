@@ -14,7 +14,7 @@ import MISOThemesContract
 /// *Select input* components tokens are defined with semantic tokens of dimensions (from `AllDimensionSemanticTokensProvider`).
 ///
 /// - Since: 0.17.0
-final class WireframeThemeSelectInputComponentTokensProvider: AllSelectInputComponentTokensProvider {
+open class WireframeThemeSelectInputComponentTokensProvider: AllSelectInputComponentTokensProvider {
 
     /// Provider of dimensions semantic tokens to use for pin code input dimensions
     let dimensions: AllDimensionSemanticTokensProvider
@@ -25,7 +25,7 @@ final class WireframeThemeSelectInputComponentTokensProvider: AllSelectInputComp
 
     /// Defines a provider of component tokens dedicated to `MISOSelect`
     /// - Parameter dimensions: Provider for _ semantic tokens. If nil, a default one will be used (``WireframeThemeDimensionSemanticTokensProvider``)
-    init(dimensions: AllDimensionSemanticTokensProvider? = nil) {
+    public init(dimensions: AllDimensionSemanticTokensProvider? = nil) {
         ML.debug("Init of WireframeThemeSelectInputComponentTokensProvider")
         self.dimensions = (dimensions ?? WireframeThemeDimensionSemanticTokensProvider())
         #if DEBUG

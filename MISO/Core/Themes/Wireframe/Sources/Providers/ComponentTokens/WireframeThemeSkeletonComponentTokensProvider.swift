@@ -14,7 +14,7 @@ import MISOThemesContract
 /// *Skeleton* components tokens are defined with semantic tokens of colors (from `AllColorSemanticTokensProvider`).
 ///
 /// - Since: 0.17.0
-final class WireframeThemeSkeletonComponentTokensProvider: AllSkeletonComponentTokensProvider {
+open class WireframeThemeSkeletonComponentTokensProvider: AllSkeletonComponentTokensProvider {
 
     /// Provider of color semantic tokens to use for link colors
     let colors: AllColorSemanticTokensProvider
@@ -25,7 +25,7 @@ final class WireframeThemeSkeletonComponentTokensProvider: AllSkeletonComponentT
 
     /// Defines a provider of component tokens dedicated to `MISOSkeleton`
     /// - Parameter colors: Provider for color semantic tokens. If nil, a default one will be used (``WireframeThemeColorSemanticTokensProvider``)
-    init(colors: AllColorSemanticTokensProvider? = nil) {
+    public init(colors: AllColorSemanticTokensProvider? = nil) {
         ML.debug("Init of WireframeThemeSkeletonComponentTokensProvider")
         self.colors = (colors ?? WireframeThemeColorSemanticTokensProvider())
         #if DEBUG

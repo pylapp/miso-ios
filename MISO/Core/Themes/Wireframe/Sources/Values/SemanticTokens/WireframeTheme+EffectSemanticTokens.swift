@@ -10,7 +10,7 @@ import MISOTokensSemantic
 
 extension WireframeThemeEffectSemanticTokensProvider: EffectSemanticTokens {
     /// Has for value token EffectRawTokens.blur80 (= 8)
-    @objc public final var blurBackdrop: EffectSemanticToken { EffectRawTokens.blur80 }
+    @objc open var blurBackdrop: EffectSemanticToken { EffectRawTokens.blur80 }
     /// Has for value token EffectRawTokens.blur480 (= 48)
-    @objc public final var blurDrag: EffectSemanticToken { EffectRawTokens.blur480 }
+    @objc open var blurDrag: EffectSemanticToken { EffectRawTokens.blur480 }
 }

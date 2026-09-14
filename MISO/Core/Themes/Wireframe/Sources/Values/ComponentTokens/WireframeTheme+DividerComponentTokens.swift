@@ -10,5 +10,5 @@ import MISOTokensSemantic
 
 extension WireframeThemeDividerComponentTokensProvider: DividerComponentTokens {
     /// Has for value token borders.widthThin
-    @objc public final var borderWidth: BorderWidthSemanticToken { borders.widthThin }
+    @objc open var borderWidth: BorderWidthSemanticToken { borders.widthThin }
 }

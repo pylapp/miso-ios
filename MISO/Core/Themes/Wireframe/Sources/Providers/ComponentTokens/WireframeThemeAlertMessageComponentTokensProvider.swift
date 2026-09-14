@@ -15,7 +15,7 @@ import MISOThemesContract
 /// and spaces (from `AllSpaceSemanticTokensProvider`).
 ///
 /// - Since: 3.0.0
-final class WireframeThemeAlertMessageComponentTokensProvider: AllAlertMessageComponentTokensProvider {
+open class WireframeThemeAlertMessageComponentTokensProvider: AllAlertMessageComponentTokensProvider {
 
     /// Provider of borders semantic tokens to use for alert borders
     let borders: AllBorderSemanticTokensProvider
@@ -31,8 +31,8 @@ final class WireframeThemeAlertMessageComponentTokensProvider: AllAlertMessageCo
     /// - Parameters:
     ///    - borders: Provider for border semantic tokens, if nil, default one will be used ( ``WireframeThemeBorderSemanticTokensProvider``)
     ///    - spaces: Provider for space semantic tokens, if nil, a default one will be used (``WireframeThemeSpaceSemanticTokensProvider``)
-    init(borders: AllBorderSemanticTokensProvider? = nil,
-         spaces: AllSpaceSemanticTokensProvider? = nil)
+    public init(borders: AllBorderSemanticTokensProvider? = nil,
+                spaces: AllSpaceSemanticTokensProvider? = nil)
     {
         ML.debug("Init of WireframeThemeAlertMessageComponentTokensProvider")
         self.borders = (borders ?? WireframeThemeBorderSemanticTokensProvider())

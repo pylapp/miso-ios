@@ -14,7 +14,7 @@ import MISOThemesContract
 /// *Icons* components tokens are defined with raw and semantic tokens of colors (from `AllColorSemanticTokensProvider`).
 ///
 /// - Since: 0.20.0
-final class WireframeThemeIconComponentTokensProvider: AllIconComponentTokensProvider {
+open class WireframeThemeIconComponentTokensProvider: AllIconComponentTokensProvider {
 
     /// Provider of color semantic tokens to use for link colors
     let colors: AllColorSemanticTokensProvider
@@ -26,7 +26,7 @@ final class WireframeThemeIconComponentTokensProvider: AllIconComponentTokensPro
     /// Defines a provider of component tokens dedicated to icons
     /// - Parameters:
     ///    - colors: Provider for color semantic tokens. If nil, a default one will be used (``WireframeThemeColorSemanticTokensProvider``)
-    init(colors: AllColorSemanticTokensProvider? = nil) {
+    public init(colors: AllColorSemanticTokensProvider? = nil) {
         ML.debug("Init of WireframeThemeIconComponentTokensProvider")
         self.colors = (colors ?? WireframeThemeColorSemanticTokensProvider())
         #if DEBUG

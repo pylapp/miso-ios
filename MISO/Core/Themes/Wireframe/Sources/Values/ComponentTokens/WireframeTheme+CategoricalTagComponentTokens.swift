@@ -12,17 +12,17 @@ import MISOTokensSemantic
 
 extension WireframeThemeCategoricalTagComponentTokensProvider: CategoricalTagComponentTokens {
     /// Has for value token MultipleColorSemanticToken(light: WireframeBrandColorRawTokens.royalBlue500, dark: WireframeBrandColorRawTokens.royalBlue300) (= light: "#407BF1FF" / dark: "#96C1FAFF")
-    @objc public final var colorBgCategory1: MultipleColorSemanticToken { MultipleColorSemanticToken(light: WireframeBrandColorRawTokens.royalBlue500, dark: WireframeBrandColorRawTokens.royalBlue300) }
+    @objc open var colorBgCategory1: MultipleColorSemanticToken { MultipleColorSemanticToken(light: WireframeBrandColorRawTokens.royalBlue500, dark: WireframeBrandColorRawTokens.royalBlue300) }
     /// Has for value token MultipleColorSemanticToken(light: WireframeBrandColorRawTokens.flame500, dark: WireframeBrandColorRawTokens.flame300) (= light: "#F0741FFF" / dark: "#F8BA79FF")
-    @objc public final var colorBgCategory2: MultipleColorSemanticToken { MultipleColorSemanticToken(light: WireframeBrandColorRawTokens.flame500, dark: WireframeBrandColorRawTokens.flame300) }
+    @objc open var colorBgCategory2: MultipleColorSemanticToken { MultipleColorSemanticToken(light: WireframeBrandColorRawTokens.flame500, dark: WireframeBrandColorRawTokens.flame300) }
     /// Has for value token MultipleColorSemanticToken(light: WireframeBrandColorRawTokens.colorMountainMeadow600, dark: WireframeBrandColorRawTokens.colorMountainMeadow400) (= light: "#25D09BFF" / dark: "#6CE5BFFF")
-    @objc public final var colorBgCategory3: MultipleColorSemanticToken { MultipleColorSemanticToken(light: WireframeBrandColorRawTokens.colorMountainMeadow600, dark: WireframeBrandColorRawTokens.colorMountainMeadow400) }
+    @objc open var colorBgCategory3: MultipleColorSemanticToken { MultipleColorSemanticToken(light: WireframeBrandColorRawTokens.colorMountainMeadow600, dark: WireframeBrandColorRawTokens.colorMountainMeadow400) }
     /// Has for value token MultipleColorSemanticToken(light: WireframeBrandColorRawTokens.colorGoldTips500, dark: WireframeBrandColorRawTokens.colorGoldTips400) (= light: "#E7BB2CFF" / dark: "#ECCA5AFF")
-    @objc public final var colorBgCategory4: MultipleColorSemanticToken { MultipleColorSemanticToken(light: WireframeBrandColorRawTokens.colorGoldTips500, dark: WireframeBrandColorRawTokens.colorGoldTips400) }
+    @objc open var colorBgCategory4: MultipleColorSemanticToken { MultipleColorSemanticToken(light: WireframeBrandColorRawTokens.colorGoldTips500, dark: WireframeBrandColorRawTokens.colorGoldTips400) }
     /// Has for value token MultipleColorSemanticToken(light: WireframeBrandColorRawTokens.colorLightIndigo500, dark: WireframeBrandColorRawTokens.colorLightIndigo300) (= light: "#8B5CF6FF" / dark: "#B395F9FF")
-    @objc public final var colorBgCategory5: MultipleColorSemanticToken { MultipleColorSemanticToken(light: WireframeBrandColorRawTokens.colorLightIndigo500, dark: WireframeBrandColorRawTokens.colorLightIndigo300) }
+    @objc open var colorBgCategory5: MultipleColorSemanticToken { MultipleColorSemanticToken(light: WireframeBrandColorRawTokens.colorLightIndigo500, dark: WireframeBrandColorRawTokens.colorLightIndigo300) }
     /// Has for value token MultipleColorSemanticToken(colors.repositoryNeutralEmphasizedBlack) (= "#08090DFF")
-    @objc public final var colorContent: MultipleColorSemanticToken { MultipleColorSemanticToken(colors.repositoryNeutralEmphasizedBlack) }
+    @objc open var colorContent: MultipleColorSemanticToken { MultipleColorSemanticToken(colors.repositoryNeutralEmphasizedBlack) }
 }
 
 // swiftlint:enable line_length

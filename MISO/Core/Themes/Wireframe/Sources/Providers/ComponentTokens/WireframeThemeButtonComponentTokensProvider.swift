@@ -15,7 +15,7 @@ import MISOThemesContract
 /// spaces (from `AllSpaceSemanticTokensProvider`).
 ///
 /// - Since: 0.17.0
-final class WireframeThemeButtonComponentTokensProvider: AllButtonComponentTokensProvider {
+open class WireframeThemeButtonComponentTokensProvider: AllButtonComponentTokensProvider {
 
     /// Provider of size semantic tokens to use for button sizes
     let sizes: AllSizeSemanticTokensProvider
@@ -39,10 +39,10 @@ final class WireframeThemeButtonComponentTokensProvider: AllButtonComponentToken
     ///    - borders: Provider for border semantic tokens. If nil, a default one will be used (``WireframeThemeBorderSemanticTokensProvider``)
     ///    - colors: Provider for color semantic tokens. If nil, a default one will be used (``WireframeThemeColorSemanticTokensProvider``)
     ///    - spaces: Provider for space semantic tokens. If nil, a default one will be used (``WireframeThemeSpaceSemanticTokensProvider``)
-    init(sizes: AllSizeSemanticTokensProvider? = nil,
-         borders: AllBorderSemanticTokensProvider? = nil,
-         colors: AllColorSemanticTokensProvider? = nil,
-         spaces: AllSpaceSemanticTokensProvider? = nil)
+    public init(sizes: AllSizeSemanticTokensProvider? = nil,
+                borders: AllBorderSemanticTokensProvider? = nil,
+                colors: AllColorSemanticTokensProvider? = nil,
+                spaces: AllSpaceSemanticTokensProvider? = nil)
     {
         ML.debug("Init of WireframeThemeButtonComponentTokensProvider")
         self.sizes = (sizes ?? WireframeThemeSizeSemanticTokensProvider())

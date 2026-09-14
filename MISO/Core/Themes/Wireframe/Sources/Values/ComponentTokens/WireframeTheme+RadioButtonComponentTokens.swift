@@ -10,27 +10,27 @@ import MISOTokensSemantic
 
 extension WireframeThemeRadioButtonComponentTokensProvider: RadioButtonComponentTokens {
     /// Has for value token borders.radiusPill (= 2000)
-    @objc public final var borderRadius: BorderRadiusSemanticToken { borders.radiusPill }
+    @objc open var borderRadius: BorderRadiusSemanticToken { borders.radiusPill }
     /// Has for value token borders.widthNone (= 0)
-    @objc public final var borderWidthSelected: BorderWidthSemanticToken { borders.widthNone }
+    @objc open var borderWidthSelected: BorderWidthSemanticToken { borders.widthNone }
     /// Has for value token borders.widthNone (= 0)
-    @objc public final var borderWidthSelectedFocus: BorderWidthSemanticToken { borders.widthNone }
+    @objc open var borderWidthSelectedFocus: BorderWidthSemanticToken { borders.widthNone }
     /// Has for value token borders.widthNone (= 0)
-    @objc public final var borderWidthSelectedHover: BorderWidthSemanticToken { borders.widthNone }
+    @objc open var borderWidthSelectedHover: BorderWidthSemanticToken { borders.widthNone }
     /// Has for value token borders.widthNone (= 0)
-    @objc public final var borderWidthSelectedPressed: BorderWidthSemanticToken { borders.widthNone }
+    @objc open var borderWidthSelectedPressed: BorderWidthSemanticToken { borders.widthNone }
     /// Has for value token borders.widthMedium (= 3)
-    @objc public final var borderWidthUnselected: BorderWidthSemanticToken { borders.widthMedium }
+    @objc open var borderWidthUnselected: BorderWidthSemanticToken { borders.widthMedium }
     /// Has for value token borders.widthMedium (= 3)
-    @objc public final var borderWidthUnselectedFocus: BorderWidthSemanticToken { borders.widthMedium }
+    @objc open var borderWidthUnselectedFocus: BorderWidthSemanticToken { borders.widthMedium }
     /// Has for value token borders.widthMedium (= 3)
-    @objc public final var borderWidthUnselectedHover: BorderWidthSemanticToken { borders.widthMedium }
+    @objc open var borderWidthUnselectedHover: BorderWidthSemanticToken { borders.widthMedium }
     /// Has for value token borders.widthMedium (= 3)
-    @objc public final var borderWidthUnselectedPressed: BorderWidthSemanticToken { borders.widthMedium }
+    @objc open var borderWidthUnselectedPressed: BorderWidthSemanticToken { borders.widthMedium }
     /// Has for value token sizes.minInteractiveAreaDefault (= 48)
-    @objc public final var sizeMaxHeight: SizeSemanticToken { sizes.minInteractiveAreaDefault }
+    @objc open var sizeMaxHeight: SizeSemanticToken { sizes.minInteractiveAreaDefault }
     /// Has for value token sizes.minInteractiveAreaDefault (= 48)
-    @objc public final var sizeMinHeight: SizeSemanticToken { sizes.minInteractiveAreaDefault }
+    @objc open var sizeMinHeight: SizeSemanticToken { sizes.minInteractiveAreaDefault }
     /// Has for value token sizes.minInteractiveAreaDefault (= 48)
-    @objc public final var sizeMinWidth: SizeSemanticToken { sizes.minInteractiveAreaDefault }
+    @objc open var sizeMinWidth: SizeSemanticToken { sizes.minInteractiveAreaDefault }
 }

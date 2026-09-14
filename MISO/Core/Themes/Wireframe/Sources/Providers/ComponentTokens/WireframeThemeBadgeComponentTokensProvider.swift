@@ -15,7 +15,7 @@ import MISOThemesContract
 /// and spaces (from `AllSpaceSemanticTokensProvider`).
 ///
 /// - Since: 0.17.0
-final class WireframeThemeBadgeComponentTokensProvider: AllBadgeComponentTokensProvider {
+open class WireframeThemeBadgeComponentTokensProvider: AllBadgeComponentTokensProvider {
 
     /// Provider of spaces semantic tokens to use for badge spaces
     let spaces: AllSpaceSemanticTokensProvider
@@ -31,8 +31,8 @@ final class WireframeThemeBadgeComponentTokensProvider: AllBadgeComponentTokensP
     /// - Parameters:
     ///    - spaces: Provider for space semantic tokens, if nil, a default one will be used (``WireframeThemeSpaceSemanticTokensProvider``)
     ///    - dimensions: Provider for dimension semantic tokens, if nil, default one will be used ( ``WireframeThemeDimensionSemanticTokensProvider``)
-    init(spaces: AllSpaceSemanticTokensProvider? = nil,
-         dimensions: AllDimensionSemanticTokensProvider? = nil)
+    public init(spaces: AllSpaceSemanticTokensProvider? = nil,
+                dimensions: AllDimensionSemanticTokensProvider? = nil)
     {
         ML.debug("Init of WireframeThemeBadgeComponentTokensProvider")
         self.spaces = (spaces ?? WireframeThemeSpaceSemanticTokensProvider())

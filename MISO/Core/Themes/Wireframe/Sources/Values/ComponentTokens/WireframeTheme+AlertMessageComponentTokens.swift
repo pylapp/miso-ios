@@ -10,7 +10,7 @@ import MISOTokensSemantic
 
 extension WireframeThemeAlertMessageComponentTokensProvider: AlertMessageComponentTokens {
     /// Has for value token borders.widthThin (= 1)
-    @objc public final var borderWidth: BorderWidthSemanticToken { borders.widthThin }
+    @objc open var borderWidth: BorderWidthSemanticToken { borders.widthThin }
     /// Has for value token spaces.rowGapNone (= 0)
-    @objc public final var spaceRowGapBullet: SpaceSemanticToken { spaces.rowGapNone }
+    @objc open var spaceRowGapBullet: SpaceSemanticToken { spaces.rowGapNone }
 }

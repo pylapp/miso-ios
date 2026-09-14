@@ -13,13 +13,13 @@ import MISOTokensSemantic
 
 extension WireframeThemeIconComponentTokensProvider: IconComponentTokens {
     /// Has for value token MultipleColorSemanticToken(light: colors.repositoryWarningMedium, dark: colors.repositoryWarningLow) (= light: "#FFD000FF" / dark: "#FFE270FF")
-    @objc public final var colorContentStatusWarningExternalShape: MultipleColorSemanticToken { MultipleColorSemanticToken(light: colors.repositoryWarningMedium, dark: colors.repositoryWarningLow) }
+    @objc open var colorContentStatusWarningExternalShape: MultipleColorSemanticToken { MultipleColorSemanticToken(light: colors.repositoryWarningMedium, dark: colors.repositoryWarningLow) }
     /// Has for value token MultipleColorSemanticToken(light: colors.repositoryWarningHigh, dark: colors.opacityTransparentDark) (= light: "#856A00FF" / dark: "#EFF5FF00")
-    @objc public final var colorContentStatusWarningInternalShape: MultipleColorSemanticToken { MultipleColorSemanticToken(light: colors.repositoryWarningHigh, dark: colors.opacityTransparentDark) }
+    @objc open var colorContentStatusWarningInternalShape: MultipleColorSemanticToken { MultipleColorSemanticToken(light: colors.repositoryWarningHigh, dark: colors.opacityTransparentDark) }
     /// Has for value token MultipleColorSemanticToken(light: colors.repositoryWarningLow, dark: colors.repositoryWarningMedium) (= light: "#FFE270FF" / dark: "#FFD000FF")
-    @objc public final var colorContentStatusWarningInverseExternalShape: MultipleColorSemanticToken { MultipleColorSemanticToken(light: colors.repositoryWarningLow, dark: colors.repositoryWarningMedium) }
+    @objc open var colorContentStatusWarningInverseExternalShape: MultipleColorSemanticToken { MultipleColorSemanticToken(light: colors.repositoryWarningLow, dark: colors.repositoryWarningMedium) }
     /// Has for value token MultipleColorSemanticToken(light: colors.opacityTransparentDark, dark: colors.repositoryWarningHigh) (= light: "#EFF5FF00" / dark: "#856A00FF")
-    @objc public final var colorContentStatusWarningInverseInternalShape: MultipleColorSemanticToken { MultipleColorSemanticToken(light: colors.opacityTransparentDark, dark: colors.repositoryWarningHigh) }
+    @objc open var colorContentStatusWarningInverseInternalShape: MultipleColorSemanticToken { MultipleColorSemanticToken(light: colors.opacityTransparentDark, dark: colors.repositoryWarningHigh) }
 }
 
 // swiftlint:enable identifier_name

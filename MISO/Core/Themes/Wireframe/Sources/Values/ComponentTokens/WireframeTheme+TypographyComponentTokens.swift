@@ -12,13 +12,13 @@ import MISOTokensSemantic
 
 extension WireframeThemeTypographyComponentTokensProvider: TypographyComponentTokens {
     /// Has for value token colors.contentBrandSecondary (= light: "#DB2345FF" / dark: "#F66F7DFF")
-    @objc public final var colorContentMarker: MultipleColorSemanticToken { colors.contentBrandSecondary }
+    @objc open var colorContentMarker: MultipleColorSemanticToken { colors.contentBrandSecondary }
     /// Has for value token true
-    @objc public final var headingLargeMarker: Bool { true }
+    @objc open var headingLargeMarker: Bool { true }
     /// Has for value token spaces.paddingBlockNone (= 0)
-    @objc public final var spacePaddingBlockBottomHeadingLargeMarker: SpaceSemanticToken { spaces.paddingBlockNone }
+    @objc open var spacePaddingBlockBottomHeadingLargeMarker: SpaceSemanticToken { spaces.paddingBlockNone }
     /// Has for value token spaces.paddingBlock3xsmall (= 4)
-    @objc public final var spacePaddingBlockTopHeadingLargeMarker: SpaceSemanticToken { spaces.paddingBlock3xsmall }
+    @objc open var spacePaddingBlockTopHeadingLargeMarker: SpaceSemanticToken { spaces.paddingBlock3xsmall }
 }
 
 // swiftlint:enable identifier_name

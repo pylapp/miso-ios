@@ -14,7 +14,7 @@ import MISOThemesContract
 /// *Typography* components tokens are defined with semantic tokens of spaces (from `AllSpaceSemanticTokensProvider`).
 ///
 /// - Since: 3.0.0
-final class WireframeThemeTypographyComponentTokensProvider: AllTypographyComponentTokensProvider {
+open class WireframeThemeTypographyComponentTokensProvider: AllTypographyComponentTokensProvider {
 
     /// Provider of spaces semantic tokens to use for button spaces
     let spaces: AllSpaceSemanticTokensProvider
@@ -31,7 +31,7 @@ final class WireframeThemeTypographyComponentTokensProvider: AllTypographyCompon
     /// - Parameters:
     ///    - spaces: Provider for space semantic tokens, if nil, a default one will be used (``WireframeThemeSpaceSemanticTokensProvider``)
     ///    - colors: Provider for color semantic tokens, if nil, a default one will be used (``WireframeThemeColorSemanticTokensProvider``)
-    init(spaces: AllSpaceSemanticTokensProvider? = nil, colors: AllColorSemanticTokensProvider? = nil) {
+    public init(spaces: AllSpaceSemanticTokensProvider? = nil, colors: AllColorSemanticTokensProvider? = nil) {
         ML.debug("Init of WireframeThemeTypographyComponentTokensProvider")
         self.spaces = (spaces ?? WireframeThemeSpaceSemanticTokensProvider())
         self.colors = (colors ?? WireframeThemeColorSemanticTokensProvider())

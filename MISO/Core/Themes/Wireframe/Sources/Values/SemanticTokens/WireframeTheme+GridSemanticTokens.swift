@@ -10,27 +10,27 @@ import MISOTokensSemantic
 
 extension WireframeThemeGridSemanticTokensProvider: GridSemanticTokens {
     /// Has for value token GridRawTokens.columnGap200 (= 16)
-    @objc public final var compactColumnGap: GridSemanticToken { GridRawTokens.columnGap200 }
+    @objc open var compactColumnGap: GridSemanticToken { GridRawTokens.columnGap200 }
     /// Has for value token GridRawTokens.margin300 (= 24)
-    @objc public final var compactMargin: GridSemanticToken { GridRawTokens.margin300 }
+    @objc open var compactMargin: GridSemanticToken { GridRawTokens.margin300 }
     /// Has for value token GridRawTokens.maxWidthCompact (= 852)
-    @objc public final var compactMaxWidth: GridSemanticToken { GridRawTokens.maxWidthCompact }
+    @objc open var compactMaxWidth: GridSemanticToken { GridRawTokens.maxWidthCompact }
     /// Has for value token GridRawTokens.minWidthCompact (= 390)
-    @objc public final var compactMinWidth: GridSemanticToken { GridRawTokens.minWidthCompact }
+    @objc open var compactMinWidth: GridSemanticToken { GridRawTokens.minWidthCompact }
     /// Has for value token GridRawTokens.columnGap100 (= 8)
-    @objc public final var extraCompactColumnGap: GridSemanticToken { GridRawTokens.columnGap100 }
+    @objc open var extraCompactColumnGap: GridSemanticToken { GridRawTokens.columnGap100 }
     /// Has for value token GridRawTokens.margin100 (= 16)
-    @objc public final var extraCompactMargin: GridSemanticToken { GridRawTokens.margin100 }
+    @objc open var extraCompactMargin: GridSemanticToken { GridRawTokens.margin100 }
     /// Has for value token GridRawTokens.maxWidthExtraCompact (= 389)
-    @objc public final var extraCompactMaxWidth: GridSemanticToken { GridRawTokens.maxWidthExtraCompact }
+    @objc open var extraCompactMaxWidth: GridSemanticToken { GridRawTokens.maxWidthExtraCompact }
     /// Has for value token GridRawTokens.minWidthExtraCompact (= 320)
-    @objc public final var extraCompactMinWidth: GridSemanticToken { GridRawTokens.minWidthExtraCompact }
+    @objc open var extraCompactMinWidth: GridSemanticToken { GridRawTokens.minWidthExtraCompact }
     /// Has for value token GridRawTokens.columnGap400 (= 24)
-    @objc public final var regularColumnGap: GridSemanticToken { GridRawTokens.columnGap400 }
+    @objc open var regularColumnGap: GridSemanticToken { GridRawTokens.columnGap400 }
     /// Has for value token GridRawTokens.margin500 (= 32)
-    @objc public final var regularMargin: GridSemanticToken { GridRawTokens.margin500 }
+    @objc open var regularMargin: GridSemanticToken { GridRawTokens.margin500 }
     /// Has for value token GridRawTokens.maxWidthRegular (= 1366)
-    @objc public final var regularMaxWidth: GridSemanticToken { GridRawTokens.maxWidthRegular }
+    @objc open var regularMaxWidth: GridSemanticToken { GridRawTokens.maxWidthRegular }
     /// Has for value token GridRawTokens.minWidthRegular (= 736)
-    @objc public final var regularMinWidth: GridSemanticToken { GridRawTokens.minWidthRegular }
+    @objc open var regularMinWidth: GridSemanticToken { GridRawTokens.minWidthRegular }
 }

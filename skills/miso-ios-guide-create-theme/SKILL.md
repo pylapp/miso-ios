@@ -814,24 +814,24 @@ import MISOTokensSemantic
 
 extension MyBrandColorSemanticTokensProvider: ColorSemanticTokens {
 
-    @objc public final var actionEnabledLight: ColorSemanticToken {
+    @objc open var actionEnabledLight: ColorSemanticToken {
         ColorRawTokens.repositoryPrimaryMedium
     }
-    @objc public final var actionEnabledDark: ColorSemanticToken {
+    @objc open var actionEnabledDark: ColorSemanticToken {
         ColorRawTokens.repositoryPrimaryLow
     }
 
-    @objc public final var contentDefaultLight: ColorSemanticToken {
+    @objc open var contentDefaultLight: ColorSemanticToken {
         ColorRawTokens.repositoryNeutralEmphasizedBlack
     }
-    @objc public final var contentDefaultDark: ColorSemanticToken {
+    @objc open var contentDefaultDark: ColorSemanticToken {
         ColorRawTokens.repositoryNeutralEmphasizedWhite
     }
 
-    @objc public final var bgPrimaryLight: ColorSemanticToken {
+    @objc open var bgPrimaryLight: ColorSemanticToken {
         ColorRawTokens.repositoryNeutralEmphasizedWhite
     }
-    @objc public final var bgPrimaryDark: ColorSemanticToken {
+    @objc open var bgPrimaryDark: ColorSemanticToken {
         ColorRawTokens.repositoryNeutralEmphasizedBlack
     }
 
@@ -844,21 +844,21 @@ import MISOTokensSemantic
 
 extension MyBrandColorSemanticTokensProvider: ColorMultipleSemanticTokensProvider {
 
-    @objc public final var actionEnabled: MultipleColorSemanticToken {
+    @objc open var actionEnabled: MultipleColorSemanticToken {
         MultipleColorSemanticToken(
             light: ColorRawTokens.repositoryPrimaryMedium,
             dark:  ColorRawTokens.repositoryPrimaryLow
         )
     }
 
-    @objc public final var contentDefault: MultipleColorSemanticToken {
+    @objc open var contentDefault: MultipleColorSemanticToken {
         MultipleColorSemanticToken(
             light: ColorRawTokens.repositoryNeutralEmphasizedBlack,
             dark:  ColorRawTokens.repositoryNeutralEmphasizedWhite
         )
     }
 
-    @objc public final var bgPrimary: MultipleColorSemanticToken {
+    @objc open var bgPrimary: MultipleColorSemanticToken {
         MultipleColorSemanticToken(
             light: ColorRawTokens.repositoryNeutralEmphasizedWhite,
             dark:  ColorRawTokens.repositoryNeutralEmphasizedBlack
@@ -887,15 +887,15 @@ final class MyBrandBorderSemanticTokensProvider: AllBorderSemanticTokensProvider
 // In Values/SemanticTokens/MyBrandTheme+BorderSemanticTokens.swift
 extension MyBrandBorderSemanticTokensProvider: BorderSemanticTokens {
 
-    @objc public final var styleDefault: BorderStyleSemanticToken {
+    @objc open var styleDefault: BorderStyleSemanticToken {
         BorderRawTokens.styleSolid
     }
 
-    @objc public final var widthThin: BorderWidthSemanticToken {
+    @objc open var widthThin: BorderWidthSemanticToken {
         BorderRawTokens.width10
     }
 
-    @objc public final var radiusMedium: BorderRadiusSemanticToken {
+    @objc open var radiusMedium: BorderRadiusSemanticToken {
         BorderRawTokens.radius200
     }
     // See: https://ios.unified-design-system.orange.com/documentation/misoTokensSemantic/BorderSemanticTokens
@@ -915,7 +915,7 @@ final class MyBrandDimensionSemanticTokensProvider: AllDimensionSemanticTokensPr
 
 // Values/SemanticTokens/...
 extension MyBrandDimensionSemanticTokensProvider: DimensionSemanticTokens {
-    @objc public final var base: DimensionRawToken { DimensionRawTokens._100 }
+    @objc open var base: DimensionRawToken { DimensionRawTokens._100 }
 }
 
 // MyBrandSizeSemanticTokensProvider.swift
@@ -924,8 +924,8 @@ final class MyBrandSizeSemanticTokensProvider: AllSizeSemanticTokensProvider {
 }
 // Values/...
 extension MyBrandSizeSemanticTokensProvider: SizeSemanticTokens {
-    @objc public final var iconSmall: SizeSemanticToken { DimensionRawTokens._200 }
-    @objc public final var iconMedium: SizeSemanticToken { DimensionRawTokens._300 }
+    @objc open var iconSmall: SizeSemanticToken { DimensionRawTokens._200 }
+    @objc open var iconMedium: SizeSemanticToken { DimensionRawTokens._300 }
 }
 
 // MyBrandSpaceSemanticTokensProvider.swift
@@ -934,8 +934,8 @@ final class MyBrandSpaceSemanticTokensProvider: AllSpaceSemanticTokensProvider {
 }
 // Values/...
 extension MyBrandSpaceSemanticTokensProvider: SpaceSemanticTokens {
-    @objc public final var fixedSmall: SpaceSemanticToken { DimensionRawTokens._100 }
-    @objc public final var fixedMedium: SpaceSemanticToken { DimensionRawTokens._200 }
+    @objc open var fixedSmall: SpaceSemanticToken { DimensionRawTokens._100 }
+    @objc open var fixedMedium: SpaceSemanticToken { DimensionRawTokens._200 }
 }
 ```
 
@@ -953,18 +953,18 @@ final class MyBrandFontSemanticTokensProvider: AllFontSemanticTokensProvider {
 // Values/SemanticTokens/...
 extension MyBrandFontSemanticTokensProvider: FontSemanticTokens {
 
-    @objc public final var familyDefault: FontFamilySemanticToken {
+    @objc open var familyDefault: FontFamilySemanticToken {
         FontRawTokens.familyDefault
     }
 
-    @objc public final var familyCode: FontFamilySemanticToken {
+    @objc open var familyCode: FontFamilySemanticToken {
         FontRawTokens.familyMono
     }
 }
 
 extension MyBrandFontSemanticTokensProvider: FontMultipleSemanticTokensProvider {
 
-    @objc public final var bodyDefault: MultipleFontCompositeSemanticToken {
+    @objc open var bodyDefault: MultipleFontCompositeSemanticToken {
         MultipleFontCompositeSemanticToken(FontCompositeSemanticToken(
             size: DimensionRawTokens._400,
             lineHeight: DimensionRawTokens._600,
@@ -1006,19 +1006,19 @@ final class MyBrandButtonComponentTokensProvider: AllButtonComponentTokensProvid
 // Values/ComponentTokens/MyBrandTheme+ButtonComponentTokens.swift
 extension MyBrandButtonComponentTokensProvider: ButtonComponentTokens {
 
-    @objc public final var sizeMinHeight: SizeSemanticToken {
+    @objc open var sizeMinHeight: SizeSemanticToken {
         sizes.iconMedium
     }
 
-    @objc public final var borderRadius: BorderRadiusSemanticToken {
+    @objc open var borderRadius: BorderRadiusSemanticToken {
         borders.radiusMedium
     }
 
-    @objc public final var colorBackgroundDefaultEnabled: ColorSemanticToken {
+    @objc open var colorBackgroundDefaultEnabled: ColorSemanticToken {
         colors.actionEnabled
     }
 
-    @objc public final var spacePaddingHorizontal: SpaceSemanticToken {
+    @objc open var spacePaddingHorizontal: SpaceSemanticToken {
         spaces.fixedMedium
     }
 }

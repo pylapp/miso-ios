@@ -16,7 +16,7 @@ import MISOThemesContract
 /// borders (from `AllBorderSemanticTokensProvider`) and colors (from `AllColorSemanticTokensProvider`).
 ///
 /// - Since: 3.0.0
-final class WireframeThemeProgressIndicatorComponentTokensProvider: AllProgressIndicatorComponentTokensProvider {
+open class WireframeThemeProgressIndicatorComponentTokensProvider: AllProgressIndicatorComponentTokensProvider {
 
     /// Provider of size semantic tokens to use for progress indicator  sizes
     let sizes: AllSizeSemanticTokensProvider
@@ -45,11 +45,11 @@ final class WireframeThemeProgressIndicatorComponentTokensProvider: AllProgressI
     ///    - colors: Provider for color semantic tokens, if nil, a default one will be used (``WireframeThemeColorSemanticTokensProvider``)
     ///    - spaces: Provider for space semantic tokens, if nil, a default one will be used (``WireframeThemeSpaceSemanticTokensProvider``)
     ///    - dimensions: Provider for dimensions semantic tokens, if nil, a default one will be used (``WireframeThemeDimensionsSemanticTokensProvider``)
-    init(sizes: AllSizeSemanticTokensProvider? = nil,
-         borders: AllBorderSemanticTokensProvider? = nil,
-         colors: AllColorSemanticTokensProvider? = nil,
-         spaces: AllSpaceSemanticTokensProvider? = nil,
-         dimensions: AllDimensionSemanticTokensProvider? = nil)
+    public init(sizes: AllSizeSemanticTokensProvider? = nil,
+                borders: AllBorderSemanticTokensProvider? = nil,
+                colors: AllColorSemanticTokensProvider? = nil,
+                spaces: AllSpaceSemanticTokensProvider? = nil,
+                dimensions: AllDimensionSemanticTokensProvider? = nil)
     {
         ML.debug("Init of WireframeThemeProgressIndicatorComponentTokensProvider")
         self.sizes = (sizes ?? WireframeThemeSizeSemanticTokensProvider())

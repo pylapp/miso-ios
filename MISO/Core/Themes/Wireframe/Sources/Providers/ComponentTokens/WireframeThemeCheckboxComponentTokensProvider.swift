@@ -17,7 +17,7 @@ import MISOThemesContract
 /// These components share the same type of tokens which are all gathered here.
 ///
 /// - Since: 0.17.0
-final class WireframeThemeCheckboxComponentTokensProvider: AllCheckboxComponentTokensProvider {
+open class WireframeThemeCheckboxComponentTokensProvider: AllCheckboxComponentTokensProvider {
 
     /// Provider of size semantic tokens to use for checkbox sizes
     let sizes: AllSizeSemanticTokensProvider
@@ -33,8 +33,8 @@ final class WireframeThemeCheckboxComponentTokensProvider: AllCheckboxComponentT
     /// - Parameters:
     ///    - sizes: Provider for size semantic tokens. If nil, a default one will be used (``WireframeThemeSizeSemanticTokensProvider``)
     ///    - borders: Provider for border semantic tokens. If nil, a default one will be used (``WireframeThemeBorderSemanticTokensProvider``)
-    init(sizes: AllSizeSemanticTokensProvider? = nil,
-         borders: AllBorderSemanticTokensProvider? = nil)
+    public init(sizes: AllSizeSemanticTokensProvider? = nil,
+                borders: AllBorderSemanticTokensProvider? = nil)
     {
         ML.debug("Init of WireframeThemeCheckboxComponentTokensProvider")
         self.sizes = (sizes ?? WireframeThemeSizeSemanticTokensProvider())

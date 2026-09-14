@@ -11,7 +11,7 @@ import MISOThemesContract
 /// all tokens to the users.
 ///
 /// - Since: 0.17.0
-final class WireframeThemeColorModeSemanticTokensProvider: AllColorModeSemanticTokensProvider {
+open class WireframeThemeColorModeSemanticTokensProvider: AllColorModeSemanticTokensProvider {
 
     /// Provider of color semantic tokens to use for depending to some color modes
     let colors: AllColorSemanticTokensProvider
@@ -22,7 +22,7 @@ final class WireframeThemeColorModeSemanticTokensProvider: AllColorModeSemanticT
 
     /// Defines a provider of color mode semantic tokens
     /// - Parameter colors: Provider for color semantic tokens. If nil, a default one will be used (``WireframeThemeColorSemanticTokensProvider``)
-    init(colors: AllColorSemanticTokensProvider? = nil) {
+    public init(colors: AllColorSemanticTokensProvider? = nil) {
         ML.debug("Init of WireframeThemeColorModeSemanticTokensProvider")
         self.colors = (colors ?? WireframeThemeColorSemanticTokensProvider())
         #if DEBUG

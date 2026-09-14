@@ -14,7 +14,7 @@ import MISOThemesContract
 /// *Categorical tags* components tokens are defined with semantic tokens of colors (`AllColorSemanticTokensProvider`)
 ///
 /// - Since: 3.0.0
-final class WireframeThemeCategoricalTagComponentTokensProvider: AllCategoricalTagComponentTokensProvider {
+open class WireframeThemeCategoricalTagComponentTokensProvider: AllCategoricalTagComponentTokensProvider {
 
     /// Provider of color semantic tokens to use
     let colors: AllColorSemanticTokensProvider
@@ -25,7 +25,7 @@ final class WireframeThemeCategoricalTagComponentTokensProvider: AllCategoricalT
 
     /// Defines a provider of component tokens dedicated to `MISOCategoricalTag`
     /// - Parameter colors: Provider for color semantic tokens. If nil, a default one will be used (``WireframeThemeColorSemanticTokensProvider``)
-    init(colors: AllColorSemanticTokensProvider? = nil) {
+    public init(colors: AllColorSemanticTokensProvider? = nil) {
         ML.debug("Init of WireframeThemeCategoricalTagComponentTokensProvider")
         self.colors = (colors ?? WireframeThemeColorSemanticTokensProvider())
         #if DEBUG

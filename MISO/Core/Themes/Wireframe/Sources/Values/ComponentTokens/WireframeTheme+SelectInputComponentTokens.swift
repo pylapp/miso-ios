@@ -10,5 +10,5 @@ import MISOTokensSemantic
 
 extension WireframeThemeSelectInputComponentTokensProvider: SelectInputComponentTokens {
     /// Has for value token dimensions._8xlarge (= 96)
-    @objc public final var sizeMinWidth: SizeSemanticToken { dimensions._8xlarge }
+    @objc open var sizeMinWidth: SizeSemanticToken { dimensions._8xlarge }
 }

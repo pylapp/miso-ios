@@ -15,7 +15,7 @@ import MISOThemesContract
 /// dimensions (`AllDimensionSemanticTokensProvider`) and sizes (from `AllSizeSemanticTokensProvider`).
 ///
 /// - Since: 3.0.0
-final class WireframeThemeToastComponentTokensProvider: AllToastComponentTokensProvider {
+open class WireframeThemeToastComponentTokensProvider: AllToastComponentTokensProvider {
 
     /// Provider of borders semantic tokens to use for toast borders
     let borders: AllBorderSemanticTokensProvider
@@ -35,9 +35,9 @@ final class WireframeThemeToastComponentTokensProvider: AllToastComponentTokensP
     ///    - borders: Provider for border semantic tokens, if nil, a default one will be used (``WireframeThemeBorderSemanticTokensProvider``)
     ///    - dimensions: Provider for dimension semantic tokens, if nil, default one will be used ( ``WireframeThemeDimensionSemanticTokensProvider``)
     ///    - sizes: Provider for size semantic tokens, if nil, default one will be used ( ``WireframeThemeSizeSemanticTokensProvider``)
-    init(borders: AllBorderSemanticTokensProvider? = nil,
-         dimensions: AllDimensionSemanticTokensProvider? = nil,
-         sizes: AllSizeSemanticTokensProvider? = nil)
+    public init(borders: AllBorderSemanticTokensProvider? = nil,
+                dimensions: AllDimensionSemanticTokensProvider? = nil,
+                sizes: AllSizeSemanticTokensProvider? = nil)
     {
         ML.debug("Init of WireframeThemeToastComponentTokensProvider")
         self.borders = (borders ?? WireframeThemeBorderSemanticTokensProvider())

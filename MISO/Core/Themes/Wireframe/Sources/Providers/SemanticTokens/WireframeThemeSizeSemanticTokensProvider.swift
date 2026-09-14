@@ -10,7 +10,7 @@ import MISOThemesContract
 /// Closed tokens of dimensions (`AllDimensionSemanticTokensProvider`) are used so as to keep consistancy between Figma specifications and library for developers.
 ///
 /// - Since: 0.17.0
-final class WireframeThemeSizeSemanticTokensProvider: AllSizeSemanticTokensProvider {
+open class WireframeThemeSizeSemanticTokensProvider: AllSizeSemanticTokensProvider {
 
     /// Provider of _dimensions_  semantic tokens to use for spaces as the Swift package exposes "closed" tokens of Figma
     let dimensions: AllDimensionSemanticTokensProvider
@@ -21,7 +21,7 @@ final class WireframeThemeSizeSemanticTokensProvider: AllSizeSemanticTokensProvi
 
     /// Intializes the provider
     /// - Parameter dimensions: Provider for _ semantic tokens. If nil, a default one will be used (``WireframeThemeDimensionSemanticTokensProvider``)
-    init(dimensions: AllDimensionSemanticTokensProvider? = nil) {
+    public init(dimensions: AllDimensionSemanticTokensProvider? = nil) {
         ML.debug("Init of WireframeThemeSizeSemanticTokensProvider")
         self.dimensions = (dimensions ?? WireframeThemeDimensionSemanticTokensProvider())
         #if DEBUG

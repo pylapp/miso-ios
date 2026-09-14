@@ -15,7 +15,7 @@ import MISOThemesContract
 /// and spaces (from `AllSpaceSemanticTokensProvider`).
 ///
 /// - Since: 0.17.0
-final class WireframeThemeTextInputComponentTokensProvider: AllTextInputComponentTokensProvider {
+open class WireframeThemeTextInputComponentTokensProvider: AllTextInputComponentTokensProvider {
 
     /// Provider of size semantic tokens to use for text input sizes
     let sizes: AllSizeSemanticTokensProvider
@@ -43,11 +43,11 @@ final class WireframeThemeTextInputComponentTokensProvider: AllTextInputComponen
     ///    - colors: Provider for color semantic tokens. If nil, a default one will be used (`WireframeThemeColorSemanticTokensProvider`)
     ///    - spaces: Provider for space semantic tokens. If nil, a default one will be used (`WireframeThemeSpaceSemanticTokensProvider`)
     ///    - dimensions: Provider for dimension semantic tokens. If nil, a default one will be used (`WireframeThemeDimensionSemanticTokensProvider`)
-    init(sizes: AllSizeSemanticTokensProvider? = nil,
-         borders: AllBorderSemanticTokensProvider? = nil,
-         colors: AllColorSemanticTokensProvider? = nil,
-         spaces: AllSpaceSemanticTokensProvider? = nil,
-         dimensions: AllDimensionSemanticTokensProvider? = nil)
+    public init(sizes: AllSizeSemanticTokensProvider? = nil,
+                borders: AllBorderSemanticTokensProvider? = nil,
+                colors: AllColorSemanticTokensProvider? = nil,
+                spaces: AllSpaceSemanticTokensProvider? = nil,
+                dimensions: AllDimensionSemanticTokensProvider? = nil)
     {
         ML.debug("Init of WireframeThemeTextInputComponentTokensProvider")
         self.sizes = (sizes ?? WireframeThemeSizeSemanticTokensProvider())

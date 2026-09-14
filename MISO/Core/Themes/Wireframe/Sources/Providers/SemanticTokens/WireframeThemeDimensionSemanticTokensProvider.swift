@@ -15,14 +15,14 @@ import MISOThemesContract
 /// and library. The tokens are not hidden from developers.
 ///
 /// - Since: 0.17.0
-final class WireframeThemeDimensionSemanticTokensProvider: AllDimensionSemanticTokensProvider {
+open class WireframeThemeDimensionSemanticTokensProvider: AllDimensionSemanticTokensProvider {
 
     #if DEBUG
     nonisolated(unsafe) private static var instanceCount: Int = 0
     #endif
 
     /// Intializes the provider
-    init() {
+    public init() {
         ML.debug("Init of WireframeThemeDimensionSemanticTokensProvider")
         #if DEBUG
         Self.instanceCount++

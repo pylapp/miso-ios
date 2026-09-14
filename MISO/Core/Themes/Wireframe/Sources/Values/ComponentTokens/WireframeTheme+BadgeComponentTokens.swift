@@ -11,21 +11,21 @@ import MISOTokensSemantic
 
 extension WireframeThemeBadgeComponentTokensProvider: BadgeComponentTokens {
     /// Has for value token dimensions._4xsmall (= 20)
-    @objc public final var sizeLarge: SizeSemanticToken { dimensions._4xsmall }
+    @objc open var sizeLarge: SizeSemanticToken { dimensions._4xsmall }
     /// Has for value token dimensions._5xsmall (= 16)
-    @objc public final var sizeMedium: SizeSemanticToken { dimensions._5xsmall }
+    @objc open var sizeMedium: SizeSemanticToken { dimensions._5xsmall }
     /// Has for value token dimensions._6xsmall (= 12)
-    @objc public final var sizeSmall: SizeSemanticToken { dimensions._6xsmall }
+    @objc open var sizeSmall: SizeSemanticToken { dimensions._6xsmall }
     /// Has for value token dimensions._8xsmall (= 8)
-    @objc public final var sizeXsmall: SizeSemanticToken { dimensions._8xsmall }
+    @objc open var sizeXsmall: SizeSemanticToken { dimensions._8xsmall }
     /// Has for value token DimensionRawTokens.outOfSystem75 (= 3)
-    @objc public final var spaceInsetMediumLarge: SpaceSemanticToken { DimensionRawTokens.outOfSystem75 }
+    @objc open var spaceInsetMediumLarge: SpaceSemanticToken { DimensionRawTokens.outOfSystem75 }
     /// Has for value token DimensionRawTokens.outOfSystem50 (= 2)
-    @objc public final var spaceInsetSmall: SpaceSemanticToken { DimensionRawTokens.outOfSystem50 }
+    @objc open var spaceInsetSmall: SpaceSemanticToken { DimensionRawTokens.outOfSystem50 }
     /// Has for value token DimensionRawTokens.outOfSystem25 (= 1)
-    @objc public final var spaceInsetXsmall: SpaceSemanticToken { DimensionRawTokens.outOfSystem25 }
+    @objc open var spaceInsetXsmall: SpaceSemanticToken { DimensionRawTokens.outOfSystem25 }
     /// Has for value token spaces.paddingInline2xsmall (= 6)
-    @objc public final var spacePaddingInlineLarge: SpaceSemanticToken { spaces.paddingInline2xsmall }
+    @objc open var spacePaddingInlineLarge: SpaceSemanticToken { spaces.paddingInline2xsmall }
     /// Has for value token spaces.paddingInline3xsmall (= 4)
-    @objc public final var spacePaddingInlineMedium: SpaceSemanticToken { spaces.paddingInline3xsmall }
+    @objc open var spacePaddingInlineMedium: SpaceSemanticToken { spaces.paddingInline3xsmall }
 }

@@ -13,7 +13,7 @@ import MISOThemesContract
 /// and borders (from `AllBorderSemanticTokensProvider`).
 ///
 /// - Since: 0.17.0
-final class WireframeThemeInputTagComponentTokensProvider: AllInputTagComponentTokensProvider {
+open class WireframeThemeInputTagComponentTokensProvider: AllInputTagComponentTokensProvider {
 
     /// Provider of border semantic tokens to use for tag input borders
     let borders: AllBorderSemanticTokensProvider
@@ -29,8 +29,8 @@ final class WireframeThemeInputTagComponentTokensProvider: AllInputTagComponentT
     /// - Parameters:
     ///    - borders: Provider for borders semantic tokens. If nil, a default one will be used (``WireframeThemeBorderSemanticTokensProvider``)
     ///    - colors: Provider for _ semantic tokens. If nil, a default one will be used (``WireframeThemeColorSemanticTokensProvider``)
-    init(borders: AllBorderSemanticTokensProvider? = nil,
-         colors: AllColorSemanticTokensProvider? = nil)
+    public init(borders: AllBorderSemanticTokensProvider? = nil,
+                colors: AllColorSemanticTokensProvider? = nil)
     {
         ML.debug("Init of WireframeThemeInputTagComponentTokensProvider")
         self.borders = (borders ?? WireframeThemeBorderSemanticTokensProvider())

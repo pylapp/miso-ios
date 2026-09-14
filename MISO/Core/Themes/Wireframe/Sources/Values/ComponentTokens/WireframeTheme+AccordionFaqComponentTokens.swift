@@ -13,33 +13,33 @@ import MISOTokensSemantic
 
 extension WireframeThemeAccordionComponentTokensProvider: AccordionFaqComponentTokens {
     /// Has for value token sizes.iconWithLabelLargeSizeSmall (= 24)
-    @objc public final var sizeExpandingIndicatorMobile: SizeSemanticToken { sizes.iconWithLabelLargeSizeSmall }
+    @objc open var sizeExpandingIndicatorMobile: SizeSemanticToken { sizes.iconWithLabelLargeSizeSmall }
     /// Has for value token sizes.iconWithLabelLargeSizeSmall (= 24)
-    @objc public final var sizeExpandingIndicatorTablet: SizeSemanticToken { sizes.iconWithLabelLargeSizeSmall }
+    @objc open var sizeExpandingIndicatorTablet: SizeSemanticToken { sizes.iconWithLabelLargeSizeSmall }
     /// Has for value token sizes.iconWithLabelLargeSizeMedium (= 28)
-    @objc public final var sizeIconMobile: SizeSemanticToken { sizes.iconWithLabelLargeSizeMedium }
+    @objc open var sizeIconMobile: SizeSemanticToken { sizes.iconWithLabelLargeSizeMedium }
     /// Has for value token sizes.iconWithLabelLargeSizeMedium (= 28)
-    @objc public final var sizeIconTablet: SizeSemanticToken { sizes.iconWithLabelLargeSizeMedium }
+    @objc open var sizeIconTablet: SizeSemanticToken { sizes.iconWithLabelLargeSizeMedium }
     /// Has for value token DimensionRawTokens._750 (= 60)
-    @objc public final var sizeMinHeightMobile: SizeSemanticToken { DimensionRawTokens._750 }
+    @objc open var sizeMinHeightMobile: SizeSemanticToken { DimensionRawTokens._750 }
     /// Has for value token DimensionRawTokens._750 (= 60)
-    @objc public final var sizeMinHeightTablet: SizeSemanticToken { DimensionRawTokens._750 }
+    @objc open var sizeMinHeightTablet: SizeSemanticToken { DimensionRawTokens._750 }
     /// Has for value token spaces.columnGapMedium (= 12)
-    @objc public final var spaceColumnGapMobile: SpaceSemanticToken { spaces.columnGapMedium }
+    @objc open var spaceColumnGapMobile: SpaceSemanticToken { spaces.columnGapMedium }
     /// Has for value token spaces.columnGapMedium (= 12)
-    @objc public final var spaceColumnGapTablet: SpaceSemanticToken { spaces.columnGapMedium }
+    @objc open var spaceColumnGapTablet: SpaceSemanticToken { spaces.columnGapMedium }
     /// Has for value token spaces.paddingBlock3xlarge (= 28)
-    @objc public final var spacePaddingBlockBottomExpandContainerMobile: SpaceSemanticToken { spaces.paddingBlock3xlarge }
+    @objc open var spacePaddingBlockBottomExpandContainerMobile: SpaceSemanticToken { spaces.paddingBlock3xlarge }
     /// Has for value token spaces.paddingBlock3xlarge (= 28)
-    @objc public final var spacePaddingBlockBottomExpandContainerTablet: SpaceSemanticToken { spaces.paddingBlock3xlarge }
+    @objc open var spacePaddingBlockBottomExpandContainerTablet: SpaceSemanticToken { spaces.paddingBlock3xlarge }
     /// Has for value token spaces.paddingBlockLarge (= 16)
-    @objc public final var spacePaddingBlockBottomSlotContainerMobile: SpaceSemanticToken { spaces.paddingBlockLarge }
+    @objc open var spacePaddingBlockBottomSlotContainerMobile: SpaceSemanticToken { spaces.paddingBlockLarge }
     /// Has for value token spaces.paddingBlockLarge (= 16)
-    @objc public final var spacePaddingBlockBottomSlotContainerTablet: SpaceSemanticToken { spaces.paddingBlockLarge }
+    @objc open var spacePaddingBlockBottomSlotContainerTablet: SpaceSemanticToken { spaces.paddingBlockLarge }
     /// Has for value token spaces.paddingBlockMedium (= 12)
-    @objc public final var spacePaddingBlockMobile: SpaceSemanticToken { spaces.paddingBlockMedium }
+    @objc open var spacePaddingBlockMobile: SpaceSemanticToken { spaces.paddingBlockMedium }
     /// Has for value token spaces.paddingBlockMedium (= 12)
-    @objc public final var spacePaddingBlockTablet: SpaceSemanticToken { spaces.paddingBlockMedium }
+    @objc open var spacePaddingBlockTablet: SpaceSemanticToken { spaces.paddingBlockMedium }
 }
 
 // swiftlint:enable identifier_name

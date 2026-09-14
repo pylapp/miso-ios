@@ -10,31 +10,31 @@ import MISOTokensSemantic
 
 extension WireframeThemeInputTagComponentTokensProvider: InputTagComponentTokens {
     /// Has for value token borders.widthDefault (= 2)
-    @objc public final var borderWidthDefault: BorderWidthSemanticToken { borders.widthDefault }
+    @objc open var borderWidthDefault: BorderWidthSemanticToken { borders.widthDefault }
     /// Has for value token borders.widthMedium (= 3)
-    @objc public final var borderWidthDefaultInteraction: BorderWidthSemanticToken { borders.widthMedium }
+    @objc open var borderWidthDefaultInteraction: BorderWidthSemanticToken { borders.widthMedium }
     /// Has for value token colors.actionSupportEnabled (= light: "#05052E0A" / dark: "#EFF5FF0A")
-    @objc public final var colorBgEnabled: MultipleColorSemanticToken { colors.actionSupportEnabled }
+    @objc open var colorBgEnabled: MultipleColorSemanticToken { colors.actionSupportEnabled }
     /// Has for value token colors.actionSupportFocus (= light: "#05052E14" / dark: "#EFF5FF14")
-    @objc public final var colorBgFocus: MultipleColorSemanticToken { colors.actionSupportFocus }
+    @objc open var colorBgFocus: MultipleColorSemanticToken { colors.actionSupportFocus }
     /// Has for value token colors.actionSupportHover (= light: "#05052E14" / dark: "#EFF5FF14")
-    @objc public final var colorBgHover: MultipleColorSemanticToken { colors.actionSupportHover }
+    @objc open var colorBgHover: MultipleColorSemanticToken { colors.actionSupportHover }
     /// Has for value token colors.actionSupportPressed (= light: "#05052E1F" / dark: "#EFF5FF1F")
-    @objc public final var colorBgPressed: MultipleColorSemanticToken { colors.actionSupportPressed }
+    @objc open var colorBgPressed: MultipleColorSemanticToken { colors.actionSupportPressed }
     /// Has for value token colors.borderDefault (= light: "#05052E33" / dark: "#EFF5FF33")
-    @objc public final var colorBorderEnabled: MultipleColorSemanticToken { colors.borderDefault }
+    @objc open var colorBorderEnabled: MultipleColorSemanticToken { colors.borderDefault }
     /// Has for value token colors.actionFocus (= light: "#223CABFF" / dark: "#C1D8FCFF")
-    @objc public final var colorBorderFocus: MultipleColorSemanticToken { colors.actionFocus }
+    @objc open var colorBorderFocus: MultipleColorSemanticToken { colors.actionFocus }
     /// Has for value token colors.actionHover (= light: "#223CABFF" / dark: "#C1D8FCFF")
-    @objc public final var colorBorderHover: MultipleColorSemanticToken { colors.actionHover }
+    @objc open var colorBorderHover: MultipleColorSemanticToken { colors.actionHover }
     /// Has for value token colors.actionPressed (= light: "#213787FF" / dark: "#DCE9FDFF")
-    @objc public final var colorBorderPressed: MultipleColorSemanticToken { colors.actionPressed }
+    @objc open var colorBorderPressed: MultipleColorSemanticToken { colors.actionPressed }
     /// Has for value token colors.contentDefault (= light: "#08090DFF" / dark: "#E9ECF1FF")
-    @objc public final var colorContentEnabled: MultipleColorSemanticToken { colors.contentDefault }
+    @objc open var colorContentEnabled: MultipleColorSemanticToken { colors.contentDefault }
     /// Has for value token colors.actionFocus (= light: "#223CABFF" / dark: "#C1D8FCFF")
-    @objc public final var colorContentFocus: MultipleColorSemanticToken { colors.actionFocus }
+    @objc open var colorContentFocus: MultipleColorSemanticToken { colors.actionFocus }
     /// Has for value token colors.actionHover (= light: "#223CABFF" / dark: "#C1D8FCFF")
-    @objc public final var colorContentHover: MultipleColorSemanticToken { colors.actionHover }
+    @objc open var colorContentHover: MultipleColorSemanticToken { colors.actionHover }
     /// Has for value token colors.actionPressed (= light: "#213787FF" / dark: "#DCE9FDFF")
-    @objc public final var colorContentPressed: MultipleColorSemanticToken { colors.actionPressed }
+    @objc open var colorContentPressed: MultipleColorSemanticToken { colors.actionPressed }
 }

@@ -14,7 +14,7 @@ import MISOThemesContract
 /// *Divider* components tokens are defined with raw and semantic tokens of borders (from `AllBorderSemanticTokensProvider`).
 ///
 /// - Since: 0.17.0
-final class WireframeThemeDividerComponentTokensProvider: AllDividerComponentTokensProvider {
+open class WireframeThemeDividerComponentTokensProvider: AllDividerComponentTokensProvider {
 
     /// Provider of border semantic tokens to use for chip sizes
     let borders: AllBorderSemanticTokensProvider
@@ -25,7 +25,7 @@ final class WireframeThemeDividerComponentTokensProvider: AllDividerComponentTok
 
     /// Defines a provider of component tokens dedicated to `MISOHorizontalDivider` and `MISOVerticalDivider`
     /// - Parameter borders: Provider for border semantic tokens. If nil, a default one will be used (``WireframeThemeBorderSemanticTokensProvider``)
-    init(borders: AllBorderSemanticTokensProvider? = nil) {
+    public init(borders: AllBorderSemanticTokensProvider? = nil) {
         ML.debug("Init of WireframeThemeDividerComponentTokensProvider")
         self.borders = (borders ?? WireframeThemeBorderSemanticTokensProvider())
         #if DEBUG

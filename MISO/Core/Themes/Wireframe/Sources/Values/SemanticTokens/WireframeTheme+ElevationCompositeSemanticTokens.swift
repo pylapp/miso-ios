@@ -17,31 +17,31 @@ import MISOTokensSemantic
 /// It defines in fact box shadows effects.
 extension WireframeThemeElevationSemanticTokensProvider: ElevationCompositeSemanticTokens {
 
-    @objc public final var none: ElevationCompositeSemanticToken {
+    @objc open var none: ElevationCompositeSemanticToken {
         MultipleElevationCompositeRawToken(ElevationCompositeRawToken(x: xNone, y: yNone, blur: blurNone, color: colorNone))
     }
 
-    @objc public final var raised: ElevationCompositeSemanticToken {
+    @objc open var raised: ElevationCompositeSemanticToken {
         MultipleElevationCompositeRawToken(light: ElevationCompositeRawToken(x: xRaised, y: yRaised, blur: blurRaised, color: colorRaisedLight),
                                            dark: ElevationCompositeRawToken(x: xRaised, y: yRaised, blur: blurRaised, color: colorRaisedDark))
     }
 
-    @objc public final var drag: ElevationCompositeSemanticToken {
+    @objc open var drag: ElevationCompositeSemanticToken {
         MultipleElevationCompositeRawToken(light: ElevationCompositeRawToken(x: xDrag, y: yDrag, blur: blurDrag, color: colorDragLight),
                                            dark: ElevationCompositeRawToken(x: xDrag, y: yDrag, blur: blurDrag, color: colorDragDark))
     }
 
-    @objc public final var `default`: ElevationCompositeSemanticToken {
+    @objc open var `default`: ElevationCompositeSemanticToken {
         MultipleElevationCompositeRawToken(light: ElevationCompositeRawToken(x: xElevated, y: yElevated, blur: blurElevated, color: colorElevatedLight),
                                            dark: ElevationCompositeRawToken(x: xElevated, y: yElevated, blur: blurElevated, color: colorElevatedDark))
     }
 
-    @objc public final var emphasized: ElevationCompositeSemanticToken {
+    @objc open var emphasized: ElevationCompositeSemanticToken {
         MultipleElevationCompositeRawToken(light: ElevationCompositeRawToken(x: xEmphasized, y: yEmphasized, blur: blurEmphasized, color: colorEmphasizedLight),
                                            dark: ElevationCompositeRawToken(x: xEmphasized, y: yEmphasized, blur: blurEmphasized, color: colorEmphasizedDark))
     }
 
-    @objc public final var sticky: ElevationCompositeSemanticToken {
+    @objc open var sticky: ElevationCompositeSemanticToken {
         MultipleElevationCompositeRawToken(light: ElevationCompositeRawToken(x: xSticky, y: ySticky, blur: blurSticky, color: colorStickyLight),
                                            dark: ElevationCompositeRawToken(x: xSticky, y: ySticky, blur: blurSticky, color: colorStickyDark))
     }

@@ -10,13 +10,13 @@ import MISOTokensSemantic
 
 extension WireframeThemeToastComponentTokensProvider: ToastComponentTokens {
     /// Has for value token borders.radiusNone (= 0)
-    @objc public final var borderRadiusMedia: BorderRadiusSemanticToken { borders.radiusNone }
+    @objc open var borderRadiusMedia: BorderRadiusSemanticToken { borders.radiusNone }
     /// Has for value token borders.radiusSmall (= 3)
-    @objc public final var borderRadiusMediaRounded: BorderRadiusSemanticToken { borders.radiusSmall }
+    @objc open var borderRadiusMediaRounded: BorderRadiusSemanticToken { borders.radiusSmall }
     /// Has for value token dimensions._3xlarge (= 56)
-    @objc public final var sizeAssetLarge: SizeSemanticToken { dimensions._3xlarge }
+    @objc open var sizeAssetLarge: SizeSemanticToken { dimensions._3xlarge }
     /// Has for value token dimensions._medium (= 40)
-    @objc public final var sizeAssetMedium: SizeSemanticToken { dimensions._medium }
+    @objc open var sizeAssetMedium: SizeSemanticToken { dimensions._medium }
     /// Has for value token sizes.iconWithLabelLargeSizeMedium (= 28)
-    @objc public final var sizeAssetSmall: SizeSemanticToken { sizes.iconWithLabelLargeSizeMedium }
+    @objc open var sizeAssetSmall: SizeSemanticToken { sizes.iconWithLabelLargeSizeMedium }
 }

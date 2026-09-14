@@ -11,14 +11,14 @@ import MISOThemesContract
 /// all tokens to the users.
 ///
 /// - Since: 0.22.0
-final class WireframeThemeEffectSemanticTokensProvider: AllEffectSemanticTokensProvider {
+open class WireframeThemeEffectSemanticTokensProvider: AllEffectSemanticTokensProvider {
 
     #if DEBUG
     nonisolated(unsafe) private static var instanceCount: Int = 0
     #endif
 
     /// Intializes the provider
-    init() {
+    public init() {
         ML.debug("Init of WireframeThemeEffectSemanticTokensProvider")
         #if DEBUG
         Self.instanceCount++

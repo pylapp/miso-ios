@@ -14,7 +14,7 @@ import MISOThemesContract
 /// *Bullet list* components tokens are defined with raw and semantic tokens of spaces (from `AllSpaceSemanticTokensProvider`).
 ///
 /// - Since: 0.17.0
-final class WireframeThemeBulletListComponentTokensProvider: AllBulletListComponentTokensProvider {
+open class WireframeThemeBulletListComponentTokensProvider: AllBulletListComponentTokensProvider {
 
     /// Provider of spaces semantic tokens to use for link spaces
     let spaces: AllSpaceSemanticTokensProvider
@@ -25,7 +25,7 @@ final class WireframeThemeBulletListComponentTokensProvider: AllBulletListCompon
 
     /// Defines a provider of component tokens dedicated to `MISOLink`
     /// - Parameter spaces: Provider for space semantic tokens. If nil, a default one will be used (``WireframeThemeSpaceSemanticTokensProvider``)
-    init(spaces: AllSpaceSemanticTokensProvider? = nil) {
+    public init(spaces: AllSpaceSemanticTokensProvider? = nil) {
         ML.debug("Init of WireframeThemeBulletListComponentTokensProvider")
         self.spaces = (spaces ?? WireframeThemeSpaceSemanticTokensProvider())
         #if DEBUG

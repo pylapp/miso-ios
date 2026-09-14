@@ -11,19 +11,19 @@ import MISOTokensSemantic
 
 extension WireframeThemeTextAreaComponentTokensProvider: TextAreaComponentTokens {
     /// Has for value token DimensionRawTokens._1100 (= 88)
-    @objc public final var sizeMaxHeightAssetsContainer: SizeSemanticToken { DimensionRawTokens._1100 }
+    @objc open var sizeMaxHeightAssetsContainer: SizeSemanticToken { DimensionRawTokens._1100 }
     /// Has for value token DimensionRawTokens._2500 (= 240)
-    @objc public final var sizeMaxHeightInput: SizeSemanticToken { DimensionRawTokens._2500 }
+    @objc open var sizeMaxHeightInput: SizeSemanticToken { DimensionRawTokens._2500 }
     /// Has for value token DimensionRawTokens._6000 (= 640)
-    @objc public final var sizeMaxWidth: SizeSemanticToken { DimensionRawTokens._6000 }
+    @objc open var sizeMaxWidth: SizeSemanticToken { DimensionRawTokens._6000 }
     /// Has for value token DimensionRawTokens._900 (= 72)
-    @objc public final var sizeMinHeightInput: SizeSemanticToken { DimensionRawTokens._900 }
+    @objc open var sizeMinHeightInput: SizeSemanticToken { DimensionRawTokens._900 }
     /// Has for value token spaces.paddingBlockSmall (= 10)
-    @objc public final var spacePaddingBlock: SpaceSemanticToken { spaces.paddingBlockSmall }
+    @objc open var spacePaddingBlock: SpaceSemanticToken { spaces.paddingBlockSmall }
     /// Has for value token spaces.paddingBlock2xsmall (= 6)
-    @objc public final var spacePaddingBlockEmptyTrailingContainer: SpaceSemanticToken { spaces.paddingBlock2xsmall }
+    @objc open var spacePaddingBlockEmptyTrailingContainer: SpaceSemanticToken { spaces.paddingBlock2xsmall }
     /// Has for value token spaces.paddingBlockMedium (= 12)
-    @objc public final var spacePaddingBlockTopEmpty: SpaceSemanticToken { spaces.paddingBlockMedium }
+    @objc open var spacePaddingBlockTopEmpty: SpaceSemanticToken { spaces.paddingBlockMedium }
     /// Has for value token spaces.paddingBlockXsmall (= 8)
-    @objc public final var spacePaddingBlockTrailingContainer: SpaceSemanticToken { spaces.paddingBlockXsmall }
+    @objc open var spacePaddingBlockTrailingContainer: SpaceSemanticToken { spaces.paddingBlockXsmall }
 }

@@ -14,7 +14,7 @@ import MISOThemesContract
 /// and borders (from `AllBorderSemanticTokensProvider`).
 ///
 /// - Since: 0.17.0
-final class WireframeThemeTagComponentTokensProvider: AllTagComponentTokensProvider {
+open class WireframeThemeTagComponentTokensProvider: AllTagComponentTokensProvider {
 
     /// Provider of size semantic tokens to use for tag sizes
     let sizes: AllSizeSemanticTokensProvider
@@ -38,10 +38,10 @@ final class WireframeThemeTagComponentTokensProvider: AllTagComponentTokensProvi
     ///    - borders: Provider for borders semantic tokens. If nil, a default one will be used (``WireframeThemeBorderSemanticTokensProvider``)
     ///    - spaces: Provider for spaces semantic tokens. If nil, a default one will be used (``WireframeThemeSpaceSemanticTokensProvider``)
     ///    - dimensions: Provider for dimension semantic tokens. If nil, a default one will be used (``WireframeThemeDimensionSemanticTokensProvider``)
-    init(sizes: AllSizeSemanticTokensProvider? = nil,
-         borders: AllBorderSemanticTokensProvider? = nil,
-         spaces: AllSpaceSemanticTokensProvider? = nil,
-         dimensions: AllDimensionSemanticTokensProvider? = nil)
+    public init(sizes: AllSizeSemanticTokensProvider? = nil,
+                borders: AllBorderSemanticTokensProvider? = nil,
+                spaces: AllSpaceSemanticTokensProvider? = nil,
+                dimensions: AllDimensionSemanticTokensProvider? = nil)
     {
         ML.debug("Init of WireframeThemeTagComponentTokensProvider")
         self.sizes = (sizes ?? WireframeThemeSizeSemanticTokensProvider())

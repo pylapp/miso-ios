@@ -14,7 +14,7 @@ import MISOThemesContract
 /// and effects (from `AllEffectSemanticTokensProvider`).
 ///
 /// - Since: 0.22.0
-final class WireframeThemeBarComponentTokensProvider: AllBarComponentTokensProvider {
+open class WireframeThemeBarComponentTokensProvider: AllBarComponentTokensProvider {
 
     /// Provider of sizes semantic tokens to use for bar sizes
     let sizes: AllSizeSemanticTokensProvider
@@ -43,11 +43,11 @@ final class WireframeThemeBarComponentTokensProvider: AllBarComponentTokensProvi
     ///    - colors: Provider for colors semantic tokens, if nil, a default one will be used (``WireframeThemeColorsSemanticTokensProvider``)
     ///    - opacities: Provider for opacities semantic tokens, if nil, a default one will be used (``WireframeThemeOpacitiesSemanticTokensProvider``)
     ///    - effects: Provider for effects semantic tokens, if nil, a default one will be used (``WireframeThemeEffectsSemanticTokensProvider``)
-    init(sizes: AllSizeSemanticTokensProvider? = nil,
-         borders: AllBorderSemanticTokensProvider? = nil,
-         colors: AllColorSemanticTokensProvider? = nil,
-         opacities: AllOpacitySemanticTokensProvider? = nil,
-         effects: AllEffectSemanticTokensProvider? = nil)
+    public init(sizes: AllSizeSemanticTokensProvider? = nil,
+                borders: AllBorderSemanticTokensProvider? = nil,
+                colors: AllColorSemanticTokensProvider? = nil,
+                opacities: AllOpacitySemanticTokensProvider? = nil,
+                effects: AllEffectSemanticTokensProvider? = nil)
     {
         ML.debug("Init of WireframeBarComponentTokensProvider")
         self.sizes = (sizes ?? WireframeThemeSizeSemanticTokensProvider())

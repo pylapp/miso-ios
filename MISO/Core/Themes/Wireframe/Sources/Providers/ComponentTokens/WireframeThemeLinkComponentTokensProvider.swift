@@ -16,7 +16,7 @@ import MISOThemesContract
 /// and dimensions (from `AllDimensionSemanticTokensProvider`).
 ///
 /// - Since: 0.17.0
-final class WireframeThemeLinkComponentTokensProvider: AllLinkComponentTokensProvider {
+open class WireframeThemeLinkComponentTokensProvider: AllLinkComponentTokensProvider {
 
     /// Provider of size semantic tokens to use for link sizes
     let sizes: AllSizeSemanticTokensProvider
@@ -40,10 +40,10 @@ final class WireframeThemeLinkComponentTokensProvider: AllLinkComponentTokensPro
     ///    - colors: Provider for color semantic tokens. If nil, a default one will be used (``WireframeThemeColorSemanticTokensProvider``)
     ///    - spaces: Provider for space semantic tokens. If nil, a default one will be used (``WireframeThemeSpaceSemanticTokensProvider``)
     ///    - dimensions: Provider for dimensions semantic tokens. If nil, a default one will be used (``WireframeThemeDimensionSemanticTokensProvider``)
-    init(sizes: AllSizeSemanticTokensProvider? = nil,
-         colors: AllColorSemanticTokensProvider? = nil,
-         spaces: AllSpaceSemanticTokensProvider? = nil,
-         dimensions: AllDimensionSemanticTokensProvider? = nil)
+    public init(sizes: AllSizeSemanticTokensProvider? = nil,
+                colors: AllColorSemanticTokensProvider? = nil,
+                spaces: AllSpaceSemanticTokensProvider? = nil,
+                dimensions: AllDimensionSemanticTokensProvider? = nil)
     {
         ML.debug("Init of WireframeThemeLinkComponentTokensProvider")
         self.sizes = (sizes ?? WireframeThemeSizeSemanticTokensProvider())

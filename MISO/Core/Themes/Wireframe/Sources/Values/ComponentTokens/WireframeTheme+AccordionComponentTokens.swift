@@ -12,11 +12,11 @@ import MISOTokensSemantic
 
 extension WireframeThemeAccordionComponentTokensProvider: AccordionComponentTokens {
     /// Has for value token spaces.paddingBlock3xlarge (= 28)
-    @objc public final var spacePaddingBlockBottomExpandContainerDefault: SpaceSemanticToken { spaces.paddingBlock3xlarge }
+    @objc open var spacePaddingBlockBottomExpandContainerDefault: SpaceSemanticToken { spaces.paddingBlock3xlarge }
     /// Has for value token spaces.paddingBlock2xlarge (= 24)
-    @objc public final var spacePaddingBlockBottomExpandContainerSmall: SpaceSemanticToken { spaces.paddingBlock2xlarge }
+    @objc open var spacePaddingBlockBottomExpandContainerSmall: SpaceSemanticToken { spaces.paddingBlock2xlarge }
     /// Has for value token spaces.paddingBlockXsmall (= 8)
-    @objc public final var spacePaddingBlockTopExpandContainer: SpaceSemanticToken { spaces.paddingBlockXsmall }
+    @objc open var spacePaddingBlockTopExpandContainer: SpaceSemanticToken { spaces.paddingBlockXsmall }
 }
 
 // swiftlint:enable identifier_name
