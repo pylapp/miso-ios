@@ -221,7 +221,7 @@ public struct MISOTabBar<Content: View>: View {
                 @ViewBuilder content: @escaping () -> Content)
     {
         if selectedTab.wrappedValue < 0 || selectedTab.wrappedValue >= count {
-            OL.warning("The selected tab binding for the MISOTabBar does not match the count of tabs")
+            ML.warning("The selected tab binding for the MISOTabBar does not match the count of tabs")
         }
         _selectedTab = selectedTab
         tabCount = Int(count)

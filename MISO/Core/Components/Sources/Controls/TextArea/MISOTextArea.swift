@@ -300,7 +300,7 @@ public struct MISOTextArea: View {
         ///   - action: The action when clicked
         public init(text: String, action: @escaping () -> Void) {
             if text.isEmpty {
-                OL.warning("The helper link text for the MISOTextArea is empty, avoid using it in that case.")
+                ML.warning("The helper link text for the MISOTextArea is empty, avoid using it in that case.")
             }
             self.text = text
             self.action = action

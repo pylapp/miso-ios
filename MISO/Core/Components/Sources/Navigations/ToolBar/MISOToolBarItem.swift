@@ -170,7 +170,7 @@ public struct MISOToolBarItem: View, Identifiable {
     ///   - action: The action triggered when the item is tapped
     public init(label: String, action: (() -> Void)? = nil) {
         if label.isEmpty {
-            OL.fatal("The label for a toolBar item without icon must not be empty")
+            ML.fatal("The label for a toolBar item without icon must not be empty")
         }
         content = .action(type: .label(label, action: action), style: .default)
     }

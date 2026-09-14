@@ -48,7 +48,7 @@ struct PinCodeInputContainer: View {
         // Warning if value is longer than the expected length
         let rawValue = value.wrappedValue
         if rawValue.count > length.rawValue {
-            OL.warning("The given value '\(rawValue)' for MISOPinCodeInput has \(rawValue.count) digits but length is \(length.rawValue). Extra digits will be ignored.")
+            ML.warning("The given value '\(rawValue)' for MISOPinCodeInput has \(rawValue.count) digits but length is \(length.rawValue). Extra digits will be ignored.")
         }
 
         // Pre-fill digits from value, filtered to digits only and clamped to length

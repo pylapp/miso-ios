@@ -114,7 +114,7 @@ public struct MISOCheckbox: View {
                 isReadOnly: Bool = false)
     {
         if accessibilityLabel.isEmpty {
-            OL.warning("The MISOCheckbox should not have an empty accessibility label, think about your disabled users!")
+            ML.warning("The MISOCheckbox should not have an empty accessibility label, think about your disabled users!")
         }
         _isOn = isOn
         self.accessibilityLabel = accessibilityLabel

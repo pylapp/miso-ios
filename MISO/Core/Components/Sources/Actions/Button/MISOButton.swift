@@ -351,7 +351,7 @@ public struct MISOButton: View {
         // A button with negative or brand appearance is not allowed on a colored surface.
         // Test is done here because onColoredSurface is environment variable which is not accessible in init.
         if onColoredSurface, appearance == .negative || appearance == .brand {
-            OL.fatal("An MISOButton with MISOButton.Appearance.{Negative | Brand} appearance has been detected as a direct or indirect child of an MISOColoredSurface, which is not allowed.")
+            ML.fatal("An MISOButton with MISOButton.Appearance.{Negative | Brand} appearance has been detected as a direct or indirect child of an MISOColoredSurface, which is not allowed.")
         }
 
         Button(action: action) {

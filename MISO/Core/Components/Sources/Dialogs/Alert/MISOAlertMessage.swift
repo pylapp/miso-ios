@@ -107,7 +107,7 @@ public struct MISOAlertMessage: View {
         ///   - action: The action to process when clicked
         public init(text: String, position: Position = .bottom, action: @escaping () -> Void) {
             if text.isEmpty {
-                OL.warning("The link text for the MISOAlertMessage is empty, avoid using it in that case.")
+                ML.warning("The link text for the MISOAlertMessage is empty, avoid using it in that case.")
             }
             self.text = text
             self.action = action
@@ -150,7 +150,7 @@ public struct MISOAlertMessage: View {
     {
         text = label
         if text.isEmpty {
-            OL.warning("The label for the MISOAlertMessage must not be empty!")
+            ML.warning("The label for the MISOAlertMessage must not be empty!")
         }
         self.status = status
         self.description = if let description {
@@ -193,7 +193,7 @@ public struct MISOAlertMessage: View {
     {
         text = label
         if text.isEmpty {
-            OL.warning("The label for the MISOAlertMessage must not be empty!")
+            ML.warning("The label for the MISOAlertMessage must not be empty!")
         }
         self.status = status
         self.description = .attributed(description)
@@ -235,7 +235,7 @@ public struct MISOAlertMessage: View {
     {
         text = label
         if text.isEmpty {
-            OL.warning("The label for the MISOAlertMessage must not be empty!")
+            ML.warning("The label for the MISOAlertMessage must not be empty!")
         }
         self.status = status
         self.description = if let description {
@@ -282,7 +282,7 @@ public struct MISOAlertMessage: View {
     {
         text = label
         if text.isEmpty {
-            OL.warning("The label for the MISOAlertMessage must not be empty!")
+            ML.warning("The label for the MISOAlertMessage must not be empty!")
         }
         self.status = status
         self.description = .attributed(description)

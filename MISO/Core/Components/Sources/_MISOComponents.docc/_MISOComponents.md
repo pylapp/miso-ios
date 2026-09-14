@@ -12,7 +12,7 @@ See https://github.com/swiftlang/swift-docc/issues/1283
 
 The catalog of all components provided by MISO. It contains also `View` extensions and `ViewModifiers` to apply tokens and styles on components and higher-level views.
 
-Components are grouped in several categories, the same as the ones defined in the *Figma* design kit:
+Components are grouped in several categories.
 *Actions* component are for example buttons. *Navigations* group contains links, *inputs* group has checkboxes, radio buttons and switches, *layouts* group is dedicated to things like dividers.
 You can get more details about them in the categories below:
 
@@ -29,8 +29,8 @@ You can get more details about them in the categories below:
 
 ### Apply a specific shadow effect (elevation tokens)
 
-The unified design system implemented by MISO iOS library allows to apply *elevation effets* on a `View`, i.e. a shadow under the component.
-Because the design tool in use is _Figma_ which defines such shadow with a _blur_ and a _spread_ radiuses, and because _SwiftUI_ uses only its own _radius_ definition, an extension of `View` has been implemented to let users apply some effect using an [`ElevationCompositeSemanticToken`](https://ios.unified-design-system.orange.com/documentation/misotokenssemantic/elevationcompositesemantictoken) from the [MISOTokensSemantic](https://ios.unified-design-system.orange.com/documentation/misotokenssemantic/) library thanks to the method `shadow(elevation: ElevationCompositeSemanticToken)`.
+The MISO iOS library allows to apply *elevation effets* on a `View`, i.e. a shadow under the component.
+Because the original project (OUDS° uses as design tool _Figma_ which defines such shadow with a _blur_ and a _spread_ radiuses, and because _SwiftUI_ uses only its own _radius_ definition, an extension of `View` has been implemented to let users apply some effect using an [`ElevationCompositeSemanticToken`](https://ios.unified-design-system.orange.com/documentation/misotokenssemantic/elevationcompositesemantictoken) from the [MISOTokensSemantic](https://ios.unified-design-system.orange.com/documentation/misotokenssemantic/) library thanks to the method `shadow(elevation: ElevationCompositeSemanticToken)`.
 
 ```swift
 // For example, apply the elevation effect "drag" from your theme:

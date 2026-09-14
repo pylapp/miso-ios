@@ -105,7 +105,7 @@ public struct MISORadio: View {
                 isReadOnly: Bool = false)
     {
         if accessibilityLabel.isEmpty {
-            OL.warning("The MISORadio should not have an empty accessibility label, think about your disabled users!")
+            ML.warning("The MISORadio should not have an empty accessibility label, think about your disabled users!")
         }
         _isOn = isOn
         self.accessibilityLabel = accessibilityLabel.localized()
