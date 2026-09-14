@@ -1,8 +1,8 @@
 # Themes
 
 @Metadata {
-    @PageImage(purpose: icon, source: "ic_theme_intro")
-    @PageImage(purpose: card, source: "ic_theme_intro")
+    @PageImage(purpose: icon, source: "ic_logo_miso")
+    @PageImage(purpose: card, source: "ic_logo_miso")
 }
 
 _Themes_ are applications of specific values for _components tokens_ and _semantic tokens_ using in the end _raw tokens_.(thus final usable low level values).

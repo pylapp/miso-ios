@@ -1,7 +1,7 @@
 # ``MISOThemesContract``
 
 @Metadata {
-    @PageImage(purpose: icon, source: "ic_unified_ds")
+    @PageImage(purpose: icon, source: "ic_logo_miso")
     @DisplayName("Welcome to MISO", style: symbol)
     @TitleHeading("Swift Package")
 }
@@ -10,7 +10,7 @@ Do not add @PageImage(purpose: card) because not managed for landing page of onl
 See https://github.com/swiftlang/swift-docc/issues/1283
 -->
 
-🍜 MISO: a SwiftUI library of components, forked from ouds-ios.
+🐙🍜 MISO is a library of SwiftUI components (forked from [ouds-ios](https://github.com/Orange-OpenSource/ouds-ios)), themes and tools for iOS app development.
 
 ## Overview
 

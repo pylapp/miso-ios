@@ -1,8 +1,8 @@
 # Getting Started with MISO
 
 @Metadata {
-    @PageImage(purpose: icon, source: "ic_unified_ds")
-    @PageImage(purpose: card, source: "ic_unified_ds")
+    @PageImage(purpose: icon, source: "ic_logo_miso")
+    @PageImage(purpose: card, source: "ic_logo_miso")
 }
 
 How to add the package as dependency, import libraries and use theme and components for your apps.

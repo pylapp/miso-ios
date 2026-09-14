@@ -1,6 +1,3 @@
-Disclaimer
-==========
-
 <p align="center">
 <img src="./images/logo-MISO.png" alt="Logo of MISO tool" height="150" />
 </p>
@@ -8,7 +5,7 @@ Disclaimer
 <h1 align="center">MISO iOS</h1>
 
 <p align="center">
-  MISO iOS provides SwiftUI components and themes logic for iOS apps developers.
+  🐙🍜 MISO is a library of SwiftUI components (forked from ouds-ios), themes and tools for iOS app development.
   <br>
   Miso Is So {Open | Obvious | Original}
   <br>
@@ -50,13 +47,6 @@ Disclaimer
 
 MISO is a recursive acronym which can mean for example *Miso Is So Open*. Or *obvious*. Or *original*. We don't care in the end.
 Miso soup is tasty. 🍜
-
-> [!IMPORTANT]
-> This project is a fork from [Orange-OpenSource/ouds-ios](https://github.com/Orange-OpenSource/ouds-ios),
-> but without Orange and Sosh brand themes,
-> with a renamed API to not use the "OUDS" acronym,
-> and with an opened Wireframe theme.
-> The architecture is the same as OUDS v3.0.0.
 
 > [!CAUTION]
 > This Swift Package is dedicated to SwiftUI. UIKit and other frameworks are not supported.
@@ -144,8 +134,18 @@ As such:
 
 ## ⚖️ Copyright and license
 
+
+> [!IMPORTANT]
+> This project is a fork from [Orange-OpenSource/ouds-ios](https://github.com/Orange-OpenSource/ouds-ios),
+> but without Orange and Sosh brand themes,
+> with a renamed API to not use the "OUDS" acronym,
+> and with an opened Wireframe theme.
+> The architecture is the same as OUDS v3.0.0.
+
 Code released under the [MIT License](https://github.com/pylapp/miso-ios/blob/main/LICENSE).
 
 > [!NOTE]
-> Copyright Orange SA
-> Copyright Pierre-Yves Lapersonne
+> Copyright Orange SA (for OUDS specific elements)
+
+> [!NOTE]
+> Copyright Pierre-Yves Lapersonne (for MISO)

@@ -1,8 +1,8 @@
 # Modules
 
 @Metadata {
-    @PageImage(purpose: icon, source: "ic_module_intro")
-    @PageImage(purpose: card, source: "ic_module_intro")
+    @PageImage(purpose: icon, source: "ic_logo_miso")
+    @PageImage(purpose: card, source: "ic_logo_miso")
 }
 
 A _module_ can be seen as a set of features and components to fill a need.

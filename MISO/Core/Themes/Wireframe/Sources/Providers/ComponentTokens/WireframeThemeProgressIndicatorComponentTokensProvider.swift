@@ -44,7 +44,7 @@ open class WireframeThemeProgressIndicatorComponentTokensProvider: AllProgressIn
     ///    - borders: Provider for border semantic tokens, if nil, a default one will be used (``WireframeThemeBorderSemanticTokensProvider``)
     ///    - colors: Provider for color semantic tokens, if nil, a default one will be used (``WireframeThemeColorSemanticTokensProvider``)
     ///    - spaces: Provider for space semantic tokens, if nil, a default one will be used (``WireframeThemeSpaceSemanticTokensProvider``)
-    ///    - dimensions: Provider for dimensions semantic tokens, if nil, a default one will be used (``WireframeThemeDimensionsSemanticTokensProvider``)
+    ///    - dimensions: Provider for dimensions semantic tokens, if nil, a default one will be used (``WireframeThemeDimensionSemanticTokensProvider``)
     public init(sizes: AllSizeSemanticTokensProvider? = nil,
                 borders: AllBorderSemanticTokensProvider? = nil,
                 colors: AllColorSemanticTokensProvider? = nil,

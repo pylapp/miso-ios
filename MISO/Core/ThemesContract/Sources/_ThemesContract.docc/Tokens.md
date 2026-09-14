@@ -1,8 +1,8 @@
 # Tokens
 
 @Metadata {
-    @PageImage(purpose: icon, source: "ic_design_token_intro")
-    @PageImage(purpose: card, source: "ic_design_token_intro")
+    @PageImage(purpose: icon, source: "ic_logo_miso")
+    @PageImage(purpose: card, source: "ic_logo_miso")
 }
 
 Design tokens represent the small, repeated design decisions that make up a design system's visual style. Tokens wrap hard-coded static values, such as hexadecimal codes for color, with self-explanatory names. They are used to define the look and feel and the style of everything. They are exposed through the themes and can be used as they are.

@@ -1,7 +1,7 @@
 # ``MISOTokensRaw``
 
 @Metadata {
-    @PageImage(purpose: icon, source: "ic_design_token_figma_raw")
+    @PageImage(purpose: icon, source: "ic_design_token_intro")
     @DisplayName("Tokens with raw values", style: symbol)
     @TitleHeading("Library")
 }

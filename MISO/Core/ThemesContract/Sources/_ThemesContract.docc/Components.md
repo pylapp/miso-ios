@@ -1,8 +1,8 @@
 # Components
 
 @Metadata {
-    @PageImage(purpose: icon, source: "ic_component_intro")
-    @PageImage(purpose: card, source: "ic_component_intro")
+    @PageImage(purpose: icon, source: "ic_logo_miso")
+    @PageImage(purpose: card, source: "ic_logo_miso")
 }
 
 _Components_ are the `View` objects you can add in the views of your apps, like buttons, links, cards etc.
