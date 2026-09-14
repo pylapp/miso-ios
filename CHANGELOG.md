@@ -8,4 +8,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
     
-- Migration from MISO iOS codebase to MISO iOS (remove Orange and Sosh related elments, iopen and udpate Wireframe theme)
+- Migration from MISO iOS codebase to MISO iOS

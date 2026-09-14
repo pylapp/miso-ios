@@ -1,0 +1,287 @@
+// Software: MISO iOS (fork of OUDS iOS)
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
+
+import MISOThemesContract
+import MISOTokensSemantic
+import SwiftUI
+
+/// An icon element that can be used at the leading or trailing position of a list item
+/// such as ``MISOStaticListItem`` or ``MISONavigationListItem``.
+///
+/// ``MISOListItemImage`` displays an image (square or wide).
+///
+/// ## Sizes
+///
+/// The ``Size`` enum defines the available sizes:
+/// - **`.medium`**: The default size, suited for standard list items.
+/// - **`.large`**: A larger variant for increased visual prominence.
+/// - **`.extraLarge`**: The largest variant, typically used for profile-like displays.
+///
+/// **Note:** When the image is embedded in a list item with small size
+/// (via `SwiftUI/View/misoListItemSize(_:)`), the icon is always rendered at its smallest size.
+///
+/// ## Code samples
+///
+/// ```swift
+///     // Decorative image
+///     MISOListItemImage(asset: Image(decorative: "il_placeholder"))
+///
+///     // Not decorative image
+///     MISOListItemImage(asset: Image("meaningful_image"), description: "A nice landscape")
+///
+///     // Not decorative image with large size
+///     MISOListItemImage(asset: Image("meaningful_image"), description: "A nice landscape", size: .large)
+///
+///     // Adjust with square ratio
+///     MISOListItemImage(asset: Image("meaningful_image"), description: "A nice landscape", ratio: .square)
+///
+///     // Async image from URL
+///     MISOListItemImage(asyncImage: MISOAsyncImage(url: URL(string: "https://example.com/image.png")), description: "A remote image")
+///
+///     // Animated image (GIF or WebP) from URL
+///     MISOListItemImage(animatedImage: MISOAnimatedImage(url: URL(string: "https://example.com/animation.gif")),
+///                       description: "An animated image")
+///
+///     // Usage as leading element in a list item
+///     MISOStaticListItem(
+///         data: MISOListItemData(label: "Information"),
+///         leading: .image(.init(asset: Image(decorative: "il_placeholder", size: .medium))
+///     )
+///
+///     // Usage as trailing element in a list item
+///     MISOStaticListItem(
+///         data: MISOListItemData(label: "Warning"),
+///         trailing: .image(.init(asset: Image(decorative: "il_placeholder", size: .medium))
+///     )
+/// ```
+///
+/// - Since: OUDS 3.0.0
+@available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
+public struct MISOListItemImage: View {
+
+    // MARK: Size
+
+    /// Defines the available sizes (i.e. height) for the image.
+    /// When the image is embedded in a list item with `.small` size, this parameter is ignored
+    /// and a smallest size is always used.
+    ///
+    /// - Since: OUDS 3.0.0
+    @frozen public enum Size {
+        /// The medium size, used as the default in standard list items.
+        case medium
+
+        /// The large size, providing increased visual prominence.
+        case large
+
+        /// The extra-large size, typically used for profile-like displays.
+        case extraLarge
+    }
+
+    /// Defines the aspect ratio of the image container.
+    ///
+    /// - Since: OUDS 3.0.0
+    @frozen public enum Ratio {
+        /// Use for square visual content such as products, logos, album covers or profile-related imagery.
+        case square
+
+        /// Use for landscape content such as editorial images or wide media thumbnails.
+        case widescreen
+    }
+
+    // MARK: Properties
+
+    let imageType: ImageType
+    let size: Size
+    let ratio: Ratio
+    let contentMode: ContentMode
+    let description: String?
+
+    @Environment(\.theme) private var theme
+    @Environment(\.isEnabled) private var isEnabled
+    @Environment(\.misoListItemSize) private var itemSize
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.misoListItemRoundedMedia) private var roundedMedia
+
+    // MARK: Initializers
+
+    /// Creates an icon element for use in a list item at the leading or trailing position.
+    ///
+    /// ```swift
+    ///     // Decorative image
+    ///     MISOListItemImage(asset: Image(decorative: "il_placeholder"))
+    ///
+    ///     // Not decorative image
+    ///     MISOListItemImage(asset: Image("meaningful_image"), description: "A nice landscape")
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - asset: The asset contains the image
+    ///   - description: The description of the image if not decorative
+    ///   - size: The size of the icon. Defaults to `.medium`.
+    ///     **Note:** Ignored when the icon is embedded in a list item with small size
+    ///     (via ``SwiftUICore/View/misoListItemSize(_:)``), where the smallest size is always applied.
+    ///   - ratio: Ratio of the image. By default a `square` image.
+    ///   - contentMode:A flag indicating whether this view should fit or fill the parent context. Default set to `.fit`.
+    public init(asset: Image, description: String? = nil, size: Size = .medium, ratio: Ratio = .square, contentMode: ContentMode = .fit) {
+        imageType = .asset(asset)
+        self.size = size
+        self.ratio = ratio
+        self.contentMode = contentMode
+        self.description = description
+    }
+
+    /// Creates an icon element for use in a list item at the leading or trailing position with an async image.
+    ///
+    /// ```swift
+    ///     // Async image from URL
+    ///     MISOListItemImage(asyncImage: MISOAsyncImage(url: URL(string: "https://example.com/image.png")), description: "A remote image")
+    ///
+    ///     // Async image with large size
+    ///     MISOListItemImage(asyncImage: MISOAsyncImage(url: URL(string: "https://example.com/image.png")), description: "A remote image", size: .large)
+    ///
+    ///     // Async image with custom content and placeholder
+    ///     MISOListItemImage(
+    ///         asyncImage: MISOAsyncImage(url: URL(string: "https://example.com/image.png")) { image in
+    ///             image.resizable()
+    ///         } placeholder: {
+    ///             ProgressView()
+    ///         },
+    ///         description: "A remote image",
+    ///         size: .medium
+    ///     )
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - asyncImage: The async image to load (created with ``MISOAsyncImage``)
+    ///   - description: The description of the image for accessibility
+    ///   - size: The size of the icon. Defaults to `.medium`.
+    ///     **Note:** Ignored when the icon is embedded in a list item with small size
+    ///     (via ``SwiftUICore/View/misoListItemSize(_:)``), where the smallest size is always applied.
+    ///   - ratio: Ratio of the image. By default a `square` image.
+    ///   - contentMode: A flag indicating whether this view should fit or fill the parent context. Default set to `.fit`.
+    public init(asyncImage: MISOAsyncImage<some View>, description: String? = nil, size: Size = .medium, ratio: Ratio = .square, contentMode: ContentMode = .fit) {
+        imageType = .asyncImage(AnyView(asyncImage))
+        self.size = size
+        self.ratio = ratio
+        self.contentMode = contentMode
+        self.description = description
+    }
+
+    /// Creates an image element for use in a list item at the leading or trailing position with an animated
+    /// image (GIF or WebP).
+    ///
+    /// ```swift
+    ///     // Animated image from a remote URL
+    ///     MISOListItemImage(animatedImage: MISOAnimatedImage(url: URL(string: "https://example.com/animation.gif")),
+    ///                       description: "An animated image")
+    ///
+    ///     // Animated image from a local file bundled with the app (not an .xcassets entry)
+    ///     MISOListItemImage(animatedImage: MISOAnimatedImage(named: "loading_spinner", withExtension: "gif"),
+    ///                       description: "An animated image")
+    ///
+    ///     // Animated image from local data (e.g. already downloaded and cached by the caller)
+    ///     MISOListItemImage(animatedImage: MISOAnimatedImage(data: myWebPData),
+    ///                       description: "An animated image",
+    ///                       size: .large)
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - animatedImage: The animated image to play (created with ``MISOAnimatedImage``)
+    ///   - description: The description of the image for accessibility
+    ///   - size: The size of the icon. Defaults to `.medium`.
+    ///     **Note:** Ignored when the icon is embedded in a list item with small size
+    ///     (via ``SwiftUICore/View/misoListItemSize(_:)``), where the smallest size is always applied.
+    ///   - ratio: Ratio of the image. By default a `square` image.
+    ///   - contentMode: A flag indicating whether this view should fit or fill the parent context. Default set to `.fit`.
+    public init(animatedImage: MISOAnimatedImage, description: String? = nil, size: Size = .medium, ratio: Ratio = .square, contentMode: ContentMode = .fit) {
+        imageType = .animated(AnyView(animatedImage))
+        self.size = size
+        self.ratio = ratio
+        self.contentMode = contentMode
+        self.description = description
+    }
+
+    // MARK: Image Type
+
+    /// Defines the type of image displayed in the list item.
+    enum ImageType {
+        /// A static image asset.
+        case asset(Image)
+
+        /// An async image loaded from a URL.
+        case asyncImage(AnyView)
+
+        /// An animated image (GIF or WebP).
+        case animated(AnyView)
+    }
+
+    // MARK: Body
+
+    @ViewBuilder
+    public var body: some View {
+        resizableImage
+            .opacity(opacity)
+            .frame(width: assetSize * ratioValue, height: assetSize, alignment: .center)
+            .clipShape(RoundedRectangle(cornerRadius: radius))
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(description ?? "")
+            .accessibilityHidden(isDecorative)
+    }
+
+    @ViewBuilder
+    private var resizableImage: some View {
+        switch imageType {
+        case let .asset(image):
+            image
+                .resizable()
+                .aspectRatio(contentMode: contentMode)
+        case let .asyncImage(anyView):
+            anyView
+                .aspectRatio(contentMode: contentMode)
+        case let .animated(anyView):
+            anyView
+                .aspectRatio(contentMode: contentMode)
+        }
+    }
+
+    // MARK: Helpers
+
+    private var isDecorative: Bool {
+        description == nil || description?.isEmpty == true
+    }
+
+    private var radius: BorderRadiusSemanticToken {
+        roundedMedia ? theme.listItem.borderRadiusMediaRounded : theme.listItem.borderRadiusMedia
+    }
+
+    private var ratioValue: CGFloat {
+        switch ratio {
+        case .square:
+            1
+        case .widescreen:
+            16 / 9
+        }
+    }
+
+    private var opacity: Double {
+        isEnabled ? theme.opacities.opaque : theme.opacities.disabled
+    }
+
+    private var assetSize: CGFloat {
+        let rawSize = if itemSize == .small {
+            theme.listItem.sizeAssetSmall
+        } else {
+            switch size {
+            case .medium:
+                theme.listItem.sizeAssetMedium
+            case .large:
+                theme.listItem.sizeAssetLarge
+            case .extraLarge:
+                theme.listItem.sizeAssetXlarge
+            }
+        }
+
+        return rawSize * dynamicTypeSize.percentageRate / 100
+    }
+}

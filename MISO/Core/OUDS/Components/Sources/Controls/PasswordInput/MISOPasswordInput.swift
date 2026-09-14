@@ -1,0 +1,363 @@
+// Software: MISO iOS (fork of OUDS iOS)
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
+
+#if !os(watchOS) && !os(tvOS)
+import MISOFoundations
+import MISOThemesContract
+import MISOTokensComponent
+import MISOTokensSemantic
+import SwiftUI
+
+/// Password input is a UI element that allows to securely and confidentially capture a user’s password.
+/// As it is based on the `MISOTextInput`,  it offers same layout and the same elements of configuration.
+///
+/// ## Layout
+///
+/// Passwords input is based on several configurable UI elements:
+///
+/// - **label**: It is used to describe the purpose of the input.
+///
+/// - **placeholder**:  A prefix is not common and is discouraged in a Password Input component. In very specific cases, it can provide
+/// context or format requirements (e.g., “DEV-” for test accounts, "admin-" as a pattern to define an admin password)
+///
+/// - **lock icon**: it helps to reinforce the security context.
+///
+/// - **Helper text**:  A supporting text conveys additional information about the password field.
+///
+/// ## Outlined style
+///
+/// By **default**, the input is with a subtle background fill and invisible bottom border, creating a softer and more contained look.
+///
+///  ```swift
+///     // An outlined text input
+///     MISOPasswordInput(label: "Your password", password: $password, isOutlined: true)
+///
+///     // With a localizable from a bundle
+///     MISOPasswordInput(LocalizedStringKey("password_label"), bundle: Bundle.module, password: $password)
+/// ```
+///
+/// ### Rounded layout
+///
+/// As the` MISOTextInput`, rounded corners can be enabled or disabled using the `hasRoundedTextInputs` values of the `Tuning` object
+/// in your theme configuration.
+///
+/// ## Status
+///
+/// As `MISOPasswordInput` is based on the` MISOTextInput`, all the status are the same and have the same behavior available here `MISOTextInput.Status`
+///
+/// ## Accessibility considerations
+///
+/// By default no haptics are done by the component for the trailing action.
+/// However you should think about cases wher you will have to make the devices vibrates.
+/// You can refer to the [Human Interface Guidelines of Apple](https://developer.apple.com/design/human-interface-guidelines/playing-haptics).
+///
+/// ## Rich text
+///
+/// Rich text can be used for error and helper texts.
+///
+/// Strong text can be used sparingly to highlight key information within the content.
+/// No other text styles should be used.
+/// Underlined text must not be applied manually (e.g. in error message), as it is commonly associated with hyperlinks and may mislead users.
+///
+/// ## Code samples
+///
+/// ```swift
+///     // The password to display and edit
+///     @State var password: String = ""
+///
+///     // A basic password input with label
+///     MISOPasswordInput(label: "Password", password: $password)
+///
+///     // Add a leading icon and helper text to more context
+///     MISOPasswordInput(label: "Password", password: $password, lockIcon: true, helperText: "Your password must be between 8 and 20 characters long.")
+///
+///     // Password with prefix
+///     MISOPasswordInput(label: "Password", password: $password, prefix: "CORP-")
+///
+///     // Make password visible
+///     MISOPasswordInput(label: "Password", password: $password, isHiddenPassword: .constant(false))
+/// ```
+///
+/// - Version: 1.3.1 (Figma component design version)
+/// - Since: OUDS 1.2.0
+@available(iOS 15, macOS 13, visionOS 1, *)
+public struct MISOPasswordInput: View {
+
+    // MARK: - Properties
+
+    let label: String
+    let password: Binding<String>
+    let placeholder: String?
+    let prefix: String?
+    let lockIcon: Bool
+    let helperText: TextualContent?
+    let status: MISOTextInput.Status
+    let isOutlined: Bool
+    let constrainedMaxWidth: Bool
+
+    @Binding private var isHiddenPassword: Bool
+
+    @Environment(\.theme) private var theme
+
+    // MARK: - Initializers
+
+    // swiftlint:disable function_default_parameter_at_end
+
+    /// Creates a password input.
+    ///
+    /// ```swift
+    ///     MISOPasswordInput(label: "Password", password: $password)
+    /// ```
+    ///
+    /// - Parameters:
+    ///    - label: The label displayed above the password input.
+    ///    - password: The pasword to display and edit.
+    ///    - isHiddenPassword: Flag to hide or show the password, By default set to `true`. Be carefull it is recommanded
+    ///    to hide password by default and let user to display it with the button.
+    ///    - placeholder: The text displayed when the password input is empty, by default is *nil*
+    ///    - prefix: Text placed before the user's input. A prefix is not common and is discouraged in a
+    ///    Password Input component. In very specific cases, it can provide context or format requirements
+    ///    (e.g., “DEV-” for test accounts, "admin-" as a pattern to define an admin password)
+    ///    -  lockIcon: When `true`, a lock icon is displayed at the start of the password input to visually reinforce
+    ///    the security context. Defaults to `false`.
+    ///    - helperText: An optional helper text displayed below the password input. It conveys additional, information about the input field,
+    ///    such as how it will be used, by default is *nil*. If `status` is set to `MISOTextInput.Status.Error`, this `helperText` is ignored.
+    ///    - isOutlined: Controls the style of the pasword input. When `true`, it displays a minimalist
+    ///      password input with a transparent background and a visible stroke outlining the field, by default is *false*
+    ///    - constrainedMaxWidth: When `true`, the width is constrained to a maximum value defined by the design system.
+    ///      When `false`, no specific width constraint is applied, allowing the component to size itself or follow external
+    ///      modifier. Defaults to `false`.
+    ///    - status: The current status of the password input base on ` MISOTextInput.Status `, by default to set *enabled*
+    public init(label: String,
+                password: Binding<String>,
+                isHiddenPassword: Binding<Bool> = .constant(true),
+                placeholder: String? = nil,
+                prefix: String? = nil,
+                lockIcon: Bool = false,
+                helperText: String? = nil,
+                isOutlined: Bool = false,
+                constrainedMaxWidth: Bool = false,
+                status: MISOTextInput.Status = .enabled)
+    {
+        self.label = label
+        self.password = password
+        self.helperText = if let helperText {
+            .raw(helperText)
+        } else {
+            nil
+        }
+        self.placeholder = placeholder
+        self.prefix = prefix
+        self.lockIcon = lockIcon
+        self.status = status
+        _isHiddenPassword = isHiddenPassword
+        self.isOutlined = isOutlined
+        self.constrainedMaxWidth = constrainedMaxWidth
+    }
+
+    /// Creates a password input with a rich text as helper text
+    ///
+    /// ```swift
+    ///     MISOPasswordInput(label: "Password",
+    ///                       password: $password,
+    ///                       helperText: AttributedString(markdown: "You should use a **strong password**"))  // Manage in your side errors for init)
+    /// ```
+    ///
+    /// - Parameters:
+    ///    - label: The label displayed above the password input.
+    ///    - password: The pasword to display and edit.
+    ///    - isHiddenPassword: Flag to hide or show the password, By default set to `true`. Be carefull it is recommanded
+    ///    to hide password by default and let user to display it with the button.
+    ///    - placeholder: The text displayed when the password input is empty, by default is *nil*
+    ///    - prefix: Text placed before the user's input. A prefix is not common and is discouraged in a
+    ///    Password Input component. In very specific cases, it can provide context or format requirements
+    ///    (e.g., “DEV-” for test accounts, "admin-" as a pattern to define an admin password)
+    ///    -  lockIcon: When `true`, a lock icon is displayed at the start of the password input to visually reinforce
+    ///    the security context. Defaults to `false`.
+    ///    - helperText: An helper text displayed below the password input. It conveys additional, information about the input field,
+    ///    such as how it will be used, by default is *nil*. If `status` is set to `MISOTextInput.Status.Error`, this `helperText` is ignored.
+    ///    - isOutlined: Controls the style of the pasword input. When `true`, it displays a minimalist
+    ///      password input with a transparent background and a visible stroke outlining the field, by default is *false*
+    ///    - constrainedMaxWidth: When `true`, the width is constrained to a maximum value defined by the design system.
+    ///      When `false`, no specific width constraint is applied, allowing the component to size itself or follow external
+    ///      modifier. Defaults to `false`.
+    ///    - status: The current status of the password input base on ` MISOTextInput.Status `, by default to set *enabled*
+    public init(label: String,
+                password: Binding<String>,
+                isHiddenPassword: Binding<Bool> = .constant(true),
+                placeholder: String? = nil,
+                prefix: String? = nil,
+                lockIcon: Bool = false,
+                helperText: AttributedString,
+                isOutlined: Bool = false,
+                constrainedMaxWidth: Bool = false,
+                status: MISOTextInput.Status = .enabled)
+    {
+        self.label = label
+        self.password = password
+        self.helperText = .attributed(helperText)
+        self.placeholder = placeholder
+        self.prefix = prefix
+        self.lockIcon = lockIcon
+        self.status = status
+        _isHiddenPassword = isHiddenPassword
+        self.isOutlined = isOutlined
+        self.constrainedMaxWidth = constrainedMaxWidth
+    }
+
+    /// Creates a password input with a localized label, looking up the key in the given bundle.
+    ///
+    /// ```swift
+    ///     MISOPasswordInput(LocalizedStringKey("password_label"),
+    ///                       bundle: Bundle.module,
+    ///                       password: $password,
+    ///                       helperText: AttributedString(markdown: "You should use a **strong password**"))  // Manage in your side errors for init)
+    /// ```
+    ///
+    /// - Parameters:
+    ///    - key: A `LocalizedStringKey` used to look up the label in the given bundle
+    ///    - tableName: The name of the `.strings` file, or `nil` for the default
+    ///    - bundle: The bundle in which to look up the localized string. Defaults to `Bundle.main`.
+    ///    - password: The pasword to display and edit
+    ///    - isHiddenPassword: Flag to hide or show the password, By default set to `true`
+    ///    - placeholder: The text displayed when the password input is empty, by default is *nil*
+    ///    - prefix: Text placed before the user's input, by default is *nil*
+    ///    - lockIcon: When `true`, a lock icon is displayed, defaults to `false`
+    ///    - helperText: An optional helper text, by default is *nil*
+    ///    - isOutlined: Controls the style of the pasword input, by default is *false*
+    ///    - constrainedMaxWidth: When `true`, the width is constrained, defaults to `false`
+    ///    - status: The current status of the password input, default set to *enabled*
+    public init(_ key: LocalizedStringKey,
+                tableName: String? = nil,
+                bundle: Bundle = .main,
+                password: Binding<String>,
+                isHiddenPassword: Binding<Bool> = .constant(true),
+                placeholder: String? = nil,
+                prefix: String? = nil,
+                lockIcon: Bool = false,
+                helperText: String? = nil,
+                isOutlined: Bool = false,
+                constrainedMaxWidth: Bool = false,
+                status: MISOTextInput.Status = .enabled)
+    {
+        self.init(label: key.resolved(tableName: tableName, bundle: bundle),
+                  password: password,
+                  isHiddenPassword: isHiddenPassword,
+                  placeholder: placeholder,
+                  prefix: prefix,
+                  lockIcon: lockIcon,
+                  helperText: helperText,
+                  isOutlined: isOutlined,
+                  constrainedMaxWidth: constrainedMaxWidth,
+                  status: status)
+    }
+
+    /// Creates a password input with a localized label, looking up the key in the given bundle.
+    ///
+    /// ```swift
+    ///     MISOPasswordInput(LocalizedStringKey("password_label"), bundle: Bundle.module, password: $password)
+    /// ```
+    ///
+    /// - Parameters:
+    ///    - key: A `LocalizedStringKey` used to look up the label in the given bundle
+    ///    - tableName: The name of the `.strings` file, or `nil` for the default
+    ///    - bundle: The bundle in which to look up the localized string. Defaults to `Bundle.main`.
+    ///    - password: The pasword to display and edit
+    ///    - isHiddenPassword: Flag to hide or show the password, By default set to `true`
+    ///    - placeholder: The text displayed when the password input is empty, by default is *nil*
+    ///    - prefix: Text placed before the user's input, by default is *nil*
+    ///    - lockIcon: When `true`, a lock icon is displayed, defaults to `false`
+    ///    - helperText: An  helper text in rich text
+    ///    - isOutlined: Controls the style of the pasword input, by default is *false*
+    ///    - constrainedMaxWidth: When `true`, the width is constrained, defaults to `false`
+    ///    - status: The current status of the password input, default set to *enabled*
+    public init(_ key: LocalizedStringKey,
+                tableName: String? = nil,
+                bundle: Bundle = .main,
+                password: Binding<String>,
+                isHiddenPassword: Binding<Bool> = .constant(true),
+                placeholder: String? = nil,
+                prefix: String? = nil,
+                lockIcon: Bool = false,
+                helperText: AttributedString,
+                isOutlined: Bool = false,
+                constrainedMaxWidth: Bool = false,
+                status: MISOTextInput.Status = .enabled)
+    {
+        self.init(label: key.resolved(tableName: tableName, bundle: bundle),
+                  password: password,
+                  isHiddenPassword: isHiddenPassword,
+                  placeholder: placeholder,
+                  prefix: prefix,
+                  lockIcon: lockIcon,
+                  helperText: helperText,
+                  isOutlined: isOutlined,
+                  constrainedMaxWidth: constrainedMaxWidth,
+                  status: status)
+    }
+
+    // swiftlint:enable function_default_parameter_at_end
+
+    // MARK: Body
+
+    public var body: some View {
+        switch helperText {
+        case let .raw(rawHelperText):
+            MISOTextInput(label: label,
+                          text: password,
+                          placeholder: placeholder,
+                          prefix: prefix,
+                          leadingImage: leadingIcon,
+                          trailingAction: trailingAction,
+                          helperText: rawHelperText,
+                          isOutlined: isOutlined,
+                          constrainedMaxWidth: constrainedMaxWidth,
+                          status: status)
+                .environment(\.textInputAsSecureField, isHiddenPassword)
+        case let .attributed(richHelperText):
+            MISOTextInput(label: label,
+                          text: password,
+                          placeholder: placeholder,
+                          prefix: prefix,
+                          leadingImage: leadingIcon,
+                          trailingAction: trailingAction,
+                          helperText: richHelperText,
+                          isOutlined: isOutlined,
+                          constrainedMaxWidth: constrainedMaxWidth,
+                          status: status)
+                .environment(\.textInputAsSecureField, isHiddenPassword)
+        default:
+            MISOTextInput(label: label,
+                          text: password,
+                          placeholder: placeholder,
+                          prefix: prefix,
+                          leadingImage: leadingIcon,
+                          trailingAction: trailingAction,
+                          helperText: nil,
+                          isOutlined: isOutlined,
+                          constrainedMaxWidth: constrainedMaxWidth,
+                          status: status)
+                .environment(\.textInputAsSecureField, isHiddenPassword)
+        }
+    }
+
+    // MARK: - Helpers
+
+    private var leadingIcon: MISOImage? {
+        // TODO: #997 - Should we add an accessibility label?
+        lockIcon ? MISOImage(asset: Image(decorative: "communication-security-and-safety-lock-closed", bundle: theme.resourcesBundle)) : nil
+    }
+
+    private var trailingAction: MISOTextInput.TrailingAction {
+        let iconName = isHiddenPassword ? "communication-accessibility-accessibility-vision" : "functional-settings-and-tools-accessibility-hide"
+        let actionHint = isHiddenPassword ? "core_passwordInput_showPassword_a11y" : "core_passwordInput_hidePassword_a11y"
+
+        return .init(image: MISOImage(asset: Image(decorative: iconName, bundle: theme.resourcesBundle)),
+                     actionHint: actionHint.localized())
+        {
+            isHiddenPassword.toggle()
+        }
+    }
+}
+#endif

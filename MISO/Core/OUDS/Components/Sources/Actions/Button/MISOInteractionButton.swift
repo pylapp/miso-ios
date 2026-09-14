@@ -1,0 +1,133 @@
+// Software: MISO iOS (fork of OUDS iOS)
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
+
+import SwiftUI
+
+// MARK: - Interaction Button
+
+/// ``MISOInteractionButton`` defines how a tappable component can be defined with several interaction states.
+/// Remark: If the *isReadOnly* flag is true the action on the button is dropped.
+///
+/// ## Code samples
+///
+/// ```swift
+/// struct MyTappableComponent: View {
+///
+///     let isReadOnly: Bool
+///
+///     var body: some View {
+///         MISOInteractionButton(isReadOnly: isReadOnly) {
+///             // Do something on tap
+///         } content: { interactionState in
+///             // Define your component and its style depending to the given MISOButtonInteractionState
+///         }
+///     }
+/// }
+/// ```
+///
+/// - Since: OUDS 2.3.0
+public struct MISOInteractionButton<Content>: View where Content: View {
+
+    // MARK: Properties
+
+    private let isReadOnly: Bool
+    private let action: () -> Void
+
+    @ViewBuilder private let content: (MISOButtonInteractionState) -> Content
+
+    // MARK: Initializer
+
+    /// - Parameters:
+    ///    - isReadOnly: Default set to `false`, defines if the component is in read only state or not
+    ///    - action: The action to trigger when the user taps the `MISOInteractionButton`. Won't be triggered if `isReadOnly` set to `true`.
+    ///    - content: A `ViewBuilder` to define the content of the `MISOInteractionButton`
+    public init(isReadOnly: Bool = false,
+                action: @escaping () -> Void,
+                @ViewBuilder content: @escaping (MISOButtonInteractionState) -> Content)
+    {
+        self.isReadOnly = isReadOnly
+        self.action = action
+        self.content = content
+    }
+
+    // MARK: Body
+
+    public var body: some View {
+        Button("") {
+            if !isReadOnly {
+                action()
+            }
+        }
+        .buttonStyle(MISOInteractionButtonStyle(isReadOnly: isReadOnly, content: content))
+    }
+}
+
+// MARK: - Interaction Button Style
+
+/// The SwiftUI `ButtonStyle` to compute the interaction state ``MISOButtonInteractionState`` and send it to
+/// the provided content builder.
+/// To compute this state, some elements are needed:
+/// - the `isHover` flag get from the `onHover` added on the `content`
+/// - the `isPressed` flag get from `ButtonStyle.Configuration`
+/// - the `isEnabled` flag get from the `@Environment`
+/// - the `isReadOnly` flag provided by the init function.
+///
+/// ## Code samples
+///
+/// ```swift
+/// struct MyButton<Content>: View where Content: View {
+///
+///     let isReadOnly: Bool
+///     let action: () -> Void
+///     @ViewBuilder let content: (MISOButtonInteractionState) -> Content
+///
+///     var body: some View {
+///         Button("") {
+///             if !isReadOnly {
+///                 action()
+///             }
+///         }
+///         // Will defined the interaction state for the button depending to the OS
+///         .buttonStyle(MISOInteractionButtonStyle(isReadOnly: isReadOnly, content: content))
+///     }
+/// }
+///
+/// // Then call
+/// MyButton(isReadOnly: isReadOnly) {
+///     // Toggle action
+/// } content: { interactionState in
+///     // Change the layout depending to the interaction state
+///     SomeComponentLayout(interactionState: interactionState)
+/// }
+/// ```
+///
+/// - Since: OUDS 2.3.0
+public struct MISOInteractionButtonStyle<Content>: ButtonStyle where Content: View {
+
+    // MARK: Properties
+
+    private let isReadOnly: Bool
+    @ViewBuilder private let content: (MISOButtonInteractionState) -> Content
+    @State private var isHover: Bool = false
+
+    @Environment(\.isEnabled) private var isEnabled
+
+    // MARK: Initializer
+
+    public init(isReadOnly: Bool = false, @ViewBuilder content: @escaping (MISOButtonInteractionState) -> Content) {
+        self.isReadOnly = isReadOnly
+        self.content = content
+    }
+
+    // MARK: Body
+
+    public func makeBody(configuration: Configuration) -> some View {
+        content(MISOButtonInteractionState(isEnabled: isEnabled, isHover: isHover, isPressed: configuration.isPressed, isReadOnly: isReadOnly))
+        #if !os(watchOS) && !os(tvOS)
+            .onHover { isHover in
+                self.isHover = isHover
+            }
+        #endif
+    }
+}

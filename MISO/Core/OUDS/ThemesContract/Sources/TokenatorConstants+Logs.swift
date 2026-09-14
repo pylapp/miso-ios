@@ -1,0 +1,55 @@
+// Software: MISO iOS (fork of OUDS iOS)
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
+
+import MISOFoundations
+
+extension MISOVersions {
+
+    /// Displays in standard output an information message about the tokens libraries versions in use
+    static func logTokensLibrairiesVersions() {
+        var versionsLog = "MISO iOS Libraries Versions:\n"
+        versionsLog += "- Core MISO: \(Self.themeCoreVersion)\n"
+        versionsLog += "- Core BlueCoat: \(Self.themeBlueCoatCoreVersion)\n"
+        versionsLog += "- Brand BlueCoat: \(Self.themeBlueCoatBrandVersion)\n"
+
+        ML.info(versionsLog)
+    }
+
+    /// Displays in standard output an informationmemssage about the versions of the components
+    static func logComponentsVersions() {
+        // NOTE: Keep components sorted
+        var versionsLog = "MISO iOS Components Versions:\n"
+        versionsLog += "- Alert message: \(Self.componentAlertMessageVersion)\n"
+        versionsLog += "- Badge Standard: \(Self.componentBadgeVersion)\n"
+        versionsLog += "- Badge Count: \(Self.componentBadgeCountVersion)\n"
+        versionsLog += "- Badge Icon: \(Self.componentBadgeIconVersion)\n"
+        versionsLog += "- Bullet List: \(Self.componentBulletListVersion)\n"
+        versionsLog += "- Button: \(Self.componentButtonVersion)\n"
+        versionsLog += "- Checkbox: \(Self.componentCheckboxVersion)\n"
+        versionsLog += "- Divider: \(Self.componentDividerVersion)\n"
+        versionsLog += "- Expand Link: \(Self.componentExpandLinkVersion)\n"
+        versionsLog += "- Filter Chip: \(Self.componentFilterChipVersion)\n"
+        versionsLog += "- Filter Chip Expand: \(Self.componentFilterChipExpandVersion)\n"
+        versionsLog += "- Inline Alert: \(Self.componentInlineAlertVersion)\n"
+        versionsLog += "- Input Tag: \(Self.componentInputTagVersion)\n"
+        versionsLog += "- Link: \(Self.componentLinkVersion)\n"
+        versionsLog += "- Tab Bar: \(Self.componentTabBarVersion)\n"
+        versionsLog += "- ToolBar Top: \(Self.componentToolBarTopVersion)\n"
+        versionsLog += "- ToolBar Bottom: \(Self.componentToolBarBottomVersion)\n"
+        versionsLog += "- Password Input: \(Self.componentPasswordInputVersion)\n"
+        versionsLog += "- Phone Number Input: \(Self.componentPhoneNumberInputVersion)\n"
+        versionsLog += "- Pin Code Input: \(Self.componentPinCodeInputVersion)\n"
+        versionsLog += "- Quantity Input: \(Self.componentQuantityInputVersion)\n"
+        versionsLog += "- Radio Button: \(Self.componentRadioButtonVersion)\n"
+        versionsLog += "- Select Input: \(Self.componentSelectInputVersion)\n"
+        versionsLog += "- Skeleton: \(Self.componentSkeletonVersion)\n"
+        versionsLog += "- Suggestion Chip: \(Self.componentSuggestionChipVersion)\n"
+        versionsLog += "- Switch: \(Self.componentSwitchVersion)\n"
+        versionsLog += "- Tag: \(Self.componentTagVersion)\n"
+        versionsLog += "- Text Area: \(Self.componentTextAreaVersion)\n"
+        versionsLog += "- Text Input: \(Self.componentTextInputVersion)\n"
+
+        ML.log(versionsLog)
+    }
+}

@@ -1,6 +1,6 @@
 ---
 name: miso-ios-guide-create-theme
-description: Use when the user wants to create a custom MISO theme or brand theme for an iOS app — covers subclassing an existing theme (e.g. WireframeTheme), building a theme from scratch on MISOTheme, mixing existing providers, local custom fonts (.ttf registration), and tuning.
+description: Use when the user wants to create a custom MISO theme or brand theme for an iOS app — covers subclassing an existing theme (e.g. BlueCoatTheme), building a theme from scratch on MISOTheme, mixing existing providers, local custom fonts (.ttf registration), and tuning.
 license: MIT
 ---
 
@@ -18,7 +18,7 @@ Before writing any code, ask the user these two questions:
 
 | Strategy | When to choose |
 |---|---|
-| **A — Subclass an existing theme (e.g. `WireframeTheme`)** *(recommended)* | An existing theme's assets are close enough; only some tokens differ from its defaults |
+| **A — Subclass an existing theme (e.g. `BlueCoatTheme`)** *(recommended)* | An existing theme's assets are close enough; only some tokens differ from its defaults |
 | **B — From scratch on `MISOTheme`** | Fully independent brand; all tokens are custom |
 | **C — Mix existing providers** | Compose providers from existing themes without creating a new subclass |
 
@@ -50,7 +50,7 @@ To get the full list of properties / tokens by protocols:
   - `TextInputComponentTokens` : https://ios.unified-design-system.orange.com/documentation/misoTokensComponent/TextInputComponentTokens
   - etc.
 
-> **Tip** : To see all properties / tokens of a provider, look in files `Values/SemanticTokens/` or `Values/ComponentTokens/` in the Wireframe theme from MISO iOS repository.
+> **Tip** : To see all properties / tokens of a provider, look in files `Values/SemanticTokens/` or `Values/ComponentTokens/` in the BlueCoat theme from MISO iOS repository.
 
 ---
 
@@ -59,7 +59,7 @@ To get the full list of properties / tokens by protocols:
 ```
 MISOTheme                    ← base "abstract" class (open)
     │
-    └── YourBaseTheme        ← an existing open theme (e.g. WireframeTheme, if made subclassable)
+    └── YourBaseTheme        ← an existing open theme (e.g. BlueCoatTheme, if made subclassable)
             │
             └── YourTheme    ← your app's custom theme (Strategy A)
 
@@ -68,7 +68,7 @@ MISOTheme
 ```
 
 > **Rule:** Check whether the theme you want to extend is declared `open` or `final`.
-> `WireframeTheme` is `final` in this repository, but its tokens providers can be reused (Strategy C),
+> `BlueCoatTheme` is `final` in this repository, but its tokens providers can be reused (Strategy C),
 > or you can declare your own `open` theme subclassable from `MISOTheme`.
 
 ---
@@ -78,58 +78,58 @@ MISOTheme
 ### 2.1 Import
 
 ```swift
-import MISOThemesWireframe
+import MISOThemesMISOBlueCoat
 // or the umbrella product that includes it:
-import MISOSwiftUIWireframe
+import MISOSwiftUIBlueCoat
 ```
 
 ### 2.2 Override only the providers you need
 
-Each provider inherits from a `WireframeThemeXxxProvider` class (or the equivalent for the theme you extend). Override `@objc open` properties.
+Each provider inherits from a `BlueCoatThemeXxxProvider` class (or the equivalent for the theme you extend). Override `@objc open` properties.
 
 **Semantic token providers available to override** (Layer 2 — generic tokens):
 
-| What to override | Wireframe base class to inherit |
+| What to override | BlueCoat base class to inherit |
 |---|---|
-| Borders (style / width / radius) | `WireframeThemeBorderSemanticTokensProvider` |
-| Colors (light + dark via `MultipleColorSemanticToken`) | `WireframeThemeColorSemanticTokensProvider` |
-| Color modes (for `MISOColoredSurface`) | `WireframeThemeColorModeSemanticTokensProvider` |
-| Color charts | `WireframeThemeColorChartSemanticTokensProvider` |
-| Color decorative | `WireframeThemeColorDecorativeSemanticTokensProvider` |
-| Effects | `WireframeThemeEffectSemanticTokensProvider` |
-| Elevations / shadows | `WireframeThemeElevationSemanticTokensProvider` |
-| Typography / fonts | `WireframeThemeFontSemanticTokensProvider` |
-| Grids | `WireframeThemeGridSemanticTokensProvider` |
-| Opacities | `WireframeThemeOpacitySemanticTokensProvider` |
-| Dimensions (base scale) | `WireframeThemeDimensionSemanticTokensProvider` |
-| Sizes (icon, component) | `WireframeThemeSizeSemanticTokensProvider` |
-| Spaces (fixed, scaled) | `WireframeThemeSpaceSemanticTokensProvider` |
+| Borders (style / width / radius) | `BlueCoatThemeBorderSemanticTokensProvider` |
+| Colors (light + dark via `MultipleColorSemanticToken`) | `BlueCoatThemeColorSemanticTokensProvider` |
+| Color modes (for `MISOColoredSurface`) | `BlueCoatThemeColorModeSemanticTokensProvider` |
+| Color charts | `BlueCoatThemeColorChartSemanticTokensProvider` |
+| Color decorative | `BlueCoatThemeColorDecorativeSemanticTokensProvider` |
+| Effects | `BlueCoatThemeEffectSemanticTokensProvider` |
+| Elevations / shadows | `BlueCoatThemeElevationSemanticTokensProvider` |
+| Typography / fonts | `BlueCoatThemeFontSemanticTokensProvider` |
+| Grids | `BlueCoatThemeGridSemanticTokensProvider` |
+| Opacities | `BlueCoatThemeOpacitySemanticTokensProvider` |
+| Dimensions (base scale) | `BlueCoatThemeDimensionSemanticTokensProvider` |
+| Sizes (icon, component) | `BlueCoatThemeSizeSemanticTokensProvider` |
+| Spaces (fixed, scaled) | `BlueCoatThemeSpaceSemanticTokensProvider` |
 
 **Component token providers available to override** (Layer 3 — component-specific tokens):
 
-| Component | Wireframe base class |
+| Component | BlueCoat base class |
 |---|---|
-| Alert messages | `WireframeThemeAlertComponentTokensProvider` |
-| Badge | `WireframeThemeBadgeComponentTokensProvider` |
-| Bar (tab bar / toolbar) | `WireframeThemeBarComponentTokensProvider` |
-| Bullet list | `WireframeThemeBulletListComponentTokensProvider` |
-| Button | `WireframeThemeButtonComponentTokensProvider` |
-| Checkbox | `WireframeThemeCheckboxComponentTokensProvider` |
-| Chip | `WireframeThemeChipComponentTokensProvider` |
-| Divider | `WireframeThemeDividerComponentTokensProvider` |
-| Icon | `WireframeThemeIconComponentTokensProvider` |
-| Link | `WireframeThemeLinkComponentTokensProvider` |
-| List item | `WireframeThemeListItemComponentTokensProvider` |
-| Pin code input | `WireframeThemePinCodeInputComponentTokensProvider` |
-| Quantity input | `WireframeThemeQuantityInputComponentTokensProvider` |
-| Radio button | `WireframeThemeRadioButtonComponentTokensProvider` |
-| Select input | `WireframeThemeSelectInputComponentTokensProvider` |
-| Skeleton | `WireframeThemeSkeletonComponentTokensProvider` |
-| Switch | `WireframeThemeSwitchComponentTokensProvider` |
-| Tag | `WireframeThemeTagComponentTokensProvider` |
-| Input tag | `WireframeThemeInputTagComponentTokensProvider` |
-| Text area | `WireframeThemeTextAreaComponentTokensProvider` |
-| Text input | `WireframeThemeTextInputComponentTokensProvider` |
+| Alert messages | `BlueCoatThemeAlertComponentTokensProvider` |
+| Badge | `BlueCoatThemeBadgeComponentTokensProvider` |
+| Bar (tab bar / toolbar) | `BlueCoatThemeBarComponentTokensProvider` |
+| Bullet list | `BlueCoatThemeBulletListComponentTokensProvider` |
+| Button | `BlueCoatThemeButtonComponentTokensProvider` |
+| Checkbox | `BlueCoatThemeCheckboxComponentTokensProvider` |
+| Chip | `BlueCoatThemeChipComponentTokensProvider` |
+| Divider | `BlueCoatThemeDividerComponentTokensProvider` |
+| Icon | `BlueCoatThemeIconComponentTokensProvider` |
+| Link | `BlueCoatThemeLinkComponentTokensProvider` |
+| List item | `BlueCoatThemeListItemComponentTokensProvider` |
+| Pin code input | `BlueCoatThemePinCodeInputComponentTokensProvider` |
+| Quantity input | `BlueCoatThemeQuantityInputComponentTokensProvider` |
+| Radio button | `BlueCoatThemeRadioButtonComponentTokensProvider` |
+| Select input | `BlueCoatThemeSelectInputComponentTokensProvider` |
+| Skeleton | `BlueCoatThemeSkeletonComponentTokensProvider` |
+| Switch | `BlueCoatThemeSwitchComponentTokensProvider` |
+| Tag | `BlueCoatThemeTagComponentTokensProvider` |
+| Input tag | `BlueCoatThemeInputTagComponentTokensProvider` |
+| Text area | `BlueCoatThemeTextAreaComponentTokensProvider` |
+| Text input | `BlueCoatThemeTextInputComponentTokensProvider` |
 
 Etc.
 
@@ -139,11 +139,11 @@ Etc.
 import MISOTokensRaw
 
 // Colors
-class YourThemeColorProvider: WireframeThemeColorSemanticTokensProvider {
+class YourThemeColorProvider: BlueCoatThemeColorSemanticTokensProvider {
     override var bgSecondary: MultipleColorSemanticToken {
         MultipleColorSemanticToken(
             light: ColorRawTokens.colorDecorativeAmber500,
-            dark:  WireframeBrandColorRawTokens.royalBlue300)
+            dark:  BlueCoatBrandColorRawTokens.royalBlue300)
     }
     override var actionEnabled: MultipleColorSemanticToken {
         MultipleColorSemanticToken(
@@ -153,25 +153,25 @@ class YourThemeColorProvider: WireframeThemeColorSemanticTokensProvider {
 }
 
 // Borders
-class YourThemeBorderProvider: WireframeThemeBorderSemanticTokensProvider {
+class YourThemeBorderProvider: BlueCoatThemeBorderSemanticTokensProvider {
     override var styleDefault: BorderStyleSemanticToken { BorderRawTokens.styleDashed }
     override var radiusLarge:  BorderRadiusSemanticToken { BorderRawTokens.radius800 }
 }
 
 // Elevations
-class YourThemeElevationProvider: WireframeThemeElevationSemanticTokensProvider {
+class YourThemeElevationProvider: BlueCoatThemeElevationSemanticTokensProvider {
     override var stickyEmphasized: ElevationCompositeSemanticToken {
         ElevationCompositeSemanticToken(ElevationRawTokens.bottom_4_600)
     }
 }
 
 // Opacities
-class YourThemeOpacityProvider: WireframeThemeOpacitySemanticTokensProvider {
+class YourThemeOpacityProvider: BlueCoatThemeOpacitySemanticTokensProvider {
     override var strong: OpacitySemanticToken { OpacityRawTokens._920 }
 }
 
 // Spaces
-class YourThemeSpaceProvider: WireframeThemeSpaceSemanticTokensProvider {
+class YourThemeSpaceProvider: BlueCoatThemeSpaceSemanticTokensProvider {
     override var fixedMedium: SpaceSemanticToken { DimensionRawTokens._400 }
     override var scaledSmall: MultipleSpaceSemanticToken {
         MultipleSpaceSemanticToken(compact: fixed5xl, regular: fixed5xl)
@@ -179,19 +179,19 @@ class YourThemeSpaceProvider: WireframeThemeSpaceSemanticTokensProvider {
 }
 
 // Sizes
-class YourThemeSizeProvider: WireframeThemeSizeSemanticTokensProvider {
+class YourThemeSizeProvider: BlueCoatThemeSizeSemanticTokensProvider {
     override var iconDecorative2xl: SizeSemanticToken { DimensionRawTokens._300 }
 }
 
 // Grids
-class YourThemeGridProvider: WireframeThemeGridSemanticTokensProvider {
+class YourThemeGridProvider: BlueCoatThemeGridSemanticTokensProvider {
     override var extraCompactColumnGap: GridSemanticToken { GridRawTokens.columnGap200 }
     override var compactColumnGap:      GridSemanticToken { GridRawTokens.columnGap200 }
     override var regularColumnGap:      GridSemanticToken { GridRawTokens.columnGap200 }
 }
 
 // Font (typography scale)
-class YourThemeFontProvider: WireframeThemeFontSemanticTokensProvider {
+class YourThemeFontProvider: BlueCoatThemeFontSemanticTokensProvider {
     override var displayLarge: MultipleFontCompositeSemanticToken {
         MultipleFontCompositeSemanticToken(FontCompositeSemanticToken(
             size:          sizeDisplayLargeMobile,
@@ -224,7 +224,7 @@ class YourTheme: MISOTheme {
             colors:  colors,
             borders: borders,
             fonts:   fonts,
-            // Leave unspecified parameters as nil → base theme's defaults are used when WireframeTheme is used as super class.
+            // Leave unspecified parameters as nil → base theme's defaults are used when BlueCoatTheme is used as super class.
             name:    Self.name,
             tuning:  Tuning.default)  // see §5 for tuning options
         )
@@ -240,7 +240,7 @@ class YourTheme: MISOTheme {
 
 > **Warning:** This requires implementing all providers — potentially hundreds of `@objc open`
 > property overrides. Use only for fully independent brands.
-> See `WireframeTheme` in the MISO source as the canonical reference.
+> See `BlueCoatTheme` in the MISO source as the canonical reference.
 
 ### 3.1 Import
 
@@ -308,7 +308,7 @@ Respect dependency order — some providers take others as constructor arguments
 | `textArea` | `AllTextAreaComponentTokensProvider` |
 | `textInput` | `AllTextInputComponentTokensProvider` |
 
-See init of `WireframeTheme` or `MISOTheme` for fill list.
+See init of `BlueCoatTheme` or `MISOTheme` for fill list.
 
 ### 3.4 Theme class skeleton
 
@@ -417,37 +417,37 @@ public final class YourTheme: MISOTheme, @unchecked Sendable {
 
 ## 4. Strategy C — Mix existing providers
 
-No new subclass needed. Instantiate providers from existing themes and pass them directly to `WireframeTheme` or `MISOTheme`:
+No new subclass needed. Instantiate providers from existing themes and pass them directly to `BlueCoatTheme` or `MISOTheme`:
 
 ```swift
-import MISOThemesWireframe
+import MISOThemesMISOBlueCoat
 
-// Reuse most Wireframe providers, only replace colors:
-let dimensions = WireframeThemeDimensionSemanticTokensProvider()
-let borders    = WireframeThemeBorderSemanticTokensProvider()
+// Reuse most BlueCoat providers, only replace colors:
+let dimensions = BlueCoatThemeDimensionSemanticTokensProvider()
+let borders    = BlueCoatThemeBorderSemanticTokensProvider()
 let colors     = YourOwnColorSemanticTokensProvider()  // custom
-let sizes      = WireframeThemeSizeSemanticTokensProvider(dimensions: dimensions)
-let spaces     = WireframeThemeSpaceSemanticTokensProvider(dimensions: dimensions)
+let sizes      = BlueCoatThemeSizeSemanticTokensProvider(dimensions: dimensions)
+let spaces     = BlueCoatThemeSpaceSemanticTokensProvider(dimensions: dimensions)
 
 // Component providers that depend on colors must receive the custom one:
-let button = WireframeThemeButtonComponentTokensProvider(
+let button = BlueCoatThemeButtonComponentTokensProvider(
                  sizes: sizes, borders: borders, colors: colors, spaces: spaces)
 
 // Inject directly — no subclass required:
-let theme = WireframeTheme(colors: colors, button: button)
+let theme = BlueCoatTheme(colors: colors, button: button)
 ```
 
 Or wrap in a named class for reuse across the app:
 
 ```swift
-class YourTheme: WireframeTheme {
+class YourTheme: BlueCoatTheme {
     override init() {
-        let dimensions = WireframeThemeDimensionSemanticTokensProvider()
-        let borders    = WireframeThemeBorderSemanticTokensProvider()
+        let dimensions = BlueCoatThemeDimensionSemanticTokensProvider()
+        let borders    = BlueCoatThemeBorderSemanticTokensProvider()
         let colors     = YourOwnColorSemanticTokensProvider()
-        let sizes      = WireframeThemeSizeSemanticTokensProvider(dimensions: dimensions)
-        let spaces     = WireframeThemeSpaceSemanticTokensProvider(dimensions: dimensions)
-        let button     = WireframeThemeButtonComponentTokensProvider(
+        let sizes      = BlueCoatThemeSizeSemanticTokensProvider(dimensions: dimensions)
+        let spaces     = BlueCoatThemeSpaceSemanticTokensProvider(dimensions: dimensions)
+        let button     = BlueCoatThemeButtonComponentTokensProvider(
                              sizes: sizes, borders: borders, colors: colors, spaces: spaces)
         super.init(colors: colors, button: button)
     }
@@ -458,7 +458,7 @@ class YourTheme: WireframeTheme {
 
 ## 5. Tuning & Flags
 
-Tuning controls brand-level UI decisions for corner rounding. Only `WireframeTheme` (and its subclasses) support tuning.
+Tuning controls brand-level UI decisions for corner rounding. Only `BlueCoatTheme` (and its subclasses) support tuning.
 
 ```swift
 // Custom tuning:
@@ -589,7 +589,7 @@ Then pass `YourBrandFontRawTokens.familyDefault` as `fontFamily:` in `super.init
 ## 7. Inject the theme in your app
 
 ```swift
-import MISOSwiftUI  // or MISOSwiftUIWireframe if subclassing WireframeTheme
+import MISOSwiftUI  // or MISOSwiftUIBlueCoat if subclassing BlueCoatTheme
 
 @main
 struct YourApp: App {
@@ -632,14 +632,14 @@ Understanding the three token layers is essential for creating custom themes:
 │  SEMANTIC TOKENS (Layer 2)                                      │
 │  Meaningful names tied to usage context; reference raw tokens  │
 │  Example: theme.colors.contentPrimary → uses ColorRawToken     │
-│  Provided by: WireframeThemeXxxSemanticTokensProvider             │
+│  Provided by: BlueCoatThemeXxxSemanticTokensProvider             │
 └─────────────────────────────────────────────────────────────────┘
                               ↓ references
 ┌─────────────────────────────────────────────────────────────────┐
 │  COMPONENT TOKENS (Layer 3)                                     │
 │  Scoped to specific components; reference semantic tokens      │
 │  Example: theme.button.colorBackgroundDefault                  │
-│  Provided by: WireframeThemeXxxComponentTokensProvider            │
+│  Provided by: BlueCoatThemeXxxComponentTokensProvider            │
 └─────────────────────────────────────────────────────────────────┘
 ```
 

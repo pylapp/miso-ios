@@ -76,7 +76,7 @@ You can choose the _dependency rule_ you want. Keep in mind MISO iOS releases ar
 ### Add the libraries
 
 In your Xcode _targets_, add the libraries you need. Everything is splitted so as to let users choose the content to embed they want.
-The `MISOSwiftUI` library embeds everything except themes which are not *Wireframe* basic root theme, but you may prefer instead tailor your imports.
+The `MISOSwiftUI` library embeds everything except themes which are not *BlueCoat* basic root theme, but you may prefer instead tailor your imports.
 
 ### Instanciate and inject theme
 
@@ -134,13 +134,11 @@ As such:
 
 ## ⚖️ Copyright and license
 
-
 > [!IMPORTANT]
 > This project is a fork from [Orange-OpenSource/ouds-ios](https://github.com/Orange-OpenSource/ouds-ios),
-> but without Orange and Sosh brand themes,
-> with a renamed API to not use the "OUDS" acronym,
-> and with an opened Wireframe theme.
-> The architecture is the same as OUDS v3.0.0.
+> but with a lot of refactoring to make the product ligther and not locked
+> by propriertary or branded assets.
+> MISO does not replace OUDS, and does not belong to Orange Group.
 
 Code released under the [MIT License](https://github.com/pylapp/miso-ios/blob/main/LICENSE).
 

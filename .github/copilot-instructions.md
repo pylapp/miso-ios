@@ -19,9 +19,9 @@ Here are the modules of the Swift Package, i.e. set of features with external de
 
 Here the the components provided by the Swift Package like buttons, switchs, checkboxes, chips, tags, links, etc.
 
-#### Core / Themes / Wireframe
+#### Core / Themes / BlueCoat
 
-Here is the definition of the Wireframe theme for prototyping and mockups.
+Here is the definition of the BlueCoat theme for prototyping and mockups.
 
 #### Core / ThemesContract
 
@@ -289,7 +289,7 @@ bundle exec fastlane update_sbom
 
 When adding or modifying components, you MUST add illustrations in both:
 - Component documentation files (public API docs)
-- Theme documentation files (Wireframe)
+- Theme documentation files (BlueCoat)
 
 ### 10.1 Component documentation files
 
@@ -299,13 +299,13 @@ Each component MUST have an illustration with `@TabNavigator` for all themes:
 
 ```markdown
 @TabNavigator {
-    @Tab("Wireframe") {
-        ![A component in light and dark modes with Wireframe theme](component_name_Wireframe)
+    @Tab("BlueCoat") {
+        ![A component in light and dark modes with BlueCoat theme](component_name_BlueCoat)
     }
 }
 ```
 
-- Use local references (not URLs): `component_name_Wireframe`
+- Use local references (not URLs): `component_name_BlueCoat`
 - For components with variants (e.g., Badge standard/count/icon), use nested tabs
 
 ### 10.2 Theme documentation files
@@ -316,8 +316,8 @@ Each component MUST have an illustration with `@TabNavigator` using full URLs:
 
 ```markdown
 @TabNavigator {
-    @Tab("Wireframe") {
-        ![A component in light and dark modes with Wireframe theme](https://some.url/component_name_Wireframe.png)
+    @Tab("BlueCoat") {
+        ![A component in light and dark modes with BlueCoat theme](https://some.url/component_name_BlueCoat.png)
     }
 }
 ```
@@ -345,8 +345,8 @@ For components with multiple variants (e.g., Badge, ProgressIndicator, ListItem)
 @TabNavigator {
     @Tab("Standard") {
         @TabNavigator {
-            @Tab("Wireframe") {
-                ![Badge Standard](component_badge_Wireframe)
+            @Tab("BlueCoat") {
+                ![Badge Standard](component_badge_BlueCoat)
             }
             ...
         }

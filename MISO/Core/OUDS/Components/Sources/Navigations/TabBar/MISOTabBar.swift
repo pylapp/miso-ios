@@ -1,0 +1,359 @@
+// Software: MISO iOS (fork of OUDS iOS)
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
+
+import MISOFoundations
+import SwiftUI
+
+/// The Tab bar is a system navigation component with a position which can vary depending to the OS.
+/// The tab bar can be found at the bottom of the screen for iOS. It can vary for iPadOS.
+/// It allows users to switch between the sections of an app.
+/// Each tab can be represented by a label, optionally paired with an icon, and maintains persistent visibility across top-level destinations.
+///
+/// ## Appearances
+///
+/// iOS 26 brings Liquid Glass, the new Apple look and feel which will prevent developers to define specific styles for some critical components like bars.
+/// Because today the MISO tab bar relies on native component and is not designed from scratch, some elements will look different between iOS 26 and older versions:
+/// - background color of tab bar can be changed for iOS lower than 26
+/// - background color of tab bar does not change since iOS 26
+/// - normal / unselected tab item color can be changed for both image and text only for iOS lower than 26
+/// - with iOS 26 no token of color are applied on unselected / normal tab item because only the image will be changed
+/// and not the text making theme not readable in dark color scheme
+///
+/// In addition the badges colors will be the same and cannot be changed (except with token definition). These particular badges do not rely on ``MISOBadgeStandard``
+/// or ``MISOBadgeCount``, the native API is used instead.
+///
+/// Because Liquid Glass is available since iOS 26, the tab bar will be liquified / glassified since this OS version, not before.
+/// However if an app is built with Xcode 26 and the flag *UIDesignRequiresCompatibility* set to *YES*, then Liquid Glass won't be applied but the alternative layout.
+/// Nevertheless with Xcode 27 and for iOS 27, Liquid Glass will be always applied, whatever the value of the flag is.
+///
+/// If you use SF Symbols for images, if they exist their *fill* variant will be automatically used in the tab bar (native behaviour).
+///
+/// ## Platform considerations
+///
+/// - This component is tailored for iOS
+/// - On iPadOS the tabs do not apply the fonts since iPadOS 18
+/// - Because macOS does not support UIKit and because UIKIt is used to define the style of the tab bar, there is no styling of the tab bar for macOS
+/// - visionOS with its specific UI does not apply colors on tab bars and things are glasssified
+/// - The component is not available for watchOS
+/// - The component is not available for tvOS
+///
+/// ## Guidelines
+///
+/// MISO guidelines recommends to:
+/// - limit when possible the number of items to 5
+/// - use both images and texts in tab bar items
+/// - use badges only when needed to avoid to have heavy tab bar
+/// - be sure the selected information is not only defined by the color of the tab; you may need to change the shape or the fill of the image
+/// - if a badge must be displayed, prefer short texts. If the text is a decimal value greater than 99, prefer display "+99"
+/// - if decorative images are used for tab bar item, apply *template* rendering mode on it to apply color on tabs
+///
+/// ## Accessibility considerations
+///
+/// - If your tabs embedded in the `MISOTabBar` do not contain texts but only images, add an accessibility label introducing the journey for this tab
+/// - If your tabs embedded in the `MISOTabBar` display a badge (empty or with text), vocalize it in your tab to let users know what it is (unread messages, new things, etc)
+/// by using accessibiltiy value
+///
+/// ```swift
+///     MISOTabBar {
+///         SomeView()
+///             .tabItem {
+///                 Label {
+///                     Text("Emails") // The text is vocalized first
+///                         .accessibilityValue("5 unread emails") // A value vocalized after the text
+///             } icon: {
+///                 Image(systemName: "mail").accessibilityHidden(true)
+///             }
+///         }
+///         .badge(5) // The value you give to the badge
+///     }
+///
+/// ```
+///
+/// ## Selection of tabs
+///
+/// For iOS lower than 26, a selected tab indicator is displayed in the `MISOTabBar` ; the `count` parameter must be defined (to the number of tabs in the component),
+/// and if the `selectedTab` binding value is equal to a given tag associated to a tab item.
+/// Otherwise the indicator won't appear; these parameters are mandatory to compute the location of the indicator.
+/// This rule is only applied if selected tab indicator must be displayed.
+/// When the user taps a tab, the `selectedTab` binding is updated automatically, keeping the parent view in sync.
+///
+/// ## Technical considerations
+///
+/// In order to improve the Developer eXperience the current `MISOTabBar` implementation lets users define their own tab items.
+/// MISO applies only appearances and styles on elements to prevent users to define raw data to assign to the component before being rendered like a *picker*.
+/// Thus users will need to add their own accessiiblity label if badges are used or also apply *template* rendering mode on images if needed.
+/// Thus it will be also possible to use Liquid Glass new API with animations and items stacking.
+///
+/// You must use in your tab bar items images with **a size of 26 x 26**, otherwise rendering could be unaligned with Figma specifications
+///
+/// Because the component cannot compute the ideal width of the selected tab indicator (for iOS before 26 and iPadOS before 18), ideal width based on the tab bar item content,
+/// this indicator is not displayed for iOS lower than 26 in landscape mode and iPadOS.
+///
+/// If your app uses several universes with nested views, containing their own navigation and tab bars, prefer `hideTabBar()` from `View` to hide the tab bar
+/// (`TabView` and overlay items) with Liquid Glass is disabled or not available, or also `tabBar(isHidden:)`.
+///
+/// ## Code samples
+///
+/// ```swift
+///     // Use the MISO tab bar to wrap tab bar items and associated views
+///     // Item tagged 0 will be selected first, 3 tabs are embedded.
+///     // Image with size of 26 x 26
+///     @State private var selectedTab = 0
+///
+///     MISOTabBar(selectedTab: $selectedTab, count: 3) {
+///
+///         // Add the views with the SwiftUI tab item and labels
+///         // No need to define colors, everything is done inside MISOTabBar
+///         SomeView()
+///             .tabItem {
+///                 Label("Label 1", image: "image_1")
+///             }
+///             .tag(0) // Must match the selectedTab binding value
+///         OtherView()
+///             .tabItem {
+///                 Label {
+///                     Text("Label 2")
+///                 } icon: {
+///                     Image(decorative: "image_2")
+///                         .renderingMode(.template) // Mandatory to apply color on selected item
+///                 }
+///              }
+///             .tag(1) // Must be used for the selectedTab binding
+///         LastView()
+///             .tabItem {
+///                 Label("Label 3", image: "image_3")
+///             }
+///             .tag(2) // Must be used for the selectedTab binding
+///     }
+/// ```
+///
+/// ## Alternative components
+///
+/// If you want to use SwiftUI `Tab` View with or without rules, use instead `MISOTabView`.
+/// If you target apps with Liquid Glass enabled and need `Tab` or rules, use instead `MISOLiquidGlassTabView`.
+///
+/// ## Design documentation
+///
+/// [unified-design-system.orange.com](https://r.orange.fr/r/S-miso-doc-ios-tab-bar)
+///
+/// ## Themes rendering
+///
+/// ### Liquid Glass
+///
+/// #### BlueCoat
+///
+/// ![A  tab bar component in light mode with Liquid Glass effect and BlueCoat theme](component_tabBar_LiquidGlass_BlueCoat_light)
+/// ![A  tab bar component in dark mode with Liquid Glass effect and BlueCoat theme](component_tabBar_LiquidGlass_BlueCoat_dark)
+///
+/// ### Without Liquid Glass
+///
+/// #### BlueCoat
+///
+/// ![A  tab bar component in light mode without Liquid Glass effect and BlueCoat theme](component_tabBar_BlueCoat_light)
+/// ![A  tab bar component in dark mode without Liquid Glass effect and BlueCoat theme](component_tabBar_BlueCoat_dark)
+///
+/// - Version: 1.0.0 (Figma component design version)
+/// - Since: OUDS 1.0.0
+@available(iOS 15, macOS 13, visionOS 1, *)
+public struct MISOTabBar<Content: View>: View {
+
+    // MARK: Properties
+
+    /// The current number of tabs in the `MISOTabBar` to compute the selected tab indicator for iOS without Liquid Glass
+    private let tabCount: Int
+
+    /// Binding to the currently selected tab index.
+    /// When the user selects a tab, this binding is updated so the parent view can react.
+    /// When the parent changes this binding, the displayed selected tab updates accordingly.
+    @Binding private var selectedTab: Int
+
+    /// Contains the tab bar items
+    @ViewBuilder private let content: () -> Content
+
+    /// Track orientation changes to trigger view refresh
+    @State private var isLandscape: Bool
+
+    #if os(iOS)
+    /// Single source of truth for tab bar visibility.
+    /// Updated via `TabBarHiddenPreferenceKey` posted by child views using `.hideTabBar()`.
+    /// Passed down as a `@Binding` to overlay views (`SelectedTabIndicator`, `TabBarTopDivider`)
+    /// so they never need to call `findTabBar()` themselves to check `isHidden`.
+    @State private var isTabBarHidden: Bool = false
+    #endif
+
+    @Environment(\.forceMISOLegacyLayout) private var forceMISOLegacyLayout
+    @Environment(\.isLiquidGlassDisabled) private var isLiquidGlassDisabled
+
+    // MARK: Initializers
+
+    // NOTE: No use of #if os(iOS) to let MISO maintainers macOS computers compute the documentation
+    /// Defines the tab bar component with given tab bar items and a two-way binding to the selected tab index.
+    /// Number of tabs and selected tab are needed to compute the selected tab indicator for iOS lower than 26.
+    /// If you target iOS 26+ or other platform, prefer instead `MISOTabBar(content:)`.
+    ///
+    /// The `selectedTab` binding is updated whenever the user taps a tab item, allowing the parent
+    /// view to observe or drive tab selection programmatically.
+    ///
+    /// ```swift
+    ///     @State private var selectedTab = 0
+    ///
+    ///     MISOTabBar(selectedTab: $selectedTab, count: 2) {
+    ///         SomeView()
+    ///             .tabItem {
+    ///                 Label("Label 1", image: "some-image")
+    ///              }
+    ///              .tag(0)
+    ///         OtherView()
+    ///             .tabItem {
+    ///                 Label("Label 2", image: "some-image")
+    ///              }
+    ///              .tag(1)
+    ///     }
+    /// ```
+    ///
+    /// - Parameters:
+    ///    - selectedTab: A binding to the 0-based index of the currently selected tab, associated to a *tag* on a *tab bar item*.
+    ///    Updated when the user selects a tab. Must be positive and lower than `count`.
+    ///    - count: The current number of tabs hosted in the tab bar, must be a positive non-null integer
+    ///    - content: The list of items to add in the tab bar
+    public init(selectedTab: Binding<Int>,
+                count: UInt8,
+                @ViewBuilder content: @escaping () -> Content)
+    {
+        if selectedTab.wrappedValue < 0 || selectedTab.wrappedValue >= count {
+            ML.warning("The selected tab binding for the MISOTabBar does not match the count of tabs")
+        }
+        _selectedTab = selectedTab
+        tabCount = Int(count)
+        self.content = content
+        _isLandscape = State(initialValue: Self.isInLandscapeViewport())
+    }
+
+    // NOTE: No use of #if os(iOS) to let MISO maintainers macOS computers compute the documentation
+    /// Defines the tab bar component with given tab bar items.
+    /// If you target iOS lower than 26, prefer instead `MISOTabBar(selectedTab:count:content:)`
+    ///
+    /// ```swift
+    ///     MISOTabBar {
+    ///         SomeView()
+    ///             .tabItem {
+    ///                 Label("Label 1", image: "some-image")
+    ///              }
+    ///         OtherView()
+    ///             .tabItem {
+    ///                 Label("Label 2", image: "some-image")
+    ///              }
+    ///     }
+    /// ```
+    ///
+    /// - Parameter content: The views to add in the tab bar
+    @available(iOS 26, *)
+    public init(@ViewBuilder content: @escaping () -> Content) {
+        _selectedTab = .constant(0)
+        tabCount = 0
+        self.content = content
+        _isLandscape = State(initialValue: false)
+    }
+
+    // MARK: Body
+
+    /// Uses a native SwiftUI `TabView` populated with the given content where *tab item* elements are defined.
+    /// Rendering wil change depending to OS version, with a top divider and a selected tab indicator for legacy layouts.
+    public var body: some View {
+        #if os(iOS)
+        // Without Liquid Glass, an indicator for the tab bar is mandatory for iPhones in portrait mode only,
+        // not for iPhone in landscape mode nor iPads (design requirements).
+        // With Xcode 26.0 it was mandatory to manage these 2 cases.
+        // But with Xcode 26.1 and 26.2, the old implementation was broken and add cycle in attributes graph
+        // because of the ZStack, its conditions and the multiple use of tab views.
+        // Such cycle broke view hierachy, UI tests and had side effects with toolBar buttons.
+        // Now it seems for iOS 26+ this code is not used and the tab bar is still well computed.
+        // `DeviceModifier` is intentionally applied at the `MISOTabBar` level so that
+        // device-related environment values (such as `iPhoneInUse`) are available only
+        // within the TabBar view hierarchy (e.g. `SelectedTabIndicator`, `TabBarTopDivider`).
+        ZStack(alignment: .bottom) {
+
+            // NOTE: Do not understand why, but if we do not have these SelectedTabIndicator TWICE
+            // the indicator will be never disabled if Liquid Glass unavailable or disabled
+            // for iOS 26+ with Liquid Glass disabled and Xcode 26.4.1
+            // (ノಠ益ಠ)ノ彡┻━┻
+            SelectedTabIndicator(selected: $selectedTab, count: tabCount, isTabBarHidden: $isTabBarHidden)
+                .opacity(shouldShowTabIndicator ? 1 : 0)
+                .ignoresSafeArea(.keyboard, edges: .bottom)
+
+            TabView(selection: $selectedTab) {
+                content()
+            }
+            .modifier(MISOTabBarViewModifier())
+
+            SelectedTabIndicator(selected: $selectedTab, count: tabCount, isTabBarHidden: $isTabBarHidden)
+                .opacity(shouldShowTabIndicator ? 1 : 0)
+                .ignoresSafeArea(.keyboard, edges: .bottom)
+
+            TabBarTopDivider(isTabBarHidden: $isTabBarHidden)
+                .opacity(hasLegacyLayout ? 1 : 0)
+                .ignoresSafeArea(.keyboard, edges: .bottom)
+        }
+        .onAppear {
+            isLandscape = Self.isInLandscapeViewport()
+        }
+        // React to child views calling `.hideTabBar()`, which posts `TabBarHiddenPreferenceKey`.
+        // SwiftUI PreferenceKey is the only reliable mechanism here: `.toolbar(.hidden, for: .tabBar)`
+        // does not change any observable UIKit property on UITabBar (isHidden, alpha, frame all stay
+        // unchanged), making KVO, polling and GeometryReader all blind to the visibility change.
+        // When the child view disappears, SwiftUI resets the preference to its defaultValue (false),
+        // so the overlays reappear automatically without any additional handling.
+        .onPreferenceChange(TabBarHiddenPreferenceKey.self) { hidden in
+            isTabBarHidden = hidden
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+            DispatchQueue.main.asyncAfter(deadline: .now() + SelectedTabIndicator.asyncDelay) {
+                isLandscape = Self.isInLandscapeViewport()
+            }
+        }
+        .modifier(DeviceModifier())
+        #else // visionOS, macOS
+        TabView {
+            content()
+        }
+        #endif
+    }
+
+    // MARK: - Helpers
+
+    /// Determines if the selected tab indicator should be shown, i.e. if iOS lower than 26 in portrait mode.
+    private var shouldShowTabIndicator: Bool {
+        #if canImport(UIKit) && !os(watchOS)
+        if forceMISOLegacyLayout { return true }
+        guard isLiquidGlassDisabled else { return false }
+        guard UIDevice.current.userInterfaceIdiom == .phone else { return false }
+        return !isLandscape
+        #else
+        return false
+        #endif
+    }
+
+    /// - Returns Bool: true if iOS lower than 26.0 for iPhone or iOS lower than 18.0 for iPad, false otherwise
+    private var hasLegacyLayout: Bool {
+        #if canImport(UIKit) && !os(watchOS)
+        if forceMISOLegacyLayout { return true }
+        // iOS < 26
+        if isLiquidGlassDisabled {
+            // iPhone
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                return true
+                // iPad with iPadOS < 18
+            } else if UIDevice.current.userInterfaceIdiom == .pad {
+                if #unavailable(iOS 18.0) {
+                    return true
+                }
+            }
+        }
+        return false
+        #else
+        // iOS 26+ / Liquid Glass
+        return false
+        #endif
+    }
+}

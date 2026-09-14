@@ -1,0 +1,131 @@
+// Software: MISO iOS (fork of OUDS iOS)
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
+
+#if !os(watchOS) && !os(tvOS)
+import MISOTokensSemantic
+import SwiftUI
+
+struct TextInputBorderModifier: ViewModifier {
+
+    // MARK: - Properties
+
+    let status: MISOTextInput.Status
+    let isOutlined: Bool
+    let interactionState: TextInputInteractionState
+
+    @Environment(\.theme) private var theme
+    @Environment(\.colorScheme) private var colorScheme
+
+    // MARK: - Body
+
+    func body(content: Content) -> some View {
+        if isOutlined {
+            if status == .readOnly {
+                content
+            } else {
+                content
+                    .border(style: theme.borders.styleDefault,
+                            width: size,
+                            radius: cornerRadius,
+                            color: outlinedColor)
+            }
+        } else {
+            if status == .readOnly {
+                content
+                    .border(style: theme.borders.styleDefault,
+                            width: theme.textInput.borderWidthDefault,
+                            radius: cornerRadius,
+                            color: theme.colors.borderMuted)
+            } else {
+                ZStack(alignment: .bottomLeading) {
+                    content
+                    Divider()
+                        .frame(height: size)
+                        .overlay(defaultColor.color(for: colorScheme))
+                }
+                .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+            }
+        }
+    }
+
+    // MARK: - Helpers
+
+    private var cornerRadius: BorderRadiusSemanticToken {
+        theme.tuning.hasRoundedTextInputs ? theme.textInput.borderRadiusRounded : theme.textInput.borderRadiusDefault
+    }
+
+    private var size: BorderWidthSemanticToken {
+        switch interactionState {
+        case .idle:
+            theme.textInput.borderWidthDefault
+        case .focused:
+            theme.textInput.borderWidthFocus
+        case .hover:
+            theme.textInput.borderWidthDefault
+        }
+    }
+
+    private var defaultColor: MultipleColorSemanticToken {
+        switch status {
+        case .enabled:
+            switch interactionState {
+            case .idle:
+                theme.textInput.colorBorderEnabled
+            case .focused:
+                theme.textInput.colorBorderFocus
+            case .hover:
+                theme.textInput.colorBorderHover
+            }
+
+        case .error, .richError:
+            switch interactionState {
+            case .idle:
+                theme.colors.actionNegativeEnabled
+            case .focused:
+                theme.colors.actionNegativePressed
+            case .hover:
+                theme.colors.actionNegativeHover
+            }
+
+        case .loading:
+            theme.textInput.colorBorderLoading
+
+        case .readOnly:
+            theme.colors.borderMuted
+
+        case .disabled:
+            theme.colors.actionDisabled
+        }
+    }
+
+    private var outlinedColor: MultipleColorSemanticToken {
+        switch status {
+        case .enabled:
+            switch interactionState {
+            case .idle:
+                theme.textInput.colorBorderEnabled
+            case .focused:
+                theme.textInput.colorBorderFocus
+            case .hover:
+                theme.textInput.colorBorderHover
+            }
+        case .error, .richError:
+            switch interactionState {
+            case .idle:
+                theme.colors.actionNegativeEnabled
+            case .focused:
+                theme.colors.actionNegativePressed
+            case .hover:
+                theme.colors.actionNegativeHover
+            }
+        case .loading:
+            theme.textInput.colorBorderLoading
+        case .readOnly:
+            theme.colors.actionDisabled // Should not appear
+        case .disabled:
+            theme.colors.actionDisabled
+        }
+    }
+}
+#endif

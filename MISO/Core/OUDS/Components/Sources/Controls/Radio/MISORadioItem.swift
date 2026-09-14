@@ -1,0 +1,502 @@
+// Software: MISO iOS (fork of OUDS iOS)
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
+
+import MISOFoundations
+import SwiftUI
+
+// swiftlint:disable file_length
+
+/// Radio button item is a UI element that allows to select a single option from a set of mutually exclusive choices.
+/// Radio button item covers a wider range of contexts by allowing to toggle the visibility of additional text labels and icon assets.
+///
+/// ## Layouts
+///
+/// The component can be rendered as two different layouts:
+///
+/// - **default**: the component has a leading indicator, a label and optional texts, and an optional trailing decorative icon
+/// - **reversed**: like the *default* layout but with a trailing radio indicator and a leading optional decorative icon
+///
+/// ## Indicator states
+///
+/// The radio indicator has two available states:
+/// - **selected**: the radio is filled with a filled circle, the user has made the action to select the radio
+/// - **unselected**: the radio is empty, does not contain anything, the user has made the action to unselect or did not select yet the radio
+///
+/// ## Particular cases
+///
+/// An ``MISORadioItem`` can be related to an error situation, for example troubles for a form.
+/// A dedicated look and feel is implemented for that if the `isError` flag is risen.
+/// In that case if the component displayed an icon, this icon will be replaced automatically by an error icon.
+///
+/// In addition, the ``MISORadioItem`` can be in read only mode, i.e. the user cannot interact with the component yet but this component must not be considered
+/// as disabled.
+/// The radio can be also outlined in some cases.
+///
+/// The component does not follow the right-to-left (RTL) / left-to-right (LTR) mode returned by the system as it could have some meaning
+/// to have for example the indicator in trailing position for LTR mode and vice versa.
+/// However, if the component has an icon in leading position (RTL mode) or in trailing position (LTR), the content of the icon is never changed.
+/// It could lead to a loss of meaning or semantics in the icon. Thus the ``MISOImage`` `flipped` property can be used to flip the icon content
+/// whatever the layout direction is, preventing the user from implementing their own rules to flip or not the image.
+///
+/// ## Rich text
+///
+/// Rich text can only be used for error messages.
+///
+/// Strong text can be used sparingly to highlight key information within the content.
+/// No other text styles should be used.
+/// Underlined text must not be applied manually (e.g. in error message), as it is commonly associated with hyperlinks and may mislead users.
+///
+/// ## Accessibility considerations
+///
+/// Always check the results of rich text mode with high contrast, light and dark modes, and Voice Over vocalization.
+///
+/// *Voice Over* will use several elements to describe the component: if component disabled / read only, if error context, the label and optional texts and a custom radio trait.
+/// No accessibility identifier is defined in MISO side as this value remains in the users hands.
+///
+/// ## Forbidden by design
+///
+/// **The design system does not allow to have both an error situation and a read only component.**
+/// **The design system does not allow to have both an error situation and a disabled component.**
+/// **The design system does not allow to have both a read only and a disabled component.**
+///
+/// ## Code samples
+///
+/// The ``MISORadioItem`` can be used outside a dedicated picker, thus it does not need any tag and associated type.
+///
+/// ```swift
+///     // Supposing we have an unselected state
+///     @Published var selection: Bool = false
+///
+///     // A leading radio with a label.
+///     MISORadioItem("Lucy in the Sky with Diamonds", isOn: $selection)
+///
+///     // Localizable from bundle can also be used
+///     MISORadioItem(LocalizedStringKey("option_label"), bundle: Bundle.module, isOn: $selection)
+///
+///     // A leading radio with a label, but in read only mode (user cannot interact yet, but not disabled).
+///     MISORadioItem("Lucy in the Sky with Diamonds", isOn: $selection, isReadOnly: true)
+///
+///     // A leading radio with an additional label and a description.
+///     MISORadioItem("Lucy in the Sky with Diamonds", isOn: $selection,
+///                   extraLabel: "The Beatles", description: "1967")
+///
+///     // A trailing radio with a label, a description, a tinted icon, a divider and an error.
+///     MISORadioItem("Rescue from this world!",
+///                   isOn: $selection,
+///                   description: "Put your hand in mine",
+///                   image: MISOImage(asset: Image(decorative: "ic_heart")),
+///                   isReversed: true,
+///                   isError: true,
+///                   hasDivider: true)
+///
+///     // A trailing radio with a raw (non-tinted) image.
+///     MISORadioItem("Rescue from this world!",
+///                   isOn: $selection,
+///                   description: "Put your hand in mine",
+///                   image: MISOImage(asset: Image(decorative: "il_someImage"), renderingMode: .original),
+///                   isReversed: true,
+///                   isError: true,
+///                   hasDivider: true)
+///
+///     // Flip the icon for RTL layouts using MISOImage.
+///     MISORadioItem("Cocorico !",
+///                   isOn: $selection,
+///                   image: MISOImage(asset: Image(systemName: "figure.handball"),
+///                                   flipped: layoutDirection == .rightToLeft),
+///                   isReversed: layoutDirection == .rightToLeft)
+///
+///     // If on error, add an error message can help user to understand error context
+///     MISORadioItem("Rescue from this world!",
+///                   isOn: $selection,
+///                   isError: true,
+///                   errorText: "Something wrong",
+///                   hasDivider: true)
+///
+///     // A leading radio with a label, but disabled.
+///     MISORadioItem("Rescue from this world!", isOn: $selection)
+///         .disabled(true)
+///
+///     // Never disable a read only or an error-related radio as it will crash
+///     // This is forbidden by design!
+///     MISORadioItem("Kaboom!", isOn: $selection, isError: true).disabled(true) // fatal error
+///     MISORadioItem("Kaboom!", isOn: $selection, isReadOnly: true).disabled(true) // fatal error
+/// ```
+///
+/// - Version: 1.4.0 (Figma component design version)
+/// - Since: OUDS 0.12.0
+@available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
+public struct MISORadioItem: View {
+
+    // MARK: - Properties
+
+    // NOTE: Do not forget to keep updated MISORadioPickerData
+    @Binding private var isOn: Bool
+    private let layoutData: ControlItemLabel.LayoutData
+    private let action: (() -> Void)?
+
+    @Environment(\.isEnabled) private var isEnabled
+
+    // MARK: - Initializers — String label + errorText: String?
+
+    /// Creates a radio with label and optional helper text as description, icon, divider.
+    ///
+    /// ```swift
+    ///     MISORadioItem("Virgin Holy Lava",
+    ///                   isOn: $selection,
+    ///                   extraLabel: "Very spicy",
+    ///                   description: "No alcohol, only tasty flavors",
+    ///                   image: MISOImage(asset: Image(systemName: "flame")))
+    /// ```
+    ///
+    /// **The design system does not allow to have both an error situation and a read only mode for the component.**
+    ///
+    /// **Remark 1: As divider and outline effect are not supposed to be displayed at the same time, the divider is not displayed if the outline effect is active.**
+    ///
+    /// **Remark 2: If `label` and `description` strings are wording keys from strings catalog stored in `Bundle.main`, they are automatically localized. Else, prefer to
+    /// provide the localized string if key is stored in another bundle.**
+    ///
+    /// - Parameters:
+    ///   - label: The main label text of the radio, must not be empty
+    ///   - isOn: A binding to a property that determines whether the toggle is on or off
+    ///   - extraLabel: An additional label text of the radio, default set to `nil`
+    ///   - description: A description, like a helper text, should not be empty, default set to `nil`
+    ///   - image: An optional ``MISOImage`` encapsulating the asset, its flip flag and its rendering mode.
+    ///   Default set to `nil`. If defined, its accessibility label will be ignored.
+    ///   - isOutlined: Flag to get an outlined radio, default set to `false`
+    ///   - isReversed: `true` if the radio indicator must be in trailing position, `false` otherwise. Default to `false`
+    ///   - isError: `true` if the look and feel of the component must reflect an error state, default set to `false`
+    ///   - errorText: An optional error message to display at the bottom. This message is ignored if `isError` is `false`.
+    ///   - isReadOnly: True if component is in read only, i.e. not really disabled but user cannot interact with it yet, default set to `false`
+    ///   - hasDivider: If `true` a divider is added at the bottom of the view, by default set to `false`
+    ///   - constrainedMaxWidth: When `true`, the item width is constrained to a maximum value defined by the design system.
+    ///     When `false`, no specific width constraint is applied, allowing the component to size itself or follow external
+    ///     modifier. Defaults to `false`.
+    ///   - action: An additional action to trigger when the radio button has been pressed
+    public init(_ label: String,
+                isOn: Binding<Bool>,
+                extraLabel: String? = nil,
+                description: String? = nil,
+                image: MISOImage? = nil,
+                isOutlined: Bool = false,
+                isReversed: Bool = false,
+                isError: Bool = false,
+                errorText: String? = nil,
+                isReadOnly: Bool = false,
+                hasDivider: Bool = false,
+                constrainedMaxWidth: Bool = false,
+                action: (() -> Void)? = nil)
+    {
+        if isError, isReadOnly {
+            ML.fatal("It is forbidden by design to have an MISORadioItem in an error context and in read only mode")
+        }
+
+        if label.isEmpty {
+            ML.warning("Label given to an MISORadioItem is empty, prefer MISORadio(isOn:accessibilityLabel:) instead")
+        }
+
+        if let description, description.isEmpty {
+            ML.warning("Description text given to an MISORadioItem is defined but empty, is it expected? Prefer use of `nil` value instead")
+        }
+
+        if let extraLabel, extraLabel.isEmpty {
+            ML.warning("Extra label text given to an MISORadioItem is defined but empty, is it expected? Prefer use of `nil` value instead")
+        }
+
+        // swiftlint:disable force_unwrapping
+        if isError, errorText == nil || errorText!.isEmpty {
+            ML.warning("Error text given to an MISORadioItem must be defined in case of error")
+        }
+        // swiftlint:enable force_unwrapping
+
+        _isOn = isOn
+
+        let errorTextContent: TextualContent? = if let errorText {
+            .raw(errorText)
+        } else {
+            nil
+        }
+
+        layoutData = .init(
+            label: label.localized(),
+            extraLabel: extraLabel?.localized(),
+            description: description?.localized(),
+            icon: image,
+            isOutlined: isOutlined,
+            isError: isError,
+            errorText: errorTextContent,
+            isReadOnly: isReadOnly,
+            hasDivider: hasDivider,
+            constrainedMaxWidth: constrainedMaxWidth,
+            orientation: isReversed ? .reversed : .default)
+        self.action = action
+    }
+
+    // MARK: - Initializers — String label + errorText: AttributedString
+
+    // swiftlint:disable function_default_parameter_at_end
+    /// Creates a radio with label, optional helper text, icon, divider, and a rich attributed error text.
+    ///
+    /// ```swift
+    ///     MISORadioItem("Virgin Holy Lava",
+    ///                   isOn: $selection,
+    ///                   extraLabel: "Very spicy",
+    ///                   description: "No alcohol, only tasty flavors",
+    ///                   image: MISOImage(asset: Image(systemName: "flame")),
+    ///                   errorText: AttributedString(markdown: "Please select **one flavor** for this drink"))
+    ///                    // Manage in your side errors for init for AttributedString(markdown:)
+    /// ```
+    ///
+    /// **The design system does not allow to have both an error situation and a read only mode for the component.**
+    ///
+    /// **Remark 1: As divider and outline effect are not supposed to be displayed at the same time, the divider is not displayed if the outline effect is active.**
+    ///
+    /// **Remark 2: If `label` and `description` strings are wording keys from strings catalog stored in `Bundle.main`, they are automatically localized. Else, prefer to
+    /// provide the localized string if key is stored in another bundle.**
+    ///
+    /// - Parameters:
+    ///   - label: The main label text of the radio, must not be empty
+    ///   - isOn: A binding to a property that determines whether the toggle is on or off
+    ///   - extraLabel: An additional label text of the radio, default set to `nil`
+    ///   - description: A description, like a helper text, should not be empty, default set to `nil`
+    ///   - image: An optional ``MISOImage`` encapsulating the asset, its flip flag and its rendering mode. Default set to `nil`.
+    ///   If defined, its accessibility label will be ignored.
+    ///   - isOutlined: Flag to get an outlined radio, default set to `false`
+    ///   - isReversed: `true` if the radio indicator must be in trailing position, `false` otherwise. Default to `false`
+    ///   - isError: `true` if the look and feel of the component must reflect an error state, default set to `false`
+    ///   - errorText: An error message to display at the bottom as rich `AttributedString`. This message is ignored if `isError` is `false`.
+    ///   - isReadOnly: True if component is in read only, i.e. not really disabled but user cannot interact with it yet, default set to `false`
+    ///   - hasDivider: If `true` a divider is added at the bottom of the view, by default set to `false`
+    ///   - constrainedMaxWidth: When `true`, the item width is constrained to a maximum value defined by the design system.
+    ///     When `false`, no specific width constraint is applied, allowing the component to size itself or follow external
+    ///     modifier. Defaults to `false`.
+    ///   - action: An additional action to trigger when the radio button has been pressed
+    public init(_ label: String,
+                isOn: Binding<Bool>,
+                extraLabel: String? = nil,
+                description: String? = nil,
+                image: MISOImage? = nil,
+                isOutlined: Bool = false,
+                isReversed: Bool = false,
+                isError: Bool = false,
+                errorText: AttributedString,
+                isReadOnly: Bool = false,
+                hasDivider: Bool = false,
+                constrainedMaxWidth: Bool = false,
+                action: (() -> Void)? = nil)
+    {
+        if isError, isReadOnly {
+            ML.fatal("It is forbidden by design to have an MISORadioItem in an error context and in read only mode")
+        }
+
+        if label.isEmpty {
+            ML.warning("Label given to an MISORadioItem is empty, prefer MISORadio(isOn:accessibilityLabel:) instead")
+        }
+
+        if let description, description.isEmpty {
+            ML.warning("Description text given to an MISORadioItem is defined but empty, is it expected? Prefer use of `nil` value instead")
+        }
+
+        if let extraLabel, extraLabel.isEmpty {
+            ML.warning("Extra label text given to an MISORadioItem is defined but empty, is it expected? Prefer use of `nil` value instead")
+        }
+
+        if isError, errorText.isEmpty {
+            ML.warning("Error text given to an MISORadioItem must be defined in case of error")
+        }
+
+        _isOn = isOn
+
+        layoutData = .init(
+            label: label.localized(),
+            extraLabel: extraLabel?.localized(),
+            description: description?.localized(),
+            icon: image,
+            isOutlined: isOutlined,
+            isError: isError,
+            errorText: .attributed(errorText),
+            isReadOnly: isReadOnly,
+            hasDivider: hasDivider,
+            constrainedMaxWidth: constrainedMaxWidth,
+            orientation: isReversed ? .reversed : .default)
+        self.action = action
+    }
+
+    // swiftlint:enable function_default_parameter_at_end
+
+    // MARK: - Initializers — LocalizedStringKey + errorText: String?
+
+    // swiftlint:disable function_default_parameter_at_end
+    /// Creates a radio with a localized label, looking up the key in the given bundle.
+    ///
+    /// ```swift
+    ///     MISORadioItem(LocalizedStringKey("option_label"),
+    ///                   bundle: Bundle.module,
+    ///                   isOn: $selection)
+    ///
+    ///     MISORadioItem(LocalizedStringKey("option_label"),
+    ///                   bundle: Bundle.module,
+    ///                   isOn: $selection,
+    ///                   image: MISOImage(asset: Image(decorative: "ic_heart")))
+    /// ```
+    ///
+    /// **The design system does not allow to have both an error situation and a read only mode for the component.**
+    ///
+    /// - Parameters:
+    ///   - key: A `LocalizedStringKey` used to look up the label in the given bundle
+    ///   - tableName: The name of the `.strings` file, or `nil` for the default
+    ///   - bundle: The bundle in which to look up the localized string. Defaults to `Bundle.main`.
+    ///   - isOn: A binding to a property that determines whether the toggle is on or off
+    ///   - extraLabel: An additional label text of the radio, default set to `nil`
+    ///   - description: A description, like a helper text, should not be empty, default set to `nil`
+    ///   - image: An optional ``MISOImage`` encapsulating the asset, its flip flag and its rendering mode. Default set to `nil`.
+    ///   If defined, its accessibility label will be ignored.
+    ///   - isOutlined: Flag to get an outlined radio, default set to `false`
+    ///   - isReversed: `true` if the radio indicator must be in trailing position, `false` otherwise. Default to `false`
+    ///   - isError: `true` if the look and feel of the component must reflect an error state, default set to `false`
+    ///   - errorText: An optional error message to display at the bottom. This message is ignored if `isError` is `false`.
+    ///   - isReadOnly: True if component is in read only, default set to `false`
+    ///   - hasDivider: If `true` a divider is added at the bottom of the view, by default set to `false`
+    ///   - constrainedMaxWidth: When `true`, the item width is constrained to a maximum value defined by the design system.
+    ///   - action: An additional action to trigger when the radio button has been pressed
+    public init(_ key: LocalizedStringKey,
+                tableName: String? = nil,
+                bundle: Bundle = .main,
+                isOn: Binding<Bool>,
+                extraLabel: String? = nil,
+                description: String? = nil,
+                image: MISOImage? = nil,
+                isOutlined: Bool = false,
+                isReversed: Bool = false,
+                isError: Bool = false,
+                errorText: String? = nil,
+                isReadOnly: Bool = false,
+                hasDivider: Bool = false,
+                constrainedMaxWidth: Bool = false,
+                action: (() -> Void)? = nil)
+    {
+        self.init(key.resolved(tableName: tableName, bundle: bundle),
+                  isOn: isOn,
+                  extraLabel: extraLabel,
+                  description: description,
+                  image: image,
+                  isOutlined: isOutlined,
+                  isReversed: isReversed,
+                  isError: isError,
+                  errorText: errorText,
+                  isReadOnly: isReadOnly,
+                  hasDivider: hasDivider,
+                  constrainedMaxWidth: constrainedMaxWidth,
+                  action: action)
+    }
+
+    // swiftlint:enable function_default_parameter_at_end
+
+    // MARK: - Initializers — LocalizedStringKey + errorText: AttributedString
+
+    // swiftlint:disable function_default_parameter_at_end
+    /// Creates a radio with a localized label and a rich attributed error text.
+    ///
+    /// ```swift
+    ///     MISORadioItem(LocalizedStringKey("option_label"),
+    ///                   bundle: Bundle.module,
+    ///                   isOn: $selection,
+    ///                   errorText: AttributedString(markdown: "Please select **one flavor** for this drink"))
+    ///                    // Manage in your side errors for init for AttributedString(markdown:)
+    /// ```
+    ///
+    /// **The design system does not allow to have both an error situation and a read only mode for the component.**
+    ///
+    /// - Parameters:
+    ///   - key: A `LocalizedStringKey` used to look up the label in the given bundle
+    ///   - tableName: The name of the `.strings` file, or `nil` for the default
+    ///   - bundle: The bundle in which to look up the localized string. Defaults to `Bundle.main`.
+    ///   - isOn: A binding to a property that determines whether the toggle is on or off
+    ///   - extraLabel: An additional label text of the radio, default set to `nil`
+    ///   - description: A description, like a helper text, should not be empty, default set to `nil`
+    ///   - image: An optional ``MISOImage`` encapsulating the asset, its flip flag and its rendering mode. Default set to `nil`.
+    ///   If defined, its accessibility label will be ignored.
+    ///   - isOutlined: Flag to get an outlined radio, default set to `false`
+    ///   - isReversed: `true` if the radio indicator must be in trailing position, `false` otherwise. Default to `false`
+    ///   - isError: `true` if the look and feel of the component must reflect an error state, default set to `false`
+    ///   - errorText: An error message to display at the bottom as rich `AttributedString`. This message is ignored if `isError` is `false`.
+    ///   - isReadOnly: True if component is in read only, default set to `false`
+    ///   - hasDivider: If `true` a divider is added at the bottom of the view, by default set to `false`
+    ///   - constrainedMaxWidth: When `true`, the item width is constrained to a maximum value defined by the design system.
+    ///   - action: An additional action to trigger when the radio button has been pressed
+    public init(_ key: LocalizedStringKey,
+                tableName: String? = nil,
+                bundle: Bundle = .main,
+                isOn: Binding<Bool>,
+                extraLabel: String? = nil,
+                description: String? = nil,
+                image: MISOImage? = nil,
+                isOutlined: Bool = false,
+                isReversed: Bool = false,
+                isError: Bool = false,
+                errorText: AttributedString,
+                isReadOnly: Bool = false,
+                hasDivider: Bool = false,
+                constrainedMaxWidth: Bool = false,
+                action: (() -> Void)? = nil)
+    {
+        self.init(key.resolved(tableName: tableName, bundle: bundle),
+                  isOn: isOn,
+                  extraLabel: extraLabel,
+                  description: description,
+                  image: image,
+                  isOutlined: isOutlined,
+                  isReversed: isReversed,
+                  isError: isError,
+                  errorText: errorText,
+                  isReadOnly: isReadOnly,
+                  hasDivider: hasDivider,
+                  constrainedMaxWidth: constrainedMaxWidth,
+                  action: action)
+    }
+
+    // swiftlint:enable function_default_parameter_at_end
+
+    // MARK: - Body
+
+    public var body: some View {
+        ControlItem(indicatorType: .radioButton($isOn), layoutData: layoutData, action: action)
+            .accessibilityRemoveTraits([.isButton]) // .isToggle trait for iOS 17+
+            .accessibilityLabel(accessibilityLabel)
+            .accessibilityValue(accessibilityValue)
+            .accessibilityHint(accessibilityHint)
+    }
+
+    // MARK: - A11Y helpers
+
+    /// Forge a string to vocalize the component label based on label, extraLabel and description
+    private var accessibilityLabel: String {
+        let extraLabel = layoutData.extraLabel?.isEmpty != false ? "" : ", \(layoutData.extraLabel ?? "")"
+        let description = layoutData.description?.isEmpty != false ? "" : ", \(layoutData.description ?? "")"
+        return "\(layoutData.label)\(extraLabel)\(description)"
+    }
+
+    /// Forges a string to vocalize with *Voice Over* describing the component trait, value, state and error
+    private var accessibilityValue: String {
+        let traitDescription = "core_radio_trait_a11y".localized() // Fake trait for Voice Over vocalization
+        let valueDescription = (_isOn.wrappedValue ? "core_common_selected_a11y" : "core_common_unselected_a11y").localized()
+        let stateDescription = !isEnabled || layoutData.isReadOnly ? "core_common_disabled_a11y".localized() : ""
+
+        let errorPrefix = "core_common_onError_a11y".localized()
+        let errorText = layoutData.errorText?.rawValue ?? ""
+        let errorDescription = layoutData.isError ? "\(errorPrefix), \(errorText)" : ""
+
+        return "\(traitDescription). \(valueDescription). \(stateDescription). \(errorDescription)"
+    }
+
+    /// Forges a string to vocalize with *Voice Over* describing the component hint
+    private var accessibilityHint: String {
+        if layoutData.isReadOnly || !isEnabled {
+            ""
+        } else {
+            _isOn.wrappedValue
+                ? "core_radio_hint_selected_a11y" <- "core_common_unselected_a11y".localized()
+                : "core_radio_hint_unselected_a11y" <- "core_common_selected_a11y".localized()
+        }
+    }
+}

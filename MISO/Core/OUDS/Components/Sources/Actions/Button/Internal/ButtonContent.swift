@@ -1,0 +1,175 @@
+// Software: MISO iOS (fork of OUDS iOS)
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
+
+import MISOTokensSemantic
+import SwiftUI
+
+// MARK: - Button Icon
+
+struct ButtonIcon: View {
+
+    let image: MISOImage
+    let size: MISOButton.Size
+
+    @Environment(\.theme) private var theme
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
+    var body: some View {
+        MISOScaledIcon(image: image, size: sizeIcon)
+            .padding(.all, paddingInset)
+            .frame(maxHeight: maxHeight, alignment: .center)
+    }
+
+    private var sizeIcon: SizeSemanticToken {
+        switch size {
+        case .default:
+            theme.button.sizeIconOnlyDefault
+        case .small:
+            theme.button.sizeIconOnlySmall
+        }
+    }
+
+    private var paddingInset: CGFloat {
+        switch size {
+        case .default:
+            theme.button.spaceInsetIconOnlyDefault
+        case .small:
+            theme.button.spaceInsetIconOnlySmall
+        }
+    }
+
+    private var maxHeight: SizeSemanticToken {
+        let rawValue = switch size {
+        case .default:
+            theme.button.sizeMaxSizeIconOnlyDefault
+        case .small:
+            theme.button.sizeMaxSizeIconOnlySmall
+        }
+
+        return rawValue * dynamicTypeSize.percentageRate / 100
+    }
+}
+
+// MARK: - Button Text
+
+struct ButtonText: View {
+
+    let text: String
+    let size: MISOButton.Size
+
+    @Environment(\.theme) private var theme
+
+    var body: some View {
+        TextForButton(text: text, size: size)
+            .padding(.vertical, paddingVertical)
+            .padding(.horizontal, paddingHorizontal)
+    }
+
+    private var paddingVertical: SizeSemanticToken {
+        switch size {
+        case .default:
+            theme.button.spacePaddingBlockDefault
+        case .small:
+            theme.button.spacePaddingBlockSmall
+        }
+    }
+
+    private var paddingHorizontal: SizeSemanticToken {
+        switch size {
+        case .default:
+            theme.button.spacePaddingInlineIconNoneDefault
+        case .small:
+            theme.button.spacePaddingInlineIconNoneSmall
+        }
+    }
+}
+
+// MARK: - Button Text And Icon
+
+struct ButtonTextAndIcon: View {
+
+    let text: String
+    let image: MISOImage
+    let size: MISOButton.Size
+
+    @Environment(\.theme) private var theme
+
+    var body: some View {
+        HStack(alignment: .center, spacing: spacing) {
+            MISOFixedIcon(image: image, size: sizeIcon)
+            TextForButton(text: text, size: size)
+        }
+        .padding(.vertical, paddingVertical)
+        .padding(.leading, paddingLeading)
+        .padding(.trailing, paddingTrailing)
+    }
+
+    private var spacing: SizeSemanticToken {
+        switch size {
+        case .default:
+            theme.button.spaceColumnGapIconDefault
+        case .small:
+            theme.button.spaceColumnGapIconSmall
+        }
+    }
+
+    private var paddingVertical: SizeSemanticToken {
+        switch size {
+        case .default:
+            theme.button.spacePaddingBlockDefault
+        case .small:
+            theme.button.spacePaddingBlockSmall
+        }
+    }
+
+    private var paddingLeading: SizeSemanticToken {
+        switch size {
+        case .default:
+            theme.button.spacePaddingInlineIconStartDefault
+        case .small:
+            theme.button.spacePaddingInlineIconStartSmall
+        }
+    }
+
+    private var paddingTrailing: SizeSemanticToken {
+        switch size {
+        case .default:
+            theme.button.spacePaddingInlineEndIconStartDefault
+        case .small:
+            theme.button.spacePaddingInlineEndIconStartSmall
+        }
+    }
+
+    private var sizeIcon: SizeSemanticToken {
+        switch size {
+        case .default:
+            theme.button.sizeIconDefault
+        case .small:
+            theme.button.sizeIconSmall
+        }
+    }
+}
+
+// MARK: - Text For Button
+
+private struct TextForButton: View {
+
+    let text: String
+    let size: MISOButton.Size
+
+    @Environment(\.theme) private var theme
+
+    var body: some View {
+        switch size {
+        case .default:
+            Text(LocalizedStringKey(text))
+                .labelStrongLarge(theme)
+                .multilineTextAlignment(.center)
+        case .small:
+            Text(LocalizedStringKey(text))
+                .labelStrongMedium(theme)
+                .multilineTextAlignment(.center)
+        }
+    }
+}

@@ -30,8 +30,10 @@ let package = Package(
             name: "MISOSwiftUI",
             targets: ["MISOSwiftUI"]),
 
-        // MARK: Atomic products
+        // MARK: Atomic products (OUDS)
 
+        // Better user of products, choose only the one users want
+        // Helps to isolate packages of MISO
         .library(
             name: "MISOThemesContract",
             targets: ["MISOThemesContract"]),
@@ -46,13 +48,28 @@ let package = Package(
             targets: ["MISOTokensComponent"]),
         .library(
             name: "MISOTokensSemantic",
-            targets: ["MISOTokensRaw"]),
+            targets: ["MISOTokensSemantic"]),
         .library(
             name: "MISOTokensRaw",
             targets: ["MISOTokensRaw"]),
         .library(
             name: "MISOFoundations",
             targets: ["MISOFoundations"]),
+
+        // MARK: Atomic products (MISO)
+
+        .library(
+            name: "MISOModulesMISO",
+            targets: ["MISOModulesMISO"]),
+        .library(
+            name: "MISOThemesMISOBlueCoat",
+            targets: ["MISOThemesMISOBlueCoat"]),
+        .library(
+            name: "MISOComponentsMISO",
+            targets: ["MISOComponentsMISO"]),
+        .library(
+            name: "MISOFoundationsMISO",
+            targets: ["MISOFoundationsMISO"]),
     ],
 
     // MARK: - Dependencies
@@ -80,7 +97,6 @@ let package = Package(
         .target(
             name: "MISOSwiftUI",
             dependencies: [
-                "MISOThemesWireframe",
                 "MISOThemesContract",
                 "MISOModules",
                 "MISOComponents",
@@ -88,79 +104,100 @@ let package = Package(
                 "MISOTokensSemantic",
                 "MISOTokensRaw",
                 "MISOFoundations",
+                "MISOModulesMISO",
+                "MISOComponentsMISO",
+                "MISOThemesMISOBlueCoat",
+                "MISOFoundationsMISO",
             ],
             path: "MISO/exported/MISO/Sources"),
 
-        // MARK: Atomic targets
-
-        .target(
-            name: "MISOThemesWireframe",
-            dependencies: ["MISOThemesContract"],
-            path: "MISO/Core/Themes/Wireframe/Sources",
-            resources: [.process("Resources/")]),
-        .testTarget(
-            name: "MISOThemesWirefame-Tests",
-            dependencies: ["TestsUtils", "MISOThemesWireframe"],
-            path: "MISO/Core/Themes/Wireframe/Tests"),
+        // MARK: Atomic targets (OUDS)
 
         .target(
             name: "MISOThemesContract",
             dependencies: ["MISOTokensRaw", "MISOTokensSemantic", "MISOTokensComponent"],
-            path: "MISO/Core/ThemesContract/Sources"),
+            path: "MISO/Core/OUDS/ThemesContract/Sources"),
         .testTarget(
             name: "MISOThemesContract-Tests",
             dependencies: ["MISOThemesContract", "TestsUtils"],
-            path: "MISO/Core/ThemesContract/Tests"),
+            path: "MISO/Core/OUDS/ThemesContract/Tests"),
 
         .target(
             name: "MISOModules",
             dependencies: ["MISOComponents"],
-            path: "MISO/Modules/Sources"),
+            path: "MISO/Modules/OUDS/Sources"),
 
         .target(
             name: "MISOComponents",
             dependencies: ["MISOTokensComponent", "MISOThemesContract"],
-            path: "MISO/Core/Components/Sources",
+            path: "MISO/Core/OUDS/Components/Sources",
             resources: [.process("_/Resources/")]),
         .testTarget(
             name: "MISOComponents-Tests",
             dependencies: ["MISOComponents"],
-            path: "MISO/Core/Components/Tests"),
+            path: "MISO/Core/OUDS/Components/Tests"),
 
         .target(
             name: "MISOTokensComponent",
             dependencies: ["MISOTokensSemantic"],
-            path: "MISO/Core/Tokens/ComponentTokens/Sources"),
+            path: "MISO/Core/OUDS/Tokens/ComponentTokens/Sources"),
 
         .target(
             name: "MISOTokensSemantic",
             dependencies: ["MISOTokensRaw"],
-            path: "MISO/Core/Tokens/SemanticTokens/Sources"),
+            path: "MISO/Core/OUDS/Tokens/SemanticTokens/Sources"),
         .testTarget(
             name: "MISOTokensSemantic-Tests",
             dependencies: ["MISOTokensSemantic"],
-            path: "MISO/Core/Tokens/SemanticTokens/Tests"),
+            path: "MISO/Core/OUDS/Tokens/SemanticTokens/Tests"),
 
         .target(
             name: "MISOTokensRaw",
             dependencies: ["MISOFoundations"],
-            path: "MISO/Core/Tokens/RawTokens/Sources"),
+            path: "MISO/Core/OUDS/Tokens/RawTokens/Sources"),
         .testTarget(
             name: "MISOTokensRaw-Tests",
             dependencies: ["TestsUtils", "MISOTokensRaw"],
-            path: "MISO/Core/Tokens/RawTokens/Tests"),
+            path: "MISO/Core/OUDS/Tokens/RawTokens/Tests"),
 
         .target(
             name: "MISOFoundations",
-            path: "MISO/Foundations/Sources"),
+            path: "MISO/Foundations/OUDS/Sources"),
         .testTarget(
             name: "MISOFoundations-Tests",
             dependencies: ["MISOFoundations"],
-            path: "MISO/Foundations/Tests"),
+            path: "MISO/Foundations/OUDS/Tests"),
         .target(
             name: "TestsUtils",
             dependencies: ["MISOFoundations"],
-            path: "MISO/Foundations/TestsUtils"),
+            path: "MISO/Foundations/OUDS/TestsUtils"),
+
+        // MARK: Atomic targets (MISO)
+
+        .target(
+            name: "MISOModulesMISO",
+            dependencies: ["MISOComponents", "MISOComponentsMISO"],
+            path: "MISO/Modules/MISO/Sources"),
+
+        .target(
+            name: "MISOThemesMISOBlueCoat",
+            dependencies: ["MISOThemesContract"],
+            path: "MISO/Core/MISO/Themes/BlueCoat/Sources",
+            resources: [.process("Resources/")]),
+        .testTarget(
+            name: "MISOThemesMISOBlueCoat-Tests",
+            dependencies: ["TestsUtils", "MISOThemesMISOBlueCoat"],
+            path: "MISO/Core/MISO/Themes/BlueCoat/Tests"),
+
+        .target(
+            name: "MISOComponentsMISO",
+            dependencies: ["MISOComponents"],
+            path: "MISO/Core/MISO/Components/Sources"),
+
+        .target(
+            name: "MISOFoundationsMISO",
+            dependencies: ["MISOFoundations"],
+            path: "MISO/Foundations/MISO/Sources"),
     ],
 
     // MARK: - Swift language modes

@@ -6,7 +6,7 @@ targets:
 - MISOFoundations
 - MISOModules
 - MISOThemesContract
-- MISOThemesWireframe
+- MISOThemesBlueCoat
 - MISOTokensComponent
 - MISOTokensRaw
 - MISOTokensSemantic

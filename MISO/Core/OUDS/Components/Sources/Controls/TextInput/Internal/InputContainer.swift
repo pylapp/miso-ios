@@ -1,0 +1,65 @@
+// Software: MISO iOS (fork of OUDS iOS)
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
+
+#if !os(watchOS) && !os(tvOS)
+import MISOTokensSemantic
+import SwiftUI
+
+struct InputContainer: View {
+
+    let text: Binding<String>
+    let label: String
+    let placeholder: String?
+    let prefix: String?
+    let suffix: String?
+    let status: MISOTextInput.Status
+    let interactionState: TextInputInteractionState
+    let accessibilityLabel: String
+    let accessibilityValue: String
+    let accessibilityHint: String
+
+    @Environment(\.theme) private var theme
+
+    var body: some View {
+        HStack(alignment: .center, spacing: theme.textInput.spaceColumnGapInlineText) {
+
+            // Prefix container
+            if let placeholder,
+               let prefix,
+               !prefix.isEmpty,
+               (placeholder.isEmpty && interactionState == .focused) || !placeholder.isEmpty || !text.wrappedValue.isEmpty
+            {
+                Text(prefix)
+                    .labelDefaultLarge(theme)
+                    .foregroundColor(prefixSuffixColor)
+                    .accessibilityHidden(true)
+            }
+
+            // Input text container
+            InputText(label: placeholder ?? label,
+                      text: text,
+                      status: status,
+                      accessibilityLabel: accessibilityLabel,
+                      accessibilityValue: accessibilityValue,
+                      accessibilityHint: accessibilityHint)
+
+            // Suffix container
+            if let placeholder,
+               let suffix,
+               !suffix.isEmpty,
+               (placeholder.isEmpty && interactionState == .focused) || !placeholder.isEmpty || !text.wrappedValue.isEmpty
+            {
+                Text(suffix)
+                    .labelDefaultLarge(theme)
+                    .foregroundColor(prefixSuffixColor)
+                    .accessibilityHidden(true)
+            }
+        }
+    }
+
+    private var prefixSuffixColor: MultipleColorSemanticToken {
+        status == .disabled ? theme.colors.actionDisabled : theme.colors.contentMuted
+    }
+}
+#endif

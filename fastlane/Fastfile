@@ -26,8 +26,16 @@ platform :ios do
     lane :format do
         puts "👉 Run Swift Format to format sources"
 
-        template = 'SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne\\nSPDX-License-Identifier: MIT'
-        sh "cd .. && swiftformat . --header \"#{template}\""
+        # Format sources of fork, copyrighted Orange, modified by Pierre-Yves Lapersonne
+        templateOUDSFork = 'Software: MISO iOS (fork of OUDS iOS)\\nSPDX-License-Identifier: MIT\\nSPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne'
+        sh "cd .. && swiftformat . --header \"#{templateOUDSFork}\" && cd .."
+
+        # Format sources of MISO, not related to the fork, copyrighted Pierre-Yves Lapersonne only
+        templateMISO = 'Software: MISO iOS\\nSPDX-License-Identifier: MIT\\nSPDX-FileCopyrightText: Copyright (c) Pierre-Yves Lapersonne'
+        sh "cd .. && swiftformat MISO/Core/MISO/ --header \"#{templateMISO}\" && cd .."
+        sh "cd .. && swiftformat MISO/Foundations/MISO --header \"#{templateMISO}\" && cd .."
+        sh "cd .. && swiftformat MISO/Modules/MISO --header \"#{templateMISO}\" && cd .."
+        
     end
 
     # ------------------------------------------------------------

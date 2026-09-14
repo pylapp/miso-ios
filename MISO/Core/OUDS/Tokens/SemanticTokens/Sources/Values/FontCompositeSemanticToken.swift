@@ -1,0 +1,65 @@
+// Software: MISO iOS (fork of OUDS iOS)
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
+
+import CoreFoundation
+import MISOTokensRaw
+
+/// An operator to make for example comparisons between ``FontCompositeSemanticToken``
+infix operator <|
+
+/// In the *Figma* global design system, composite tokens are defined for font-related things.
+/// Composite tokens are tokens defined in *Figma* by other tokens.
+/// Here a *font* thing is caracterized by a *font size*, a *line height*, a *font weight* and *letter spacing* values.
+/// All these elements are *raw tokens*, and together define a *composite raw token* for *font* thing.
+///
+/// - Since: OUDS 0.22.0
+@frozen public struct FontCompositeSemanticToken: Equatable, Sendable {
+
+    // Font family is not included here because this is the only thing which can vary
+
+    /// The font size to apply for the texts
+    public let size: FontSizeRawToken
+
+    /// The line height to apply on texts
+    public let lineHeight: FontLineHeightRawToken
+
+    /// The font weight to associate with the font family
+    public let weight: FontWeightRawToken
+
+    /// The font letter spacing to associated with the font family
+    public let letterSpacing: FontLetterSpacingRawToken
+
+    /// - Parameters:
+    ///    - size: the size for the texts
+    ///    - lineHeight: the line height for the texts
+    ///    - weight: the weight for the texts
+    ///    - letterSpacing: the letter spacing for the texts
+    @inlinable public init(size: FontSizeRawToken,
+                           lineHeight: FontLineHeightRawToken,
+                           weight: FontWeightRawToken,
+                           letterSpacing: FontLetterSpacingRawToken)
+    {
+        self.size = size
+        self.lineHeight = lineHeight
+        self.weight = weight
+        self.letterSpacing = letterSpacing
+    }
+
+    /// Operator which will return `true` if `lhs` is smaller than `rhs`.
+    /// By "smaller" we mean smaller `size` and smaller or equal `lineHeight` and `weight`.
+    ///
+    /// `letterSpacing` is not managed here because these values are, in fact, computed in Figma side
+    /// and can vary a lot because depend to two factors and the result can increase and decrease even if
+    /// these composite tokens are bigger or not. In few words, this property is not trustable.
+    ///
+    /// - Parameters:
+    ///    - lhs: The font composite token we expect to be smaller than `rhs`
+    ///    - rhs: The font composite token we expect to be bigger than `lhs`
+    /// - Returns Bool: `true` if `lhs` smaller than `rhs`, `false` otherwise
+    @inlinable public static func <| (lhs: FontCompositeSemanticToken, rhs: FontCompositeSemanticToken) -> Bool {
+        lhs.size < rhs.size
+            && lhs.lineHeight <= rhs.lineHeight
+            && lhs.weight <= rhs.weight
+    }
+}

@@ -1,0 +1,95 @@
+// Software: MISO iOS (fork of OUDS iOS)
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
+
+import MISOThemesContract
+import MISOTokensSemantic
+import SwiftUI
+
+/// A `ViewModifier` to apply to `ListItemContent` view so as to define an outline effect, i.e.
+/// draw kind of borders around the object, or a divider.
+/// The divider and the ouline effetct can be affected by the rounded corner flag of the theme `Tuning`.
+struct ListItemBordersModifier: ViewModifier {
+
+    // MARK: Properties
+
+    let interactionState: MISOButtonInteractionState
+
+    @Environment(\.theme) private var theme
+    @Environment(\.misoListItemContentStyle) private var style
+    @Environment(\.colorScheme) private var colorScheme
+
+    // MARK: Body
+
+    func body(content: Content) -> some View {
+        switch style {
+        case let .card(cardStyle):
+            switch cardStyle {
+            case let .outlined(onInteractionOnly):
+                outlined(content: content, onInteractionOnly: onInteractionOnly)
+            case let .standard(divider, _):
+                self.divider(content: content, with: divider)
+            }
+        case let .item(divider, _):
+            self.divider(content: content, with: divider)
+        }
+    }
+
+    // MARK: Rounded corners
+
+    private var roundedCorners: Bool {
+        switch style {
+        case .card:
+            theme.tuning.hasRoundedListItems
+        case .item:
+            false
+        }
+    }
+
+    private var radius: BorderRadiusSemanticToken {
+        roundedCorners ? theme.listItem.borderRadiusRounded : theme.listItem.borderRadiusDefault
+    }
+
+    // MARK: Border modifiers
+
+    @ViewBuilder
+    private func outlined(content: Content, onInteractionOnly: Bool) -> some View {
+        let color = switch interactionState {
+        case .enabled:
+            onInteractionOnly ? nil : theme.colors.borderDefault
+        case .hover:
+            onInteractionOnly ? nil : theme.colors.actionHover
+        case .pressed:
+            theme.colors.actionPressed
+        case .disabled:
+            theme.colors.actionDisabled
+        case .readOnly:
+            theme.colors.actionDisabled
+        }
+
+        if let color {
+            content
+                .border(style: theme.borders.styleDefault,
+                        width: theme.listItem.borderWidthDefault,
+                        radius: radius,
+                        color: color)
+        } else {
+            content
+        }
+    }
+
+    @ViewBuilder
+    private func divider(content: Content, with divider: Bool) -> some View {
+        if divider {
+            ZStack(alignment: .bottomLeading) {
+                content
+                Divider()
+                    .horizontal()
+                    .overlay(theme.colors.borderMuted.color(for: colorScheme))
+            }
+            .clipShape(RoundedRectangle(cornerRadius: radius))
+        } else {
+            content.clipShape(RoundedRectangle(cornerRadius: radius))
+        }
+    }
+}

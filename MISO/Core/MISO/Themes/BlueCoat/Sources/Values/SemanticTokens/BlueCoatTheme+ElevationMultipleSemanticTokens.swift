@@ -1,0 +1,25 @@
+// Software: MISO iOS
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: Copyright (c) Pierre-Yves Lapersonne
+
+import Foundation
+import MISOTokensSemantic
+
+// swiftlint:disable line_length
+
+/// Defines provider objects for elevation semantic tokens but "multiple", i.e. tokens with values depending to color schemes.
+/// These values can be overridden inside `BlueCoatThemeElevationSemanticTokensProvider` subclasses (in extensions or not, in the same module or not) thanks to the `@objc open` combination.
+extension BlueCoatThemeElevationSemanticTokensProvider: ElevationMultipleSemanticTokens {
+
+    public var colorElevated: ElevationMultipleColorSemanticToken { MultipleColorSemanticToken(light: colorElevatedLight, dark: colorElevatedDark) }
+
+    public var colorRaised: ElevationMultipleColorSemanticToken { MultipleColorSemanticToken(light: colorRaisedLight, dark: colorRaisedDark) }
+
+    public var colorDrag: ElevationMultipleColorSemanticToken { MultipleColorSemanticToken(light: colorDragLight, dark: colorDragDark) }
+
+    public var colorEmphasized: ElevationMultipleColorSemanticToken { MultipleColorSemanticToken(light: colorEmphasizedLight, dark: colorEmphasizedDark) }
+
+    public var colorSticky: ElevationMultipleColorSemanticToken { MultipleColorSemanticToken(light: colorStickyLight, dark: colorStickyDark) }
+}
+
+// swiftlint:enable line_length

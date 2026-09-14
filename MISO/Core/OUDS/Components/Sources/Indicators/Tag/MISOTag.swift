@@ -1,0 +1,447 @@
+// Software: MISO iOS (fork of OUDS iOS)
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
+
+import SwiftUI
+
+// swiftlint:disable nesting
+
+/// Tag is a UI element that allows to display short info like a label, keyword, or category.
+/// Tag helps users quickly find, group, or understand content.
+///
+/// ## Appearances
+///
+/// Tags have two appearances so as to highlight or not their content:
+///
+/// - **emphasized**: A tag with a solid, high-contrast background. Used to draw strong attention to important
+/// labels or categories. Emphasized tags stand out prominently against the interface and are ideal for
+/// primary or high-priority information.
+///
+/// - **muted**: A tag with a subtle, light, or semi-transparent background. Used for secondary or
+/// less prominent information. Muted tags blend more with the background, providing a softer visual
+/// emphasis compared to emphasized tags.
+///
+/// ## Status
+///
+/// Tags have seven status depending on the context of the information they represent. Each state is designed
+/// to convey a specific meaning and ensure clarity in communication.
+///
+/// - **Neutral**: Default or inactive state. Used for standard labels, categories, or when no specific
+/// status needs to be communicated.
+///
+/// - **Accent**: Used to draw attention to new features, recommendations, or content suggestions.
+/// Invites users to explore and engage with new offerings, creating an exciting and engaging experience.
+///
+/// - **Positive**: Indicates success, confirmation, or a positive status. Commonly used to highlight
+/// completed actions or approved items.
+///
+/// - **Warning**: Signals caution or a potentially risky situation. Used to draw attention to items
+/// requiring user awareness or intervention.
+///
+/// - **Negative**: Represents errors, critical issues, or urgent attention needed. Used to highlight
+///  problems or failed actions.
+///
+/// - **Info**: Conveys informational messages or supplementary details. Used for neutral, helpful,
+/// or contextual information.
+///
+/// - **Disabled**: Shows that the tag is inactive and cannot be interacted with. Appears faded or greyed out. This is not
+///  allowed when loader is activated.
+///
+/// ## Shape
+///
+/// Tags can have two shapes:
+///
+/// - **Rounded**: A tag with fully rounded corners, creating a pill-shaped appearance. Rounded
+/// tags offer a softer and more approachable look, suitable for most modern interfaces.
+///
+/// - **Square**: A tag with sharp, square corners. Squared tags provide a more formal, structured, or
+/// technical feel. They are often used in business contexts to label promotions, offers, or important notices.
+///
+/// ## Size
+///
+/// Tags can have two sizes:
+///
+/// - **Default**: The standard tag size, suitable for most use cases and offering good readability.
+///
+/// - **Small**: A compact tag with reduced height and font size. Used when saving space is important or
+/// when grouping elements visually.
+///
+/// ## Layout
+///
+/// There are four available layouts for tags:
+///
+/// -**Text only**: A tag that displays only text. Used for simple labels, categories, or keywords without additional visual
+///  elements.
+///
+///  -**Text + Bullet**: A tag with a small indicator (dot) alongside the text. Used to show status, presence, or activity
+///  next to the label.
+///
+/// -**Text + Icon**: A tag that includes an icon before the text. Used to visually reinforce the meaning of the tag,
+/// such as status, type, or action.
+///
+/// - **Text + Loader**: A tag that combines a loading spinner (or progress indicator) with text. Used to indicate that
+/// a process or action related to the tag is in progress.
+///
+/// ## Code samples
+///
+/// ```swift
+///     // Text only with neutral status, for emphasized appearance with rounded shape in default size
+///     MISOTag(label: "Label",  status: .neutral(), appearance: .emphasized, shape: .rounded, size: .default)
+///     // Or also
+///     MISOTag(label: "Label")
+///     // Or from a localizale and a bundle
+///     MISOTag(LocalizedStringKey("label_wording"), bundle: Bundle.module)
+///
+///     // Tag with neutral status with bullet
+///     MISOTag(label: "Label", status: .neutral(leading: .bullet)
+///
+///     // Tag with neutral status with a custom decorative icon
+///     MISOTag(label: "Label", status: .neutral(image: MISOImage(asset: Image(decorative: "ic_heart"))))
+///     // If your layout is in RTL mode but your tag has an icon with another meaning because of bad orientation,
+///     // you can flip the icon using MISOImage.flipped
+///     MISOTag(label: "Label", status: .neutral(image: MISOImage(asset: Image(decorative: "ic_heart"), flipped: true)))
+///     // If you want to display a raw image (not tinted), use renderingMode: .original
+///     MISOTag(label: "Label", status: .neutral(image: MISOImage(asset: Image("ic_brand"), renderingMode: .original)))
+///
+///     // Text with neutral status with bullet
+///     MISOTag(label: "Label", status: .neutral(bullet: true))
+///
+///     // Tag with indeterminate circular progress indicator, with rounded shape in small size
+///     MISOTag(loadingLabel: "Processing...", shape: .rounded, size: .small)
+///
+///     // Tag with determinate circular progress indicator, with rounded shape in default size
+///     MISOTag(loadingLabel: "Processing...", progress: 0.75)
+/// ```
+///
+/// - Version: 1.5.0 (Figma component design version)
+/// - Since: OUDS 0.18.0
+@available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
+public struct MISOTag: View {
+
+    // MARK: Stored Properties
+
+    private let appearance: Appearance
+    private let shape: Shape
+    private let size: Size
+    private let type: `Type`
+
+    // MARK: - Configuration enums
+
+    /// The internal type of tag
+    enum `Type` {
+        /// Tag with label and status
+        case status(label: String, status: Status)
+
+        /// Tag with label in loading state
+        case loader(label: String, progress: Double? = nil)
+
+        /// Label of the tag
+        var label: String {
+            switch self {
+            case let .status(label, _), let .loader(label, _):
+                label
+            }
+        }
+    }
+
+    /// The status of an `MISOTag` determines the leading element, the background
+    /// and the content colors of the tag according to the category.
+    /// - Since: OUDS 0.18.0
+    @frozen public struct Status {
+
+        let leading: Self.Leading
+        let category: Self.Category
+        let customIcon: MISOImage?
+
+        /// The leading element of the tag
+        /// - Since: OUDS 0.18.0
+        @frozen public enum Leading {
+            /// Means no element
+            case none
+
+            /// To display the leading bullet
+            case bullet
+
+            /// To display the leadiong icon. For `MISOTag.Status.Category.neutral` and `MISOTag.Status.Category.accent`
+            /// the decorative icon need to be provided. For other categories, a default icon is already provided.
+            case icon
+        }
+
+        /// The category of the status.
+        /// - Since: OUDS 0.18.0
+        @frozen public enum Category {
+            /// Default or inactive state. Used for standard labels, categories, or when no specific status needs to be communicated.
+            case neutral
+
+            /// Used to draw attention to new features, recommendations, or content suggestions.
+            /// Invites users to explore and engage with new offerings, creating an exciting and engaging experience.
+            case accent
+
+            /// Indicates success, confirmation, or a positive status. Commonly used to highlight completed actions or approved items.
+            case positive
+
+            /// Signals caution or a potentially risky situation. Used to draw attention to items requiring user awareness or intervention.
+            case warning
+
+            /// Represents errors, critical issues, or urgent attention needed. Used to highlight problems or failed actions.
+            case negative
+
+            /// Conveys informational messages or supplementary details. Used for neutral, helpful, or contextual information.
+            case info
+        }
+
+        /// Used to create a tag with a positive status.
+        /// - Parameter leading: The leading element in the tag
+        public static func positive(leading: Self.Leading) -> Status {
+            Status(leading: leading, category: .positive)
+        }
+
+        /// Used to create a tag with a negative status.
+        /// - Parameter leading: The leading element in the tag
+        public static func negative(leading: Self.Leading) -> Status {
+            Status(leading: leading, category: .negative)
+        }
+
+        /// Used to create a tag with a warning status.
+        ///
+        /// - Parameter leading: The leading element in the tag
+        public static func warning(leading: Self.Leading) -> Status {
+            Status(leading: leading, category: .warning)
+        }
+
+        /// Used to create a tag with a information status.
+        ///
+        /// - Parameter leading: The leading element in the tag
+        public static func info(leading: Self.Leading) -> Status {
+            Status(leading: leading, category: .info)
+        }
+
+        /// Used to create a tag with a neutral status with a leading ``MISOImage`` icon.
+        ///
+        /// ```swift
+        ///     MISOTag(label: "Label", status: .neutral(image: MISOImage(asset: Image(decorative: "ic_heart"))))
+        ///
+        ///     // Raw (non-tinted) image:
+        ///     MISOTag(label: "Label", status: .neutral(image: MISOImage(asset: Image("ic_brand"), renderingMode: .original)))
+        ///
+        ///     // Flip for RTL:
+        ///     MISOTag(label: "Label", status: .neutral(image: MISOImage(asset: Image(decorative: "ic_heart"), flipped: true)))
+        /// ```
+        ///
+        /// - Parameter image: An ``MISOImage`` encapsulating the asset, its flip flag and its rendering mode
+        public static func neutral(image: MISOImage) -> Status {
+            Status(leading: .icon, category: .neutral, alternativeIcon: image)
+        }
+
+        /// Used to create a tag with a neutral status with leading bullet or not.
+        ///
+        /// - Parameter bullet: Default set to `false`, set to true to add bullet.
+        public static func neutral(bullet: Bool = false) -> Status {
+            Status(leading: bullet ? .bullet : .none, category: .neutral)
+        }
+
+        /// Used to create a tag with an accent status with a leading ``MISOImage`` icon.
+        ///
+        /// ```swift
+        ///     MISOTag(label: "Label", status: .accent(image: MISOImage(asset: Image(decorative: "ic_heart"))))
+        ///
+        ///     // Raw (non-tinted) image:
+        ///     MISOTag(label: "Label", status: .accent(image: MISOImage(asset: Image("ic_brand"), renderingMode: .original)))
+        /// ```
+        ///
+        /// - Parameter image: An ``MISOImage`` encapsulating the asset, its flip flag and its rendering mode
+        public static func accent(image: MISOImage) -> Status {
+            Status(leading: .icon, category: .accent, alternativeIcon: image)
+        }
+
+        /// Used to create a tag with an accent status with leading bullet or not.
+        ///
+        /// - Parameter bullet: Default set to `false`, set to true to add bullet.
+        public static func accent(bullet: Bool = false) -> Status {
+            Status(leading: bullet ? .bullet : .none, category: .accent)
+        }
+
+        /// Internal initializer
+        ///
+        /// - Parameters:
+        ///    - leading: The leading element
+        ///    - category: The category of the status
+        ///    - alternativeIcon: The optional leading ``MISOImage`` (asset, flip and rendering mode encapsulated)
+        private init(leading: Leading, category: Self.Category, alternativeIcon: MISOImage? = nil) {
+            self.leading = leading
+            self.category = category
+            customIcon = alternativeIcon
+        }
+    }
+
+    /// Represents the appearance of an `MISOTag`
+    /// - Since: OUDS 0.18.0
+    @frozen public enum Appearance {
+
+        /// A tag with a solid, high-contrast background.
+        /// Used to draw strong attention to important labels or categories. Emphasized tags stand out
+        /// prominently against the interface and are ideal for primary or high-priority information.
+        case emphasized
+
+        /// A tag with a subtle, light, or semi-transparent background.
+        /// Used for secondary or less prominent information. Muted tags blend more with the background,
+        /// providing a softer visual emphasis compared to emphasized tags.
+        case muted
+    }
+
+    /// Defines the shape of an `MISOTag`
+    /// - Since: OUDS 0.18.0
+    @frozen public enum Shape {
+        /// A tag with sharp, square corners.
+        /// Squared tags provide a more formal, structured, or technical feel. They are often used in business contexts to label promotions, offers, or important notices.
+        case square
+
+        /// A tag with fully rounded corners, creating a pill-shaped appearance.
+        /// Rounded tags offer a softer and more approachable look, suitable for most modern interfaces.
+        case rounded
+    }
+
+    /// Defines the size of an `MISOTag`
+    /// - Since: OUDS 0.18.0
+    @frozen public enum Size {
+        /// The standard tag size, suitable for most use cases and offering good readability.
+        case `default`
+
+        /// A compact tag with reduced height and font size. Used when saving space is important or when grouping elements visually.
+        case small
+    }
+
+    // MARK: - Initializer
+
+    /// Creates a tag with simple label and maybe with leading element (bullet or icon).
+    ///
+    /// Use the `View/disabled(_:)` method to have tag in disabled state. This helper has no effect when loader is added.
+    /// When loader is added, `status` and `appearance` are ignored.
+    ///
+    /// ```swift
+    ///     MISOTag(label: "Label")
+    /// ```
+    ///
+    /// - Parameters:
+    ///    - label: The label displayed in the tag
+    ///    - status: The status of the tag. Its background color and its content color are based on
+    ///    this `MISOTag.Status` combined to the `MISOTag.Appearance` of the tag. Default set to *neutral*.
+    ///    - appearance: The importance of the tag. Its background color and its content color are based on
+    ///    this `MISOTag.Appearance` combined to the `MISOTag.Status` of the tag. Default set to *emphasized*
+    ///    - shape: The shape of the tag, i.e. the corners style. Default set to *rounded*.
+    ///    - size: The size of the tag. Default set to *default*.
+    public init(label: String,
+                status: Status = .neutral(),
+                appearance: Appearance = .emphasized,
+                shape: Shape = .rounded,
+                size: Size = .default)
+    {
+        self.appearance = appearance
+        self.shape = shape
+        self.size = size
+        type = .status(label: label, status: status)
+    }
+
+    /// Creates a tag with a localized label, looking up the key in the given bundle.
+    ///
+    /// ```swift
+    ///     MISOTag(LocalizedStringKey("status_tag"), bundle: Bundle.module, status: .positive(leading: .none))
+    /// ```
+    ///
+    /// - Parameters:
+    ///    - key: A `LocalizedStringKey` used to look up the label in the given bundle
+    ///    - tableName: The name of the `.strings` file, or `nil` for the default
+    ///    - bundle: The bundle in which to look up the localized string. Defaults to `Bundle.main`.
+    ///    - status: The status of the tag, default set to *neutral*
+    ///    - appearance: The importance of the tag, default set to *emphasized*
+    ///    - shape: The shape of the tag, default set to *rounded*
+    ///    - size: The size of the tag, default set to *default*
+    public init(_ key: LocalizedStringKey,
+                tableName: String? = nil,
+                bundle: Bundle = .main,
+                status: Status = .neutral(),
+                appearance: Appearance = .emphasized,
+                shape: Shape = .rounded,
+                size: Size = .default)
+    {
+        let resolvedLabel = key.resolved(tableName: tableName, bundle: bundle)
+        self.init(label: resolvedLabel, status: status, appearance: appearance, shape: shape, size: size)
+    }
+
+    /// Creates a tag in the loading state indicates that the system is processing or retrieving data.
+    /// A circular progress indicator appears to inform the user that an action is in progress.
+    ///
+    /// The use the `View/disabled(_:)` method has no effect on this state.
+    ///
+    /// ```swift
+    ///     MISOTag(loadingLabel: "Processing...", progress: 0.75)
+    /// ```
+    ///
+    /// - Parameters:
+    ///    - loadingLabel: The label displayed in the tag`
+    ///    - progress: The loading progress, where 0.0 represents no progress and 1.0 represents full progress. Set this
+    ///  value to `nil` to display a circular indeterminate progress indicator.
+    ///    - shape: The shape of the tag, i.e. the corners style, default set to *rounded*
+    ///    - size: The size of the tag, default set to *default*.
+    public init(loadingLabel: String,
+                progress: Double? = nil,
+                shape: Shape = .rounded,
+                size: Size = .default)
+    {
+        appearance = .emphasized
+        self.shape = shape
+        self.size = size
+        type = .loader(label: loadingLabel, progress: progress)
+        // "loadingLabel" instead of "label" to avoid doubts for users with init(label:status:appearance=shape:size:hasLoader) with default values
+    }
+
+    /// Creates a tag in the loading state with a localized label, looking up the key in the given bundle.
+    ///
+    /// ```swift
+    ///     MISOTag(loadingKey: LocalizedStringKey("loading_tag"), bundle: Bundle.module)
+    /// ```
+    ///
+    /// - Parameters:
+    ///    - loadingKey: A `LocalizedStringKey` used to look up the label in the given bundle
+    ///    - tableName: The name of the `.strings` file, or `nil` for the default
+    ///    - bundle: The bundle in which to look up the localized string. Defaults to `Bundle.main`.
+    ///    - progress: The loading progress, where 0.0 represents no progress and 1.0 represents full progress. Set this
+    ///  value to `nil` to display a circular indeterminate progress indicator.
+    ///    - shape: The shape of the tag, i.e. the corners style, default set to *rounded*
+    ///    - size: The size of the tag, default set to *default*.
+    public init(loadingKey: LocalizedStringKey,
+                tableName: String? = nil,
+                bundle: Bundle = .main,
+                progress: Double? = nil,
+                shape: Shape = .rounded,
+                size: Size = .default)
+    {
+        let resolvedLabel = loadingKey.resolved(tableName: tableName, bundle: bundle)
+        self.init(loadingLabel: resolvedLabel, progress: progress, shape: shape, size: size)
+    }
+
+    // MARK: Body
+
+    public var body: some View {
+        Label {
+            TagLabel(appearance: appearance, size: size, type: type)
+        } icon: {
+            TagIcon(appearance: appearance, size: size, type: type)
+        }
+        .labelStyle(TagLabelStyle(appearance: appearance, shape: shape, size: size, type: type))
+        .accessibilityLabel(accessibilityLabel)
+    }
+
+    // MARK: - Helpers
+
+    /// Forges a string to vocalize with *Voice Over* describing the tag dependign to if loading state or not.
+    private var accessibilityLabel: String {
+        if case .loader = type {
+            type.label + ", " + "core_common_loading_a11y".localized()
+        } else {
+            type.label
+        }
+    }
+}
+
+// swiftlint:enable nesting

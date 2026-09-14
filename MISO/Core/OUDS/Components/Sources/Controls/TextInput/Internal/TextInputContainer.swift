@@ -1,0 +1,155 @@
+// Software: MISO iOS (fork of OUDS iOS)
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
+
+#if !os(watchOS) && !os(tvOS)
+import SwiftUI
+
+struct TextInputContainer: View {
+
+    // MARK: - Properties
+
+    let label: String
+    let text: Binding<String>
+    let placeholder: String?
+    let prefix: String?
+    let suffix: String?
+    let leadingIcon: MISOImage?
+    let trailingAction: MISOTextInput.TrailingAction?
+    let isOutlined: Bool
+    let status: MISOTextInput.Status
+    let accessibilityHint: TextualContent?
+    @State var hover: Bool = false
+
+    @FocusState private var focused: Bool
+
+    @Environment(\.theme) private var theme
+
+    // MARK: - Body
+
+    // swiftlint:disable accessibility_trait_for_button
+    // Not a button and a11y trait for text field defined elsewhere
+    var body: some View {
+        HStack(alignment: .center, spacing: theme.textInput.spaceColumnGapDefault) {
+            HStack(alignment: .center, spacing: theme.textInput.spaceColumnGapDefault) {
+                // Leading icon container
+                TextInputLeadingIconContainer(leadingIcon: leadingIcon, status: status)
+
+                // ZStack here to add the label above the textField when
+                // the text is empty, the placeholder is empty and not focused
+                // Otherwise the label is placed at the top
+                ZStack {
+                    if labelPosition == .middle {
+                        TextInputLabelContainer(label: label,
+                                                status: status,
+                                                interactionState: interactionState,
+                                                position: .middle)
+                    }
+
+                    VStack(alignment: .leading, spacing: theme.textInput.spaceRowGapLabelInput) {
+                        if labelPosition == .top {
+                            TextInputLabelContainer(label: label,
+                                                    status: status,
+                                                    interactionState: interactionState,
+                                                    position: .top)
+                        }
+
+                        InputContainer(text: text,
+                                       label: labelPosition == .top ? "" : label,
+                                       placeholder: placeholder,
+                                       prefix: prefix,
+                                       suffix: suffix,
+                                       status: status,
+                                       interactionState: interactionState,
+                                       accessibilityLabel: accessibilityLabel,
+                                       accessibilityValue: accessibilityValue,
+                                       accessibilityHint: accessibilityHint?.rawValue ?? "")
+                            .focused($focused, equals: true)
+                    }
+                }
+                .onTapGesture {
+                    focused = true
+                }
+            }
+
+            // Trailing container
+            TextInputTrailingContainer(trailingAction: trailingAction, status: status, interactionState: interactionState)
+        }
+        .padding(.vertical, theme.textInput.spacePaddingBlockDefault)
+        .padding(.leading, theme.textInput.spacePaddingInlineDefault)
+        .padding(.trailing, trailingPadding)
+        .frame(minHeight: theme.textInput.sizeMinHeight, alignment: .leading)
+        .modifier(TextInputBackgroundModifier(status: status, isOutlined: isOutlined, interactionState: interactionState))
+        .modifier(TextInputBorderModifier(status: status, isOutlined: isOutlined, interactionState: interactionState))
+        #if !os(watchOS) && !os(tvOS)
+            .onHover { hover = $0 }
+        #endif
+        // swiftlint:enable accessibility_trait_for_button
+    }
+
+    // MARK: - Helpers
+
+    private var labelPosition: TextInputLabelContainer.Position {
+        if !text.wrappedValue.isEmpty || placeholder?.isEmpty == false || focused {
+            .top
+        } else {
+            .middle
+        }
+    }
+
+    private var trailingPadding: CGFloat {
+        if trailingAction != nil {
+            theme.textInput.spacePaddingInlineTrailingAction
+        } else {
+            switch status {
+            case .error, .richError, .loading:
+                theme.textInput.spacePaddingInlineTrailingAction
+            default:
+                theme.textInput.spacePaddingInlineDefault
+            }
+        }
+    }
+
+    private var interactionState: TextInputInteractionState {
+        TextInputInteractionState(focused: focused, hover: hover)
+    }
+
+    /// Forge a string to vocalize the component label based on label and placeholder
+    private var accessibilityLabel: String {
+        label.isEmpty ? placeholder ?? "" : label
+    }
+
+    @Environment(\.textInputAsSecureField) private var isHiddenPassword: Bool
+
+    /// Forges a string to vocalize with *Voice Over* describing the component input value and error, loading, disabled state
+    private var accessibilityValue: String {
+
+        let emptyDescription = "core_textInput_empty_a11y".localized()
+        let textValue = text.wrappedValue
+        let inputValue = "\(prefix ?? "") \(textValue) \(suffix ?? "")"
+
+        let valueDescription = if isHiddenPassword, !textValue.isEmpty {
+            "core_PasswordInput_chipsCount_a11y" <- textValue.count
+        } else if textValue.isEmpty {
+            emptyDescription
+        } else {
+            inputValue
+        }
+
+        let stateDescription = switch status {
+        case .disabled, .readOnly:
+            "core_common_disabled_a11y".localized()
+        case let .error(message):
+            "core_common_onError_a11y".localized() + ": \(message)"
+        case let .richError(message):
+            "core_common_onError_a11y".localized() + ": \(String(message.characters))"
+        case .loading:
+            "core_common_loading_a11y".localized()
+        case .enabled:
+            ""
+        }
+
+        return "\(valueDescription). \(stateDescription)"
+    }
+}
+#endif

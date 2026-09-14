@@ -1,0 +1,110 @@
+// Software: MISO iOS (fork of OUDS iOS)
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
+
+import MISOFoundations
+import MISOThemesContract
+import MISOTokensSemantic
+import SwiftUI
+
+/// The trailing part of the  component, i.e. all the views without the indicator, i.e. texts, icons and dividers.
+/// Can be considered as a rich label for the associated indicator (checkbox, radio, switch).
+struct ControlItemLabel: View {
+
+    // MARK: - Stored properties
+
+    let interactionState: MISOButtonInteractionState
+    let layoutData: LayoutData
+
+    @Environment(\.theme) private var theme
+
+    // MARK: Layout Data
+
+    /// Gathers any details and content to add in the ``ControlItemLabel``
+    struct LayoutData {
+        let label: String
+        let extraLabel: String?
+        let description: String?
+        let icon: MISOImage?
+        let isOutlined: Bool
+        let isError: Bool
+        let errorText: TextualContent?
+        let isReadOnly: Bool
+        let hasDivider: Bool
+        let constrainedMaxWidth: Bool
+        let orientation: ControlItem.Orientation
+    }
+
+    // MARK: - Body
+
+    var body: some View {
+        HStack(alignment: .center, spacing: theme.listItem.spaceColumnGap) {
+            texts()
+        }
+    }
+
+    // MARK: - Layout Items
+
+    private func texts() -> some View {
+        VStack(alignment: .leading, spacing: theme.listItem.spaceRowGap) {
+            Text(layoutData.label)
+                .labelDefaultLarge(theme)
+                .multilineTextAlignment(.leading)
+                .foregroundStyle(labelColor)
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+            if let extraLabel = layoutData.extraLabel, !extraLabel.isEmpty {
+                Text(extraLabel)
+                    .labelStrongMedium(theme)
+                    .multilineTextAlignment(.leading)
+                    .foregroundStyle(extraLabelColor)
+            }
+
+            if let description = layoutData.description, !description.isEmpty {
+                Text(description)
+                    .labelDefaultMedium(theme)
+                    .multilineTextAlignment(.leading)
+                    .foregroundStyle(helperColor)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    // MARK: - Colors
+
+    private var labelColor: MultipleColorSemanticToken {
+        if layoutData.isError {
+            switch interactionState {
+            case .enabled:
+                theme.colors.actionNegativeEnabled
+            case .hover:
+                theme.colors.actionNegativeHover
+            case .pressed:
+                theme.colors.actionNegativePressed
+            case .readOnly, .disabled:
+                ML.fatal("A component (checkbox, switch, radio) with a disabled state / read only mode and an error situation has been detected, which is not allowed by design."
+                    + " Only non-error situation are allowed to have a disabled state or a read only mode.")
+            }
+        } else {
+            switch interactionState {
+            case .enabled, .hover, .pressed, .readOnly:
+                theme.colors.contentDefault
+            case .disabled:
+                theme.colors.contentDisabled
+            }
+        }
+    }
+
+    private var helperColor: MultipleColorSemanticToken {
+        switch interactionState {
+        case .enabled, .pressed, .hover, .readOnly:
+            theme.colors.contentMuted
+        case .disabled:
+            theme.colors.contentDisabled
+        }
+    }
+
+    private var extraLabelColor: MultipleColorSemanticToken {
+        interactionState == .disabled ? theme.colors.contentDisabled : theme.colors.contentDefault
+    }
+}

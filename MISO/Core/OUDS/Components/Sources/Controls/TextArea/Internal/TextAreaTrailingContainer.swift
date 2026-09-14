@@ -1,0 +1,86 @@
+// Software: MISO iOS (fork of OUDS iOS)
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
+
+#if !os(watchOS) && !os(tvOS)
+import MISOTokensSemantic
+import SwiftUI
+
+/// Renders the top-trailing indicator for `MISOTextArea`.
+///
+/// Always reserves the same fixed-size slot regardless of status so the `HStack` width
+/// never changes when switching between statuses — preventing height reflow.
+///
+/// - `.error` or `isOverLimit` → red alert icon (`ic_alert_important_fill`)
+/// - `.loading` → `MISOCircularProgressIndicator`, accessibility hidden
+/// - all other statuses → invisible placeholder of the same size
+struct TextAreaTrailingContainer: View {
+
+    // MARK: - Properties
+
+    let status: MISOTextArea.Status
+    let interactionState: TextAreaInteractionState
+    /// `true` when the caller uses `.charactersMaxCount` and the text exceeds the limit.
+    let isOverLimit: Bool
+    /// `true` if the associated `MISOTextArea` component does not have a placeholder nor a value, i.e. the label is small
+    let isSmallLabel: Bool
+
+    @Environment(\.theme) private var theme
+
+    // MARK: - Body
+
+    var body: some View {
+        // The slot size is always button.sizeIconOnlyDefault + 2 × button.spaceInsetIconOnlyDefault (horizontal).
+        // Content is swapped via opacity so the size is never zero — preventing layout shifts.
+        ZStack {
+            // Invisible placeholder — always present to hold the slot size.
+            Color.clear
+                .frame(width: theme.button.sizeIconOnlyDefault + 2 * theme.button.spaceInsetIconOnlyDefault,
+                       height: theme.button.sizeIconOnlyDefault)
+
+            if case .error = status {
+                errorIcon
+            } else if case .richError = status {
+                errorIcon
+            } else if isOverLimit {
+                errorIcon
+            } else if case let .loading(progress) = status {
+                TextInputCircularProgressIndicator(progress: progress)
+                    .padding(.horizontal, theme.button.spaceInsetIconOnlyDefault)
+                    .padding(.vertical, verticalPadding)
+            }
+        }
+        .frame(minWidth: theme.button.sizeMinWidthDefault)
+    }
+
+    // MARK: - Helpers
+
+    private var errorIcon: some View {
+        Image(decorative: "Component-alert-important-fill", bundle: theme.resourcesBundle)
+            .resizable()
+            .renderingMode(.template)
+            .aspectRatio(contentMode: .fill)
+            .foregroundColor(errorIconColor)
+            .frame(width: theme.button.sizeIconOnlyDefault,
+                   height: theme.button.sizeIconOnlyDefault,
+                   alignment: .center)
+            .padding(.horizontal, theme.button.spaceInsetIconOnlyDefault)
+            .padding(.vertical, verticalPadding)
+    }
+
+    private var errorIconColor: MultipleColorSemanticToken {
+        switch interactionState {
+        case .idle:
+            theme.colors.actionNegativeEnabled
+        case .focused:
+            theme.colors.actionNegativePressed
+        case .hover:
+            theme.colors.actionNegativeHover
+        }
+    }
+
+    private var verticalPadding: SpaceSemanticToken {
+        isSmallLabel ? theme.textArea.spacePaddingBlockTrailingContainer : theme.textArea.spacePaddingBlockEmptyTrailingContainer
+    }
+}
+#endif

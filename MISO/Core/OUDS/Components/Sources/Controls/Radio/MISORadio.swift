@@ -1,0 +1,155 @@
+// Software: MISO iOS (fork of OUDS iOS)
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
+
+import MISOFoundations
+import MISOTokensComponent
+import SwiftUI
+
+// MARK: - MISO Radio
+
+/// Radio button is a UI element that allows to select a single option from a set of mutually exclusive choices.
+/// Radio button that does not show icon or text, provides greater flexibility when creating other components that require a Radio button to be displayed.
+///
+/// ## Particular cases
+///
+/// An ``MISORadio`` can be related to an error situation, for example troubles for a form.
+/// A dedicated look-and-feel is implemented for that if the `isError` flag is risen.
+///
+/// ## Accessibility considerations
+///
+/// Note also the component must be instanciated with a string parameter used as accessibility label.
+/// It is a good pratice (at least) to define a label for a component without text for accessibility reasons. This label will be vocalized by *Voice Over*.
+/// The vocalization tool will also use, after the label, a description of the component (if disabled, if error context), and a fake trait for radio.
+/// No accessibility identifier is defined in MISO side as this value remains in the users hands.
+///
+/// ## Cases forbidden by design
+///
+/// **The design system does not allow to have both an error or read only situation and a disabled component.**
+///
+/// ## Code samples
+///
+/// ```swift
+///     // Supposing we have an unselected state
+///     @Published var selection: Bool = false
+///
+///     // A simple radio, no error, not in read only mode
+///     MISORadio(isOn: $selection, accessibilityLabel: "The cake is a lie")
+///
+///     // A simple radio, but is an error context
+///     MISORadio(isOn: $selection, accessibilityLabel: "The cake is a lie", isError: true)
+///
+///     // Never disable an error-related radio button as it will crash
+///     // This is forbidden by design!
+///     MISORadio(isOn: $selection, accessibilityLabel: "The cake is a lie", isError: true).disabled(true) // fatal error
+/// ```
+///
+/// - Version: 1.4.0 (Figma component design version)
+/// - Since: OUDS 0.12.0
+@available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
+public struct MISORadio: View {
+
+    // MARK: - Properties
+
+    private let accessibilityLabel: String
+    private let isError: Bool
+    private let isReadOnly: Bool
+
+    @Binding var isOn: Bool
+    @Environment(\.isEnabled) private var isEnabled
+    @Environment(\.theme) private var theme
+
+    // MARK: - Initializers
+
+    /// Creates a radio with only an indicator.
+    ///
+    /// ```swift
+    ///     MISORadio(isOn: $isOn, accessibilityLabel: LocalizedStringKey("agree_terms"), bundle: Bundle.module)
+    /// ```
+    ///
+    /// **The design system does not allow to have both an error or a read only situation and a disabled state for the component.**
+    ///
+    /// - Parameters:
+    ///    - isOn: A binding to a property that determines whether the toggle is on or off.
+    ///    - key: The text to vocalize with *Voice Over* the component must have, as as `LocalizedStringKey` for the given `Bundle`
+    ///    - tableName: The name of the `.strings` file, or `nil` for the default
+    ///    - bundle: The bundle in which to look up the localized string. Defaults to `Bundle.main`.
+    ///    - isError: True if the look and feel of the component must reflect an error state, default set to `false`
+    ///    - isReadOnly: True iif the component should be in read only mode, default set to `false`
+    public init(isOn: Binding<Bool>,
+                accessibilityLabel key: LocalizedStringKey,
+                tableName: String? = nil,
+                bundle: Bundle = .main,
+                isError: Bool = false,
+                isReadOnly: Bool = false)
+    {
+        let resolvedText = key.resolved(tableName: tableName, bundle: bundle)
+        self.init(isOn: isOn, accessibilityLabel: resolvedText, isError: isError, isReadOnly: isReadOnly)
+    }
+
+    /// Creates a radio with only an indicator.
+    ///
+    /// ```swift
+    ///     MISORadio(isOn: $isOn, accessibilityLabel: "Agree to terms")
+    /// ```
+    ///
+    /// **The design system does not allow to have both an error or a read only situation and a disabled state for the component.**
+    ///
+    /// - Parameters:
+    ///    - isOn: A binding to a property that determines whether the toggle is on or off.
+    ///    - accessibilityLabel: The accessibility label the component must have
+    ///    - isError: True if the look and feel of the component must reflect an error state, default set to `false`
+    ///    - isReadOnly: True iif the component should be in read only mode, default set to `false`
+    public init(isOn: Binding<Bool>,
+                accessibilityLabel: String,
+                isError: Bool = false,
+                isReadOnly: Bool = false)
+    {
+        if accessibilityLabel.isEmpty {
+            ML.warning("The MISORadio should not have an empty accessibility label, think about your disabled users!")
+        }
+        _isOn = isOn
+        self.accessibilityLabel = accessibilityLabel.localized()
+        self.isError = isError
+        self.isReadOnly = isReadOnly
+    }
+
+    // MARK: Body
+
+    public var body: some View {
+        MISOInteractionButton(isReadOnly: isReadOnly) {
+            $isOn.wrappedValue.toggle()
+        } content: { interactionState in
+            RadioIndicator(interactionState: interactionState, isOn: isOn, isError: isError)
+                .frame(minWidth: theme.radioButton.sizeMinWidth,
+                       minHeight: theme.radioButton.sizeMinHeight,
+                       maxHeight: theme.radioButton.sizeMaxHeight)
+                .modifier(RadioBackgroundModifier(interactionState: interactionState))
+        }
+        .accessibilityRemoveTraits([.isButton]) // .isToggle trait for iOS 17+
+        .accessibilityLabel(accessibilityLabel)
+        .accessibilityValue(accessibilityValue)
+        .accessibilityHint(accessibilityHint)
+    }
+
+    /// The text to vocalize with *Voice Over* for the state of the indicator
+    private var accessibilityValue: String {
+        let traitDescription = "core_radio_trait_a11y".localized() // Fake trait for Voice Over vocalization
+        let valueDescription = (_isOn.wrappedValue ? "core_common_selected_a11y" : "core_common_unselected_a11y").localized()
+        let stateDescription = !isEnabled || isReadOnly ? "core_common_disabled_a11y".localized() : ""
+        let errorDescription = isError ? "core_common_onError_a11y".localized() : ""
+
+        return "\(traitDescription). \(valueDescription). \(stateDescription). \(errorDescription)"
+    }
+
+    /// The text to vocalize with *Voice Over* to explain to the user to which state the component will move when tapped
+    private var accessibilityHint: String {
+        if !isEnabled || isReadOnly {
+            ""
+        } else {
+            _isOn.wrappedValue
+                ? "core_radio_hint_selected_a11y" <- "core_common_unselected_a11y".localized()
+                : "core_radio_hint_unselected_a11y" <- "core_common_selected_a11y".localized()
+        }
+    }
+}

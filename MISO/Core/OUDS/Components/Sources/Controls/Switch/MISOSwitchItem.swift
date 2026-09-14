@@ -1,0 +1,433 @@
+// Software: MISO iOS (fork of OUDS iOS)
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
+
+import MISOFoundations
+import SwiftUI
+
+// MARK: - MISO Switch Item
+
+/// Switch item is a UI element that allows to toggle between two states, typically "On" and "Off", and used to enable or disable features, options or settings.
+/// Switch Item covers a wider range of contexts by allowing to toggle the visibility of additional text labels and icon assets.
+///
+/// ## Layouts
+///
+/// The component can be rendered as two different layouts:
+///
+/// - **default**: the component has a leading indicator, a label and optional texts, and an optional trailing decorative icon
+/// - **inverse**: like the *default* layout but with a trailing switch indicator and a leading optional decorative icon
+///
+/// ## Indicator states
+///
+/// The switch indicator has two available states set as a boolean property that determines whether the toggle is on or off.
+///
+/// ## Particular cases
+///
+/// An ``MISOSwitchItem`` can be related to an error situation, for example troubles for a form.
+/// A dedicated look and feel is implemented for that if the `isError` flag is risen.
+/// In that case if the component displayed an icon, this icon will be replaced automatically by an error icon.
+///
+/// In addition, the ``MISOSwitchItem`` can be in read only mode, i.e. the user cannot interact with the component yet but this component must not be considered
+/// as disabled.
+///
+/// ## Accessibility considerations
+///
+/// *Voice Over* will use several elements to describe the component: if component disabled / read only, if error context, the label and optional texts and a custom switch trait.
+///
+/// ## Forbidden by design
+///
+/// **The design system does not allow to have both an error situation and a read only component.**
+/// **The design system does not allow to have both an error situation and a disabled component.**
+/// **The design system does not allow to have both a read only and a disabled component.**
+///
+/// ## Code samples
+///
+/// ```swift
+///     // Supposing we have an unselected state
+///     @Published var isOn: Bool = false
+///
+///     // A leading switch with a label.
+///     MISOSwitchItem("Lucy in the Sky with Diamonds", isOn: $isOn)
+///
+///     // Localizable from bundle can also be used
+///     MISOSwitchItem(LocalizedStringKey("notifications_setting"), bundle: Bundle.module, isOn: $isOn)
+///
+///     // A leading switch with a label, but in read only mode (user cannot interact yet, but not disabled).
+///     MISOSwitchItem("Lucy in the Sky with Diamonds", isOn: $isOn, isReadOnly: true)
+///
+///     // A leading switch with a label and a description text.
+///     MISOSwitchItem("Lucy in the Sky with Diamonds", isOn: $isOn, description: "The Beatles")
+///
+///     // A trailing switch with a label, a description and a tinted icon.
+///     MISOSwitchItem("Lucy in the Sky with Diamonds",
+///                    isOn: $isOn,
+///                    description: "The Beatles",
+///                    image: MISOImage(asset: Image(decorative: "ic_heart")),
+///                    isReversed: true)
+///
+///     // A trailing switch with a raw (non-tinted) image.
+///     MISOSwitchItem("Lucy in the Sky with Diamonds",
+///                    isOn: $isOn,
+///                    description: "The Beatles",
+///                    image: MISOImage(asset: Image(decorative: "il_someImage"), renderingMode: .original),
+///                    isReversed: true)
+///
+///     // Flip the icon for RTL layouts using MISOImage.
+///     MISOSwitchItem("Lucy in the Sky with Diamonds",
+///                    isOn: $isOn,
+///                    image: MISOImage(asset: Image(systemName: "figure.handball"),
+///                                    flipped: layoutDirection == .rightToLeft))
+///
+///     // If on error, add an error message to help user understand the error context
+///     MISOSwitchItem("Rescue from this world!",
+///                    isOn: $isOn,
+///                    isError: true,
+///                    errorText: "Something wrong",
+///                    hasDivider: true)
+///
+///     // A leading switch with a label, but disabled.
+///     MISOSwitchItem("Rescue from this world!", isOn: $isOn)
+///         .disabled(true)
+///
+///     // Never disable a read only or an error-related switch as it will crash
+///     // This is forbidden by design!
+///     MISOSwitchItem("Kaboom!", isOn: $isOn, isError: true).disabled(true) // fatal error
+///     MISOSwitchItem("Kaboom!", isOn: $isOn, isReadOnly: true).disabled(true) // fatal error
+/// ```
+///
+/// ## Rich text
+///
+/// Rich text can only be used for error messages.
+///
+/// Strong text can be used sparingly to highlight key information within the content.
+/// No other text styles should be used.
+/// Underlined text must not be applied manually (e.g. in error message), as it is commonly associated with hyperlinks and may mislead users.
+///
+/// ## Accessibility considerations
+///
+/// Always check the results of rich text mode with high contrast, light and dark modes, and Voice Over vocalization.
+///
+/// - Version: 1.5.0 (Figma component design version)
+/// - Since: OUDS 0.14.0
+@available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
+public struct MISOSwitchItem: View {
+
+    // MARK: - Properties
+
+    @Binding private var isOn: Bool
+    private let layoutData: ControlItemLabel.LayoutData
+
+    @Environment(\.isEnabled) private var isEnabled
+
+    // MARK: - Initializers — String label + errorText: String?
+
+    /// Creates a switch with label and optional description text, icon, divider.
+    ///
+    /// ```swift
+    ///     MISOSwitchItem("Wi-Fi", isOn: $isOn)
+    ///
+    ///     MISOSwitchItem("Wi-Fi", isOn: $isOn,
+    ///                    image: MISOImage(asset: Image(decorative: "ic_wifi")))
+    /// ```
+    ///
+    /// **The design system does not allow to have both an error situation and a read only mode for the component.**
+    ///
+    /// **Remark: If `label` and `description` strings are wording keys from strings catalog stored in `Bundle.main`, they are
+    /// automatically localized. Else, prefer to provide the localized string if key is stored in another bundle.**
+    ///
+    /// - Parameters:
+    ///   - label: The main label text of the switch, must not be empty
+    ///   - isOn: A binding to a property that determines whether the toggle is on or off
+    ///   - description: An additional helper text, a description, should not be empty
+    ///   - image: An optional ``MISOImage`` encapsulating the asset, its flip flag and its rendering mode. Default set to `nil`.
+    ///   If defined, its accessibility label will be ignored.
+    ///   - isReversed: `true` if the switch indicator must be in trailing position, `false` otherwise. Default to `true`
+    ///   - isError: `true` if the look and feel of the component must reflect an error state, default set to `false`
+    ///   - errorText: An optional error message to display at the bottom. This message is ignored if `isError` is `false`.
+    ///   The `errorText` can be different if switch is selected or not.
+    ///   - isReadOnly: True if component is in read only, i.e. not really disabled but user cannot interact with it yet, default set to `false`
+    ///   - hasDivider: If `true` a divider is added at the bottom of the view, by default set to `false`
+    ///   - constrainedMaxWidth: When `true`, the item width is constrained to a maximum value defined by the design system.
+    ///     When `false`, no specific width constraint is applied, allowing the component to size itself or follow external
+    ///     modifier. Defaults to `false`.
+    public init(_ label: String,
+                isOn: Binding<Bool>,
+                description: String? = nil,
+                image: MISOImage? = nil,
+                isReversed: Bool = true,
+                isError: Bool = false,
+                errorText: String? = nil,
+                isReadOnly: Bool = false,
+                hasDivider: Bool = false,
+                constrainedMaxWidth: Bool = false)
+    {
+        if isError, isReadOnly {
+            ML.fatal("It is forbidden by design to have an MISOSwitchItem in an error context and in read only mode")
+        }
+
+        if label.isEmpty {
+            ML.warning("Label given to an MISOSwitchItem is empty, prefer MISOSwitch(isOn:accessibilityLabel:) instead")
+        }
+
+        if let description, description.isEmpty {
+            ML.warning("Description text given to an MISOSwitchItem is defined but empty, is it expected? Prefer use of `nil` value instead")
+        }
+
+        // swiftlint:disable force_unwrapping
+        if isError, errorText == nil || errorText!.isEmpty {
+            ML.warning("Error text given to an MISOSwitchItem must be defined in case of error")
+        }
+        // swiftlint:enable force_unwrapping
+
+        _isOn = isOn
+
+        let errorTextContent: TextualContent? = if let errorText {
+            .raw(errorText)
+        } else {
+            nil
+        }
+
+        layoutData = .init(
+            label: label.localized(),
+            extraLabel: nil,
+            description: description?.localized(),
+            icon: image,
+            isOutlined: false,
+            isError: isError,
+            errorText: errorTextContent,
+            isReadOnly: isReadOnly,
+            hasDivider: hasDivider,
+            constrainedMaxWidth: constrainedMaxWidth,
+            orientation: isReversed ? .reversed : .default)
+    }
+
+    // MARK: - Initializers — String label + errorText: AttributedString
+
+    // swiftlint:disable function_default_parameter_at_end
+    /// Creates a switch with label, optional description text, icon, divider, and an error message in rich text format.
+    ///
+    /// ```swift
+    ///     MISOSwitchItem("Enable automatic payments",
+    ///                    isOn: $isOn,
+    ///                    errorText: AttributedString(markdown: "You must enable **automatic payments** to activate this offer"))
+    ///                    // Manage in your side errors for init for AttributedString(markdown:)
+    /// ```
+    ///
+    /// **The design system does not allow to have both an error situation and a read only mode for the component.**
+    ///
+    /// **Remark: If `label` and `description` strings are wording keys from strings catalog stored in `Bundle.main`, they are
+    /// automatically localized. Else, prefer to provide the localized string if key is stored in another bundle.**
+    ///
+    /// - Parameters:
+    ///   - label: The main label text of the switch, must not be empty
+    ///   - isOn: A binding to a property that determines whether the toggle is on or off
+    ///   - description: An additional helper text, a description, should not be empty
+    ///   - image: An optional ``MISOImage`` encapsulating the asset, its flip flag and its rendering mode. Default set to `nil`.
+    ///   If defined, its accessibility label will be ignored.
+    ///   - isReversed: `true` if the switch indicator must be in trailing position, `false` otherwise. Default to `true`
+    ///   - isError: `true` if the look and feel of the component must reflect an error state, default set to `false`
+    ///   - errorText: An error message to display at the bottom as rich `AttributedString`. This message is ignored if `isError` is `false`.
+    ///   - isReadOnly: True if component is in read only, i.e. not really disabled but user cannot interact with it yet, default set to `false`
+    ///   - hasDivider: If `true` a divider is added at the bottom of the view, by default set to `false`
+    ///   - constrainedMaxWidth: When `true`, the item width is constrained to a maximum value defined by the design system.
+    ///     When `false`, no specific width constraint is applied, allowing the component to size itself or follow external
+    ///     modifier. Defaults to `false`.
+    public init(_ label: String,
+                isOn: Binding<Bool>,
+                description: String? = nil,
+                image: MISOImage? = nil,
+                isReversed: Bool = true,
+                isError: Bool = false,
+                errorText: AttributedString,
+                isReadOnly: Bool = false,
+                hasDivider: Bool = false,
+                constrainedMaxWidth: Bool = false)
+    {
+        if isError, isReadOnly {
+            ML.fatal("It is forbidden by design to have an MISOSwitchItem in an error context and in read only mode")
+        }
+
+        if label.isEmpty {
+            ML.warning("Label given to an MISOSwitchItem is empty, prefer MISOSwitch(isOn:accessibilityLabel:) instead")
+        }
+
+        if let description, description.isEmpty {
+            ML.warning("Description text given to an MISOSwitchItem is defined but empty, is it expected? Prefer use of `nil` value instead")
+        }
+
+        if isError, errorText.isEmpty {
+            ML.warning("Error text given to an MISOSwitchItem must be defined in case of error")
+        }
+
+        _isOn = isOn
+
+        layoutData = .init(
+            label: label.localized(),
+            extraLabel: nil,
+            description: description?.localized(),
+            icon: image,
+            isOutlined: false,
+            isError: isError,
+            errorText: .attributed(errorText),
+            isReadOnly: isReadOnly,
+            hasDivider: hasDivider,
+            constrainedMaxWidth: constrainedMaxWidth,
+            orientation: isReversed ? .reversed : .default)
+    }
+
+    // swiftlint:enable function_default_parameter_at_end
+
+    // MARK: - Initializers — LocalizedStringKey + errorText: String?
+
+    // swiftlint:disable function_default_parameter_at_end
+    /// Creates a switch with a localized label, looking up the key in the given bundle.
+    ///
+    /// ```swift
+    ///     MISOSwitchItem(LocalizedStringKey("notifications_setting"), bundle: Bundle.module, isOn: $isOn)
+    ///
+    ///     MISOSwitchItem(LocalizedStringKey("wifi_setting"),
+    ///                    bundle: Bundle.module,
+    ///                    isOn: $isOn,
+    ///                    image: MISOImage(asset: Image(decorative: "ic_wifi")))
+    /// ```
+    ///
+    /// **The design system does not allow to have both an error situation and a read only mode for the component.**
+    ///
+    /// - Parameters:
+    ///   - key: A `LocalizedStringKey` used to look up the label in the given bundle
+    ///   - tableName: The name of the `.strings` file, or `nil` for the default
+    ///   - bundle: The bundle in which to look up the localized string. Defaults to `Bundle.main`.
+    ///   - isOn: A binding to a property that determines whether the toggle is on or off
+    ///   - description: An additional helper text, a description, should not be empty
+    ///   - image: An optional ``MISOImage`` encapsulating the asset, its flip flag and its rendering mode. Default set to `nil`.
+    ///   If defined, its accessibility label will be ignored.
+    ///   - isReversed: `true` if the switch indicator must be in trailing position, `false` otherwise. Default to `true`
+    ///   - isError: `true` if the look and feel of the component must reflect an error state, default set to `false`
+    ///   - errorText: An optional error message to display at the bottom. This message is ignored if `isError` is `false`.
+    ///   - isReadOnly: True if component is in read only, default set to `false`
+    ///   - hasDivider: If `true` a divider is added at the bottom of the view, by default set to `false`
+    ///   - constrainedMaxWidth: When `true`, the item width is constrained to a maximum value defined by the design system.
+    public init(_ key: LocalizedStringKey,
+                tableName: String? = nil,
+                bundle: Bundle = .main,
+                isOn: Binding<Bool>,
+                description: String? = nil,
+                image: MISOImage? = nil,
+                isReversed: Bool = true,
+                isError: Bool = false,
+                errorText: String? = nil,
+                isReadOnly: Bool = false,
+                hasDivider: Bool = false,
+                constrainedMaxWidth: Bool = false)
+    {
+        self.init(key.resolved(tableName: tableName, bundle: bundle),
+                  isOn: isOn,
+                  description: description,
+                  image: image,
+                  isReversed: isReversed,
+                  isError: isError,
+                  errorText: errorText,
+                  isReadOnly: isReadOnly,
+                  hasDivider: hasDivider,
+                  constrainedMaxWidth: constrainedMaxWidth)
+    }
+
+    // swiftlint:enable function_default_parameter_at_end
+
+    // MARK: - Initializers — LocalizedStringKey + errorText: AttributedString
+
+    // swiftlint:disable function_default_parameter_at_end
+    /// Creates a switch with a localized label and a rich attributed error text.
+    ///
+    /// ```swift
+    ///     MISOSwitchItem(LocalizedStringKey("enable_payments"),
+    ///                    bundle: Bundle.module,
+    ///                    isOn: $isOn,
+    ///                    errorText: AttributedString(markdown: "You must enable **automatic payments** to activate this offer"))
+    ///                    // Manage in your side errors for init for AttributedString(markdown:)
+    /// ```
+    ///
+    /// **The design system does not allow to have both an error situation and a read only mode for the component.**
+    ///
+    /// - Parameters:
+    ///   - key: A `LocalizedStringKey` used to look up the label in the given bundle
+    ///   - tableName: The name of the `.strings` file, or `nil` for the default
+    ///   - bundle: The bundle in which to look up the localized string. Defaults to `Bundle.main`.
+    ///   - isOn: A binding to a property that determines whether the toggle is on or off
+    ///   - description: An additional helper text, a description, should not be empty
+    ///   - image: An optional ``MISOImage`` encapsulating the asset, its flip flag and its rendering mode. Default set to `nil`.
+    ///   If defined, its accessibility label will be ignored.
+    ///   - isReversed: `true` if the switch indicator must be in trailing position, `false` otherwise. Default to `true`
+    ///   - isError: `true` if the look and feel of the component must reflect an error state, default set to `false`
+    ///   - errorText: An error message to display at the bottom as rich `AttributedString`. This message is ignored if `isError` is `false`.
+    ///   - isReadOnly: True if component is in read only, default set to `false`
+    ///   - hasDivider: If `true` a divider is added at the bottom of the view, by default set to `false`
+    ///   - constrainedMaxWidth: When `true`, the item width is constrained to a maximum value defined by the design system.
+    public init(_ key: LocalizedStringKey,
+                tableName: String? = nil,
+                bundle: Bundle = .main,
+                isOn: Binding<Bool>,
+                description: String? = nil,
+                image: MISOImage? = nil,
+                isReversed: Bool = true,
+                isError: Bool = false,
+                errorText: AttributedString,
+                isReadOnly: Bool = false,
+                hasDivider: Bool = false,
+                constrainedMaxWidth: Bool = false)
+    {
+        self.init(key.resolved(tableName: tableName, bundle: bundle),
+                  isOn: isOn,
+                  description: description,
+                  image: image,
+                  isReversed: isReversed,
+                  isError: isError,
+                  errorText: errorText,
+                  isReadOnly: isReadOnly,
+                  hasDivider: hasDivider,
+                  constrainedMaxWidth: constrainedMaxWidth)
+    }
+
+    // swiftlint:enable function_default_parameter_at_end
+
+    // MARK: - Body
+
+    public var body: some View {
+        ControlItem(indicatorType: .switch($isOn), layoutData: layoutData)
+            .accessibilityRemoveTraits([.isButton]) // .isToggle trait for iOS 17+
+            .accessibilityLabel(accessibilityLabel)
+            .accessibilityValue(accessibilityValue)
+            .accessibilityHint(accessibilityHint)
+    }
+
+    // MARK: - A11Y helpers
+
+    /// Forge a string to vocalize the component label based on label, extraLabel and description
+    private var accessibilityLabel: String {
+        let extraLabel = layoutData.extraLabel?.isEmpty != false ? "" : ", \(layoutData.extraLabel ?? "")"
+        let description = layoutData.description?.isEmpty != false ? "" : ", \(layoutData.description ?? "")"
+        return "\(layoutData.label)\(extraLabel)\(description)"
+    }
+
+    /// Forges a string to vocalize with *Voice Over* describing the component trait, value and state
+    private var accessibilityValue: String {
+        let traitDescription = "core_switch_trait_a11y".localized() // Fake trait for Voice Over vocalization
+        let valueDescription = (_isOn.wrappedValue ? "core_common_selected_a11y" : "core_common_unselected_a11y").localized()
+        let stateDescription = !isEnabled || layoutData.isReadOnly ? "core_common_disabled_a11y".localized() : ""
+
+        let errorPrefix = "core_common_onError_a11y".localized()
+        let errorText = layoutData.errorText?.rawValue ?? ""
+        let errorDescription = layoutData.isError ? "\(errorPrefix), \(errorText)" : ""
+
+        return "\(traitDescription). \(valueDescription). \(stateDescription). \(errorDescription)"
+    }
+
+    /// Forges a string to vocalize with *Voice Over* describing the component hint
+    private var accessibilityHint: String {
+        if !isEnabled || layoutData.isReadOnly {
+            ""
+        } else {
+            "core_switch_hint_a11y" <- (_isOn.wrappedValue ? "core_common_unselected_a11y" : "core_common_selected_a11y").localized()
+        }
+    }
+}

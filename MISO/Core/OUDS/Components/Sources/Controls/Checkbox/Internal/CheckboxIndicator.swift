@@ -1,0 +1,90 @@
+// Software: MISO iOS (fork of OUDS iOS)
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
+
+import MISOFoundations
+import MISOThemesContract
+import MISOTokensSemantic
+import SwiftUI
+
+/// The indicator of the checkbox.
+/// Its content depends to the ``MISOButtonInteractionState`` and the ``MISOCheckboxIndicatorState`` also.
+/// This `View` manages also the high contrast mode in light color scheme so as to use a dedicated color for indicator.
+struct CheckboxIndicator: View {
+
+    // MARK: - Properties
+
+    let interactionState: MISOButtonInteractionState
+    let indicatorState: MISOCheckboxIndicatorState
+    let isError: Bool
+
+    @Environment(\.theme) private var theme
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+
+    // MARK: - Body
+
+    var body: some View {
+        indicator()
+            .modifier(CheckboxIndicatorModifier(interactionState: interactionState,
+                                                indicatorState: indicatorState,
+                                                isError: isError))
+    }
+
+    // MARK: - Indicator
+
+    @ViewBuilder
+    private func indicator() -> some View {
+        if indicatorState == .selected {
+            tickImage(name: "Component-checkbox-checkbox-selected")
+        } else if indicatorState == .indeterminate {
+            tickImage(name: "Component-checkbox-checkbox-undetermined")
+        } else { // .unselected
+            Color.clear
+        }
+    }
+
+    private func tickImage(name: String) -> some View {
+        Image(decorative: name, bundle: theme.resourcesBundle)
+            .resizable()
+            .renderingMode(.template)
+            .scaledToFit()
+            .accessibilityHidden(true)
+            .foregroundColor(appliedColor)
+    }
+
+    private var appliedColor: MultipleColorSemanticToken {
+        // Error case
+        if isError {
+            switch interactionState {
+            case .enabled:
+                theme.colors.actionNegativeEnabled
+            case .hover:
+                theme.colors.actionNegativeHover
+            case .pressed:
+                theme.colors.actionNegativePressed
+            case .disabled, .readOnly:
+                ML.fatal("An MISO Checkbox with a disabled state / read only mode and an error situation has been detected, which is not allowed"
+                    + " Only non-error situation are allowed to have a disabled state / read only mode.")
+            }
+            // Not error case
+        } else {
+            switch interactionState {
+            case .enabled:
+                if colorSchemeContrast == .increased, colorScheme == .light {
+                    theme.colors.contentDefault
+                } else {
+                    theme.colors.actionSelected
+                }
+            case .hover:
+                theme.colors.actionHover
+            case .pressed:
+                theme.colors.actionPressed
+            case .readOnly:
+                theme.colors.actionReadOnlyPrimary
+            case .disabled:
+                theme.colors.actionDisabled
+            }
+        }
+    }
+}

@@ -1,0 +1,324 @@
+// Software: MISO iOS (fork of OUDS iOS)
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
+
+#if !os(watchOS) && !os(tvOS)
+import MISOFoundations
+import MISOThemesContract
+import MISOTokensSemantic
+import SwiftUI
+
+// MARK: - MISO ToolBar Item
+
+/// A strongly typed toolbar item container used inside:
+/// - `toolBarTop(_:hasLargeTitle:subtitle:leadingItems:principalItem:trailingItems:)`
+/// - `toolBarBottom(leadingItems:trailingItems:)`
+///
+/// Use ``MISOToolBarItem`` to provide custom toolbar views or predefined navigation items.
+///
+/// ```swift
+///     // A toolbar item with only the close icon
+///     MISOToolBarItem(navigation: .close)
+///
+///     // A toolbar item with the back icon and and a text, for iOS < 26
+///     MISOToolBarItem(navigation: .back(label: "Back"))
+///
+///     // A toolbar item with the label
+///     MISOToolBarItem(action: "Label") {
+///        // do something
+///     }
+///
+///     // A toolbar item with the label
+///     MISOToolBarItem(action: .label("Label")) {
+///        // do something
+///     }
+///
+///     // A toolbar item with the icon
+///     MISOToolBarItem(action: .icon(asset: Image("mail"),
+///                     accessibilityLabel: "New messages available")) {
+///        // do something
+///     }
+///
+///     // A toolbar item with the icon and badge count
+///     MISOToolBarItem(action: .icon(asset: Image("mail"),
+///                                   accessibilityLabel: "9 new messages",
+///                                   badgeType: .number(count: 9))) {
+///        // do something
+///     }
+///
+///     // A toolbar item with some View inside
+///     MISOToolBarItem {
+///         // Menu, ...
+///     }
+/// ```
+///
+/// - Since: OUDS 1.4.0
+@available(iOS 15, visionOS 1, *)
+public struct MISOToolBarItem: View, Identifiable {
+
+    // MARK: - Item content
+
+    enum Content {
+        case action(type: ActionType, style: ActionStyle)
+        case navigation(type: NavigationType)
+        case customView(AnyView)
+    }
+
+    // MARK: - Item definition
+
+    /// Defines the styling configuration for tooolbar items for iOS > 26
+    ///
+    /// - Since: OUDS 1.4.0
+    @frozen public enum ActionStyle {
+        case `default`
+        case prominent
+        case tinted
+    }
+
+    /// Defines the built-in action type available for the toolbars.
+    /// Those items can be used at `.topLeading`, `.principal` and `.topTrailing` positions
+    /// of a `toolBarTop(_:hasLargeTitle:subtitle:leadingItems:principalItem:trailingItems:)`
+    ///
+    /// - Since: OUDS 1.4.0
+    @frozen public enum ActionType {
+
+        /// Create an action wth label only that could be emphasized.
+        /// **For iOS > 26, label is always emphasized.**
+        ///
+        /// - Parameters:
+        ///    - string: The text displayed in the label
+        ///    - emphasized: Flag to know if text is emphasized. Default set to *false*. **Ignored on iOS > 26**
+        ///    - accessibilityHint: Communicates to the user what happens after performing the action, default set to *nil*
+        ///    - action: The action to do when clicked. If *nil* (default) the button is disabled.
+        case label(_ string: String, emphasized: Bool = false, accessibilityHint: String? = nil, action: (() -> Void)? = nil)
+
+        /// Create an action with icon only.
+        ///
+        ///  - Parameters:
+        ///     - asset: The asset displayed in the icon
+        ///     - accessibilityLabel: The accessibility label discribes the action
+        ///     - accessibilityHint: Communicates to the user what happens after performing the action, default set to *nil*
+        ///     - badgeType: The optional badge type, by default *nil* means no badge.
+        ///     - action: The action to do when clicked. If *nil* (default) the button is disabled
+        case icon(asset: Image, accessibilityLabel: String, accessibilityHint: String? = nil, badgeType: BadgeType? = nil, action: (() -> Void)? = nil)
+    }
+
+    /// Defines the badge type can be added on `ActionType.icon` for item of toolbars.
+    ///
+    /// **By default, the MISO badge component is used, but for iOS > 26, the system one is used, so its color, size and position
+    /// can not be changed.**
+    ///
+    /// - Since: OUDS 2.0.0
+    @frozen public enum BadgeType {
+
+        /// The basic badge without any information
+        case standard
+
+        /// The badge with a count
+        ///
+        /// - Parameter count:The number displayed in the badge.
+        case number(count: UInt8)
+    }
+
+    /// Defines the built-in navigation type available for the toolbars. Those items must be used only on top leading position of `.toolBar`
+    /// Each case maps to an image asset provided by the MISO package resources.
+    ///
+    /// - Since: OUDS 1.4.0
+    @frozen public enum NavigationType {
+
+        /// The back button that can be added manualy if need. According to our design system, in could be the case for a sheet.
+        /// In a navigation, by default the system's one is displayed (without text). If preferred, this one can be added but the system one must be hidden
+        /// using `View.navigationBarBackButtonHidden()`
+        ///
+        /// **Warning: if OS is iOS 26+ / Liquid Glass, the label will not appear**
+        ///
+        ///  - Parameters:
+        ///     - label: The optional string label displayed near to the back indicator
+        ///     - accessibilityLabel: The accessibility label to describe the back action that could be overridden if needed, default set to *core_common_back*
+        ///     - action: The action to do when clicked. If *nil* (default) the button is disabled. By default the dismiss is done after `action` is called..
+        case back(label: String? = nil, accessibilityLabel: String = "core_common_back".localized(), action: (() -> Void)? = nil)
+
+        /// The close button can be used to close sheets, the close feature is automatically managed.
+        case close
+
+        /// The name of the icon associated to the button.
+        var iconName: String {
+            switch self {
+            case .back:
+                "Component-link-previous"
+            case .close:
+                "Component-button-expurge"
+            }
+        }
+    }
+
+    // MARK: - Stored properties
+
+    let content: Content
+
+    public let id = UUID()
+
+    // MARK: - Initializers
+
+    /// Creates an action toolbar item with only a text
+    ///
+    /// ```swift
+    ///     MISOToolBarItem(label: "Done") { /* Action */ }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - label: The text to display in the item, must not be empty
+    ///   - action: The action triggered when the item is tapped
+    public init(label: String, action: (() -> Void)? = nil) {
+        if label.isEmpty {
+            ML.fatal("The label for a toolBar item without icon must not be empty")
+        }
+        content = .action(type: .label(label, action: action), style: .default)
+    }
+
+    /// Creates an action toolbar item with an icon only dedicated to action.
+    ///
+    /// ```swift
+    ///     MISOToolBarItem(icon: Image(systemName: "plus"), accessibilityLabel: "Add") { /* Action */ }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - icon: The `Image` to add as button as action item
+    ///   - accessibilityLabel: The accessibility label describing the icon
+    ///   - action: The action triggered when the item is tapped
+    public init(icon: Image, accessibilityLabel: String, action: (() -> Void)? = nil) {
+        content = .action(type: .icon(asset: icon, accessibilityLabel: accessibilityLabel, action: action), style: .default)
+    }
+
+    /// Creates a toolbar item with action type.
+    ///
+    /// ```swift
+    ///     // A toolbar item with an "Edit" label and an associated action
+    ///     MISOToolBarItem(action: .label("Edit") { /* Action */ })
+    ///
+    ///     // A toolbar item with an image and a badge
+    ///     MISOToolBarItem(action: .icon(asset: Image("mail"), accessibilityLabel: "5 new emails", badgeType: .number(count: 5)))
+    /// ```
+    ///
+    /// - Parameter type: The action type describing the layout and assoicated action.
+    public init(action type: Self.ActionType) {
+        content = .action(type: type, style: .default)
+    }
+
+    /// Creates a toolbar item with action type and a style
+    ///
+    /// ```swift
+    ///     MISOToolBarItem(action: .label("Edit") { }, style: .tinted)
+    /// ```
+    ///
+    /// - Parameters:
+    ///    - type: The action type describing the layout and assoicated action.
+    ///    - style: The action style to apply on layout
+    @available(iOS 26, *)
+    public init(action type: Self.ActionType, style: ActionStyle) {
+        content = .action(type: type, style: style)
+    }
+
+    /// Creates a toolbar item with icon dedicated to navigation.
+    ///
+    /// ```swift
+    ///     MISOToolBarItem(navigation: .back { /* Action */ })
+    /// ```
+    ///
+    /// - Parameter type: The navigation type describing asset and associated action.
+    public init(navigation type: Self.NavigationType) {
+        content = .navigation(type: type)
+    }
+
+    /// Creates a toolbar item with a custom view.
+    ///
+    /// Use this initializer to provide any SwiftUI view, such as a `Menu`, custom button, or complex layout.
+    ///
+    /// ```swift
+    ///     MISOToolBarItem {
+    ///         Menu("Options") {
+    ///             Button("Option 1") { }
+    ///             Button("Option 2") { }
+    ///         }
+    ///     }
+    /// ```
+    ///
+    /// - Parameter content: A view builder that returns the custom view to display.
+    public init(@ViewBuilder content: () -> some View) {
+        self.content = .customView(AnyView(content()))
+    }
+
+    // MARK: - Body
+
+    public var body: some View {
+        switch content {
+        case let .action(type, style):
+            ToolBarItemActionButton(type: type, style: style)
+        case let .navigation(type):
+            ToolBarItemNavigationButton(type: type)
+        case let .customView(view):
+            view
+        }
+    }
+}
+
+// MARK: - MISO Tool Bar Items Builder
+
+/// A result builder to group ``MISOToolBarItem`` instances.
+///
+/// - Since: OUDS 1.4.0
+@resultBuilder
+public enum MISOToolBarItemsBuilder {
+    /// Combines multiple `MISOToolBarItem` instances into a single array
+    public static func buildBlock(_ components: MISOToolBarItem...) -> [MISOToolBarItem] {
+        components
+    }
+
+    /// Combines multiple `MISOToolBarItem` instances into a single array
+    public static func buildBlock(_ components: [MISOToolBarItem]...) -> [MISOToolBarItem] {
+        components.flatMap(\.self)
+    }
+
+    // swiftlint:disable discouraged_optional_collection
+    /// Finalizes the result, returning an empty list of items
+    public static func buildOptional(_ component: [MISOToolBarItem]?) -> [MISOToolBarItem] {
+        component ?? []
+    }
+
+    // swiftlint:enable discouraged_optional_collection
+
+    /// Finalizes the result, returning the complete list of items
+    public static func buildFinalResult(_ component: [MISOToolBarItem]) -> [MISOToolBarItem] {
+        component
+    }
+
+    /// Handles the first branch of an if-else statement (true branch)
+    public static func buildEither(first component: [MISOToolBarItem]) -> [MISOToolBarItem] {
+        component
+    }
+
+    /// Handles the second branch of an if-else statement (false branch)
+    public static func buildEither(second component: [MISOToolBarItem]) -> [MISOToolBarItem] {
+        component
+    }
+
+    /// Finalizes the result, returning an array of items from array of array of items
+    public static func buildArray(_ components: [[MISOToolBarItem]]) -> [MISOToolBarItem] {
+        components.flatMap(\.self)
+    }
+}
+
+// MARK: - MISO Tool Bar Item Position
+
+enum ToolBarItemLocation {
+    case toolbarTop
+    case toolbarBottom
+}
+
+extension EnvironmentValues {
+
+    /// A flag to know if ``MISOToolBarItem`` will be placed in ``MISOToolBarBottom`` or ``MISOToolBarTop``
+    @Entry var toolbarItemLocation: ToolBarItemLocation = .toolbarTop
+}
+
+#endif
