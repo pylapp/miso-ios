@@ -49,7 +49,7 @@ final class WireframeThemeTextInputComponentTokensProvider: AllTextInputComponen
          spaces: AllSpaceSemanticTokensProvider? = nil,
          dimensions: AllDimensionSemanticTokensProvider? = nil)
     {
-        OL.debug("Init of WireframeThemeTextInputComponentTokensProvider")
+        ML.debug("Init of WireframeThemeTextInputComponentTokensProvider")
         self.sizes = (sizes ?? WireframeThemeSizeSemanticTokensProvider())
         self.borders = (borders ?? WireframeThemeBorderSemanticTokensProvider())
         self.colors = (colors ?? WireframeThemeColorSemanticTokensProvider())

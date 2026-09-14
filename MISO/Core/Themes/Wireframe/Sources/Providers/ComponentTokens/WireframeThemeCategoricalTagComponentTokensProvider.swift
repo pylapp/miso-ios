@@ -26,7 +26,7 @@ final class WireframeThemeCategoricalTagComponentTokensProvider: AllCategoricalT
     /// Defines a provider of component tokens dedicated to `MISOCategoricalTag`
     /// - Parameter colors: Provider for color semantic tokens. If nil, a default one will be used (``WireframeThemeColorSemanticTokensProvider``)
     init(colors: AllColorSemanticTokensProvider? = nil) {
-        OL.debug("Init of WireframeThemeCategoricalTagComponentTokensProvider")
+        ML.debug("Init of WireframeThemeCategoricalTagComponentTokensProvider")
         self.colors = (colors ?? WireframeThemeColorSemanticTokensProvider())
         #if DEBUG
         Self.instanceCount++

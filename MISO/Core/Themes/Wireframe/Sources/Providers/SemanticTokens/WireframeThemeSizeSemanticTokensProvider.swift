@@ -22,7 +22,7 @@ final class WireframeThemeSizeSemanticTokensProvider: AllSizeSemanticTokensProvi
     /// Intializes the provider
     /// - Parameter dimensions: Provider for _ semantic tokens. If nil, a default one will be used (``WireframeThemeDimensionSemanticTokensProvider``)
     init(dimensions: AllDimensionSemanticTokensProvider? = nil) {
-        OL.debug("Init of WireframeThemeSizeSemanticTokensProvider")
+        ML.debug("Init of WireframeThemeSizeSemanticTokensProvider")
         self.dimensions = (dimensions ?? WireframeThemeDimensionSemanticTokensProvider())
         #if DEBUG
         Self.instanceCount++

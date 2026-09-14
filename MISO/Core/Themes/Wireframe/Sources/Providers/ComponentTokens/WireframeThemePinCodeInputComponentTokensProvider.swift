@@ -34,7 +34,7 @@ final class WireframeThemePinCodeInputComponentTokensProvider: AllPinCodeInputCo
     init(spaces: AllSpaceSemanticTokensProvider? = nil,
          dimensions: AllDimensionSemanticTokensProvider? = nil)
     {
-        OL.debug("Init of WireframeThemePinCodeInputComponentTokensProvider")
+        ML.debug("Init of WireframeThemePinCodeInputComponentTokensProvider")
         self.spaces = (spaces ?? WireframeThemeSpaceSemanticTokensProvider())
         self.dimensions = (dimensions ?? WireframeThemeDimensionSemanticTokensProvider())
         #if DEBUG

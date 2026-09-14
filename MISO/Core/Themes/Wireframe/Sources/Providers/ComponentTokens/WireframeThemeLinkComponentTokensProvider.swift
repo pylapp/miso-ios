@@ -45,7 +45,7 @@ final class WireframeThemeLinkComponentTokensProvider: AllLinkComponentTokensPro
          spaces: AllSpaceSemanticTokensProvider? = nil,
          dimensions: AllDimensionSemanticTokensProvider? = nil)
     {
-        OL.debug("Init of WireframeThemeLinkComponentTokensProvider")
+        ML.debug("Init of WireframeThemeLinkComponentTokensProvider")
         self.sizes = (sizes ?? WireframeThemeSizeSemanticTokensProvider())
         self.colors = (colors ?? WireframeThemeColorSemanticTokensProvider())
         self.spaces = (spaces ?? WireframeThemeSpaceSemanticTokensProvider())

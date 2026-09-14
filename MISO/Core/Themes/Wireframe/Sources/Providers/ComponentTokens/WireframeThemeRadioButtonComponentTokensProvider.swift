@@ -36,7 +36,7 @@ final class WireframeThemeRadioButtonComponentTokensProvider: AllRadioButtonComp
     init(sizes: AllSizeSemanticTokensProvider? = nil,
          borders: AllBorderSemanticTokensProvider? = nil)
     {
-        OL.debug("Init of WireframeThemeRadioButtonComponentTokensProvider")
+        ML.debug("Init of WireframeThemeRadioButtonComponentTokensProvider")
         self.sizes = (sizes ?? WireframeThemeSizeSemanticTokensProvider())
         self.borders = (borders ?? WireframeThemeBorderSemanticTokensProvider())
         #if DEBUG

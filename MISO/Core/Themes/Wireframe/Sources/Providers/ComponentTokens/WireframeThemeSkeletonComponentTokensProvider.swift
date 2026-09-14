@@ -26,7 +26,7 @@ final class WireframeThemeSkeletonComponentTokensProvider: AllSkeletonComponentT
     /// Defines a provider of component tokens dedicated to `MISOSkeleton`
     /// - Parameter colors: Provider for color semantic tokens. If nil, a default one will be used (``WireframeThemeColorSemanticTokensProvider``)
     init(colors: AllColorSemanticTokensProvider? = nil) {
-        OL.debug("Init of WireframeThemeSkeletonComponentTokensProvider")
+        ML.debug("Init of WireframeThemeSkeletonComponentTokensProvider")
         self.colors = (colors ?? WireframeThemeColorSemanticTokensProvider())
         #if DEBUG
         Self.instanceCount++

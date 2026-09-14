@@ -27,7 +27,7 @@ final class WireframeThemeIconComponentTokensProvider: AllIconComponentTokensPro
     /// - Parameters:
     ///    - colors: Provider for color semantic tokens. If nil, a default one will be used (``WireframeThemeColorSemanticTokensProvider``)
     init(colors: AllColorSemanticTokensProvider? = nil) {
-        OL.debug("Init of WireframeThemeIconComponentTokensProvider")
+        ML.debug("Init of WireframeThemeIconComponentTokensProvider")
         self.colors = (colors ?? WireframeThemeColorSemanticTokensProvider())
         #if DEBUG
         Self.instanceCount++

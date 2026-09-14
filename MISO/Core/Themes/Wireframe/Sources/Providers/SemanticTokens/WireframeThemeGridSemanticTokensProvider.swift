@@ -17,7 +17,7 @@ final class WireframeThemeGridSemanticTokensProvider: AllGridSemanticTokensProvi
 
     /// Intializes the provider
     init() {
-        OL.debug("Init of WireframeThemeGridSemanticTokensProvider")
+        ML.debug("Init of WireframeThemeGridSemanticTokensProvider")
         #if DEBUG
         Self.instanceCount++
         checkInstances(count: Self.instanceCount, for: "WireframeThemeGridSemanticTokensProvider")

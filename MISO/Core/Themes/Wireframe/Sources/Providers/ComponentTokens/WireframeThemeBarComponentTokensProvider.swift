@@ -49,7 +49,7 @@ final class WireframeThemeBarComponentTokensProvider: AllBarComponentTokensProvi
          opacities: AllOpacitySemanticTokensProvider? = nil,
          effects: AllEffectSemanticTokensProvider? = nil)
     {
-        OL.debug("Init of WireframeBarComponentTokensProvider")
+        ML.debug("Init of WireframeBarComponentTokensProvider")
         self.sizes = (sizes ?? WireframeThemeSizeSemanticTokensProvider())
         self.borders = (borders ?? WireframeThemeBorderSemanticTokensProvider())
         self.colors = (colors ?? WireframeThemeColorSemanticTokensProvider())

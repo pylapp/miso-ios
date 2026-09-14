@@ -26,7 +26,7 @@ final class WireframeThemeDividerComponentTokensProvider: AllDividerComponentTok
     /// Defines a provider of component tokens dedicated to `MISOHorizontalDivider` and `MISOVerticalDivider`
     /// - Parameter borders: Provider for border semantic tokens. If nil, a default one will be used (``WireframeThemeBorderSemanticTokensProvider``)
     init(borders: AllBorderSemanticTokensProvider? = nil) {
-        OL.debug("Init of WireframeThemeDividerComponentTokensProvider")
+        ML.debug("Init of WireframeThemeDividerComponentTokensProvider")
         self.borders = (borders ?? WireframeThemeBorderSemanticTokensProvider())
         #if DEBUG
         Self.instanceCount++

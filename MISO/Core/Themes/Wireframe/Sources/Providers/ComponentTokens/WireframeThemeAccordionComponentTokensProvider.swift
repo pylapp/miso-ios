@@ -35,7 +35,7 @@ final class WireframeThemeAccordionComponentTokensProvider: AllAccordionComponen
     init(sizes: AllSizeSemanticTokensProvider? = nil,
          spaces: AllSpaceSemanticTokensProvider? = nil)
     {
-        OL.debug("Init of WireframeThemeAccordionComponentTokensProvider")
+        ML.debug("Init of WireframeThemeAccordionComponentTokensProvider")
         self.sizes = (sizes ?? WireframeThemeSizeSemanticTokensProvider())
         self.spaces = (spaces ?? WireframeThemeSpaceSemanticTokensProvider())
         #if DEBUG

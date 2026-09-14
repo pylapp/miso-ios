@@ -32,7 +32,7 @@ final class WireframeThemeTextAreaComponentTokensProvider: AllTextAreaComponentT
     init(sizes: AllSizeSemanticTokensProvider? = nil,
          spaces: AllSpaceSemanticTokensProvider? = nil)
     {
-        OL.debug("Init of WireframeThemeTextAreaComponentTokensProvider")
+        ML.debug("Init of WireframeThemeTextAreaComponentTokensProvider")
         self.sizes = (sizes ?? WireframeThemeSizeSemanticTokensProvider())
         self.spaces = (spaces ?? WireframeThemeSpaceSemanticTokensProvider())
         #if DEBUG

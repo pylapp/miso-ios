@@ -17,7 +17,7 @@ final class WireframeThemeFontSemanticTokensProvider: AllFontSemanticTokensProvi
 
     /// Intializes the provider
     init() {
-        OL.debug("Init of WireframeThemeFontSemanticTokensProvider")
+        ML.debug("Init of WireframeThemeFontSemanticTokensProvider")
         #if DEBUG
         Self.instanceCount++
         checkInstances(count: Self.instanceCount, for: "WireframeThemeFontSemanticTokensProvider")

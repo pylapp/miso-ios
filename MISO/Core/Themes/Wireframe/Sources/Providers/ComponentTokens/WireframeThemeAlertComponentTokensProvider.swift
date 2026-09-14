@@ -39,7 +39,7 @@ final class WireframeThemeAlertComponentTokensProvider: AllAlertComponentTokensP
          borders: AllBorderSemanticTokensProvider? = nil,
          spaces: AllSpaceSemanticTokensProvider? = nil)
     {
-        OL.debug("Init of WireframeThemeAlertComponentTokensProvider")
+        ML.debug("Init of WireframeThemeAlertComponentTokensProvider")
         self.sizes = (sizes ?? WireframeThemeSizeSemanticTokensProvider())
         self.borders = (borders ?? WireframeThemeBorderSemanticTokensProvider())
         self.spaces = (spaces ?? WireframeThemeSpaceSemanticTokensProvider())

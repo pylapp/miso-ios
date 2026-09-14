@@ -44,7 +44,7 @@ final class WireframeThemeButtonComponentTokensProvider: AllButtonComponentToken
          colors: AllColorSemanticTokensProvider? = nil,
          spaces: AllSpaceSemanticTokensProvider? = nil)
     {
-        OL.debug("Init of WireframeThemeButtonComponentTokensProvider")
+        ML.debug("Init of WireframeThemeButtonComponentTokensProvider")
         self.sizes = (sizes ?? WireframeThemeSizeSemanticTokensProvider())
         self.borders = (borders ?? WireframeThemeBorderSemanticTokensProvider())
         self.colors = (colors ?? WireframeThemeColorSemanticTokensProvider())

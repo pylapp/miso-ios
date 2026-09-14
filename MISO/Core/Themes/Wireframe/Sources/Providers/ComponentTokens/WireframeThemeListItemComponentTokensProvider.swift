@@ -56,7 +56,7 @@ final class WireframeThemeListItemComponentTokensProvider: AllListItemComponentT
          opacities: AllOpacitySemanticTokensProvider? = nil,
          dimensions: AllDimensionSemanticTokensProvider? = nil)
     {
-        OL.debug("Init of WireframeThemeListItemComponentTokensProvider")
+        ML.debug("Init of WireframeThemeListItemComponentTokensProvider")
         self.sizes = (sizes ?? WireframeThemeSizeSemanticTokensProvider())
         self.borders = (borders ?? WireframeThemeBorderSemanticTokensProvider())
         self.colors = (colors ?? WireframeThemeColorSemanticTokensProvider())

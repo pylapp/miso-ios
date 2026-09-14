@@ -39,7 +39,7 @@ final class WireframeThemeToastComponentTokensProvider: AllToastComponentTokensP
          dimensions: AllDimensionSemanticTokensProvider? = nil,
          sizes: AllSizeSemanticTokensProvider? = nil)
     {
-        OL.debug("Init of WireframeThemeToastComponentTokensProvider")
+        ML.debug("Init of WireframeThemeToastComponentTokensProvider")
         self.borders = (borders ?? WireframeThemeBorderSemanticTokensProvider())
         self.dimensions = (dimensions ?? WireframeThemeDimensionSemanticTokensProvider())
         self.sizes = (sizes ?? WireframeThemeSizeSemanticTokensProvider(dimensions: self.dimensions))

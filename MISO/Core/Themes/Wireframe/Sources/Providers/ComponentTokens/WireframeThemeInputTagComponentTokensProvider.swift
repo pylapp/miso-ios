@@ -32,7 +32,7 @@ final class WireframeThemeInputTagComponentTokensProvider: AllInputTagComponentT
     init(borders: AllBorderSemanticTokensProvider? = nil,
          colors: AllColorSemanticTokensProvider? = nil)
     {
-        OL.debug("Init of WireframeThemeInputTagComponentTokensProvider")
+        ML.debug("Init of WireframeThemeInputTagComponentTokensProvider")
         self.borders = (borders ?? WireframeThemeBorderSemanticTokensProvider())
         self.colors = (colors ?? WireframeThemeColorSemanticTokensProvider())
         #if DEBUG
