@@ -5,9 +5,9 @@
 <h1 align="center">MISO iOS</h1>
 
 <p align="center">
-  🐙🍜 MISO is a library of SwiftUI components (forked from ouds-ios), themes and tools for iOS app development.
+  🍜 MISO is a library of SwiftUI components (forked from ouds-ios), themes and tools for iOS app development.
   <br>
-  Miso Is So {Open | Obvious | Original}
+  🐙 Miso Is So {Open | Obvious | Original}
   <br>
   <a href="https://github.com/pylapp/miso-ios/issues/new?template=bug_report.yml" title="Open an issue on GitHub">Report bug</a>
   ·
@@ -45,8 +45,8 @@
 
 ## ℹ️ About MISO
 
-MISO is a recursive acronym which can mean for example *Miso Is So Open*. Or *obvious*. Or *original*. We don't care in the end.
-Miso soup is tasty. 🍜
+MISO is a recursive acronym which can mean for example *Miso Is So Open*. Or *Obvious*. Or *Original*. We don't care in the end.
+Miso soup is also tasty. 🍜
 
 > [!CAUTION]
 > This Swift Package is dedicated to SwiftUI. UIKit and other frameworks are not supported.
@@ -57,7 +57,7 @@ Miso soup is tasty. 🍜
 ## 🚀 Quick start
 
 > [!TIP]
-> Documentation on GitHub pages will come soon.
+> Documentation on GitHub Pages will come soon.
 
 ### Choose your version
 
@@ -76,7 +76,7 @@ You can choose the _dependency rule_ you want. Keep in mind MISO iOS releases ar
 ### Add the libraries
 
 In your Xcode _targets_, add the libraries you need. Everything is splitted so as to let users choose the content to embed they want.
-The `MISOSwiftUI` library embeds everything, but you may prefer instead tailor your imports.
+The `MISOSwiftUI` library embeds everything except themes which are not *Wireframe* basic root theme, but you may prefer instead tailor your imports.
 
 ### Instanciate and inject theme
 
@@ -127,7 +127,7 @@ Please read through our [contributing guidelines](https://github.com/pylapp/miso
 
 ## 🔒 Data and privacy
 
-The MISO is a Software Development Kit (SDK) that allows developpers to create mobile applications with predefined components.
+The MISO is a Software Development Kit (SDK) that allows developpers to create mobile applications with predefined components and tools.
 As such:
 - this SDK does not handle any personnal data
 - this SDK does not require any device permission to work
