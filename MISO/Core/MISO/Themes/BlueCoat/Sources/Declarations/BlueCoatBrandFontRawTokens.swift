@@ -8,3 +8,7 @@
 ///
 /// - Since: 1.0.0
 @frozen public enum BlueCoatBrandFontRawTokens {}
+
+/// `BlueCoat` can be considered as default theme for MISO
+/// - Since: 1.0.0
+public typealias DefaultBrandFontRawTokens = BlueCoatBrandFontRawTokens

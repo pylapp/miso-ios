@@ -5,6 +5,10 @@
 import MISOFoundations
 import MISOThemesContract
 
+/// `BlueCoat` can be considered as default theme for MISO
+/// - Since: 1.0.0
+public typealias DefaultGridSemanticTokensProvider = BlueCoatThemeGridSemanticTokensProvider
+
 /// A class which wraps all **grid semantic tokens** and expose them.
 /// This provider should be integrated as a `AllGridSemanticTokensProvider` implementation inside `MISOTheme` so as to provide
 /// all tokens to the users.

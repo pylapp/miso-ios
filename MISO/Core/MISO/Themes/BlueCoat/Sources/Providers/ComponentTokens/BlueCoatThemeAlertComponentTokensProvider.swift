@@ -7,6 +7,10 @@ import MISOThemesContract
 
 // swiftlint:disable type_name
 
+/// `BlueCoat` can be considered as default theme for MISO
+/// - Since: 1.0.0
+public typealias DefaultAlertComponentTokensProvider = BlueCoatThemeAlertComponentTokensProvider
+
 /// A class which wraps all **component  tokens of alert** for *alert* objects like `MISOAlertMessage`.
 /// Contains also references to semantic tokens providers so as to be able to use them to define the component tokens.
 /// This provider should be integrated as a `AllAlertComponentTokensProvider` implementation inside `MISOTheme` so as to provide

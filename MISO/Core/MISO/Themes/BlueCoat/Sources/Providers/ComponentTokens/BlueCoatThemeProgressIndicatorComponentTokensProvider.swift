@@ -8,6 +8,10 @@ import MISOThemesContract
 // swiftlint:disable type_name
 // swiftlint:disable line_length
 
+/// `BlueCoat` can be considered as default theme for MISO
+/// - Since: 1.0.0
+public typealias DefaultProgressIndicatorComponentTokensProvider = BlueCoatThemeProgressIndicatorComponentTokensProvider
+
 /// A class which wraps all **component  tokens of progress indicators** for *circular progress*  and *linear progress*components.
 /// Contains also references to semantic tokens providers so as to be able to use them to define the component tokens.
 /// This provider should be integrated as a `AllProgressIndicatorComponentTokensProvider` implementation inside `MISOTheme` so as to provide

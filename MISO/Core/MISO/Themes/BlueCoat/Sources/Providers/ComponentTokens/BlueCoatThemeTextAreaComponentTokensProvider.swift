@@ -7,6 +7,10 @@ import MISOThemesContract
 
 // swiftlint:disable type_name
 
+/// `BlueCoat` can be considered as default theme for MISO
+/// - Since: 1.0.0
+public typealias DefaultTextAreaComponentTokensProvider = BlueCoatThemeTextAreaComponentTokensProvider
+
 /// A class which wraps all **component tokens of text area** objects like `MISOTextArea`.
 /// Contains also references to semantic tokens providers so as to be able to use them to define the component tokens.
 /// It implements also the protocol `TextAreaComponentTokens` so as to expose the component tokens for *text area* through any `MISOTheme`.

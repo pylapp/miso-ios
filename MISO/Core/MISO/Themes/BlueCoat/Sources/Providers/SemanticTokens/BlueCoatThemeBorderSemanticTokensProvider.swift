@@ -7,6 +7,10 @@ import MISOThemesContract
 
 // swiftlint:disable type_name
 
+/// `BlueCoat` can be considered as default theme for MISO
+/// - Since: 1.0.0
+public typealias DefaultBorderSemanticTokensProvider = BlueCoatThemeBorderSemanticTokensProvider
+
 /// A class which wraps all **border semantic tokens** and expose them.
 /// This provider should be integrated as a `AllBorderSemanticTokensProvider` implementation inside some `MISOTheme` so as to provide
 /// all tokens to the users.

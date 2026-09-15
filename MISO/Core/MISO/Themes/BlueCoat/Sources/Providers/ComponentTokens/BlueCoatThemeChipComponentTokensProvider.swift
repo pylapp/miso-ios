@@ -5,6 +5,10 @@
 import MISOFoundations
 import MISOThemesContract
 
+/// `BlueCoat` can be considered as default theme for MISO
+/// - Since: 1.0.0
+public typealias DefaultChipComponentTokensProvider = BlueCoatThemeChipComponentTokensProvider
+
 /// A class which wraps all **component  tokens of chip** for *chip* objects like `MISOFilterChip` and `MISOSuggestionChip`.
 /// Contains also references to semantic tokens providers so as to be able to use them to define the component tokens.
 /// This provider should be integrated as a `AllChipComponentTokensProvider` implementation inside `MISOTheme` so as to provide

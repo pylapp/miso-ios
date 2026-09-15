@@ -7,6 +7,10 @@ import MISOThemesContract
 
 // swiftlint:disable type_name
 
+/// `BlueCoat` can be considered as default theme for MISO
+/// - Since: 1.0.0
+public typealias DefaultListItemComponentTokensProvider = BlueCoatThemeListItemComponentTokensProvider
+
 /// A class which wraps all **component tokens** for list item components like `MISOListItem`.
 /// Contains also references to semantic tokens providers so as to be able to use them to define the component tokens.
 /// This provider should be integrated as a `AllListItemComponentTokensProvider` implementation inside `MISOTheme` so as to provide

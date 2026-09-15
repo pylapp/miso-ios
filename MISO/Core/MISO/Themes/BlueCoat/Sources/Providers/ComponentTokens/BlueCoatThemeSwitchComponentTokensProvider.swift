@@ -7,6 +7,10 @@ import MISOThemesContract
 
 // swiftlint:disable type_name
 
+/// `BlueCoat` can be considered as default theme for MISO
+/// - Since: 1.0.0
+public typealias DefaultSwitchComponentTokensProvider = BlueCoatThemeSwitchComponentTokensProvider
+
 /// A class which wraps all **component  tokens of switch** for *switch / toggle* objects like `MISOSwitch`.
 /// Contains also references to semantic tokens providers so as to be able to use them to define the component tokens.
 /// This provider should be integrated as a `AllSwitchComponentTokensProvider` implementation inside `MISOTheme` so as to provide

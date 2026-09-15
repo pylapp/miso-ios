@@ -5,6 +5,10 @@
 import MISOFoundations
 import MISOThemesContract
 
+/// `BlueCoat` can be considered as default theme for MISO
+/// - Since: 1.0.0
+public typealias DefaultBarComponentTokensProvider = BlueCoatThemeBarComponentTokensProvider
+
 /// A class which wraps all **component  tokens of bar**.
 /// Contains also references to semantic tokens providers so as to be able to use them to define the component tokens.
 /// This provider should be integrated as a `AllBarComponentTokensProvider` implementation inside `MISOTheme` so as to provide

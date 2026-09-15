@@ -10,6 +10,10 @@ import SwiftUI
 // swiftlint:disable function_body_length
 // swiftlint:disable line_length
 
+/// `BlueCoat` can be considered as default theme for MISO
+/// - Since: 1.0.0
+public typealias DefaultTheme = BlueCoatTheme
+
 /// This BlueCoat theme is a theme for some specific usages, like for prototyping and design of journeys without any brand-charted theme.
 /// This is an override of the default basic `MISOTheme` for some usages.
 /// It can override any properties from its superclass, and but cannot be derived ; this is not allowed.

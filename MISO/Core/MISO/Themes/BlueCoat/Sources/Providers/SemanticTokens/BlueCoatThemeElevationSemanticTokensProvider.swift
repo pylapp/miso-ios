@@ -7,6 +7,10 @@ import MISOThemesContract
 
 // swiftlint:disable type_name
 
+/// `BlueCoat` can be considered as default theme for MISO
+/// - Since: 1.0.0
+public typealias DefaultElevationSemanticTokensProvider = BlueCoatThemeElevationSemanticTokensProvider
+
 /// A class which wraps all **elevation semantic tokens**, *multiple*, *composite* or not, and expose them.
 /// This provider should be integrated as a `AllElevationSemanticTokensProvider` implementation inside `MISOTheme` so as to provide
 /// all tokens to the users.

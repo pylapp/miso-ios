@@ -7,6 +7,10 @@ import MISOThemesContract
 
 // swiftlint:disable type_name
 
+/// `BlueCoat` can be considered as default theme for MISO
+/// - Since: 1.0.0
+public typealias DefaultRadioButtonComponentTokensProvider = BlueCoatThemeRadioButtonComponentTokensProvider
+
 /// A class which wraps all **component  tokens of radio button** for  *radios* objects
 /// like `MISORadioButton` and `MISORadioButtonItem`.
 /// Contains also references to semantic tokens providers so as to be able to use them to define the component tokens.

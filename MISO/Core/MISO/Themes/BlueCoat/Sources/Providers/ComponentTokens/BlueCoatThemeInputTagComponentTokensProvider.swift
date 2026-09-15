@@ -7,6 +7,10 @@ import MISOThemesContract
 
 // swiftlint:disable type_name
 
+/// `BlueCoat` can be considered as default theme for MISO
+/// - Since: 1.0.0
+public typealias DefaultInputTagComponentTokensProvider = BlueCoatThemeInputTagComponentTokensProvider
+
 /// A class which wraps all **component  tokens of tag input** objects like `MISOInputTag`.
 /// Contains also references to semantic tokens providers so as to be able to use them to define the component tokens.
 /// It implements also the protocol `InputTagComponentTokens` so as to expose the component tokens for *tag inputs* through any `MISOTheme`.

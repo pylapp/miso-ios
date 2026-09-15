@@ -7,6 +7,10 @@ import MISOThemesContract
 
 // swiftlint:disable type_name
 
+/// `BlueCoat` can be considered as default theme for MISO
+/// - Since: 1.0.0
+public typealias DefaultSkeletonComponentTokensProvider = BlueCoatThemeSkeletonComponentTokensProvider
+
 /// A class which wraps all **component  tokens of skeleton** for *skeleton* objects like `MISOSkeleton`.
 /// Contains also references to semantic tokens providers so as to be able to use them to define the component tokens.
 /// This provider should be integrated as a `AllSkeletonComponentTokensProvider` implementation inside `MISOTheme` so as to provide

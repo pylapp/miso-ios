@@ -7,6 +7,10 @@ import MISOThemesContract
 
 // swiftlint:disable type_name
 
+/// `BlueCoat` can be considered as default theme for MISO
+/// - Since: 1.0.0
+public typealias DefaultCheckboxComponentTokensProvider = BlueCoatThemeCheckboxComponentTokensProvider
+
 /// A class which wraps all **component  tokens of checkbox** for  *checkboxes* objects
 /// like `MISOCheckbox` and `MISOCheckboxItem`.
 /// Contains also references to semantic tokens providers so as to be able to use them to define the component tokens.
