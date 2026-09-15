@@ -1,7 +1,7 @@
 # ``MISOTokensComponent``
 
 @Metadata {
-    @PageImage(purpose: icon, source: "ic_design_token_intro")
+    @PageImage(purpose: icon, source: "ic_design_tokens_components_intro")
     @DisplayName("Tokens for components", style: symbol)
     @TitleHeading("Library")
 }

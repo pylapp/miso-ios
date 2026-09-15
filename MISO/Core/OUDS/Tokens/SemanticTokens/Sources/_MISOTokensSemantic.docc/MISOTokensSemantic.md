@@ -1,7 +1,7 @@
 # ``MISOTokensSemantic``
 
 @Metadata {
-    @PageImage(purpose: icon, source: "ic_design_token_intro")
+    @PageImage(purpose: icon, source: "ic_design_tokens_semantics_intro")
     @DisplayName("Tokens for semantics", style: symbol)
     @TitleHeading("Library")
 }
