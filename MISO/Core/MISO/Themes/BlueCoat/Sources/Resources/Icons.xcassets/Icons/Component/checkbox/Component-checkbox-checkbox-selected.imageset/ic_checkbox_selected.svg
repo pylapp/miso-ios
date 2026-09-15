@@ -1,7 +1,0 @@
-<!-- Copyright Pierre-Yves Lapersonne, licensed under Creative Commons Zero --><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-  <mask id="m">
-    <rect width="24" height="24" fill="white"/>
-    <path d="M8 12l3 3 5-5" stroke="black" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  </mask>
-  <rect width="24" height="24" fill="currentColor" mask="url(#m)"/>
-</svg>

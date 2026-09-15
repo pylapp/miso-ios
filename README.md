@@ -136,8 +136,8 @@ As such:
 
 > [!IMPORTANT]
 > This project is a fork from [Orange-OpenSource/ouds-ios](https://github.com/Orange-OpenSource/ouds-ios),
-> but with a lot of refactoring to make the product ligther and not locked
-> by propriertary or branded assets.
+> but with a lot of refactoring to make the product lighter and not locked
+> by proprietary or branded assets.
 > MISO does not replace OUDS, and does not belong to Orange Group.
 > The MIT license of MISO comes from OUDS MIT license.
 
