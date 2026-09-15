@@ -54,4 +54,4 @@ jobs:
       - name: Build documentation
         run: |
           cd scripts
-          yes | ./generateWebDocumentation.sh --libversion=none --nozip
+          yes | ./updateWebDocumentation.sh --libversion=none --nozip
