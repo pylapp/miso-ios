@@ -205,24 +205,14 @@ files_count=`find $DOCUMENTATION_HTML_LOCATION -type f | wc -l | xargs`
 
 _ "👍 Generated '$files_count' files!"
 
-# Step 3 - Add custom assets
-# --------------------------
-
-# CNAME for GitHub Pages etc.
-if [[ $use_git -eq 1 ]]; then
-    _ "👉 Updating CNAME file"
-    echo "$SERVICE_PAGES_DOMAIN" > "$DOCUMENTATION_HTML_LOCATION/CNAME"
-    _ "👍 Updated!"
-fi
-
-# Step 4 - Add hard-coded redirect URL
+# Step 3 - Add hard-coded redirect URL
 # ------------------------------------
 
 # Landing page of generated documentation is broken, real content is in /documentation
 # Override this page and force by code redirection
 echo '<!doctype html><html><head><meta http-equiv="refresh" content="0; URL= https://pylapp.github.io/miso-ios/documentation/"></head><body>Redirecting tohttps://pylapp.github.io/miso-ios/documentation/</body></html>' > "$DOCUMENTATION_HTML_LOCATION/index.html"
 
-# Step 5 - Checkout to service pages dedicated branch (if relevant)
+# Step 4 - Checkout to service pages dedicated branch (if relevant)
 # ------------------------------------------------------------------
 
 # When the files have been generated, stash them, change branch, unstash, add, commit, push then clean
@@ -278,6 +268,7 @@ if [[ $use_git -eq 1 ]]; then
         -type d -name "data" -o \
         -type d -name "documentation" -o \
         -type d -name "images" -o \
+        -type d -name "videos" -o \
         -type d -name "img" -o \
         -type d -name "index" -o \
         -type d -name "js" \) \
@@ -315,17 +306,13 @@ if [[ $use_git -eq 1 ]]; then
     # It seems there is an issue with references of images
     # Need to copy them also in root images folder at least for landing page
     # See https://github.com/swiftlang/swift-docc/issues/1284
-    cp "$DOCS_DIRECTORY/images/MISOThemesContract/ic_unified_ds.png" "$DOCS_DIRECTORY/images"
-    cp "$DOCS_DIRECTORY/images/MISOThemesContract/ic_design_token_intro.png" "$DOCS_DIRECTORY/images"
-    cp "$DOCS_DIRECTORY/images/MISOThemesContract/ic_theme_intro.png" "$DOCS_DIRECTORY/images"
-    cp "$DOCS_DIRECTORY/images/MISOThemesContract/ic_module_intro.png" "$DOCS_DIRECTORY/images"
-    cp "$DOCS_DIRECTORY/images/MISOThemesContract/ic_component_intro.png" "$DOCS_DIRECTORY/images"
+    cp "$DOCS_DIRECTORY/images/MISOThemesContract/ic_logo_miso.png" "$DOCS_DIRECTORY/images"
     cp "$DOCS_DIRECTORY/images/MISOComponents/ic_folder_categories.png" "$DOCS_DIRECTORY/images"
     cp "$DOCS_DIRECTORY/images/MISOFoundations/ic_layers.png" "$DOCS_DIRECTORY/images"
     cp "$DOCS_DIRECTORY/images/MISOModules/ic_modular.png" "$DOCS_DIRECTORY/images"
-    cp "$DOCS_DIRECTORY/images/MISOTokensComponent/ic_design_token_figma_component.png" "$DOCS_DIRECTORY/images"
-    cp "$DOCS_DIRECTORY/images/MISOTokensRaw/ic_design_token_figma_raw.png" "$DOCS_DIRECTORY/images"
-    cp "$DOCS_DIRECTORY/images/MISOTokensSemantic/ic_design_token_figma_semantic.png" "$DOCS_DIRECTORY/images"
+    cp "$DOCS_DIRECTORY/images/MISOTokensComponent/ic_design_tokens_components_intro.png" "$DOCS_DIRECTORY/images"
+    cp "$DOCS_DIRECTORY/images/MISOTokensRaw/ic_design_tokens_raws_intro.png" "$DOCS_DIRECTORY/images"
+    cp "$DOCS_DIRECTORY/images/MISOTokensSemantic/ic_design_tokens_semantics_intro.png" "$DOCS_DIRECTORY/images"
     
     cp "$DOCS_DIRECTORY/images/MISOThemesMISOBlueCoat/ic_theme_bluecoat.png" "$DOCS_DIRECTORY/images"
 
@@ -338,6 +325,7 @@ if [[ $use_git -eq 1 ]]; then
             "$DOCS_DIRECTORY/downloads" \
             "$DOCS_DIRECTORY/tutorials" \
             "$DOCS_DIRECTORY/images" \
+            "$DOCS_DIRECTORY/videos" \
             "$DOCS_DIRECTORY/img" \
             "$DOCS_DIRECTORY/index" \
             "$DOCS_DIRECTORY/js" \
@@ -366,7 +354,7 @@ else
     _ "👍 Ok, just keep documentation here"
 fi
 
-# Step 6 - Compress ZIP (if relevant)
+# Step 5 - Compress ZIP (if relevant)
 # -----------------------------------
 
 # ZIP action must be done before reseting the Git workspace (otherwise everything will be wiped out).
@@ -377,7 +365,7 @@ if [[ $no_zip -eq 0 ]]; then
     _ "👍 Documentation ZIP available at $DOCUMENTATION_ZIP_LOCATION ($size_in_byte bytes)"
 fi
 
-# Step 6b - Resume work on Git branch (if relevant)
+# Step 6 - Resume work on Git branch (if relevant)
 # -------------------------------------------------
 
 if [[ $use_git -eq 1 ]]; then
