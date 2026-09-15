@@ -1,0 +1,8 @@
+<!-- Copyright Pierre-Yves Lapersonne, licensed under Creative Commons Zero --><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <mask id="x-mask">
+    <rect width="24" height="24" fill="white"/>
+    <line x1="15" y1="9" x2="9" y2="15" stroke="black" stroke-width="2" stroke-linecap="round"/>
+    <line x1="9" y1="9" x2="15" y2="15" stroke="black" stroke-width="2" stroke-linecap="round"/>
+  </mask>
+  <circle cx="12" cy="12" r="10" fill="currentColor" mask="url(#x-mask)"/>
+</svg>

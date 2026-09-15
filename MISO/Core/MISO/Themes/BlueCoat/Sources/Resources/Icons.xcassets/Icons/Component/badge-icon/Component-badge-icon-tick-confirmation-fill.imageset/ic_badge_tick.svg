@@ -1,0 +1,7 @@
+<!-- Copyright Pierre-Yves Lapersonne, licensed under Creative Commons Zero --><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <mask id="check-mask">
+    <rect width="24" height="24" fill="white"/>
+    <polyline points="8,12 11,16 16,10" stroke="black" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </mask>
+  <circle cx="12" cy="12" r="10" fill="currentColor" mask="url(#check-mask)"/>
+</svg>

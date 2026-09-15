@@ -7,7 +7,7 @@
 <p align="center">
   🍜 MISO is a library of SwiftUI components (forked from ouds-ios), themes and tools for iOS app development.
   <br>
-  🐙 Miso Is So {Open | Obvious | Original}
+  🐙 Miso Is So {Open | Obvious | Original | Or not}
   <br>
   <a href="https://github.com/pylapp/miso-ios/issues/new?template=bug_report.yml" title="Open an issue on GitHub">Report bug</a>
   ·
@@ -139,8 +139,10 @@ As such:
 > but with a lot of refactoring to make the product ligther and not locked
 > by propriertary or branded assets.
 > MISO does not replace OUDS, and does not belong to Orange Group.
+> The MIT license of MISO comes from OUDS MIT license.
 
-Code released under the [MIT License](https://github.com/pylapp/miso-ios/blob/main/LICENSE).
+Code released under the [MIT License](https://github.com/pylapp/miso-ios/blob/main/LICENSES/LICENSE-MIT.txt).
+Images, illustrations and videos are under [CC0 1.0 Universal](https://github.com/pylapp/miso-ios/blob/main/LICENSES/LICENSE-CC0.txt)
 
 > [!NOTE]
 > Copyright Orange SA (for OUDS specific elements)
