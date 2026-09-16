@@ -9,17 +9,36 @@ set -euo pipefail
 # Configuration
 # -------------
 
-# The name of the Git branch hosting the documentation (e.g. GitHub Pages branch defined in repository).
-# We suppose all the documentation will be in this dedicated branch.
-SERVICE_PAGES_BRANCH="docs"
+# The dedicated GitHub repository hosting the documentation website, and the branch to push to.
+DOCUMENTATION_REPO_URL="git@github.com:pylapp/miso-ios-documentation.git"
+DOCUMENTATION_REPO_BRANCH="main"
 
+# The URL hosting the website (GitHub Pages free tier)
+DOCUMENTATION_URL_ONLINE="https://pylapp.github.io/miso-ios-documentation/"
+
+# Files present in the documentation repository that must NEVER be overwritten
+# by the generated content. They are the "source of truth" version maintained
+# manually in the doc repo. If DocC generated a homonym, it will be discarded.
+PROTECTED_FILES=(
+    "LICENSE"
+    "README.md"
+    ".gitignore"
+    ".mailmap"
+    "_/logo-MISO.png"
+    ".github/workflows/pages.ym"
+)
+
+# For temporary folders
 timestamp=$(date +%s)
 
-# Path where the documentation will be temporary
+# Path where the documentation will be temporary generated
 DOCUMENTATION_HTML_LOCATION="/tmp/miso-docs-$timestamp"
 
-# Relative path for assets on the branch
-DOCS_DIRECTORY=".."
+# Path where the dedicated documentation repository will be cloned
+DOCUMENTATION_REPO_LOCATION="/tmp/miso-ios-documentation-$timestamp"
+
+# Assets on the documentation repository live at its root
+DOCS_DIRECTORY="$DOCUMENTATION_REPO_LOCATION"
 
 # The ZIP containing the generated sources of documentation (for archive).
 DOCUMENTATION_ZIP_NAME="miso-docs-$timestamp.zip"
@@ -38,8 +57,9 @@ on_error_signal() {
     local exit_code=$?
     local line_number=${BASH_LINENO[0]}
     _ "❌  An error occurred with command '$BASH_COMMAND' at line $line_number (exit code: $exit_code). Exits. ($EXIT_ERROR_SIG)" true
-    if [[ $use_git -eq 1 ]]; then
-        clean_repo
+    if [[ ${use_git:-0} -eq 1 && -d "$DOCUMENTATION_REPO_LOCATION" ]]; then
+        _ "🧹 Removing temporary documentation repository clone at '$DOCUMENTATION_REPO_LOCATION'"
+        rm -rf "$DOCUMENTATION_REPO_LOCATION"
     fi
     exit $EXIT_ERROR_SIG
 }
@@ -55,7 +75,7 @@ trap 'on_error_signal' SIGABRT
 _() {
     local message="$1"
     local is_error="${2:-false}"
-    local prefix="🍜 "
+    local prefix="🍊 "
     
     if [[ "$is_error" == "true" ]]; then
         echo "${prefix}❌ ERROR: $message" >&2
@@ -68,21 +88,14 @@ clean_directory() {
     if [ -d "$1" ]; then rm -rf "$1"; fi
 }
 
-clean_repo() {
-    _ "🧹 Cleaning Git repository"
-    git reset --hard
-    git clean -fd
-    git prune
-}
-
 show_help() {
     echo "This script will generate web files (HTML, CSS, JSON, JavaScript) for online documentation for MISO iOS Swift Package"
-    echo "It can also update the Git repository."
+    echo "It can also publish the documentation to the dedicated GitHub repository pylapp/miso-ios-documentation (branch main)."
     echo -e "Usage: $0 [--help] --libversion=VERSION [--usegit | --nozip]\n"
     echo "Options:"
     echo "  --help                Shows this help message."
     echo "  --libversion=VERSION  Specifies the library version to include in HTML page (mandatory)."
-    echo "  --usegit              Specifies to version documentation in the current Git repository and upload (default it does not, only local)."
+    echo "  --usegit              Specifies to push documentation to the dedicated repository $DOCUMENTATION_REPO_URL on branch $DOCUMENTATION_REPO_BRANCH (default it does not, only local)."
     echo "  --nozip               Specifies the ZIP archive of the documentation must not be done (by default it is)."
 }
 
@@ -143,7 +156,7 @@ if [[ "$use_git" -eq 0 && "$no_zip" -eq 1 ]]; then
 fi
 
 # Ask the user if he/she wants to go further (updating documentation updates the production website).
-read -p "🍜 ❓ Do you want to update the documentation? (yes/YES/Y/y): " answer
+read -p "🍊 ❓ Do you want to update the documentation? (yes/YES/Y/y): " answer
 if [[ ! "$answer" =~ ^(yes|YES|Y|y)$ ]]; then
     _ "👋 Bye!"
     exit $EXIT_OK
@@ -157,21 +170,8 @@ start_time=$(date +%s)
 # --------------------------------
 
 if [[ $use_git -eq 1 ]]; then
-    if [ -d "../.git" ]; then
-
-        # Xcode keeps files and dislikes updates of local branches...
-        _ "🚨 You should close Xcode or any software working on this workspace, before going further, just in case of..."
-        _ "Press any key to continue..."
-        read -n 1 -s # Don't care of the input, just want the user be ready in the end.
-    
-        _ "✅ This is a Git repository. Please ensure the credentials you need are ready (SSH, HTTPS, GPG, etc.)"
-        current_branch=$(git rev-parse --abbrev-ref HEAD)
-        _ "🔨 Current Git branch is '$current_branch'"
-        clean_repo # To get rid of unversioned files etc.
-    else
-        _ "This is not a Git repository. Exits. ($EXIT_NOT_GIT_REPO)" true
-        exit $EXIT_NOT_GIT_REPO
-    fi
+    _ "✅ Documentation will be pushed to '$DOCUMENTATION_REPO_URL' on branch '$DOCUMENTATION_REPO_BRANCH'"
+    _ "🔐 Please ensure the credentials you need are ready (SSH, GPG, etc.) to push to this repository"
 fi
 
 # Step 2 - Generate the documentation
@@ -196,10 +196,10 @@ swift package \
     --target MISOFoundationsMISO \
     --output-path "$DOCUMENTATION_HTML_LOCATION" \
     --transform-for-static-hosting \
+    --hosting-base-path "$DOCUMENTATION_URL_ONLINE" \
     --experimental-transform-for-static-hosting-with-content \
     --warnings-as-errors \
     --symbol-graph-minimum-access-level public
-
 
 files_count=`find $DOCUMENTATION_HTML_LOCATION -type f | wc -l | xargs`
 
@@ -210,49 +210,38 @@ _ "👍 Generated '$files_count' files!"
 
 # Landing page of generated documentation is broken, real content is in /documentation
 # Override this page and force by code redirection
-echo '<!doctype html><html><head><meta http-equiv="refresh" content="0; URL= https://pylapp.github.io/miso-ios/documentation/"></head><body>Redirecting tohttps://pylapp.github.io/miso-ios/documentation/</body></html>' > "$DOCUMENTATION_HTML_LOCATION/index.html"
+echo '<!doctype html><html><head><meta http-equiv="refresh" content="0; URL= https://pylapp.github.io/miso-ios-documentation/documentation/"></head><body>Redirecting tohttps://pylapp.github.io/miso-ios-documentation/documentation/</body></html>' > "$DOCUMENTATION_HTML_LOCATION/index.html"
 
-# Step 4 - Checkout to service pages dedicated branch (if relevant)
-# ------------------------------------------------------------------
+# Step 4 - Clone the dedicated documentation repository (if relevant)
+# --------------------------------------------------------------------
 
-# When the files have been generated, stash them, change branch, unstash, add, commit, push then clean
+# The generated files are copied into a fresh clone of the dedicated documentation repository,
+# then committed and pushed on branch $DOCUMENTATION_REPO_BRANCH.
 
 if [[ $use_git -eq 1 ]]; then
-    _ "👉 Versioning documentation in service pages branch (it can take a lot of time)..."
+    _ "👉 Cloning dedicated documentation repository '$DOCUMENTATION_REPO_URL' (branch '$DOCUMENTATION_REPO_BRANCH')..."
 
-    # Git memory boost
-    git config pack.windowMemory "100m"
-    git config pack.packSizeLimit "100m"
-    git config pack.threads "1"
-    git config core.packedGitLimit "128m"
-    git config core.packedGitWindowSize "128m"
-    git config http.postBuffer 524288000
+    clean_directory "$DOCUMENTATION_REPO_LOCATION"
 
-    clean_repo
+    git clone --depth 1 --branch "$DOCUMENTATION_REPO_BRANCH" \
+        "$DOCUMENTATION_REPO_URL" "$DOCUMENTATION_REPO_LOCATION"
 
-    # git config commit.gpgsign false
+    _ "✅ Cloned into '$DOCUMENTATION_REPO_LOCATION'"
 
-    _ "🔨 Checkout service pages branch, align with remote"
+    # Git memory boost, applied to the clone (documentation repository can grow large)
+    git -C "$DOCUMENTATION_REPO_LOCATION" config pack.windowMemory "100m"
+    git -C "$DOCUMENTATION_REPO_LOCATION" config pack.packSizeLimit "100m"
+    git -C "$DOCUMENTATION_REPO_LOCATION" config pack.threads "1"
+    git -C "$DOCUMENTATION_REPO_LOCATION" config core.packedGitLimit "128m"
+    git -C "$DOCUMENTATION_REPO_LOCATION" config core.packedGitWindowSize "128m"
+    git -C "$DOCUMENTATION_REPO_LOCATION" config http.postBuffer 524288000
+
+    git -C "$DOCUMENTATION_REPO_LOCATION" config commit.gpgsign false
+    git -C "$DOCUMENTATION_REPO_LOCATION" config user.name "Pierre-Yves Lapersonne (bot)"
+    git -C "$DOCUMENTATION_REPO_LOCATION" config user.email "dev@pylapersonne.info"
 
     # Clean before all to free memory
-    git gc --auto
-
-    # Check if the local branch exists.
-    if git show-ref --verify --quiet refs/heads/"$SERVICE_PAGES_BRANCH"; then
-        _ "🔨 Checking out local branch '$SERVICE_PAGES_BRANCH'"
-        
-        # Delete current pages branch and create new one (memory cleanup)
-        git branch -D "$SERVICE_PAGES_BRANCH" 2>/dev/null || true
-        git fetch origin "$SERVICE_PAGES_BRANCH"
-        git checkout -b "$SERVICE_PAGES_BRANCH" "origin/$SERVICE_PAGES_BRANCH"
-    else
-        _ "🔨 Local branch '$SERVICE_PAGES_BRANCH' does not exist. Checking out from remote."
-        git fetch origin "$SERVICE_PAGES_BRANCH"
-        git checkout -b "$SERVICE_PAGES_BRANCH" "origin/$SERVICE_PAGES_BRANCH"
-    fi
-
-    _ "✅ Branch '$SERVICE_PAGES_BRANCH' checked out successfully"
-
+    git -C "$DOCUMENTATION_REPO_LOCATION" gc --auto
 
     _ "🔨 Applying changes"
 
@@ -262,11 +251,12 @@ if [[ $use_git -eq 1 ]]; then
     # Do not remove theme-settings.json
     _ "🔨 Cleaning old documentation files"
 
-    # One-line deletion comman
+    # One-line deletion command
     find "$DOCS_DIRECTORY" -mindepth 1 \
         \( -type d -name "css" -o \
         -type d -name "data" -o \
         -type d -name "documentation" -o \
+        -type d -name "downloads" -o \
         -type d -name "images" -o \
         -type d -name "videos" -o \
         -type d -name "img" -o \
@@ -314,25 +304,43 @@ if [[ $use_git -eq 1 ]]; then
     cp "$DOCS_DIRECTORY/images/MISOTokensRaw/ic_design_tokens_raws_intro.png" "$DOCS_DIRECTORY/images"
     cp "$DOCS_DIRECTORY/images/MISOTokensSemantic/ic_design_tokens_semantics_intro.png" "$DOCS_DIRECTORY/images"
     
-    cp "$DOCS_DIRECTORY/images/MISOThemesMISOBlueCoat/ic_theme_bluecoat.png" "$DOCS_DIRECTORY/images"
-
     _ "🔨 Staging changes (~ $files_count files, this may take time)..."
 
-    # One-line add command to minimize number of commands
-    git add "$DOCS_DIRECTORY/css" \
-            "$DOCS_DIRECTORY/data" \
-            "$DOCS_DIRECTORY/documentation" \
-            "$DOCS_DIRECTORY/downloads" \
-            "$DOCS_DIRECTORY/tutorials" \
-            "$DOCS_DIRECTORY/images" \
-            "$DOCS_DIRECTORY/videos" \
-            "$DOCS_DIRECTORY/img" \
-            "$DOCS_DIRECTORY/index" \
-            "$DOCS_DIRECTORY/js" \
-            "$DOCS_DIRECTORY"/*.jpg \
-            "$DOCS_DIRECTORY"/*.json \
-            "$DOCS_DIRECTORY"/*.html \
-            "$DOCS_DIRECTORY/CNAME" 2>/dev/null || true
+    # Move into the clone so that glob patterns (*.jpg, *.json, *.html) are expanded
+    # relative to the documentation repository, not the caller's working directory.
+    pushd "$DOCS_DIRECTORY" > /dev/null
+
+    # Protect files that must keep their versioned content (see PROTECTED_FILES).
+    # - If the file is tracked in the doc repo -> restore it from HEAD (undo any overwrite)
+    # - If the file is not tracked but was produced by DocC -> delete the generated copy
+    _ "🛡️  Protecting files that must not be overwritten by generated content"
+    for f in "${PROTECTED_FILES[@]}"; do
+        if git ls-files --error-unmatch -- "$f" > /dev/null 2>&1; then
+            git checkout HEAD -- "$f"
+            _ "   ✅ Restored '$f' from HEAD"
+        elif [[ -e "$f" ]]; then
+            rm -f "$f"
+            _ "   🗑️  Removed generated (untracked) '$f'"
+        else
+            _ "   ℹ️  '$f' not present, nothing to do"
+        fi
+    done
+
+    # Stage every change in the documentation clone:
+    #   - new files (css/, data/, documentation/, images/, js/, CNAME, *.html, *.json, *.jpg, …)
+    #   - modified files (favicon.ico, favicon.svg, …)
+    #   - deleted files (obsolete assets from previous doc versions)
+    # The clone is freshly created at the beginning of the script, so nothing parasite
+    # can end up here. This avoids maintaining a whitelist that must stay in sync with
+    # what "swift package generate-documentation" happens to produce, and fixes previous
+    # silent failures caused by non-existent pathspecs (e.g. downloads/ or tutorials/).
+    # Use --verbose so the user sees the progress (each file must be hashed by Git);
+    # do NOT redirect stderr to /dev/null and do NOT swallow errors, otherwise a failing
+    # 'git add' would result in an empty index and a misleading "No changes to commit".
+    _ "   ⏳ Running 'git add -A --verbose' — for ~$files_count files this can take several minutes."
+    _ "   Each file must be hashed by Git; progress will scroll below."
+    git add -A --verbose
+    _ "✅ Staging done"
 
     # Check if changes
     if git diff --cached --quiet; then
@@ -341,20 +349,21 @@ if [[ $use_git -eq 1 ]]; then
         changes_count=$(git diff --cached --numstat | wc -l)
         _ "✅ Staged $changes_count changes"
     fi
-    
-    _ "🔨 Committing things (be ready if passwords / passphrases are asked)"
-    commit_message=$(printf "docs: update DocC documentation for version v%s (%s)\n\nUpdate documentation for GitHub pages of version v%s of MISP iOS library (build timestamp %s)\n\nWARNING: This is an automatic commit 🤖" "$lib_version" "$timestamp" "$lib_version" "$timestamp")
-    # git commit -m "$commit_message" --no-gpg-sign
-    git commit -m "$commit_message"
 
-    _ "🔨 Pushing things"
-    git push origin "$SERVICE_PAGES_BRANCH"
+    _ "🔨 Committing things (be ready if passwords / passphrases are asked)"
+    commit_message=$(printf "docs: update DocC documentation for version v%s (%s)\n\nUpdate documentation website for version v%s of MISO iOS library (build timestamp %s)\n\nWARNING: This is an automatic commit 🤖" "$lib_version" "$timestamp" "$lib_version" "$timestamp")
+    git commit -m "$commit_message" --no-gpg-sign
+
+    _ "🔨 Pushing things to '$DOCUMENTATION_REPO_URL' on branch '$DOCUMENTATION_REPO_BRANCH'"
+    git push origin "$DOCUMENTATION_REPO_BRANCH"
+
+    popd > /dev/null
 
 else
     _ "👍 Ok, just keep documentation here"
 fi
 
-# Step 5 - Compress ZIP (if relevant)
+# Step 6 - Compress ZIP (if relevant)
 # -----------------------------------
 
 # ZIP action must be done before reseting the Git workspace (otherwise everything will be wiped out).
@@ -365,17 +374,14 @@ if [[ $no_zip -eq 0 ]]; then
     _ "👍 Documentation ZIP available at $DOCUMENTATION_ZIP_LOCATION ($size_in_byte bytes)"
 fi
 
-# Step 6 - Resume work on Git branch (if relevant)
-# -------------------------------------------------
+# Step 6b - Cleanup temporary documentation repository clone (if relevant)
+# ------------------------------------------------------------------------
 
 if [[ $use_git -eq 1 ]]; then
-    commit_hash=`git rev-parse HEAD`
-    _ "🔨 Going back to previous Git branch"
-    clean_repo
-    git fetch origin
-    git checkout "$current_branch"
-    git reset --hard "origin/$current_branch"
-    _ "👍 Pushed with commit '$commit_hash'"
+    commit_hash=$(git -C "$DOCUMENTATION_REPO_LOCATION" rev-parse HEAD)
+    _ "👍 Pushed with commit '$commit_hash' on branch '$DOCUMENTATION_REPO_BRANCH' of '$DOCUMENTATION_REPO_URL'"
+    _ "🧹 Removing temporary documentation repository clone at '$DOCUMENTATION_REPO_LOCATION'"
+    clean_directory "$DOCUMENTATION_REPO_LOCATION"
 fi
 
 # Step 7 - Metrics and conclusion
@@ -391,8 +397,3 @@ _ "🚀 There were about $files_count files to process!"
 _ "👋 Bye!"
 
 exit $EXIT_OK
-
-# In case of performances issues due to the large amount of files in the Git repository:
-#   run "git clean -fd ; git reset --hard ; rm -rf .build"
-#   Or use "git prune"
-#   Or reclone the repository
