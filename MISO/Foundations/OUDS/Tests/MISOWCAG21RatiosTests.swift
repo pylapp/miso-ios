@@ -11,12 +11,12 @@ import Testing
 // swiftlint:disable type_body_length
 
 /// Struct to test `MISOWCAG21Ratio`.
-/// Use cases picked from issue [#647](https://github.com/Orange-OpenSource/miso-ios/issues/647)
+/// Use cases picked from issue [#647](https://github.com/Orange-OpenSource/ouds-ios/issues/647)
 /// based on Brand Theme v0.14.0 and tokens lib v0.11.0
 /// The aim is to be sure the utils are able to computed the suitable ratios and define whether or not WCAG 2.1 are respected.
 struct MISOWCAG21RatioTests {
 
-    // See https://github.com/Orange-OpenSource/miso-ios/issues/667
+    // See https://github.com/Orange-OpenSource/ouds-ios/issues/667
     #if !os(iOS)
     private static let doesRunOniOS = false
     #else

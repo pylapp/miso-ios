@@ -42,7 +42,6 @@ Can import internal modules, but for developer experience there are umbrella pro
 | Product | Themes | When |
 |---|---|---|
 | `MISOSwiftUI` | All | Default |
-| `MISOSwiftUIBlueCoat` | BlueCoat | Prototyping |
 
 Internal modules: `MISOComponents`, `MISOTokensRaw`, `MISOTokensSemantic`, `MISOTokensComponent`, `MISOThemesMISOBlueCoat`, `MISOFoundations`, etc.
 

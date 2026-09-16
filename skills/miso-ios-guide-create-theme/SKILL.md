@@ -78,9 +78,7 @@ MISOTheme
 ### 2.1 Import
 
 ```swift
-import MISOThemesMISOBlueCoat
-// or the umbrella product that includes it:
-import MISOSwiftUIBlueCoat
+import MISOSwiftUI
 ```
 
 ### 2.2 Override only the providers you need
@@ -589,7 +587,7 @@ Then pass `YourBrandFontRawTokens.familyDefault` as `fontFamily:` in `super.init
 ## 7. Inject the theme in your app
 
 ```swift
-import MISOSwiftUI  // or MISOSwiftUIBlueCoat if subclassing BlueCoatTheme
+import MISOSwiftUI
 
 @main
 struct YourApp: App {

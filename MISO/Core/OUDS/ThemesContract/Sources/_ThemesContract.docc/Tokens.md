@@ -150,8 +150,3 @@ enum BlueCoatBrandColorRawTokens {
 ```
 
 > Note: In most of cases you won't use these raw tokens as they are already in yse by component and semantic tokens
-
-## Add, edit or remove tokens
-
-If you need to add, update or remove tokens, you will have to follow some simple steps.
-You may need to [create an issue](https://github.com/Orange-OpenSource/miso-ios/issues/new?template=token_update.yml) or [a pull request](https://github.com/Orange-OpenSource/miso-ios/pulls) to submit the evolutions you want. [The wiki](https://github.com/Orange-OpenSource/miso-ios/wiki/20-%E2%80%90-How-to-update-tokens) can be also helpful.
