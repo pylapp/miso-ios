@@ -1,6 +1,7 @@
 // Software: MISO iOS
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: Copyright (c) Pierre-Yves Lapersonne
+// ✿✿✿✿ ʕ •ᴥ•ʔ/ ︻デ═一
 
 /// This enum helps to add new **color raw tokens** exclusive to this ``BlueCoatTheme``.
 /// Such tokens are packed in a _Swift enum_ so as to gather them in one object with the suitable namespace and avoid to have just constants in nothing else
