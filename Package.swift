@@ -65,6 +65,9 @@ let package = Package(
             name: "MISOThemesMISOBlueCoat",
             targets: ["MISOThemesMISOBlueCoat"]),
         .library(
+            name: "MISOThemesMISOFoxyRough",
+            targets: ["MISOThemesMISOFoxyRough"]),
+        .library(
             name: "MISOComponentsMISO",
             targets: ["MISOComponentsMISO"]),
         .library(
@@ -107,6 +110,7 @@ let package = Package(
                 "MISOModulesMISO",
                 "MISOComponentsMISO",
                 "MISOThemesMISOBlueCoat",
+                "MISOThemesMISOFoxyRough",
                 "MISOFoundationsMISO",
             ],
             path: "MISO/exported/MISO/Sources"),
@@ -188,6 +192,16 @@ let package = Package(
             name: "MISOThemesMISOBlueCoat-Tests",
             dependencies: ["TestsUtils", "MISOThemesMISOBlueCoat"],
             path: "MISO/Core/MISO/Themes/BlueCoat/Tests"),
+
+        .target(
+            name: "MISOThemesMISOFoxyRough",
+            dependencies: ["MISOThemesMISOBlueCoat"],
+            path: "MISO/Core/MISO/Themes/FoxyRough/Sources",
+            resources: [.process("Resources/")]),
+        .testTarget(
+            name: "MISOThemesMISOFoxyRough-Tests",
+            dependencies: ["TestsUtils", "MISOThemesMISOBlueCoat", "MISOThemesMISOFoxyRough"],
+            path: "MISO/Core/MISO/Themes/FoxyRough/Tests"),
 
         .target(
             name: "MISOComponentsMISO",

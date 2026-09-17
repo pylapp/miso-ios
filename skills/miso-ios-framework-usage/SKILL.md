@@ -43,7 +43,7 @@ Can import internal modules, but for developer experience there are umbrella pro
 |---|---|---|
 | `MISOSwiftUI` | All | Default |
 
-Internal modules: `MISOComponents`, `MISOTokensRaw`, `MISOTokensSemantic`, `MISOTokensComponent`, `MISOThemesMISOBlueCoat`, `MISOFoundations`, etc.
+Internal modules: `MISOComponents`, `MISOTokensRaw`, `MISOTokensSemantic`, `MISOTokensComponent`, `MISOThemesMISOBlueCoat`, `MISOThemesMISOFoxyRough`, `MISOFoundations`, etc.
 
 ---
 
@@ -54,7 +54,11 @@ MISOThemeableView(theme: BlueCoatTheme()) { … }   // inject at root
 @Environment(\.theme) private var theme          // consume anywhere
 ```
 
-Available: `BlueCoatTheme` (only theme shipped by default; define your own by subclassing `MISOTheme` or `BlueCoatTheme`).
+Available out of the box:
+- `BlueCoatTheme` — default theme, for prototyping and mockups without a brand charter.
+- `FoxyRoughTheme` — a second bundled theme ("Lipstick on a Grey Suit"), subclassing `BlueCoatTheme` and overriding only colors, fonts (custom "Winky Rough" TTF family) and the button component, plus a rounder tuning.
+
+Define your own theme by subclassing `MISOTheme` (from scratch) or `BlueCoatTheme` (override only what differs) — see the `miso-ios-guide-create-theme` skill.
 
 ---
 

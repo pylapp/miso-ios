@@ -41,10 +41,6 @@ public typealias DefaultTheme = BlueCoatTheme
 ///     }
 /// ```
 ///
-/// # Theme tuning
-///
-/// This theme cannot be customized more.
-///
 /// ## Tokens versions
 ///
 /// - Core MISO version: 1.11.0

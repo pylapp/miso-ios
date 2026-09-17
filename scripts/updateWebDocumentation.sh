@@ -193,6 +193,7 @@ swift package \
     --target MISOFoundations \
     --target MISOModulesMISO \
     --target MISOThemesMISOBlueCoat \
+    --target MISOThemesMISOFoxyRough \
     --target MISOComponentsMISO \
     --target MISOFoundationsMISO \
     --output-path "$DOCUMENTATION_HTML_LOCATION" \

@@ -10,7 +10,7 @@ import MISOThemesContract
 
 /// `BlueCoat` can be considered as default theme for MISO
 /// - Since: 1.0.0
-public typealias DefaultAButtonomponentTokensProvider = BlueCoatThemeButtonComponentTokensProvider
+public typealias DefaultButtonComponentTokensProvider = BlueCoatThemeButtonComponentTokensProvider
 
 /// A class which wraps all **component  tokens of buttons** for *button* objects like `MISOButton`.
 /// Contains also references to semantic tokens providers so as to be able to use them to define the component tokens.

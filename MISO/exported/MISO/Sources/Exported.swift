@@ -18,3 +18,4 @@
 @_exported import MISOFoundationsMISO
 @_exported import MISOModulesMISO
 @_exported import MISOThemesMISOBlueCoat
+@_exported import MISOThemesMISOFoxyRough
