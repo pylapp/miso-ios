@@ -1,0 +1,54 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "miso.components.splashscreen.buildtype.beta" : {
+      "comment" : "MISO - Components - Splashscreen",
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نسخة تجريبية (بيتا)"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beta build"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version bêta"
+          }
+        }
+      }
+    },
+    "miso.components.splashscreen.buildtype.debug" : {
+      "comment" : "MISO - Components - Splashscreen",
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تصحيح أخطاء البناء المحلي"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Debug local build"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version locale de débogage"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.2"
+}

@@ -4,10 +4,10 @@
 // ✿✿✿✿ ʕ •ᴥ•ʔ/ ︻デ═一
 
 import Foundation
-@testable import MISOModulesAppServices
+@testable import MISOComponentsMISO
 import Testing
 
-struct MISOConfettiViewTests {
+struct ConfettiConfigurationTests {
 
     @Test
     func `animation duration for confettis must be 3.0`() {

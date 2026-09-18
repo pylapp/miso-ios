@@ -5,6 +5,8 @@
 
 import Foundation
 
-/*
-    Will contain in the feature any MISO components not provided by OUDS
- */
+extension Bundle {
+
+    /// The `Bundle` for module of MISO original components
+    public static let MISOComponentsMISO = Bundle.module
+}

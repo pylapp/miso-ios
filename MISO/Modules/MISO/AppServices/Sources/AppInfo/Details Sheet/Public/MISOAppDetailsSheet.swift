@@ -6,7 +6,9 @@
 #if !os(macOS) // To make build of documentation possible
 
 import MISOComponents
+import MISOComponentsMISO
 import MISOFoundationsMISO
+import MISOTokensRaw
 import SwiftUI
 
 /// A sheet view details about the app and a bottom toolbar to report bugs or get source code.
@@ -161,7 +163,7 @@ public struct MISOAppDetailsSheet: View { // TODO: Check with watchOS, visionOS,
                 .resizable()
                 .scaledToFit()
                 .frame(width: 120, height: 120)
-                .clipShape(RoundedRectangle(cornerRadius: 26, style: .continuous))
+                .clipShape(RoundedRectangle(cornerRadius: BorderRawTokens.radius600, style: .continuous))
                 .shadow(radius: 8, y: 4)
                 .accessibilityHidden(true)
             Spacer()

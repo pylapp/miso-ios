@@ -51,21 +51,6 @@ They can be displayed through a dedicated view.
                      termsURL: URL(string: someToSDocumentUrl)!)
 ```
 
-## Display confettis (like easter eggs)
-
-Easter eggs are fun, and confettis too.
-
-```swift
-    someView
-    .overlay {
-        if showConfetti { // Toggle this boolea flag with your logic
-            MISOConfettiView(isActive: $showConfetti)
-            .ignoresSafeArea()
-            .allowsHitTesting(false)
-        }
-    } 
-```
-
 ## App details sheet
 
 Applications have a build number, a version and also a build type (debug, beta, stable).

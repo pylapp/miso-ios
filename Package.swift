@@ -211,7 +211,12 @@ let package = Package(
         .target(
             name: "MISOComponentsMISO",
             dependencies: ["MISOComponents"],
-            path: "MISO/Core/MISO/Components/Sources"),
+            path: "MISO/Core/MISO/Components/Sources",
+            resources: [.process("Resources/")]),
+        .testTarget(
+            name: "MISOComponentsMISO-Tests",
+            dependencies: ["TestsUtils", "MISOComponentsMISO"],
+            path: "MISO/Core/MISO/Components/Tests"),
 
         .target(
             name: "MISOFoundationsMISO",
