@@ -35,7 +35,7 @@ import SwiftUI
 /// - Since: 1.1.0
 @Observable
 @MainActor
-@available(iOS 17.0, macOS 14.0, *)
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, *)
 public final class MISOAppStoreUpdateViewModel {
 
     // MARK: - Properties

@@ -3,6 +3,8 @@
 // SPDX-FileCopyrightText: Copyright (c) Pierre-Yves Lapersonne
 // ✿✿✿✿ ʕ •ᴥ•ʔ/ ︻デ═一
 
+#if !os(macOS)
+
 import MISOComponents
 import SwiftUI
 
@@ -37,6 +39,7 @@ import SwiftUI
 /// ```
 ///
 /// - Since: 1.1.0
+@available(tvOS, unavailable)
 public struct MISOOnboardingView: View {
 
     // MARK: - Properties
@@ -201,3 +204,4 @@ public struct MISOOnboardingView: View {
     }
     // swiftlint:enable force_unwrapping
 }
+#endif

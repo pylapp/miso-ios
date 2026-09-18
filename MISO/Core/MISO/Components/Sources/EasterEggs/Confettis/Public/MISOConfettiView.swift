@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright (c) Pierre-Yves Lapersonne
 // ✿✿✿✿ ʕ •ᴥ•ʔ/ ︻デ═一
 
-#if !os(macOS) // To make build of documentation possible
+#if !os(macOS) && !os(tvOS) && !os(visionOS) && !os(watchOS)
 import SwiftUI
 import UIKit
 
@@ -34,7 +34,10 @@ import UIKit
 /// - Since: 1.1.0
 @available(iOS 15, *)
 @available(macOS, unavailable) // Need to find something else than Safari View stuff
-public struct MISOConfettiView: View { // TODO: Check with watchOS, visionOS, tvOS, iPadOS
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+@available(watchOS, unavailable)
+public struct MISOConfettiView: View {
 
     // MARK: - Properties
 
