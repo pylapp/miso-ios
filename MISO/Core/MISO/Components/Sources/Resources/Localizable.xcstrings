@@ -1,6 +1,78 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "miso.components.onboarding.back" : {
+      "comment" : "MISO - Components - Onboarding",
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "خلف"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Back"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Précédent"
+          }
+        }
+      }
+    },
+    "miso.components.onboarding.done" : {
+      "comment" : "MISO - Components - Onboarding",
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "منتهي"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suivant"
+          }
+        }
+      }
+    },
+    "miso.components.onboarding.next" : {
+      "comment" : "MISO - Components - Onboarding",
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "التالي"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terminé"
+          }
+        }
+      }
+    },
     "miso.components.splashscreen.buildtype.beta" : {
       "comment" : "MISO - Components - Splashscreen",
       "extractionState" : "manual",

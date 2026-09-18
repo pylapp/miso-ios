@@ -36,3 +36,33 @@ A splash screen is an element to display quickly in fullscreen when the app star
         // Action to done with splash screen is done
     }    
 ```
+
+## Onboarding
+
+Onboarding users to the app can be very useful to introduce key concepts and features.
+
+```swift
+    // Define the pages
+    private var onboardingPages: [MISOOnboardingPage] {
+        [
+         MISOOnboardingPage(
+            image: Image(systemName: "hand.wave"),
+            itle: Text("onboarding.page1.title"),
+            description: Text("onboarding.page1.description")),
+         MISOOnboardingPage(
+            image: Image(systemName: "arrow.left.arrow.right"),
+            title: Text("onboarding.page2.title"),
+            description: Text("onboarding.page2.description")),
+         MISOOnboardingPage(
+            image: Image(systemName: "cpu"),
+            title: Text("onboarding.page3.title"),
+             description: Text("onboarding.page3.description"))
+         ]
+    }
+
+    // Add to the view
+    MISOOnboardingView(pages: onboardingPages) {
+        // Action to do when the onboarding is done
+    }
+```
+

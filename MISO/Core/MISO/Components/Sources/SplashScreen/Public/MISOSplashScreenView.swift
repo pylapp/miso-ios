@@ -121,6 +121,6 @@ public struct MISOSplashScreenView: View {
 
     /// Background colour adapts to the current colour scheme.
     private var backgroundColor: Color {
-        theme.colors.contentBrandPrimary.color(for: colorScheme)
+        theme.colors.actionEnabled.color(for: colorScheme)
     }
 }

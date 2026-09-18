@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Onboarding view
 - Splash screen component
 - Developer details in app details view in AppServices module 
 - App details view in AppServices module 
