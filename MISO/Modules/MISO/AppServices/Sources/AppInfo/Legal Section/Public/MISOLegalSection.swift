@@ -3,7 +3,8 @@
 // SPDX-FileCopyrightText: Copyright (c) Pierre-Yves Lapersonne
 // ✿✿✿✿ ʕ •ᴥ•ʔ/ ︻デ═一
 
-#if os(iOS)
+#if !os(macOS) // To make build of documentation possible
+
 import MISOComponents
 import MISOFoundationsMISO
 import MISOThemesContract

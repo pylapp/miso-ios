@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright (c) Pierre-Yves Lapersonne
 // ✿✿✿✿ ʕ •ᴥ•ʔ/ ︻デ═一
 
-#if canImport(UIKit)
+#if !os(macOS) // To make build of documentation possible
 import SwiftUI
 import UIKit
 
@@ -44,11 +44,6 @@ public struct MISOConfettiView: View { // TODO: Check with watchOS, visionOS, tv
     @State private var startDate: Date
     @State private var isRunning: Bool
 
-    // MARK: - Configuration
-
-    public static let animationDuration: Double = 3.0
-    public static let particleCount = 120
-
     // MARK: - Initializer
 
     public init(isActive: Binding<Bool>) {
@@ -64,7 +59,7 @@ public struct MISOConfettiView: View { // TODO: Check with watchOS, visionOS, tv
         TimelineView(.animation(minimumInterval: 1 / 60, paused: !isRunning)) { timeline in
             Canvas { context, size in
                 let elapsed = timeline.date.timeIntervalSince(startDate)
-                let progress = min(elapsed / Self.animationDuration, 1)
+                let progress = min(elapsed / ConfettiConfiguration.ANIMATION_DURATION, 1)
 
                 for particle in particles {
                     let x = (particle.x + particle.velocityX * elapsed) * size.width
@@ -99,7 +94,7 @@ public struct MISOConfettiView: View { // TODO: Check with watchOS, visionOS, tv
     // MARK: - Private
 
     private func launch() {
-        particles = (0 ..< Self.particleCount).map { _ in ConfettiParticle.random() }
+        particles = (0 ..< ConfettiConfiguration.PARTICLE_COUNT).map { _ in ConfettiParticle.random() }
         startDate = .now
         isRunning = true
 
@@ -134,9 +129,9 @@ public struct MISOConfettiView: View { // TODO: Check with watchOS, visionOS, tv
             impact.impactOccurred()
 
             if #available(iOS 16.0, *) {
-                try? await Task.sleep(for: .seconds(Self.animationDuration - 0.9))
+                try? await Task.sleep(for: .seconds(ConfettiConfiguration.ANIMATION_DURATION - 0.9))
             } else {
-                let seconds = Self.animationDuration - 0.9
+                let seconds = ConfettiConfiguration.ANIMATION_DURATION - 0.9
                 if seconds > 0 {
                     try? await Task.sleep(nanoseconds: UInt64(seconds * 1_000_000_000))
                 }
@@ -147,5 +142,13 @@ public struct MISOConfettiView: View { // TODO: Check with watchOS, visionOS, tv
             particles = []
         }
     }
+}
+
+// MARK: - Extension of Notification
+
+extension Notification.Name {
+
+    /// Posted when the easter egg confetti is triggered.
+    public static let easterEggConfettiFound = Notification.Name("miso.easterEggFound.confetti")
 }
 #endif

@@ -3,6 +3,8 @@
 // SPDX-FileCopyrightText: Copyright (c) Pierre-Yves Lapersonne
 // ✿✿✿✿ ʕ •ᴥ•ʔ/ ︻デ═一
 
+import Foundation
+
 #if os(iOS)
 import SafariServices
 import SwiftUI
@@ -26,6 +28,7 @@ public struct SafariView: UIViewControllerRepresentable {
 
     public func updateUIViewController(_ uiViewController: SFSafariViewController, context: Context) {}
 }
+#endif
 
 // MARK: - Identifiable URL
 
@@ -41,4 +44,3 @@ public struct IdentifiableURL: Identifiable {
         self.url = url
     }
 }
-#endif

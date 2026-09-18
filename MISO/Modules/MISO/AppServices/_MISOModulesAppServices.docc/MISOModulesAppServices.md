@@ -65,3 +65,23 @@ Easter eggs are fun, and confettis too.
         }
     } 
 ```
+
+## App details sheet
+
+Applications have a build number, a version and also a build type (debug, beta, stable).
+Open source applications should also open their bug tracker and redirect the users to their source code.
+The ``MISOAppDetailsSheet`` can do that.
+
+```swift
+.sheet(isPresented: $isAboutSheetPresented) {
+    MISOAppDetailsSheet(bugReportURL: URL(string: urlToBugTracker)!,
+                        sourceCodeURL: URL(string: urlToSourceCode!)
+}
+```
+
+Several elements msut be defined in the app Info.plist:
+- **CFBundleDisplayName:** App name
+- **CFBundleShortVersionString**: Marketing version of the app
+- **CFBundleVersion:** Build number of the app
+- **MISO_ForApp_ReleaseTag**: The release tag, e.g. 1.2.3-rc.4
+- **MISO_ForApp_BuildType**: In "debug", "beta (TestFlight)", and "stable (AppStore)"
