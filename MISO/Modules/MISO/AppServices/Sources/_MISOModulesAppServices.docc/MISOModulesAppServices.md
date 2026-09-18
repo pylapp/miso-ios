@@ -59,7 +59,7 @@ They can be displayed through a dedicated view.
 
 Applications have a build number, a version and also a build type (debug, beta, stable).
 Open source applications should also open their bug tracker and redirect the users to their source code.
-The ``MISOAppDetailsSheet`` can do that.
+The `MISOAppDetailsSheet` can do that.
 
 ```swift
     let myAppURLS = MISOAppDetailsURL(bugReport: issueTrackerURL, sourceCode: forgeURL)
