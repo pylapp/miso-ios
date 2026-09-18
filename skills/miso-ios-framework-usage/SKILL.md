@@ -356,7 +356,7 @@ let theme = BlueCoatTheme(fontFamily: localizedHelveticaFont())
 
 ## 12. Component skills
 
-Load the matching skill for the component family you need. Each family skill mirrors `MISO/Core/Components/Sources/<Family>/` in the repo.
+Load the matching skill for the component family you need. Each family skill mirrors `MISO/Core/OUDS/Components/Sources/<Family>/` in the repo — these families are inherited from the OUDS upstream project.
 
 | Family | Skill | Components |
 |---|---|---|
@@ -368,5 +368,12 @@ Load the matching skill for the component family you need. Each family skill mir
 | Indicators | `miso-ios-components-indicators` | MISOBadge*, MISOTag, MISOInputTag, MISOCircularProgressIndicator, MISOLinearProgressIndicator |
 | Layouts | `miso-ios-components-layouts` | MISOColoredSurface, MISOHorizontalDivider, MISOVerticalDivider |
 | Navigations | `miso-ios-components-navigations` | MISOLink, MISOTabBar, MISOToolBarItem / `toolBarTop` / `toolBarBottom` |
+
+MISO also ships components and modules that are **exclusive to MISO** (not inherited from OUDS):
+
+| Family | Skill | Components / types | Source |
+|---|---|---|---|
+| Exclusive components | `miso-ios-components-exclusive` | MISOOnboardingView / MISOOnboardingPage, MISOSplashScreenView, MISOConfettiView | `MISOComponentsMISO` (`MISO/Core/MISO/Components/Sources/`) |
+| Exclusive module | `miso-ios-module-exclusive` | MISOAppDetailsSheet / MISOAppDetailsURL / MISOAppEditor, MISOLegalSection, MISOAppStoreUpdateViewModel | `MISOModulesAppServices` (`MISO/Modules/MISO/AppServices/Sources/`) |
 
 ---

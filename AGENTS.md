@@ -21,7 +21,7 @@ Load skills on demand for detailed guidance:
 Framework:
 - **`miso-ios-framework-usage`** — setup and shared reference: imports, themes, token namespaces, view modifiers, image rules, shared control patterns, custom fonts. Load this first when any MISO code is involved.
 
-Components:
+Components (inherited from the OUDS upstream project):
 - **`miso-ios-components-actions`** — MISOButton
 - **`miso-ios-components-content-display`** — MISOBulletList
 - **`miso-ios-components-controls`** — Checkbox, Radio, Switch, Chips, PinCodeInput, PasswordInput, TextInput, TextArea
@@ -30,6 +30,10 @@ Components:
 - **`miso-ios-components-indicators`** — MISOBadge, MISOTag, MISOInputTag, MISOCircularProgressIndicator
 - **`miso-ios-components-layouts`** — MISOColoredSurface, MISOHorizontalDivider, MISOVerticalDivider
 - **`miso-ios-components-navigations`** — MISOLink, MISOTabBar, Toolbars (MISOToolBarItem, `toolBarTop`, `toolBarBottom`)
+
+Components and modules (exclusive to MISO, not inherited from OUDS):
+- **`miso-ios-components-exclusive`** — MISOOnboardingView / MISOOnboardingPage, MISOSplashScreenView, MISOConfettiView
+- **`miso-ios-module-exclusive`** — MISOAppDetailsSheet / MISOAppDetailsURL / MISOAppEditor, MISOLegalSection, MISOAppStoreUpdateViewModel
 
 Guides:
 - **`miso-ios-guide-vocabulary`** — glossary of MISO-specific terms (tokenator, token types, theme, …)
@@ -46,7 +50,7 @@ Guides:
 ## Critical rules
 
 - Always load the **`miso-ios-guide-vocabulary`** skill before discussing tokens or themes.
-- Always load the **`miso-ios-framework-usage`** skill first before writing or reviewing any code that uses MISO. Then also load the matching **`miso-ios-components-<family>`** skill (`actions`, `content-display`, `controls`, `dialogs`, `foundations`, `indicators`, `layouts`, `navigations`) for the specific component family you are working with.
+- Always load the **`miso-ios-framework-usage`** skill first before writing or reviewing any code that uses MISO. Then also load the matching **`miso-ios-components-<family>`** skill (`actions`, `content-display`, `controls`, `dialogs`, `foundations`, `indicators`, `layouts`, `navigations`) for the specific component family you are working with, or **`miso-ios-components-exclusive`** / **`miso-ios-modules-exclusive`** for MISO-only components and modules.
 - Always load the **`miso-ios-guide-create-theme`** skill when the user wants to create a custom MISO theme or brand theme.
 - Before committing: format → build → fix errors → run tests → lint (see `.github/copilot-instructions.md` §3).
 - Use `#available` for iOS 26 SDK APIs (min deployment is iOS 15).
