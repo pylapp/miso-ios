@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Developer details in app details view in AppServices module 
 - App details view in AppServices module 
 - Conffetti view in AppServices module
 - View to display legal information in AppServices module

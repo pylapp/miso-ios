@@ -73,10 +73,13 @@ Open source applications should also open their bug tracker and redirect the use
 The ``MISOAppDetailsSheet`` can do that.
 
 ```swift
-.sheet(isPresented: $isAboutSheetPresented) {
-    MISOAppDetailsSheet(bugReportURL: URL(string: urlToBugTracker)!,
-                        sourceCodeURL: URL(string: urlToSourceCode!)
-}
+    let myAppURLS = MISOAppDetailsURL(bugReport: issueTrackerURL, sourceCode: forgeURL)
+    let myAppEditor = MISOAppEditor(name: someName, website: websiteReference, mastodon: mastodonReference)
+
+    SomeView()
+        .sheet(isPresented: $isAboutSheetPresented) {
+            MISOAppDetailsSheet(appURLs: myAppURLS, editor: myAppEditor)
+        }
 ```
 
 Several elements msut be defined in the app Info.plist:

@@ -257,7 +257,7 @@
       }
     },
     "miso.module.appservices.settings.about.buildtype.label.stable" : {
-      "comment" : "miso.module.appservices.settings.toolbar.systemAppSettings",
+      "comment" : "MISO - Modules - AppServices - App Info",
       "extractionState" : "manual",
       "localizations" : {
         "ar" : {
@@ -300,6 +300,60 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "AppStore (stable)"
+          }
+        }
+      }
+    },
+    "miso.module.appservices.settings.about.editor.mastodon" : {
+      "comment" : "MISO - Modules - AppServices - App Info",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodon"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodon"
+          }
+        }
+      }
+    },
+    "miso.module.appservices.settings.about.editor.title" : {
+      "comment" : "MISO - Modules - AppServices - App Info",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editor of the app"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Éditeur de l’application"
+          }
+        }
+      }
+    },
+    "miso.module.appservices.settings.about.editor.website" : {
+      "comment" : "MISO - Modules - AppServices - App Info",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Website"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Site web"
           }
         }
       }

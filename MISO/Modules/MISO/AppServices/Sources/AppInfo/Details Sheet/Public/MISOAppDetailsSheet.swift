@@ -22,9 +22,12 @@ import SwiftUI
 /// # Code samples
 ///
 /// ```swift
+///     let myAppURLS = MISOAppDetailsURL(bugReport: issueTrackerURL, sourceCode: forgeURL)
+///     let myAppEditor = MISOAppEditor(name: someName, website: websiteReference, mastodon: mastodonReference)
+///
+///     SomeView()
 ///     .sheet(isPresented: $isAboutSheetPresented) {
-///         MISOAppDetailsSheet(bugReportURL: URL(string: urlToBugTracker)!,
-///                             sourceCodeURL: URL(string: urlToSourceCode!)
+///         MISOAppDetailsSheet(appURLs: myAppURLS, editor: myAppEditor)
 ///     }
 /// ```
 ///
@@ -41,11 +44,11 @@ public struct MISOAppDetailsSheet: View { // TODO: Check with watchOS, visionOS,
     /// URL to open in the in-app ``SafariView`` sheet.
     @State private var safariURL: IdentifiableURL?
 
-    /// URL for bug reports
-    private let bugReportURL: URL
+    /// Useful URL for the app
+    private let appURLs: MISOAppDetailsURL
 
-    /// URL for source code
-    private let sourceCodeURL: URL
+    /// App editor information
+    private let appEditor: MISOAppEditor
 
     @Environment(\.theme) private var theme
     @Environment(\.openURL) private var openURL
@@ -55,13 +58,15 @@ public struct MISOAppDetailsSheet: View { // TODO: Check with watchOS, visionOS,
     /// Initializees the sheet for app details
     ///
     /// - Parameters:
-    ///    - bugReportURL: URL to report a bug
-    ///    - sourceCodeURL: URL to get the source code
-    public init(bugReportURL: URL, sourceCodeURL: URL) {
+    ///    - appURL: Useful URL for the app
+    ///    - appEditor: App editor information
+    public init(appURLs: MISOAppDetailsURL,
+                appEditor: MISOAppEditor)
+    {
         showConfetti = false
         safariURL = nil
-        self.bugReportURL = bugReportURL
-        self.sourceCodeURL = sourceCodeURL
+        self.appURLs = appURLs
+        self.appEditor = appEditor
     }
 
     // MARK: - Body
@@ -71,8 +76,9 @@ public struct MISOAppDetailsSheet: View { // TODO: Check with watchOS, visionOS,
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: theme.spaces.fixedLarge) {
-                    aboutSection
+                    developerSection
                     Spacer(minLength: theme.spaces.fixedLarge)
+                    aboutSection
                 }
                 .padding(theme.spaces.fixedMedium)
             }
@@ -101,7 +107,7 @@ public struct MISOAppDetailsSheet: View { // TODO: Check with watchOS, visionOS,
                         accessibilityLabel: String(localized: "miso.module.appservices.settings.toolbar.bug",
                                                    bundle: Bundle.MISOModulesAppServices))
                     {
-                        safariURL = IdentifiableURL(bugReportURL)
+                        safariURL = IdentifiableURL(appURLs.bugReport)
                     }
                     MISOToolBarItem(
                         // swiftlint:disable:next accessibility_label_for_image
@@ -109,7 +115,7 @@ public struct MISOAppDetailsSheet: View { // TODO: Check with watchOS, visionOS,
                         accessibilityLabel: String(localized: "miso.module.appservices.settings.toolbar.sourceCode",
                                                    bundle: Bundle.MISOModulesAppServices))
                     {
-                        safariURL = IdentifiableURL(sourceCodeURL)
+                        safariURL = IdentifiableURL(appURLs.sourceCode)
                     }
                 },
                 trailingItems: {
@@ -166,6 +172,47 @@ public struct MISOAppDetailsSheet: View { // TODO: Check with watchOS, visionOS,
             BuildTypeRow(
                 buildTypeInfo: BundleInfo.buildTypeInfo,
                 showConfetti: $showConfetti)
+        }
+    }
+
+    // MARK: - Developer section
+
+    private var developerSection: some View {
+        VStack(alignment: .leading, spacing: theme.spaces.fixedMedium) {
+            Text("miso.module.appservices.settings.about.editor.title",
+                 bundle: Bundle.MISOModulesAppServices)
+                .headingSmall(theme)
+                .foregroundStyle(theme.colors.contentDefault)
+
+            VStack(alignment: .leading, spacing: theme.spaces.fixedSmall) {
+                Text(appEditor.name)
+                    .bodyStrongLarge(theme)
+                    .foregroundStyle(theme.colors.contentDefault)
+
+                MISOLink(
+                    "miso.module.appservices.settings.about.editor.website",
+                    bundle: Bundle.MISOModulesAppServices,
+                    image: MISOImage(asset: appEditor.website.logo, renderingMode: .original),
+                    size: .default)
+                {
+                    safariURL = IdentifiableURL(appEditor.website.url)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+                MISOLink(
+                    "miso.module.appservices.settings.about.editor.mastodon",
+                    bundle: Bundle.MISOModulesAppServices,
+                    image: MISOImage(asset: appEditor.mastodon.logo, renderingMode: .original),
+                    size: .default)
+                {
+                    safariURL = IdentifiableURL(appEditor.mastodon.url)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .padding(theme.spaces.fixedMedium)
+            .background(
+                RoundedRectangle(cornerRadius: theme.borders.radiusMedium)
+                    .fill(Color(uiColor: .secondarySystemGroupedBackground)))
         }
     }
 
