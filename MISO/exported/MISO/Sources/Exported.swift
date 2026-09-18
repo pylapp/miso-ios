@@ -16,6 +16,6 @@
 
 @_exported import MISOComponentsMISO
 @_exported import MISOFoundationsMISO
-@_exported import MISOModulesMISO
+@_exported import MISOModulesAppServices
 @_exported import MISOThemesMISOBlueCoat
 @_exported import MISOThemesMISOFoxyRough

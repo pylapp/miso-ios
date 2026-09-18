@@ -191,7 +191,7 @@ swift package \
     --target MISOTokensSemantic \
     --target MISOTokensRaw \
     --target MISOFoundations \
-    --target MISOModulesMISO \
+    --target MISOModulesAppServices \
     --target MISOThemesMISOBlueCoat \
     --target MISOThemesMISOFoxyRough \
     --target MISOComponentsMISO \

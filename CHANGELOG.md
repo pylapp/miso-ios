@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- App Store update check
 - `FoxyRough` theme
 
 ## [1.0.0](https://github.com/pylapp/miso-ios/releases/tag/1.0.0) - 2026-09-16

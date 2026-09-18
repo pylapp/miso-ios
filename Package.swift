@@ -59,8 +59,8 @@ let package = Package(
         // MARK: Atomic products (MISO)
 
         .library(
-            name: "MISOModulesMISO",
-            targets: ["MISOModulesMISO"]),
+            name: "MISOModulesAppServices",
+            targets: ["MISOModulesAppServices"]),
         .library(
             name: "MISOThemesMISOBlueCoat",
             targets: ["MISOThemesMISOBlueCoat"]),
@@ -107,7 +107,7 @@ let package = Package(
                 "MISOTokensSemantic",
                 "MISOTokensRaw",
                 "MISOFoundations",
-                "MISOModulesMISO",
+                "MISOModulesAppServices",
                 "MISOComponentsMISO",
                 "MISOThemesMISOBlueCoat",
                 "MISOThemesMISOFoxyRough",
@@ -179,9 +179,13 @@ let package = Package(
         // MARK: Atomic targets (MISO)
 
         .target(
-            name: "MISOModulesMISO",
+            name: "MISOModulesAppServices",
             dependencies: ["MISOComponents", "MISOComponentsMISO"],
-            path: "MISO/Modules/MISO/Sources"),
+            path: "MISO/Modules/MISO/AppServices/Sources"),
+        .testTarget(
+            name: "MISOModulesAppServices-Tests",
+            dependencies: ["TestsUtils", "MISOModulesAppServices"],
+            path: "MISO/Modules/MISO/AppServices/Tests"),
 
         .target(
             name: "MISOThemesMISOBlueCoat",
