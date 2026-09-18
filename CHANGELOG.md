@@ -8,7 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- App Store update check
+- Conffetti view in AppServices module
+- View to display legal information in AppServices module
+- App Store update check in AppServices module
 - `FoxyRough` theme
 
 ## [1.0.0](https://github.com/pylapp/miso-ios/releases/tag/1.0.0) - 2026-09-16

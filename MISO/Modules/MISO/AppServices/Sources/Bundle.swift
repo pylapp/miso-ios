@@ -5,6 +5,8 @@
 
 import Foundation
 
-/*
-    Will contain in the feature any MISO foundations utils not provided by OUDS
- */
+extension Bundle {
+
+    /// The `Bundle` for AppServices MISO module, useful to find resources
+    public static let MISOModulesAppServices = Bundle.module
+}

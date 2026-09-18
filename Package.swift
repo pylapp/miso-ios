@@ -180,8 +180,9 @@ let package = Package(
 
         .target(
             name: "MISOModulesAppServices",
-            dependencies: ["MISOComponents", "MISOComponentsMISO"],
-            path: "MISO/Modules/MISO/AppServices/Sources"),
+            dependencies: ["MISOComponents", "MISOComponentsMISO", "MISOThemesContract", "MISOFoundationsMISO"],
+            path: "MISO/Modules/MISO/AppServices/Sources",
+            resources: [.process("Resources/")]),
         .testTarget(
             name: "MISOModulesAppServices-Tests",
             dependencies: ["TestsUtils", "MISOModulesAppServices"],

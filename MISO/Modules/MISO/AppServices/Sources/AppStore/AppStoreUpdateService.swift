@@ -7,7 +7,9 @@ import Foundation
 import MISOFoundations
 
 /// Queries the iTunes Lookup API to detect whether a newer version of the app is available on the App Store.
-public enum AppStoreUpdateService {
+///
+/// - Since:1.1.0
+public enum MISOAppStoreUpdateService {
 
     /// The limit of characters for the release note
     public static let RELEASE_NOTE_MAX_COUNT_LIMIT: UInt = 300

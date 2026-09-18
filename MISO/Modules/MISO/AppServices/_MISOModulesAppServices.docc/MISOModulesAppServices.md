@@ -18,7 +18,7 @@ In addition, applications have build informations and maintainers, and these inf
 In your view, instanciate the dedicated view model:
 
 ```swift
-    @State private var appStoreVM = AppStoreUpdateViewModel(appStoreID: APP_STORE_ID, country: COUNTRY_CODE)    
+    @State private var appStoreVM = MISOAppStoreUpdateViewModel(appStoreID: APP_STORE_ID, country: COUNTRY_CODE)    
 ```
 
 It will automatically check for App Store updates.
@@ -39,4 +39,29 @@ Then, in your view:
             Text(appStoreVM.alertMessage)
         }
     }    
+```
+
+## Display legal information
+
+App should have privacy statement and terms of use document.
+They can be displayed through a dedicated view.
+
+```swift
+    MISOLegalSection(privacyURL: URL(string: somePrivacyDocumentUrl)!,
+                     termsURL: URL(string: someToSDocumentUrl)!)
+```
+
+## Display confettis (like easter eggs)
+
+Easter eggs are fun, and confettis too.
+
+```swift
+    someView
+    .overlay {
+        if showConfetti { // Toggle this boolea flag with your logic
+            MISOConfettiView(isActive: $showConfetti)
+            .ignoresSafeArea()
+            .allowsHitTesting(false)
+        }
+    } 
 ```
