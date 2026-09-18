@@ -14,6 +14,8 @@
   <a href="https://github.com/pylapp/miso-ios/wiki" title="Swift library wiki">Wiki</a>
   ·
   <a href="https://github.com/pylapp/miso-ios-demo" title="Demo app GitHub project of MISO">Demo app</a>
+  ·
+  <a href="https://github.com/pylapp/miso-ios-documentation" title="MISO iOS Swift Package Documentation">Documentation</a>    
 </p>
 
 <p align="center">
