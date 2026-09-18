@@ -44,7 +44,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Suivant"
+            "value" : "Terminé"
           }
         }
       }
@@ -68,7 +68,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Terminé"
+            "value" : "Suivant"
           }
         }
       }

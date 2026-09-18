@@ -12,7 +12,7 @@ import MISOTokensRaw
 import SwiftUI
 
 /// A sheet view details about the app and a bottom toolbar to report bugs or get source code.
-/// Manages also the easter egg with the ``MISOConfettiView``.
+/// Manages also the easter egg with the `MISOConfettiView`.
 ///
 /// This `View` needs some configuration elements from Info.plist:
 /// - **CFBundleDisplayName:** App name
@@ -65,7 +65,7 @@ public struct MISOAppDetailsSheet: View { // TODO: Check with watchOS, visionOS,
     ///
     /// - Parameters:
     ///    - appIcon: Icon, logo of the app
-    ///    - appURL: Useful URL for the app
+    ///    - appURLs: Useful URL for the app
     ///    - appEditor: App editor information
     public init(appIcon: Image,
                 appURLs: MISOAppDetailsURL,

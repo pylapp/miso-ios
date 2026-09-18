@@ -45,14 +45,14 @@ struct BuildTypeChip: View {
     // MARK: - Body
 
     var body: some View {
+        let a11yLabel = "\(buildTypeInfo.label) \(buildTypeInfo.detail)"
         MISOInteractionButton(action: handleTap) { buttonState in
             BuildTypeChipBody(
                 buildTypeInfo: buildTypeInfo,
                 interactionState: MISOChipInteractionState(with: buttonState))
                 .accessibilityHidden(true)
         }
-        .accessibilityLabel(
-            Text("\(buildTypeInfo.label) \(buildTypeInfo.detail)"))
+        .accessibilityLabel(Text(a11yLabel))
         .accessibilityHint(Text(String(localized: "miso.module.appservices.settings.about.buildtype.a11y.hint",
                                        bundle: Bundle.MISOModulesAppServices)))
         .accessibilityAddTraits(.isButton)

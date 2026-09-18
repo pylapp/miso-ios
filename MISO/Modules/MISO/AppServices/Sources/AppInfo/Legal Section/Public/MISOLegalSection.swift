@@ -14,7 +14,7 @@ import SwiftUI
 
 /// Legal section with links to the privacy policy and terms of use.
 ///
-/// Opens web links in-app via ``SafariView``.
+/// Opens web links in-app via `SafariView`.
 /// Can be embedded in any view; manages its own in-app browser state.
 ///
 /// # Code samples

@@ -14,6 +14,8 @@ Here are the original components.
 
 ## Display confettis (like easter eggs)
 
+![Plenty of confettis raining in the screen with FoxyRough theme and Brut to Suit app](image_confettis_FoxyRough_BrutToSuit.png)
+
 Easter eggs are fun, and confettis too.
 
 ```swift
@@ -29,6 +31,8 @@ Easter eggs are fun, and confettis too.
 
 ## Splash screen
 
+![Splash screen in debug mode with FoxyRough theme and Brut to Suit app](image_splashscreen_FoxyRough_BrutToSuit.png)
+
 A splash screen is an element to display quickly in fullscreen when the app starts, with the app logo centered.
 
 ```swift
@@ -38,6 +42,8 @@ A splash screen is an element to display quickly in fullscreen when the app star
 ```
 
 ## Onboarding
+
+![Onboarding screen with FoxyRough theme and Brut to Suit app](image_onboarding_FoxyRough_BrutToSuit.png)
 
 Onboarding users to the app can be very useful to introduce key concepts and features.
 

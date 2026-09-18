@@ -2,7 +2,7 @@
 
 @Metadata {
     @PageImage(purpose: icon, source: "ic_modules_miso_appservices")
-    @DisplayName("Modules (MISO)", style: symbol)
+    @DisplayName("MISO Module App Services", style: symbol)
     @TitleHeading("Library")
 }
 
@@ -43,6 +43,8 @@ Then, in your view:
 
 ## Display legal information
 
+![Legal section view with FoxyRough theme and Brut to Suit app](image_legalinfo_FoxyRough_BrutToSuit.png)
+
 App should have privacy statement and terms of use document.
 They can be displayed through a dedicated view.
 
@@ -52,6 +54,8 @@ They can be displayed through a dedicated view.
 ```
 
 ## App details sheet
+
+![App detail sheet with FoxyRough theme and Brut to Suit app](image_appdetails_FoxyRough_BrutToSuit)
 
 Applications have a build number, a version and also a build type (debug, beta, stable).
 Open source applications should also open their bug tracker and redirect the users to their source code.
