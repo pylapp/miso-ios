@@ -22,12 +22,13 @@ import SwiftUI
 /// # Code samples
 ///
 /// ```swift
+///     let myAppLogoImage = Image(decorative: "AppLogo")
 ///     let myAppURLS = MISOAppDetailsURL(bugReport: issueTrackerURL, sourceCode: forgeURL)
 ///     let myAppEditor = MISOAppEditor(name: someName, website: websiteReference, mastodon: mastodonReference)
 ///
 ///     SomeView()
 ///     .sheet(isPresented: $isAboutSheetPresented) {
-///         MISOAppDetailsSheet(appURLs: myAppURLS, editor: myAppEditor)
+///         MISOAppDetailsSheet(appIcon: myAppLogoImage, appURLs: myAppURLS, editor: myAppEditor)
 ///     }
 /// ```
 ///
@@ -44,6 +45,9 @@ public struct MISOAppDetailsSheet: View { // TODO: Check with watchOS, visionOS,
     /// URL to open in the in-app ``SafariView`` sheet.
     @State private var safariURL: IdentifiableURL?
 
+    /// Logo of the app
+    private let appIcon: Image
+
     /// Useful URL for the app
     private let appURLs: MISOAppDetailsURL
 
@@ -58,13 +62,17 @@ public struct MISOAppDetailsSheet: View { // TODO: Check with watchOS, visionOS,
     /// Initializees the sheet for app details
     ///
     /// - Parameters:
+    ///    - appIcon: Icon, logo of the app
     ///    - appURL: Useful URL for the app
     ///    - appEditor: App editor information
-    public init(appURLs: MISOAppDetailsURL,
+    public init(appIcon: Image,
+                appURLs: MISOAppDetailsURL,
                 appEditor: MISOAppEditor)
     {
         showConfetti = false
         safariURL = nil
+
+        self.appIcon = appIcon
         self.appURLs = appURLs
         self.appEditor = appEditor
     }
@@ -76,8 +84,8 @@ public struct MISOAppDetailsSheet: View { // TODO: Check with watchOS, visionOS,
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: theme.spaces.fixedLarge) {
+                    imageSection
                     developerSection
-                    Spacer(minLength: theme.spaces.fixedLarge)
                     aboutSection
                 }
                 .padding(theme.spaces.fixedMedium)
@@ -144,6 +152,22 @@ public struct MISOAppDetailsSheet: View { // TODO: Check with watchOS, visionOS,
         }
     }
 
+    // MARK: - Image section
+
+    private var imageSection: some View {
+        HStack {
+            Spacer()
+            appIcon
+                .resizable()
+                .scaledToFit()
+                .frame(width: 120, height: 120)
+                .clipShape(RoundedRectangle(cornerRadius: 26, style: .continuous))
+                .shadow(radius: 8, y: 4)
+                .accessibilityHidden(true)
+            Spacer()
+        }
+    }
+
     // MARK: - About section
 
     private var aboutSection: some View {
@@ -164,7 +188,6 @@ public struct MISOAppDetailsSheet: View { // TODO: Check with watchOS, visionOS,
                                           bundle: Bundle.MISOModulesAppServices), value: tag)
                 }
             }
-            .padding(theme.spaces.fixedMedium)
             .background(
                 RoundedRectangle(cornerRadius: theme.borders.radiusMedium)
                     .fill(Color(uiColor: .secondarySystemGroupedBackground)))

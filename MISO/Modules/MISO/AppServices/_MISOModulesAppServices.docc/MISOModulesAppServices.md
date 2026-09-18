@@ -78,7 +78,7 @@ The ``MISOAppDetailsSheet`` can do that.
 
     SomeView()
         .sheet(isPresented: $isAboutSheetPresented) {
-            MISOAppDetailsSheet(appURLs: myAppURLS, editor: myAppEditor)
+            MISOAppDetailsSheet(appIcon: myAppLogoImage, appURLs: myAppURLS, editor: myAppEditor)
         }
 ```
 
