@@ -37,7 +37,7 @@ struct BuildTypeChip: View {
     let buildTypeInfo: (symbol: String, label: String, detail: String)
 
     /// Set to `true` when 8 taps are reached, triggering the confetti overlay.
-    @Binding var showConfetti: Bool
+    @Binding var actionTriggered: Bool
 
     /// Running count of consecutive taps; resets to 0 after the Easter egg fires.
     @State private var tapCount: Int = 0
@@ -53,8 +53,8 @@ struct BuildTypeChip: View {
                 .accessibilityHidden(true)
         }
         .accessibilityLabel(Text(a11yLabel))
-        .accessibilityHint(Text(String(localized: "miso.module.appservices.settings.about.buildtype.a11y.hint",
-                                       bundle: Bundle.MISOModulesAppServices)))
+        .accessibilityHint(Text(String(localized: "miso.components.eastergg.a11y.hint",
+                                       bundle: Bundle.MISOComponentsMISO)))
         .accessibilityAddTraits(.isButton)
     }
 
@@ -64,7 +64,7 @@ struct BuildTypeChip: View {
         tapCount += 1
         if tapCount >= Self.TAP_COUNT_TO_TRIGGER_EASTER_EGG {
             tapCount = 0
-            showConfetti = true
+            actionTriggered = true
         }
     }
 }

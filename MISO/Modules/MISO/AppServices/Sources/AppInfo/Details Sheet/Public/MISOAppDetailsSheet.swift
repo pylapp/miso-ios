@@ -25,12 +25,17 @@ import SwiftUI
 ///
 /// ```swift
 ///     let myAppLogoImage = Image(decorative: "AppLogo")
-///     let myAppURLS = MISOAppDetailsURL(bugReport: issueTrackerURL, sourceCode: forgeURL)
-///     let myAppEditor = MISOAppEditor(name: someName, website: websiteReference, mastodon: mastodonReference)
+///     let myAppLegalInfo = MISOAppLegalInfo(privacyStatement: privacyStatementURL, termsOfUses: termsOfUsesURL)
+///     let myAppSupportInfo = MISOAppSupportInfo(bugReport: issueTrackerURl, sourceCode: sourceCodeURL),
+///     let myAppEditor = MISOAppEditor(name: editorName, website: (logo: editorLogo, url: editorURL), mastodon: (logo: mastodonLogo, url: editorMastodonURL))
 ///
 ///     SomeView()
 ///     .sheet(isPresented: $isAboutSheetPresented) {
-///         MISOAppDetailsSheet(appIcon: myAppLogoImage, appURLs: myAppURLS, editor: myAppEditor)
+///         MISOAppDetailsSheet(
+///             appIcon: Image(decorative: "Logo"),
+///             legalInfo: myAppLegalInfo,
+///             supportInfo: myAppSupportInfo
+///             editorInfo: myAppEditor)
 ///     }
 /// ```
 ///
@@ -53,33 +58,40 @@ public struct MISOAppDetailsSheet: View {
     /// Logo of the app
     private let appIcon: Image
 
-    /// Useful URL for the app
-    private let appURLs: MISOAppDetailsURL
+    /// Legal resources about the app
+    private let legalInfo: MISOAppLegalInfo
 
-    /// App editor information
-    private let appEditor: MISOAppEditor
+    /// App support resources
+    private let supportInfo: MISOAppSupportInfo
+
+    /// App editor info
+    private let editorInfo: MISOAppEditor
 
     @Environment(\.theme) private var theme
     @Environment(\.openURL) private var openURL
 
     // MARK: - Intializer
 
-    /// Initializees the sheet for app details
+    /// Initializes the sheet for app details.
+    /// Needs some references of user, but is able to extract app metadata like version and build number.
     ///
     /// - Parameters:
     ///    - appIcon: Icon, logo of the app
-    ///    - appURLs: Useful URL for the app
-    ///    - appEditor: App editor information
+    ///    - legalInfo: App legal resources
+    ///    - supportInfo: App support resources
+    ///    - editorInfo: App editor information
     public init(appIcon: Image,
-                appURLs: MISOAppDetailsURL,
-                appEditor: MISOAppEditor)
+                legalInfo: MISOAppLegalInfo,
+                supportInfo: MISOAppSupportInfo,
+                editorInfo: MISOAppEditor)
     {
         showConfetti = false
         safariURL = nil
 
         self.appIcon = appIcon
-        self.appURLs = appURLs
-        self.appEditor = appEditor
+        self.legalInfo = legalInfo
+        self.supportInfo = supportInfo
+        self.editorInfo = editorInfo
     }
 
     // MARK: - Body
@@ -90,8 +102,9 @@ public struct MISOAppDetailsSheet: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: theme.spaces.fixedLarge) {
                     imageSection
-                    developerSection
                     aboutSection
+                    legalSection
+                    developerSection
                 }
                 .padding(theme.spaces.fixedMedium)
             }
@@ -120,7 +133,7 @@ public struct MISOAppDetailsSheet: View {
                         accessibilityLabel: String(localized: "miso.module.appservices.settings.toolbar.bug",
                                                    bundle: Bundle.MISOModulesAppServices))
                     {
-                        safariURL = IdentifiableURL(appURLs.bugReport)
+                        safariURL = IdentifiableURL(supportInfo.bugReport)
                     }
                     MISOToolBarItem(
                         // swiftlint:disable:next accessibility_label_for_image
@@ -128,7 +141,7 @@ public struct MISOAppDetailsSheet: View {
                         accessibilityLabel: String(localized: "miso.module.appservices.settings.toolbar.sourceCode",
                                                    bundle: Bundle.MISOModulesAppServices))
                     {
-                        safariURL = IdentifiableURL(appURLs.sourceCode)
+                        safariURL = IdentifiableURL(supportInfo.sourceCode)
                     }
                 },
                 trailingItems: {
@@ -157,7 +170,7 @@ public struct MISOAppDetailsSheet: View {
         }
     }
 
-    // MARK: - Image section
+    // MARK: - Sections
 
     private var imageSection: some View {
         HStack {
@@ -173,84 +186,20 @@ public struct MISOAppDetailsSheet: View {
         }
     }
 
-    // MARK: - About section
-
     private var aboutSection: some View {
-        VStack(alignment: .leading, spacing: theme.spaces.fixedMedium) {
-            Text(String(localized: "miso.module.appservices.settings.about.app.title",
-                        bundle: Bundle.MISOModulesAppServices))
-                .headingSmall(theme)
-                .foregroundStyle(theme.colors.contentDefault)
-
-            VStack(alignment: .leading, spacing: theme.spaces.fixedSmall) {
-                infoRow(label: String(localized: "miso.module.appservices.settings.about.version",
-                                      bundle: Bundle.MISOModulesAppServices),
-                        value: BundleInfo.appVersion)
-                infoRow(label: String(localized: "miso.module.appservices.settings.about.build",
-                                      bundle: Bundle.MISOModulesAppServices), value: BundleInfo.buildNumber)
-                if let tag = BundleInfo.releaseTag {
-                    infoRow(label: String(localized: "miso.module.appservices.settings.about.tag",
-                                          bundle: Bundle.MISOModulesAppServices), value: tag)
-                }
-            }
-            .background(
-                RoundedRectangle(cornerRadius: theme.borders.radiusMedium)
-                    .fill(Color(uiColor: .secondarySystemGroupedBackground)))
-
-            BuildTypeRow(
-                buildTypeInfo: BundleInfo.buildTypeInfo,
-                showConfetti: $showConfetti)
-        }
+        MISOAppAboutSection(appAbout: MISOAppAbout(version: BuildInfo.appVersion,
+                                                   buildNumber: BuildInfo.buildNumber,
+                                                   buildInfo: BuildInfo.buildTypeInfo,
+                                                   releaseTag: BuildInfo.releaseTag),
+                            actionTriggered: $showConfetti)
     }
-
-    // MARK: - Developer section
 
     private var developerSection: some View {
-        VStack(alignment: .leading, spacing: theme.spaces.fixedMedium) {
-            Text("miso.module.appservices.settings.about.editor.title",
-                 bundle: Bundle.MISOModulesAppServices)
-                .headingSmall(theme)
-                .foregroundStyle(theme.colors.contentDefault)
-
-            VStack(alignment: .leading, spacing: theme.spaces.fixedSmall) {
-                Text(appEditor.name)
-                    .bodyStrongLarge(theme)
-                    .foregroundStyle(theme.colors.contentDefault)
-
-                MISOLink(
-                    "miso.module.appservices.settings.about.editor.website",
-                    bundle: Bundle.MISOModulesAppServices,
-                    image: MISOImage(asset: appEditor.website.logo, renderingMode: .original),
-                    size: .default)
-                {
-                    safariURL = IdentifiableURL(appEditor.website.url)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-
-                MISOLink(
-                    "miso.module.appservices.settings.about.editor.mastodon",
-                    bundle: Bundle.MISOModulesAppServices,
-                    image: MISOImage(asset: appEditor.mastodon.logo, renderingMode: .original),
-                    size: .default)
-                {
-                    safariURL = IdentifiableURL(appEditor.mastodon.url)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-            }
-            .padding(theme.spaces.fixedMedium)
-            .background(
-                RoundedRectangle(cornerRadius: theme.borders.radiusMedium)
-                    .fill(Color(uiColor: .secondarySystemGroupedBackground)))
-        }
+        MISOAppEditorSection(appEditor: editorInfo)
     }
 
-    // MARK: - Helpers
-
-    private func infoRow(label: String, value: String) -> some View {
-        MISOStaticListItem(data: .init(label: label),
-                           trailing: .tag(MISOTag(label: value, status: .info(leading: .none))))
-            .misoListItemStyle(divider: false)
-            .misoListItemSize(.small)
+    private var legalSection: some View {
+        MISOAppLegalSection(appLegal: legalInfo)
     }
 }
 #endif

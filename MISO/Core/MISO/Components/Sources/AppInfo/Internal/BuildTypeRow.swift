@@ -5,21 +5,21 @@
 
 import SwiftUI
 
-/// Label–chip row for tapp details sheet ``MISOAppDetailsSheet``.
+/// Label–chip row
 struct BuildTypeRow: View {
 
     /// SF Symbol name, bold label, and parenthesised detail for the current build type.
-    let buildTypeInfo: (symbol: String, label: String, detail: String)
+    let buildTypeInfo: BuildTypeInfo
 
-    /// Set to `true` when 8 taps are reached, triggering the confetti overlay.
-    @Binding var showConfetti: Bool
+    /// Flag to rise when hidden acction triggered
+    @Binding var actionTriggered: Bool
 
     @Environment(\.theme) private var theme
 
     var body: some View {
         BuildTypeChip(
             buildTypeInfo: buildTypeInfo,
-            showConfetti: $showConfetti)
+            actionTriggered: $actionTriggered)
             .frame(maxWidth: .infinity, alignment: .center)
     }
 }

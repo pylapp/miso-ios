@@ -72,3 +72,43 @@ Onboarding users to the app can be very useful to introduce key concepts and fea
     }
 ```
 
+## Display app about information
+
+Applications have a build number, a version and also a build type (debug, beta, stable), plus an
+optional release tag. The `MISOAppAboutSection` view displays them, and also drives a hidden action
+(tap the build-type row 8 times) that can be wired to a `MISOConfettiView` easter egg.
+
+```swift
+    @State private var showConfetti = false
+
+    MISOAppAboutSection(
+        appAbout: MISOAppAbout(
+            version: BuildInfo.appVersion,
+            buildNumber: BuildInfo.buildNumber,
+            buildInfo: BuildInfo.buildTypeInfo,
+            releaseTag: BuildInfo.releaseTag),
+        actionTriggered: $showConfetti)
+```
+
+## Display app editor information
+
+Applications can credit their editor with a name and links to their website and Mastodon profile.
+The `MISOAppEditorSection` view displays them, opening the links in-app.
+
+```swift
+    let myAppEditor = MISOAppEditor(name: someName, website: websiteReference, mastodon: mastodonReference)
+
+    MISOAppEditorSection(appEditor: myAppEditor)
+```
+
+## Display app legal information
+
+Applications should have privacy statement and terms of use documents.
+They can be displayed through a dedicated view.
+
+```swift
+    MISOAppLegalSection(
+        appLegal: MISOAppLegalInfo(privacyStatement: URL(string: somePrivacyDocumentUrl)!,
+                                   termsOfUses: URL(string: someToSDocumentUrl)!))
+```
+

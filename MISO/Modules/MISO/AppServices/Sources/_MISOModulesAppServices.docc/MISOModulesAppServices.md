@@ -41,33 +41,29 @@ Then, in your view:
     }    
 ```
 
-## Display legal information
-
-![Legal section view with FoxyRough theme and Brut to Suit app](image_legalinfo_FoxyRough_BrutToSuit.png)
-
-App should have privacy statement and terms of use document.
-They can be displayed through a dedicated view.
-
-```swift
-    MISOLegalSection(privacyURL: URL(string: somePrivacyDocumentUrl)!,
-                     termsURL: URL(string: someToSDocumentUrl)!)
-```
-
 ## App details sheet
 
 ![App detail sheet with FoxyRough theme and Brut to Suit app](image_appdetails_FoxyRough_BrutToSuit)
 
 Applications have a build number, a version and also a build type (debug, beta, stable).
 Open source applications should also open their bug tracker and redirect the users to their source code.
-The `MISOAppDetailsSheet` can do that.
+Applications should also have privacy statement and terms of use documents, and information about
+their editor. The `MISOAppDetailsSheet` displays all of that at once, assembling the
+`MISOAppAboutSection`, `MISOAppLegalSection` and `MISOAppEditorSection` views from the
+`MISOComponentsMISO` module.
 
 ```swift
-    let myAppURLS = MISOAppDetailsURL(bugReport: issueTrackerURL, sourceCode: forgeURL)
+    let myAppLegalInfo = MISOAppLegalInfo(privacyStatement: URL(string: somePrivacyDocumentUrl)!,
+                                          termsOfUses: URL(string: someToSDocumentUrl)!)
+    let myAppSupportInfo = MISOAppSupportInfo(bugReport: issueTrackerURL, sourceCode: forgeURL)
     let myAppEditor = MISOAppEditor(name: someName, website: websiteReference, mastodon: mastodonReference)
 
     SomeView()
         .sheet(isPresented: $isAboutSheetPresented) {
-            MISOAppDetailsSheet(appIcon: myAppLogoImage, appURLs: myAppURLS, editor: myAppEditor)
+            MISOAppDetailsSheet(appIcon: myAppLogoImage,
+                                legalInfo: myAppLegalInfo,
+                                supportInfo: myAppSupportInfo,
+                                editorInfo: myAppEditor)
         }
 ```
 

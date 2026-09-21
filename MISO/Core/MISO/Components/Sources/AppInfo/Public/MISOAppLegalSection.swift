@@ -10,8 +10,6 @@ import MISOFoundationsMISO
 import MISOThemesContract
 import SwiftUI
 
-// MARK: - Legal Section View
-
 /// Legal section with links to the privacy policy and terms of use.
 ///
 /// Opens web links in-app via `SafariView`.
@@ -20,9 +18,8 @@ import SwiftUI
 /// # Code samples
 ///
 /// ```swift
-///    // Give to the view the URL to the documents
-///    MISOLegalSection(privacyURL: URL(string: somePrivacyDocumentUrl)!,
-///                     termsURL: URL(string: someToSDocumentUrl)!)
+///    let myAppLegalInfo = MISOAppLegalInfo(privacyStatement: privacyStatementURL, termsOfUses: termsOfUsesURL)
+///    MISOAppLegalSection(appLegal: legalInfo)
 /// ```
 ///
 /// - Since:1.1.0
@@ -31,15 +28,12 @@ import SwiftUI
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 @available(watchOS, unavailable)
-public struct MISOLegalSection: View {
+public struct MISOAppLegalSection: View {
 
     // MARK: - Properties
 
-    /// URL of the privacy statement
-    private let privacyURL: URL
-
-    /// URL of the terms of uses
-    private let termsURL: URL
+    /// Any legal information to display, or hyperlinks to resources
+    private let legalInfo: MISOAppLegalInfo
 
     /// In-app Safari sheet state, managed locally.
     @State private var safariURL: IdentifiableURL?
@@ -48,14 +42,11 @@ public struct MISOLegalSection: View {
 
     // MARK: - Initializer
 
-    /// Defines a view with URL to open
+    /// Defines a view with details to show and URL to open
     ///
-    /// - Parameters:
-    ///    - privacyURL: The URL of the privacy statement page
-    ///    - termsURL: The URL of the terms of sues
-    public init(privacyURL: URL, termsURL: URL) {
-        self.privacyURL = privacyURL
-        self.termsURL = termsURL
+    /// - Parameter appLegal:The legal resources
+    public init(appLegal: MISOAppLegalInfo) {
+        legalInfo = appLegal
         safariURL = nil
     }
 
@@ -63,7 +54,7 @@ public struct MISOLegalSection: View {
 
     public var body: some View {
         VStack(alignment: .leading, spacing: theme.spaces.fixedMedium) {
-            Text(String(localized: "miso.module.appservices.settings.section.legal", bundle: Bundle.MISOModulesAppServices))
+            Text(String(localized: "miso.components.appinfo.legal.title", bundle: Bundle.MISOComponentsMISO))
                 .headingSmall(theme)
                 .foregroundStyle(theme.colors.contentDefault)
 
@@ -71,20 +62,20 @@ public struct MISOLegalSection: View {
 
                 settingsRow(theme,
                             icon: "hand.raised",
-                            label: String(localized: "miso.module.appservices.settings.legal.privacy",
-                                          bundle: Bundle.MISOModulesAppServices))
+                            label: String(localized: "miso.components.appinfo.legal.privacy",
+                                          bundle: Bundle.MISOComponentsMISO))
                 {
-                    safariURL = IdentifiableURL(privacyURL)
+                    safariURL = IdentifiableURL(legalInfo.privacyStatement)
                 }
 
                 MISOHorizontalDivider(color: .brandPrimary)
 
                 settingsRow(theme,
                             icon: "doc.text",
-                            label: String(localized: "miso.module.appservices.settings.legal.terms",
-                                          bundle: Bundle.MISOModulesAppServices))
+                            label: String(localized: "miso.components.appinfo.legal.terms",
+                                          bundle: Bundle.MISOComponentsMISO))
                 {
-                    safariURL = IdentifiableURL(termsURL)
+                    safariURL = IdentifiableURL(legalInfo.termsOfUses)
                 }
             }
             .background(

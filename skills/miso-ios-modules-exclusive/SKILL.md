@@ -1,6 +1,6 @@
 ---
 name: miso-ios-modules-exclusive
-description: Usage and code examples for the MISO-exclusive AppServices module (not inherited from the OUDS upstream project) — MISOAppDetailsSheet / MISOAppDetailsURL / MISOAppEditor (About sheet with app info, editor links and confetti easter egg), MISOLegalSection (privacy/terms links) and MISOAppStoreUpdateViewModel (App Store update check via iTunes lookup). Load the miso-ios-framework-usage skill first for imports, themes, tokens, and image rules.
+description: Usage and code examples for the MISO-exclusive AppServices module (not inherited from the OUDS upstream project) — MISOAppDetailsSheet (About sheet assembling app info, legal links, editor links and a confetti easter egg) and MISOAppStoreUpdateViewModel (App Store update check via iTunes lookup). Load the miso-ios-framework-usage skill first for imports, themes, tokens, and image rules.
 license: MIT
 ---
 
@@ -11,13 +11,20 @@ license: MIT
 
 > Prerequisite: load `miso-ios-framework-usage` first for imports, themes,
 > token usage and image rules (`MISOImage`, `// swiftlint:disable:next accessibility_label_for_image`).
-> Also loads the `miso-ios-components-exclusive` skill for `MISOConfettiView`, used internally by `MISOAppDetailsSheet`.
+> Also load the `miso-ios-components-exclusive` skill for `MISOConfettiView` (used internally by
+> `MISOAppDetailsSheet`) and for `MISOAppAboutSection` / `MISOAppEditorSection` / `MISOAppLegalSection`
+> (the three sub-views assembled by `MISOAppDetailsSheet`, and their `MISOAppAbout` / `MISOAppEditor` /
+> `MISOAppLegalInfo` / `MISOAppSupportInfo` data types) — those live in `MISOComponentsMISO`, not in this module.
 
 ## MISOAppDetailsSheet
 
-A sheet with app details (icon, version, build, release tag), an editor section (name + website +
-Mastodon links), top/bottom toolbars (close, bug report, source code, system app settings), and a
-hidden confetti easter egg (tap the build-type chip 8 times).
+A sheet with app details (icon, version, build, release tag), a legal section (privacy/terms links),
+an editor section (name + website + Mastodon links), top/bottom toolbars (close, bug report, source
+code, system app settings), and a hidden confetti easter egg (tap the build-type chip 8 times).
+
+Internally it assembles `MISOAppAboutSection`, `MISOAppLegalSection` and `MISOAppEditorSection`
+(from `MISOComponentsMISO`, see the `miso-ios-components-exclusive` skill) — you don't call those
+sub-views yourself when using the sheet, only the data types they need.
 
 > Availability: iOS 17+. Not available on macOS, tvOS, visionOS, watchOS.
 
@@ -29,10 +36,14 @@ Requires the following `Info.plist` keys:
 - `MISO_ForApp_BuildType` — one of `"debug"`, `"beta (TestFlight)"`, `"stable (AppStore)"`
 
 ```swift
-import MISOModulesAppServices
+import MISOComponentsMISO      // MISOAppLegalInfo, MISOAppSupportInfo, MISOAppEditor
+import MISOModulesAppServices  // MISOAppDetailsSheet
 
 let myAppLogoImage = Image(decorative: "AppLogo")
-let myAppURLs = MISOAppDetailsURL(bugReport: issueTrackerURL, sourceCode: forgeURL)
+let myAppLegalInfo = MISOAppLegalInfo(
+    privacyStatement: URL(string: "https://example.com/privacy")!,
+    termsOfUses: URL(string: "https://example.com/terms")!)
+let myAppSupportInfo = MISOAppSupportInfo(bugReport: issueTrackerURL, sourceCode: forgeURL)
 let myAppEditor = MISOAppEditor(
     name: "Some Editor",
     website: (logo: Image("ic_website"), url: websiteURL),
@@ -40,35 +51,21 @@ let myAppEditor = MISOAppEditor(
 
 SomeView()
     .sheet(isPresented: $isAboutSheetPresented) {
-        MISOAppDetailsSheet(appIcon: myAppLogoImage, appURLs: myAppURLs, editor: myAppEditor)
+        MISOAppDetailsSheet(
+            appIcon: myAppLogoImage,
+            legalInfo: myAppLegalInfo,
+            supportInfo: myAppSupportInfo,
+            editorInfo: myAppEditor)
     }
 ```
 
 Notes:
 - `WebSiteReference` is `(logo: Image, url: URL)` — used for both `website` and `mastodon` in `MISOAppEditor`.
-- Bug report / source code / editor links open in-app via a `SafariView` sheet.
+- App version, build number, build tag and build type are read internally (no need to pass them);
+  only legal, support and editor info are supplied by the caller.
+- Bug report / source code / editor / legal links all open in-app via a `SafariView` sheet.
 - The system app settings toolbar item opens `UIApplication.openSettingsURLString`.
 - Tapping the build-type chip 8 times triggers `MISOConfettiView` and posts `Notification.Name.easterEggConfettiFound`.
-
----
-
-## MISOLegalSection
-
-An embeddable section with links to the privacy policy and terms of use, opened in-app via `SafariView`.
-
-> Availability: iOS 15+. Not available on macOS, tvOS, visionOS, watchOS.
-
-```swift
-import MISOModulesAppServices
-
-MISOLegalSection(
-    privacyURL: URL(string: "https://example.com/privacy")!,
-    termsURL: URL(string: "https://example.com/terms")!)
-```
-
-Notes:
-- Manages its own in-app browser (`SafariView`) state — no external configuration needed.
-- Typically embedded inside a settings screen, alongside `MISOAppDetailsSheet`.
 
 ---
 

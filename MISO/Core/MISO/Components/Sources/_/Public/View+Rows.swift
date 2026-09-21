@@ -9,8 +9,17 @@ import SwiftUI
 
 extension View {
 
+    // MARK: - Settings
+
+    /// Builds a row to display a label, an icon and an actino to trigger in one line
+    ///
+    /// - Parameters:
+    ///    - theme: To get tokens
+    ///    - icon: Icon of the app
+    ///    - label: A text to display
+    ///    - action: Callback to trigger on tap
     @ViewBuilder
-    func settingsRow(
+    public func settingsRow(
         _ theme: MISOTheme,
         icon: String,
         label: String,
@@ -25,5 +34,20 @@ extension View {
         .padding(.horizontal, theme.spaces.fixedMedium)
         .padding(.vertical, theme.spaces.fixedSmall)
         .frame(maxWidth: .infinity)
+    }
+
+    // MARK: - Information
+
+    /// Builds a row to display a label and a value, in one line
+    ///
+    /// - Parameters:
+    ///    - label: The label
+    ///    - value: The value
+    @ViewBuilder
+    public func infoRow(label: String, value: String) -> some View {
+        MISOStaticListItem(data: .init(label: label),
+                           trailing: .tag(MISOTag(label: value, status: .info(leading: .none))))
+            .misoListItemStyle(divider: false)
+            .misoListItemSize(.small)
     }
 }

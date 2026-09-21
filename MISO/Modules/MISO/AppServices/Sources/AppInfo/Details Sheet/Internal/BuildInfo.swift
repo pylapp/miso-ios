@@ -13,7 +13,7 @@ import SwiftUI
 ///
 /// Centralised here so that ``MISOAppDetailsSheet`` and any other view that needs
 /// version / build / tag information can call these without duplicating the logic.
-enum BundleInfo {
+enum BuildInfo {
 
     /// Display name read from `CFBundleDisplayName` in `Info.plist`.
     static var appDisplayName: String {
