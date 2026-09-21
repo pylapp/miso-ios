@@ -15,6 +15,9 @@ Some components can be used for **navigation**.
     @Tab("BlueCoat") {
         ![A link component in light and dark modes with BlueCoat theme](component_link_BlueCoat)
     }
+    @Tab("FoxyRough") {
+        ![A link component in light and dark modes with FoxyRough theme](component_link_FoxyRough)
+    }
 }
 
 The ``MISOLink`` proposes layout with text only or text with icon.
@@ -51,6 +54,9 @@ Use ``MISOStaticListItem`` when the row is display-only and should not trigger a
 @TabNavigator {
     @Tab("BlueCoat") {
         ![A list item component in light and dark modes with BlueCoat theme](component_static_list_item_BlueCoat)
+    }
+    @Tab("FoxyRough") {
+        ![A list item component in light and dark modes with FoxyRough theme](component_static_list_item_FoxyRough)
     }
 }
 
@@ -144,6 +150,9 @@ Use ``MISONavigationListItem`` when tapping the row should trigger an action. Th
 @TabNavigator {
     @Tab("BlueCoat") {
         ![A list item component in light and dark modes with BlueCoat theme](component_navigation_list_item_BlueCoat)
+    }
+    @Tab("FoxyRough") {
+        ![A list item component in light and dark modes with FoxyRough theme](component_navigation_list_item_FoxyRough)
     }
 }
 
@@ -246,12 +255,20 @@ MISONavigationListItem(
         ![A tab bar component with Liquid Glass in light mode with BlueCoat theme](component_tabBar_LiquidGlass_BlueCoat_light)
         ![A tab bar component with Liquid Glass in dark mode with BlueCoat theme](component_tabBar_LiquidGlass_BlueCoat_dark)
     }
+    @Tab("FoxyRough (Liquid Glass)") {
+        ![A tab bar component with Liquid Glass in light mode with FoxyRough theme](component_tabBar_LiquidGlass_FoxyRough_light)
+        ![A tab bar component with Liquid Glass in dark mode with FoxyRough theme](component_tabBar_LiquidGlass_FoxyRough_dark)
+    }
 }
 
 @TabNavigator {
     @Tab("BlueCoat") {
         ![A tab bar component without Liquid Glass in light mode with BlueCoat theme](component_tabBar_BlueCoat_light)
         ![A tab bar component without Liquid Glass in dark mode with BlueCoat theme](component_tabBar_BlueCoat_dark)
+    }
+    @Tab("FoxyRough") {
+        ![A tab bar component without Liquid Glass in light mode with FoxyRough theme](component_tabBar_FoxyRough_light)
+        ![A tab bar component without Liquid Glass in dark mode with FoxyRough theme](component_tabBar_FoxyRough_dark)
     }
 }
 
@@ -331,12 +348,20 @@ There are different style depending to Liquid Glass (iOS 26+) or not (iOS 18 and
         ![A toolbar top component with Liquid Glass in light mode with BlueCoat theme](component_toolBarTop_LiquidGlass_BlueCoat_light)
         ![A toolbar top component with Liquid Glass in dark mode with BlueCoat theme](component_toolBarTop_LiquidGlass_BlueCoat_dark)
     }
+    @Tab("FoxyRough (Liquid Glass)") {
+        ![A toolbar top component with Liquid Glass in light mode with FoxyRough theme](component_toolBarTop_LiquidGlass_FoxyRough_light)
+        ![A toolbar top component with Liquid Glass in dark mode with FoxyRough theme](component_toolBarTop_LiquidGlass_FoxyRough_dark)
+    }
 }
 
 @TabNavigator {
     @Tab("BlueCoat") {
         ![A toolbar top component with Liquid Glass in light mode with BlueCoat theme](component_toolBarTop_BlueCoat_light)
         ![A toolbar top component with Liquid Glass in dark mode with BlueCoat theme](component_toolBarTop_BlueCoat_dark)
+    }
+    @Tab("FoxyRough") {
+        ![A toolbar top component with Liquid Glass in light mode with FoxyRough theme](component_toolBarTop_FoxyRough_light)
+        ![A toolbar top component with Liquid Glass in dark mode with FoxyRough theme](component_toolBarTop_FoxyRough_dark)
     }
 }
 
@@ -405,12 +430,20 @@ SomeView()
         ![A toolbar bottom component with Liquid Glass in light mode with BlueCoat theme](component_toolBarBottom_LiquidGlass_BlueCoat_light)
         ![A toolbar bottom component with Liquid Glass in dark mode with BlueCoat theme](component_toolBarBottom_LiquidGlass_BlueCoat_dark)
     }
+    @Tab("FoxyRough (Liquid Glass)") {
+        ![A toolbar bottom component with Liquid Glass in light mode with FoxyRough theme](component_toolBarBottom_LiquidGlass_FoxyRough_light)
+        ![A toolbar bottom component with Liquid Glass in dark mode with FoxyRough theme](component_toolBarBottom_LiquidGlass_FoxyRough_dark)
+    }
 }
 
 @TabNavigator {
     @Tab("BlueCoat") {
         ![A toolbar bottom component with Liquid Glass in light mode with BlueCoat theme](component_toolBarBottom_BlueCoat_light)
         ![A toolbar bottom component with Liquid Glass in dark mode with BlueCoat theme](component_toolBarBottom_BlueCoat_dark)
+    }
+    @Tab("FoxyRough") {
+        ![A toolbar bottom component with Liquid Glass in light mode with FoxyRough theme](component_toolBarBottom_FoxyRough_light)
+        ![A toolbar bottom component with Liquid Glass in dark mode with FoxyRough theme](component_toolBarBottom_FoxyRough_dark)
     }
 }
 

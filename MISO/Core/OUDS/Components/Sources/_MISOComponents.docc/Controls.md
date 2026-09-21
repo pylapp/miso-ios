@@ -17,6 +17,9 @@ Some components can be used for **controls** and **inputs**.
     @Tab("BlueCoat") {
         ![A checkbox component in light and dark modes with BlueCoat theme](component_checkbox_BlueCoat)
     }
+    @Tab("FoxyRough") {
+        ![A checkbox component in light and dark modes with FoxyRough theme](component_checkbox_FoxyRough)
+    }
 }
 
 The library proposes layout to add in your views some checkboxes components, even if this type of component is not iOS-native one.
@@ -40,6 +43,9 @@ MISOCheckboxIndeterminate(selection: $selection, accessibilityLabel: "Select the
 @TabNavigator {
     @Tab("BlueCoat") {
         ![A checkbox item component in light and dark modes with BlueCoat theme](component_checkboxItem_BlueCoat)
+    }
+    @Tab("FoxyRough") {
+        ![A checkbox item component in light and dark modes with FoxyRough theme](component_checkboxItem_FoxyRough)
     }
 }
 
@@ -72,6 +78,9 @@ MISOCheckboxItem("We live in a fabled world",
 @TabNavigator {
     @Tab("BlueCoat") {
         ![A checkbox picker component in light and dark modes with BlueCoat theme](component_checkboxPicker_BlueCoat)
+    }
+    @Tab("FoxyRough") {
+        ![A checkbox picker component in light and dark modes with FoxyRough theme](component_checkboxPicker_FoxyRough)
     }
 }
 
@@ -128,6 +137,9 @@ MISOCheckboxPicker(selections: $selections,
     @Tab("BlueCoat") {
         ![A radio button component in light and dark modes with BlueCoat theme](component_radio_BlueCoat)
     }
+    @Tab("FoxyRough") {
+        ![A radio button component in light and dark modes with FoxyRough theme](component_radio_FoxyRough)
+    }
 }
 
 The library proposes layout to add in your views some radio buttons components, even if this type of component is not iOS-native one.
@@ -145,6 +157,9 @@ MISORadio(isOn: $isOn, accessibilityLabel: "Select the element")
 @TabNavigator {
     @Tab("BlueCoat") {
         ![A radio item component in light and dark modes with BlueCoat theme](component_radioItem_BlueCoat)
+    }
+    @Tab("FoxyRough") {
+        ![A radio item component in light and dark modes with FoxyRough theme](component_radioItem_FoxyRough)
     }
 }
 
@@ -179,6 +194,9 @@ MISORadioItem("Lucy in the Sky with Diamonds",
 @TabNavigator {
     @Tab("BlueCoat") {
         ![A radio picker component in light and dark modes with BlueCoat theme](component_radioPicker_BlueCoat)
+    }
+    @Tab("FoxyRough") {
+        ![A radio picker component in light and dark modes with FoxyRough theme](component_radioPicker_FoxyRough)
     }
 }
 
@@ -223,6 +241,9 @@ MISORadioPicker(selection: $selection, radios: someDataToPopulate)
     @Tab("BlueCoat") {
         ![A switch component in light and dark modes with BlueCoat theme](component_switch_BlueCoat)
     }
+    @Tab("FoxyRough") {
+        ![A switch component in light and dark modes with FoxyRough theme](component_switch_FoxyRough)
+    }
 }
 
 The library proposes a new layout for the switch component. The native one is not used.
@@ -242,6 +263,9 @@ MISOSwitch(isOn: $isOn, accessibilityLabel: "Select the element")
 @TabNavigator {
     @Tab("BlueCoat") {
         ![A switch item component in light and dark modes with BlueCoat theme](component_switchItem_BlueCoat)
+    }
+    @Tab("FoxyRough") {
+        ![A switch item component in light and dark modes with FoxyRough theme](component_switchItem_FoxyRough)
     }
 }
 
@@ -283,6 +307,9 @@ MISOSwitchItem("We live in a fabled world",
     @Tab("BlueCoat") {
         ![A suggestion chip component in light and dark modes with BlueCoat theme](component_suggestionChip_BlueCoat)
     }
+    @Tab("FoxyRough") {
+        ![A suggestion chip component in light and dark modes with FoxyRough theme](component_suggestionChip_FoxyRough)
+    }
 }
 
 The library proposes suggestion (``MISOSuggestionChip``) chip component to make some predicitve or recommended selection.
@@ -309,6 +336,9 @@ MISOSuggestionChip(image: MISOImage(asset: Image("ic_brand"), renderingMode: .or
 @TabNavigator {
     @Tab("BlueCoat") {
         ![A fiter chip component in light and dark modes with BlueCoat theme](component_filterChip_BlueCoat)
+    }
+    @Tab("FoxyRough") {
+        ![A fiter chip component in light and dark modes with FoxyRough theme](component_filterChip_FoxyRough)
     }
 }
 
@@ -337,6 +367,9 @@ MISOFilterChip(image: MISOImage(asset: Image("ic_brand"), renderingMode: .origin
 @TabNavigator {
     @Tab("BlueCoat") {
         ![A chip picker component in light and dark modes with BlueCoat theme](component_chipPicker_BlueCoat)
+    }
+    @Tab("FoxyRough") {
+        ![A chip picker component in light and dark modes with FoxyRough theme](component_chipPicker_FoxyRough)
     }
 }
 
@@ -401,6 +434,9 @@ MISOChipPicker(title: "Select a drink", selections: $selections, chips: someData
     @Tab("BlueCoat") {
         ![A password input component in light and dark modes with BlueCoat theme](component_passwordInput_BlueCoat)
     }
+    @Tab("FoxyRough") {
+        ![A password input component in light and dark modes with FoxyRough theme](component_passwordInput_FoxyRough)
+    }
 }
 
 The library provides an `MISOPasswordInput` based on a `MISOTextInput` to let user provides password in a secure text field.
@@ -425,6 +461,9 @@ MISOPasswordInput(label: "Password", password: $password, prefix: "CORP-")
     @Tab("BlueCoat") {
         ![A Pin Code input component in light and dark modes with BlueCoat theme](component_pinCodeInput_BlueCoat)
     }
+    @Tab("FoxyRough") {
+        ![A Pin Code input component in light and dark modes with FoxyRough theme](component_pinCodeInput_FoxyRough)
+    }
 }
 
 The library provides an `MISOPinCodeInput` to let user provides PIN code or OTP code with only digits.
@@ -448,6 +487,9 @@ MISOPinCodeInput($pinCode, length: .six, status: .error(message: "The OTP code y
 @TabNavigator {
     @Tab("BlueCoat") {
         ![A text area component in light and dark modes with BlueCoat theme](component_textArea_BlueCoat)
+    }
+    @Tab("FoxyRough") {
+        ![A text area component in light and dark modes with FoxyRough theme](component_textArea_FoxyRough)
     }
 }
 
@@ -495,6 +537,9 @@ MISOTextArea(label: "Comments",
 @TabNavigator {
     @Tab("BlueCoat") {
         ![A text input component in light and dark modes with BlueCoat theme](component_textInput_BlueCoat)
+    }
+    @Tab("FoxyRough") {
+        ![A text input component in light and dark modes with FoxyRough theme](component_textInput_FoxyRough)
     }
 }
 

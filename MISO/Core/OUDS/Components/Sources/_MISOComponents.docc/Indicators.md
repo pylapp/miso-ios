@@ -19,6 +19,9 @@ The badge is a small UI element used to highlight status, notifications, or cate
     @Tab("BlueCoat") {
         ![A count badge component in light and dark modes with BlueCoat theme](component_badge_count_BlueCoat)
     }
+    @Tab("FoxyRough") {
+        ![A count badge component in light and dark modes with FoxyRough theme](component_badge_count_FoxyRough)
+    }
 }
  
 An ``MISOBadgeCount`` displays an integer value.
@@ -34,6 +37,9 @@ MISOBadgeIcon(status: .neutral(image: MISOImage(asset: Image(decorative: "ic_hea
     @Tab("BlueCoat") {
         ![An icon badge component in light and dark modes with BlueCoat theme](component_badge_icon_BlueCoat)
     }
+    @Tab("FoxyRough") {
+        ![An icon badge component in light and dark modes with FoxyRough theme](component_badge_icon_FoxyRough)
+    }
 }
 
 An ``MISOBadgeIcon`` displays only an icon and has specific colors.
@@ -48,6 +54,9 @@ MISOBadgeIcon(status: .neutral(image: MISOImage(asset: Image(decorative: "ic_hea
 @TabNavigator {
     @Tab("BlueCoat") {
         ![A standard badge component in light and dark modes with BlueCoat theme](component_badge_standard_BlueCoat)
+    }
+    @Tab("FoxyRough") {
+        ![A standard badge component in light and dark modes with FoxyRough theme](component_badge_standard_FoxyRough)
     }
 }
 
@@ -66,6 +75,9 @@ MISOBadgeStandard(status: .info, size: .medium)
     @Tab("BlueCoat") {
         @Video(source: "component_progress_indicator_circular_BlueCoat.video")
     }
+    @Tab("FoxyRough") {
+        @Video(source: "component_progress_indicator_circular_FoxyRough.video")
+    }
 }
 
 An ``MISOCircularProgressIndicator`` is a progress indicator which can be used to display determinate value or indeterminate value with animations.
@@ -83,6 +95,9 @@ MISOCircularProgressIndicator(status: .accent)
 @TabNavigator {
     @Tab("BlueCoat") {
         @Video(source: "component_progress_indicator_linear_BlueCoat.video")
+    }
+    @Tab("FoxyRough") {
+        @Video(source: "component_progress_indicator_linear_FoxyRough.video")
     }
 }
 
@@ -112,6 +127,9 @@ MISOLinearProgressIndicator(status: .info, helperText: "Processing…", helperTe
 @TabNavigator {
     @Tab("BlueCoat") {
         ![A tag component in light and dark modes with BlueCoat theme](component_tag_BlueCoat)
+    }
+    @Tab("FoxyRough") {
+        ![A tag component in light and dark modes with FoxyRough theme](component_tag_FoxyRough)
     }
 }
 
@@ -152,6 +170,9 @@ MISOTag(loadingLabel: "Processing...", progress: 0.75)
 @TabNavigator {
     @Tab("BlueCoat") {
         ![An input tag component in light and dark modes with BlueCoat theme](component_inputTag_BlueCoat)
+    }
+    @Tab("FoxyRough") {
+        ![An input tag component in light and dark modes with FoxyRough theme](component_inputTag_FoxyRough)
     }
 }
 

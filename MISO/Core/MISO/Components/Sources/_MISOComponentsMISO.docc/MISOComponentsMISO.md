@@ -14,7 +14,14 @@ Here are the original components.
 
 ## Display confettis (like easter eggs)
 
-![Plenty of confettis raining in the screen with FoxyRough theme and Brut to Suit app](image_confettis_FoxyRough_BrutToSuit.png)
+@TabNavigator {
+    @Tab("BlueCoat") {
+        ![Plenty of confettis raining in the screen with BlueCoat theme and Brut to Suit app](image_confettis_BlueCoat_BrutToSuit.png)
+    }
+    @Tab("FoxyRough") {
+        ![Plenty of confettis raining in the screen with FoxyRough theme and Brut to Suit app](image_confettis_FoxyRough_BrutToSuit.png)
+    }
+}
 
 Easter eggs are fun, and confettis too.
 
@@ -31,7 +38,14 @@ Easter eggs are fun, and confettis too.
 
 ## Splash screen
 
-![Splash screen in debug mode with FoxyRough theme and Brut to Suit app](image_splashscreen_FoxyRough_BrutToSuit.png)
+@TabNavigator {
+    @Tab("BlueCoat") {
+        ![Splash screen in debug mode with BlueCoat theme and Brut to Suit app](image_splashscreen_BlueCoat_BrutToSuit.png)
+    }
+    @Tab("FoxyRough") {
+        ![Splash screen in debug mode with FoxyRough theme and Brut to Suit app](image_splashscreen_FoxyRough_BrutToSuit.png)
+    }
+}
 
 A splash screen is an element to display quickly in fullscreen when the app starts, with the app logo centered.
 
@@ -43,7 +57,14 @@ A splash screen is an element to display quickly in fullscreen when the app star
 
 ## Onboarding
 
-![Onboarding screen with FoxyRough theme and Brut to Suit app](image_onboarding_FoxyRough_BrutToSuit.png)
+@TabNavigator {
+    @Tab("BlueCoat") {
+        ![Onboarding screen with BlueCoat theme and Brut to Suit app](image_onboarding_BlueCoat_BrutToSuit.png)
+    }
+    @Tab("FoxyRough") {
+        ![Onboarding screen with FoxyRough theme and Brut to Suit app](image_onboarding_FoxyRough_BrutToSuit.png)
+    }
+}
 
 Onboarding users to the app can be very useful to introduce key concepts and features.
 
@@ -86,6 +107,15 @@ after a short delay.
 
 ## Display app about information
 
+@TabNavigator {
+    @Tab("BlueCoat") {
+        ![App build info in debug mode with BlueCoat theme and Brut to Suit app](image_buildinfo_BlueCoat_BrutToSuit.png)
+    }
+    @Tab("FoxyRough") {
+        ![App build info in debug mode with FoxyRough theme and Brut to Suit app](image_buildinfo_FoxyRough_BrutToSuit.png)
+    }
+}
+
 Applications have a build number, a version and also a build type (debug, beta, stable), plus an
 optional release tag. The `MISOAppAboutSection` view displays them, and also drives a hidden action
 (tap the build-type row 8 times) that can be wired to a `MISOConfettiView` easter egg.
@@ -104,6 +134,15 @@ optional release tag. The `MISOAppAboutSection` view displays them, and also dri
 
 ## Display app editor information
 
+@TabNavigator {
+    @Tab("BlueCoat") {
+        ![App editor info in debug mode with BlueCoat theme and Brut to Suit app](image_editorinfo_BlueCoat_BrutToSuit.png)
+    }
+    @Tab("FoxyRough") {
+        ![App editor info in debug mode with FoxyRough theme and Brut to Suit app](image_editorinfo_FoxyRough_BrutToSuit.png)
+    }
+}
+
 Applications can credit their editor with a name and links to their website and Mastodon profile.
 The `MISOAppEditorSection` view displays them, opening the links in-app.
 
@@ -114,6 +153,15 @@ The `MISOAppEditorSection` view displays them, opening the links in-app.
 ```
 
 ## Display app legal information
+
+@TabNavigator {
+    @Tab("BlueCoat") {
+        ![App legal info in debug mode with BlueCoat theme and Brut to Suit app](image_legalinfo_BlueCoat_BrutToSuit.png)
+    }
+    @Tab("FoxyRough") {
+        ![App legal info in debug mode with FoxyRough theme and Brut to Suit app](image_legalinfo_FoxyRough_BrutToSuit.png)
+    }
+}
 
 Applications should have privacy statement and terms of use documents.
 They can be displayed through a dedicated view.

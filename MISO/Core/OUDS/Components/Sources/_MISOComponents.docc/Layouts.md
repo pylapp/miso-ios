@@ -15,6 +15,9 @@ Some components can be used for **layouts**.
     @Tab("BlueCoat") {
         ![A colored surface with text, button and link in light and dark modes with BlueCoat theme](component_coloredSurface_BlueCoat)
     }
+    @Tab("FoxyRough") {
+        ![A colored surface with text, button and link in light and dark modes with FoxyRough theme](component_coloredSurface_FoxyRough)
+    }
 }
 
 Colored backgrounds use surface colors to maximize the contrast with content. 
@@ -108,6 +111,9 @@ A divider can be colored using color enumerated in the `MISODividerColor`.
     @Tab("BlueCoat") {
         ![An horizontal divider in light and dark modes with BlueCoat theme](component_horizontalDivider_BlueCoat)
     }
+    @Tab("FoxyRough") {
+        ![An horizontal divider in light and dark modes with FoxyRough theme](component_horizontalDivider_FoxyRough)
+    }
 }
 
 ##### Vertical
@@ -115,6 +121,9 @@ A divider can be colored using color enumerated in the `MISODividerColor`.
 @TabNavigator {
     @Tab("BlueCoat") {
         ![An vertical divider in light and dark modes with BlueCoat theme](component_verticalDivider_BlueCoat)
+    }
+    @Tab("FoxyRough") {
+        ![An vertical divider in light and dark modes with FoxyRough theme](component_verticalDivider_FoxyRough)
     }
 }
 

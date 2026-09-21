@@ -17,6 +17,9 @@ The **Foundations** family gathers primitive building blocks of the design syste
     @Tab("BlueCoat") {
         ![A heading typography component in light and dark modes with BlueCoat theme](component_typography_heading_BlueCoat)
     }
+    @Tab("FoxyRough") {
+        ![A heading typography component in light and dark modes with FoxyRough theme](component_typography_heading_FoxyRough)
+    }
 }
 
 Typography components render text using the semantic font tokens exposed by the current theme. 

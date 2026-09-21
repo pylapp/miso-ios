@@ -43,7 +43,14 @@ Then, in your view:
 
 ## App details sheet
 
-![App detail sheet with FoxyRough theme and Brut to Suit app](image_appdetails_FoxyRough_BrutToSuit)
+@TabNavigator {
+    @Tab("BlueCoat") {
+        ![App details sheet in light mode with BlueCoat theme and Brut to Suit app](image_appdetails_BlueCoat_BrutToSuit)
+    }
+    @Tab("FoxyRough") {
+        ![App details sheet in light mode with FoxyRough theme and Brut to Suit app](image_appdetails_FoxyRough_BrutToSuit)
+    }
+}
 
 Applications have a build number, a version and also a build type (debug, beta, stable).
 Open source applications should also open their bug tracker and redirect the users to their source code.

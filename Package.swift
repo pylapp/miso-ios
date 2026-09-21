@@ -210,7 +210,7 @@ let package = Package(
 
         .target(
             name: "MISOComponentsMISO",
-            dependencies: ["MISOComponents"],
+            dependencies: ["MISOComponents", "MISOFoundationsMISO"],
             path: "MISO/Core/MISO/Components/Sources",
             resources: [.process("Resources/")]),
         .testTarget(
