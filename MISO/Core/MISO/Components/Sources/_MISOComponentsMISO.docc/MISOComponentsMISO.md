@@ -72,6 +72,18 @@ Onboarding users to the app can be very useful to introduce key concepts and fea
     }
 ```
 
+An optional `showProgressIndicator` flag (`false` by default) displays a `MISOLinearProgressIndicator`
+above the navigation bar, filled according to the current page position (e.g. page 1 of 4 fills
+the indicator to 25%). The progress is also vocalized to VoiceOver as "Page X of Y". Its layout space
+is reserved from the view's first display to avoid any reflow of the page content; it only fades in
+after a short delay.
+
+```swift
+    MISOOnboardingView(pages: onboardingPages, showProgressIndicator: true) {
+        // Action to do when the onboarding is done
+    }
+```
+
 ## Display app about information
 
 Applications have a build number, a version and also a build type (debug, beta, stable), plus an

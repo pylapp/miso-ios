@@ -42,11 +42,26 @@ private var onboardingPages: [MISOOnboardingPage] {
 MISOOnboardingView(pages: onboardingPages) {
     // Action to run when the onboarding is dismissed (last page's "Done" button)
 }
+
+// With the progress indicator: shows a MISOLinearProgressIndicator above the navigation bar,
+// filled according to the current page position (page 1 of 4 → 25%), and vocalized to
+// VoiceOver as "Page X of Y". Appears after a short delay. Defaults to false.
+MISOOnboardingView(pages: onboardingPages, showProgressIndicator: true) {
+    // Action to run when the onboarding is dismissed (last page's "Done" button)
+}
 ```
 
 Notes:
 - Pages are swipeable (drag gesture) and animated with the built-in back/next navigation bar.
 - The last page's button always uses the `.strong` appearance; earlier "Back"/"Next" buttons use `.brand`.
+- `showProgressIndicator` (default `false`) displays a `MISOLinearProgressIndicator` (with track,
+  animated, no visible helper text) above the navigation bar, filled to `(index + 1) / pages.count`
+  for the current page. Its layout space is reserved from the view's first display (avoiding any
+  reflow/jump of the page content above it); it only fades in shortly after (not retriggered by
+  subsequent page changes), forces monochrome rendering (`.environment(\.misoUseMonochrome, true)`)
+  for contrast on the brand background, and exposes a localized "Page X of Y" wording
+  (`miso.components.onboarding.page.progress`) as its VoiceOver accessibility state — no visible
+  text is added on screen.
 - Background and content colors adapt automatically to the color scheme via theme tokens.
 
 ---

@@ -36,6 +36,11 @@ import SwiftUI
 ///     MISOOnboardingView(pages: onboardingPages) {
 ///         // Action to do when the onboarding is done
 ///     }
+///
+///     // With the progress indicator above the navigation bar (appears after a short delay)
+///     MISOOnboardingView(pages: onboardingPages, showProgressIndicator: true) {
+///         // Action to do when the onboarding is done
+///     }
 /// ```
 ///
 /// - Since: 1.1.0
@@ -47,10 +52,21 @@ public struct MISOOnboardingView: View {
     /// The pages to display in the onboarding suite
     private let pages: [MISOOnboardingPage]
 
+    /// When `true`, a `MISOLinearProgressIndicator` is displayed above the navigation bar, filled
+    /// according to the current page position (e.g. page 1 of 4 fills the indicator to 25%).
+    /// The progress is also vocalized to VoiceOver as "Page X of Y". Its layout space is reserved
+    /// from the view's first display to avoid any reflow of the page content; it only fades in
+    /// after a short delay. Defaults to `false`.
+    private let showProgressIndicator: Bool
+
     /// Called when the user taps the final button on the last page.
     private let onDismissed: () -> Void
 
     @State private var currentPage: Int
+
+    /// Becomes `true` 1 second after the view's first display, revealing the progress indicator
+    /// (if `showProgressIndicator` is `true`). Stays `true` afterwards, even across page changes.
+    @State private var isProgressIndicatorVisible = false
 
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.theme) private var theme
@@ -61,12 +77,19 @@ public struct MISOOnboardingView: View {
     ///
     /// - Parameters:
     ///    - pages: The pages to display
+    ///    - showProgressIndicator: When `true`, displays a linear progress indicator above the
+    ///      navigation bar, filled according to the current page position, and vocalized to
+    ///      VoiceOver as "Page X of Y". Its layout space is reserved from the view's first display
+    ///      to avoid any reflow of the page content; it only fades in after a short delay.
+    ///      Defaults to `false`.
     ///    - onDismissed: Triggered when the onboarding is done
     public init(pages: [MISOOnboardingPage],
+                showProgressIndicator: Bool = false,
                 onDismissed: @escaping () -> Void)
     {
         currentPage = 0
         self.pages = pages
+        self.showProgressIndicator = showProgressIndicator
         self.onDismissed = onDismissed
     }
 
@@ -90,6 +113,24 @@ public struct MISOOnboardingView: View {
                     .animation(.easeInOut(duration: 0.3), value: currentPage)
                 }
 
+                if showProgressIndicator {
+                    // Always mounted (space reserved) once `showProgressIndicator` is `true`, so the
+                    // carousel's available height never changes and page content never reflows.
+                    // Only its opacity/accessibility toggle once `isProgressIndicatorVisible` flips.
+                    MISOLinearProgressIndicator(
+                        progress: pageProgress(index: currentPage),
+                        track: true,
+                        helperText: nil,
+                        animated: true,
+                        accessibility: MISOAccessibilityConfiguration(state: pageProgressWording(index: currentPage)))
+                        .environment(\.misoUseMonochrome, true)
+                        .padding(.horizontal, theme.spaces.fixedLarge)
+                        .padding(.bottom, theme.spaces.fixedMedium)
+                        .opacity(isProgressIndicatorVisible ? 1 : 0)
+                        .accessibilityHidden(!isProgressIndicatorVisible)
+                        .animation(.easeInOut(duration: 0.3), value: isProgressIndicatorVisible)
+                }
+
                 navigationBar
                     .padding(.horizontal, theme.spaces.fixedMedium)
                     .padding(.bottom, theme.spaces.fixedLarge)
@@ -105,6 +146,13 @@ public struct MISOOnboardingView: View {
                         navigate(forward: false)
                     }
                 })
+        // Reveals the progress indicator shortly after the view's first display. Runs once
+        // (no `id:`) and is not retriggered by subsequent page changes.
+        .task {
+            guard showProgressIndicator else { return }
+            try? await Task.sleep(nanoseconds: 2_000_000_000)
+            isProgressIndicatorVisible = true
+        }
     }
 
     // MARK: - Page content
@@ -188,6 +236,19 @@ public struct MISOOnboardingView: View {
         withAnimation(.easeInOut(duration: 0.3)) {
             currentPage += forward ? 1 : -1
         }
+    }
+
+    /// The progress in `[0, 1]` for the page at `index`, e.g. page 1 of 4 pages returns `0.25`.
+    private func pageProgress(index: Int) -> Double {
+        Double(index + 1) / Double(max(pages.count, 1))
+    }
+
+    /// The localized "Page X of Y" wording vocalized to VoiceOver for the page at `index`.
+    private func pageProgressWording(index: Int) -> String {
+        let format = NSLocalizedString("miso.components.onboarding.page.progress",
+                                       bundle: Bundle.MISOComponentsMISO,
+                                       comment: "")
+        return String(format: format, index + 1, pages.count)
     }
 
     private var backgroundColor: Color {

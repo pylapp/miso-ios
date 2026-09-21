@@ -327,6 +327,30 @@
         }
       }
     },
+    "miso.components.onboarding.page.progress" : {
+      "comment" : "MISO - Components - Onboarding - Accessibility state vocalized for the page progress indicator. Keep both '%lld' placeholders (current page, then total page count).",
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الصفحة %lld من %lld"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Page %lld of %lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Page %lld sur %lld"
+          }
+        }
+      }
+    },
     "miso.components.splashscreen.buildtype.beta" : {
       "comment" : "MISO - Components - Splashscreen",
       "extractionState" : "manual",
