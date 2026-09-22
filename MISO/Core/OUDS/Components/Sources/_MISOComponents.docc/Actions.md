@@ -15,6 +15,9 @@ Some components can be used for **actions**.
     @Tab("BlueCoat") {
         ![A button component in light and dark modes with BlueCoat theme](component_button_BlueCoat)
     }
+    @Tab("FoxyRough") {
+        ![A button component in light and dark modes with FoxyRough theme](component_button_FoxyRough)
+    }
 }
 
 The ``MISOButton`` proposes layout with text only, icon only or text and icon. 

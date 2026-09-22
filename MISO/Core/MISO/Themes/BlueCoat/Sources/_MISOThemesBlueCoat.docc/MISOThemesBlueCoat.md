@@ -10,18 +10,13 @@ Do not add @PageImage(purpose: card) because not managed for landing page of onl
 See https://github.com/swiftlang/swift-docc/issues/1283
 -->
 
-This BlueCoat theme is a theme for some specific usages, like for prototyping and design of journeys without any brand-charted theme.
+This BlueCoat theme is a blue theme, quite smooth and simple.
 
 ## Overview
 
-<!-- NOTE: Do not forget to update tokens version -->
-```
-🧬 Theme version: 2.7.0
-```
-
 > Note: The BlueCoat theme uses the Shantell Sans font family
 
-> Important: The BlueCoat theme does not embed charts colors yet, and is read only: it cannot be suclassed or derivated.
+> Important: The BlueCoat theme does not embed charts colors yet.
 
 ## How to use the theme
 
@@ -63,18 +58,6 @@ struct SomeView: View {
     }
 }
 ```
-
-## How to tune the theme
-
-You cannot tune the BlueCoat theme.
-
-## Typography
-
-The BlueCoat theme uses the Shantell Sans font family and must not use others.
-
-## How to enrich the theme
-
-You cannot derivate the *BlueCoat* theme.
 
 ## How it looks like
 

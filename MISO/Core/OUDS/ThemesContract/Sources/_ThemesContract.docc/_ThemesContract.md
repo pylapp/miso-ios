@@ -23,8 +23,8 @@ See https://github.com/swiftlang/swift-docc/issues/1283
 
 *MISO* has been implemented in two code repositories:
 
-- a SwiftUI code library exposed as Swift Package for all Apple platforms ([Orange-OpenSource/miso-ios](https://github.com/Orange-OpenSOurce/miso-ios))
-- a demo application named *Design System Toolbox* that can be launched to show the guidelines, components and modules ([Orange-OpenSource/miso-ios-design-system-toolbox](https://github.com/Orange-OpenSOurce/miso-ios-design-system-toolbox))
+- a SwiftUI code library exposed as Swift Package for all Apple platforms ([pylapp/miso-ios](https://github.com/pylapp/miso-ios))
+- a demo application that can be launched to show the guidelines, components and modules ([pylapp/miso-ios-demo](https://github.com/pylapp/miso-ios-demo))
 
 This demo app also shows how to use the library or to style existing components.
 Using these resources will allow you to create branded applications faster and will inherit all the work that was done to make sure that all presented codes are fully tested regarding the brand, the ecodesign, the open source and the accessibility compliances.

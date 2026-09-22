@@ -42,9 +42,8 @@ Can import internal modules, but for developer experience there are umbrella pro
 | Product | Themes | When |
 |---|---|---|
 | `MISOSwiftUI` | All | Default |
-| `MISOSwiftUIBlueCoat` | BlueCoat | Prototyping |
 
-Internal modules: `MISOComponents`, `MISOTokensRaw`, `MISOTokensSemantic`, `MISOTokensComponent`, `MISOThemesMISOBlueCoat`, `MISOFoundations`, etc.
+Internal modules: `MISOComponents`, `MISOTokensRaw`, `MISOTokensSemantic`, `MISOTokensComponent`, `MISOThemesMISOBlueCoat`, `MISOThemesMISOFoxyRough`, `MISOFoundations`, etc.
 
 ---
 
@@ -55,7 +54,11 @@ MISOThemeableView(theme: BlueCoatTheme()) { … }   // inject at root
 @Environment(\.theme) private var theme          // consume anywhere
 ```
 
-Available: `BlueCoatTheme` (only theme shipped by default; define your own by subclassing `MISOTheme` or `BlueCoatTheme`).
+Available out of the box:
+- `BlueCoatTheme` — default theme, for prototyping and mockups without a brand charter.
+- `FoxyRoughTheme` — a second bundled theme ("Lipstick on a Grey Suit"), subclassing `BlueCoatTheme` and overriding only colors, fonts (custom "Winky Rough" TTF family) and the button component, plus a rounder tuning.
+
+Define your own theme by subclassing `MISOTheme` (from scratch) or `BlueCoatTheme` (override only what differs) — see the `miso-ios-guide-create-theme` skill.
 
 ---
 
@@ -353,7 +356,7 @@ let theme = BlueCoatTheme(fontFamily: localizedHelveticaFont())
 
 ## 12. Component skills
 
-Load the matching skill for the component family you need. Each family skill mirrors `MISO/Core/Components/Sources/<Family>/` in the repo.
+Load the matching skill for the component family you need. Each family skill mirrors `MISO/Core/OUDS/Components/Sources/<Family>/` in the repo — these families are inherited from the OUDS upstream project.
 
 | Family | Skill | Components |
 |---|---|---|
@@ -365,5 +368,12 @@ Load the matching skill for the component family you need. Each family skill mir
 | Indicators | `miso-ios-components-indicators` | MISOBadge*, MISOTag, MISOInputTag, MISOCircularProgressIndicator, MISOLinearProgressIndicator |
 | Layouts | `miso-ios-components-layouts` | MISOColoredSurface, MISOHorizontalDivider, MISOVerticalDivider |
 | Navigations | `miso-ios-components-navigations` | MISOLink, MISOTabBar, MISOToolBarItem / `toolBarTop` / `toolBarBottom` |
+
+MISO also ships components and modules that are **exclusive to MISO** (not inherited from OUDS):
+
+| Family | Skill | Components / types | Source |
+|---|---|---|---|
+| Exclusive components | `miso-ios-components-exclusive` | MISOOnboardingView / MISOOnboardingPage, MISOSplashScreenView, MISOConfettiView | `MISOComponentsMISO` (`MISO/Core/MISO/Components/Sources/`) |
+| Exclusive module | `miso-ios-module-exclusive` | MISOAppDetailsSheet / MISOAppDetailsURL / MISOAppEditor, MISOLegalSection, MISOAppStoreUpdateViewModel | `MISOModulesAppServices` (`MISO/Modules/MISO/AppServices/Sources/`) |
 
 ---

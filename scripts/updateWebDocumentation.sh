@@ -13,8 +13,9 @@ set -euo pipefail
 DOCUMENTATION_REPO_URL="git@github.com:pylapp/miso-ios-documentation.git"
 DOCUMENTATION_REPO_BRANCH="main"
 
-# The URL hosting the website (GitHub Pages free tier)
-DOCUMENTATION_URL_ONLINE="https://pylapp.github.io/miso-ios-documentation/"
+# The web documentation is hosted on GitHub Pages, with domain https://pylapp.github.io/miso-ios-documentation
+# The Swift DocC tool for GitHub Pages needs only the repo name, and not the full URL
+DOCUMENTATION_URL_ONLINE="miso-ios-documentation"
 
 # Files present in the documentation repository that must NEVER be overwritten
 # by the generated content. They are the "source of truth" version maintained
@@ -190,14 +191,14 @@ swift package \
     --target MISOTokensSemantic \
     --target MISOTokensRaw \
     --target MISOFoundations \
-    --target MISOModulesMISO \
+    --target MISOModulesAppServices \
     --target MISOThemesMISOBlueCoat \
+    --target MISOThemesMISOFoxyRough \
     --target MISOComponentsMISO \
     --target MISOFoundationsMISO \
     --output-path "$DOCUMENTATION_HTML_LOCATION" \
     --transform-for-static-hosting \
     --hosting-base-path "$DOCUMENTATION_URL_ONLINE" \
-    --experimental-transform-for-static-hosting-with-content \
     --warnings-as-errors \
     --symbol-graph-minimum-access-level public
 

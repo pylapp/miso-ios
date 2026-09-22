@@ -13,7 +13,7 @@ import Testing
 /// Tests also utilies like, for exmaple, contrat ratio computations.
 struct MultipleColorSemanticTokenTests {
 
-    // See https://github.com/Orange-OpenSource/miso-ios/issues/667
+    // See https://github.com/Orange-OpenSource/ouds-ios/issues/667
     #if !os(iOS)
     private static let doesRunOniOS = false
     #else

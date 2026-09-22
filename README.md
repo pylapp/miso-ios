@@ -13,7 +13,9 @@
   ·
   <a href="https://github.com/pylapp/miso-ios/wiki" title="Swift library wiki">Wiki</a>
   ·
-  <a href="https://github.com/pylapp/miso-ios-design-system-toolbox" title="Design system toolbox GitHub project of MISO">Design system toolbox</a>
+  <a href="https://github.com/pylapp/miso-ios-demo" title="Demo app GitHub project of MISO">Demo app</a>
+  ·
+  <a href="https://github.com/pylapp/miso-ios-documentation" title="MISO iOS Swift Package Documentation">Documentation</a>    
 </p>
 
 <p align="center">
@@ -119,7 +121,7 @@ If you want to share ideas or discuss about API, features, components or other t
 [Q&A](https://github.com/pylapp/miso-ios/discussions/categories/q-a) is more dedicated for help, otherwise feel free to open or update a topic in [Ideas](https://github.com/pylapp/miso-ios/discussions/categories/ideas).
 Keep in mind internal or sensitive discussions must be in internal tools, not public ones.
 
-If your discussions, requests or issues are about the design system toolbox application, [use instead its GitHub project](https://github.com/pylapp/miso-ios-design-system-toolbox).
+If your discussions, requests or issues are about the demo application, [use instead its GitHub project](https://github.com/pylapp/miso-ios-demo).
 
 ## 🤝 Contributing
 
@@ -127,9 +129,9 @@ Please read through our [contributing guidelines](https://github.com/pylapp/miso
 
 ## 🔒 Data and privacy
 
-The MISO is a Software Development Kit (SDK) that allows developpers to create mobile applications with predefined components and tools.
+The MISO is a Software Development Kit (SDK) that helps developers to create mobile applications more easily and quickly with predefined components and tools.
 As such:
-- this SDK does not handle any personnal data
+- this SDK does not handle any personal data
 - this SDK does not require any device permission to work
 
 ## ⚖️ Copyright and license

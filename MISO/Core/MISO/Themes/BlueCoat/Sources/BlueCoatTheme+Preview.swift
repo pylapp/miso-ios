@@ -1,6 +1,7 @@
 // Software: MISO iOS
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: Copyright (c) Pierre-Yves Lapersonne
+// ✿✿✿✿ ʕ •ᴥ•ʔ/ ︻デ═一
 
 import Foundation
 import MISOFoundations
@@ -36,7 +37,7 @@ extension View {
     ///     }
     /// ```
     ///
-    /// Note this second case works only if *YourView* does not refer directly to the `theme` (see [#1268](https://github.com/Orange-OpenSource/miso-ios/issues/1268))
+    /// Note this second case works only if *YourView* does not refer directly to the `theme` (see [#1268](https://github.com/Orange-OpenSource/ouds-ios/issues/1268))
     @ViewBuilder
     public func blueCoatPreview() -> some View {
         #if DEBUG

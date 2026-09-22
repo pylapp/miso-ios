@@ -320,7 +320,7 @@ struct PinCodeInputContainer: View {
 struct PinCodeInputVoiceOverGroupModifier: ViewModifier {
 
     // NOTE: People needing both Full Keyboard Access and VoiceOver simultaneously will get the
-    // VoiceOver behaviour (grouped container). See https://github.com/Orange-OpenSource/miso-ios/issues/1631
+    // VoiceOver behaviour (grouped container). See https://github.com/Orange-OpenSource/ouds-ios/issues/1631
 
     let groupLabel: String
 

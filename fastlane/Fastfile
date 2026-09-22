@@ -31,7 +31,7 @@ platform :ios do
         sh "cd .. && swiftformat . --header \"#{templateOUDSFork}\" && cd .."
 
         # Format sources of MISO, not related to the fork, copyrighted Pierre-Yves Lapersonne only
-        templateMISO = 'Software: MISO iOS\\nSPDX-License-Identifier: MIT\\nSPDX-FileCopyrightText: Copyright (c) Pierre-Yves Lapersonne'
+        templateMISO = 'Software: MISO iOS\\nSPDX-License-Identifier: MIT\\nSPDX-FileCopyrightText: Copyright (c) Pierre-Yves Lapersonne\\n✿✿✿✿ ʕ •ᴥ•ʔ/ ︻デ═一'
         sh "cd .. && swiftformat MISO/Core/MISO/ --header \"#{templateMISO}\" && cd .."
         sh "cd .. && swiftformat MISO/Foundations/MISO --header \"#{templateMISO}\" && cd .."
         sh "cd .. && swiftformat MISO/Modules/MISO --header \"#{templateMISO}\" && cd .."

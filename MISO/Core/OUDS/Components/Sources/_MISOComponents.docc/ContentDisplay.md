@@ -17,6 +17,9 @@ The ``MISOBulletList`` is a UI element that helps to display related individual 
     @Tab("BlueCoat") {
         ![A bullet list in light and dark modes with BlueCoat theme](component_bullet_list_BlueCoat)
     }
+    @Tab("FoxyRough") {
+        ![A bullet list in light and dark modes with FoxyRough theme](component_bullet_list_FoxyRough)
+    }
 }
 
 ``MISOBulletList`` is also known as _Unordered list_ or _Ordered list_ and is not an interactive element by default.

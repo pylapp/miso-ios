@@ -12,10 +12,8 @@ How to add the package as dependency, import libraries and use theme and compone
 ### Use Swift Package Manager
 
 If you want to add the iOS library of *MISO*, you need to add our _Swift Package_ into your project.
-To do that, add a new _package dependency_ to your _Xcode_ project by refering to it by `github.com/Orange-OpenSource/miso-ios`.
+To do that, add a new _package dependency_ to your _Xcode_ project by refering to it by `github.com/pylapp/miso-ios`.
 You are free to choose whether or not you want a branch or a specific tag, pick the solution you want.
-
-You can [refer to the wiki](https://github.com/Orange-OpenSource/miso-ios/wiki/50-%E2%80%90-About-versions,-releases-and-builds) for more details about versions, releases and tags. You can find release tags (e.g. *1.0.0*) and release candidates tags (e.g. *1.0.0-rc3*).
 
 ### Import the libraries you need
 

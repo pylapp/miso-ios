@@ -17,6 +17,9 @@ Dialogs components are UI elements that display information, system feedback or 
     @Tab("BlueCoat") {
         ![An alert message component in light and dark modes with BlueCoat theme](component_alertMessage_BlueCoat)
     }
+    @Tab("FoxyRough") {
+        ![An alert message component in light and dark modes with FoxyRough theme](component_alertMessage_FoxyRough)
+    }
 }
 
 ``MISOAlertMessage`` is a UI element that displays system feedback, status changes or required action; throughout detailed, prominent, persistent and actionable communication. Alert message includes functional icon and semantic colour, and may include as well a close button and/or action link.
@@ -45,6 +48,9 @@ Dialogs components are UI elements that display information, system feedback or 
 @TabNavigator {
     @Tab("BlueCoat") {
         ![An inline alert component in light and dark modes with BlueCoat theme](component_inlineAlert_BlueCoat)
+    }
+    @Tab("FoxyRough") {
+        ![An inline alert component in light and dark modes with FoxyRough theme](component_inlineAlert_FoxyRough)
     }
 }
 

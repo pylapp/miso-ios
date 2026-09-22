@@ -43,8 +43,8 @@ open class MISOTheme: @unchecked Sendable, Equatable {
     /// If nil the theme does not provide color charts.
     /// In this case it cannot be used but can be overridden by local implementation of `AllColorChartSemanticTokensProvider`.
     ///
-    /// If you think your theme must have such colors, feel free to subit an issue (https://github.com/Orange-OpenSource/miso-ios/issues)
-    /// or open a discussion (https://github.com/Orange-OpenSource/miso-ios/discussions/new?category=q-a)
+    /// If you think your theme must have such colors, feel free to subit an issue (https://github.com/Orange-OpenSource/ouds-ios/issues)
+    /// or open a discussion (https://github.com/Orange-OpenSource/ouds-ios/discussions/new?category=q-a)
     public let colorsCharts: AllColorChartSemanticTokensProvider!
 
     /// All color decorative semantic tokens exposed in one obejct
@@ -52,8 +52,8 @@ open class MISOTheme: @unchecked Sendable, Equatable {
     /// If nil the theme does not provide color decorative.
     /// In this case it cannot be used but can be overridden by local implementation of `AllColorDecorativeSemanticTokensProvider`
     ///
-    /// If you think your theme must have such colors, feel free to subit an issue (https://github.com/Orange-OpenSource/miso-ios/issues)
-    /// or open a discussion (https://github.com/Orange-OpenSource/miso-ios/discussions/new?category=q-a)
+    /// If you think your theme must have such colors, feel free to subit an issue (https://github.com/Orange-OpenSource/ouds-ios/issues)
+    /// or open a discussion (https://github.com/Orange-OpenSource/ouds-ios/discussions/new?category=q-a)
     public let colorsDecorative: AllColorDecorativeSemanticTokensProvider!
 
     // swiftlint:enable implicitly_unwrapped_optional

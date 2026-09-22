@@ -1,6 +1,7 @@
 // Software: MISO iOS
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: Copyright (c) Pierre-Yves Lapersonne
+// ✿✿✿✿ ʕ •ᴥ•ʔ/ ︻デ═一
 
 import Foundation
 import MISOThemesContract
@@ -39,10 +40,6 @@ public typealias DefaultTheme = BlueCoatTheme
 ///         }
 ///     }
 /// ```
-///
-/// # Theme tuning
-///
-/// This theme cannot be customized more.
 ///
 /// ## Tokens versions
 ///

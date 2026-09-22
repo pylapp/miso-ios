@@ -59,11 +59,14 @@ let package = Package(
         // MARK: Atomic products (MISO)
 
         .library(
-            name: "MISOModulesMISO",
-            targets: ["MISOModulesMISO"]),
+            name: "MISOModulesAppServices",
+            targets: ["MISOModulesAppServices"]),
         .library(
             name: "MISOThemesMISOBlueCoat",
             targets: ["MISOThemesMISOBlueCoat"]),
+        .library(
+            name: "MISOThemesMISOFoxyRough",
+            targets: ["MISOThemesMISOFoxyRough"]),
         .library(
             name: "MISOComponentsMISO",
             targets: ["MISOComponentsMISO"]),
@@ -104,9 +107,10 @@ let package = Package(
                 "MISOTokensSemantic",
                 "MISOTokensRaw",
                 "MISOFoundations",
-                "MISOModulesMISO",
+                "MISOModulesAppServices",
                 "MISOComponentsMISO",
                 "MISOThemesMISOBlueCoat",
+                "MISOThemesMISOFoxyRough",
                 "MISOFoundationsMISO",
             ],
             path: "MISO/exported/MISO/Sources"),
@@ -175,9 +179,14 @@ let package = Package(
         // MARK: Atomic targets (MISO)
 
         .target(
-            name: "MISOModulesMISO",
-            dependencies: ["MISOComponents", "MISOComponentsMISO"],
-            path: "MISO/Modules/MISO/Sources"),
+            name: "MISOModulesAppServices",
+            dependencies: ["MISOComponents", "MISOComponentsMISO", "MISOThemesContract", "MISOFoundationsMISO"],
+            path: "MISO/Modules/MISO/AppServices/Sources",
+            resources: [.process("Resources/")]),
+        .testTarget(
+            name: "MISOModulesAppServices-Tests",
+            dependencies: ["TestsUtils", "MISOModulesAppServices"],
+            path: "MISO/Modules/MISO/AppServices/Tests"),
 
         .target(
             name: "MISOThemesMISOBlueCoat",
@@ -190,9 +199,24 @@ let package = Package(
             path: "MISO/Core/MISO/Themes/BlueCoat/Tests"),
 
         .target(
+            name: "MISOThemesMISOFoxyRough",
+            dependencies: ["MISOThemesMISOBlueCoat"],
+            path: "MISO/Core/MISO/Themes/FoxyRough/Sources",
+            resources: [.process("Resources/")]),
+        .testTarget(
+            name: "MISOThemesMISOFoxyRough-Tests",
+            dependencies: ["TestsUtils", "MISOThemesMISOBlueCoat", "MISOThemesMISOFoxyRough"],
+            path: "MISO/Core/MISO/Themes/FoxyRough/Tests"),
+
+        .target(
             name: "MISOComponentsMISO",
-            dependencies: ["MISOComponents"],
-            path: "MISO/Core/MISO/Components/Sources"),
+            dependencies: ["MISOComponents", "MISOFoundationsMISO"],
+            path: "MISO/Core/MISO/Components/Sources",
+            resources: [.process("Resources/")]),
+        .testTarget(
+            name: "MISOComponentsMISO-Tests",
+            dependencies: ["TestsUtils", "MISOComponentsMISO"],
+            path: "MISO/Core/MISO/Components/Tests"),
 
         .target(
             name: "MISOFoundationsMISO",
