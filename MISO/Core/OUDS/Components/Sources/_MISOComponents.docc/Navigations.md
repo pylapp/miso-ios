@@ -5,7 +5,7 @@
     @PageImage(purpose: card, source: "ic_folder_categories")
 }
 
-Some components can be used for **navigation**.
+Some components can be used for **navigation**. These are inherited from OUDS.
 
 ## Overview
 

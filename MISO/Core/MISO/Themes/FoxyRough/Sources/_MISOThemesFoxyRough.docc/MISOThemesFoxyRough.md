@@ -10,13 +10,13 @@ Do not add @PageImage(purpose: card) because not managed for landing page of onl
 See https://github.com/swiftlang/swift-docc/issues/1283
 -->
 
-This FoxyRough theme is a theme with tints of red and gray, "Lipstick on a Grey Suit".
+This FoxyRough theme is a theme with tints of red and gray, "Lipstick on a Grey Suit", provided by MISO and not OUDS.
 
 ## Overview
 
 > Note: The FoxyRough theme uses the WinkyRoug font family
 
-> Important: The FoxyRough theme does not embed charts colors yet, and is read only: it cannot be suclassed or derivated.
+> Important: The FoxyRough theme does not embed charts colors yet.
 
 ## How to use the theme
 

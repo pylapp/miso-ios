@@ -10,7 +10,7 @@ Do not add @PageImage(purpose: card) because not managed for landing page of onl
 See https://github.com/swiftlang/swift-docc/issues/1283
 -->
 
-Contains a set of helpers and extensions shared for higher level targets.
+Contains a set of helpers and extensions shared for higher level targets. Inherited from OUDS.
 
 ## Overview
 

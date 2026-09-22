@@ -10,7 +10,7 @@ Do not add @PageImage(purpose: card) because not managed for landing page of onl
 See https://github.com/swiftlang/swift-docc/issues/1283
 -->
 
-This BlueCoat theme is a blue theme, quite smooth and simple.
+This BlueCoat theme is a blue theme, quite smooth and simple, provided by MISO and not OUDS.
 
 ## Overview
 

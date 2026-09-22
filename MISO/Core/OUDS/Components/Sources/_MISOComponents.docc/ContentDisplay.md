@@ -5,7 +5,7 @@
     @PageImage(purpose: card, source: "ic_folder_categories")
 }
 
-Some components can be used for **content display**.
+Some components can be used for **content display**. These are inherited from OUDS.
 
 ## Overview
 

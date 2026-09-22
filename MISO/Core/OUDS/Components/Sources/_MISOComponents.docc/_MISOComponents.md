@@ -10,7 +10,7 @@ Do not add @PageImage(purpose: card) because not managed for landing page of onl
 See https://github.com/swiftlang/swift-docc/issues/1283
 -->
 
-The catalog of all components provided by MISO. It contains also `View` extensions and `ViewModifiers` to apply tokens and styles on components and higher-level views.
+The catalog of all components provided by MISO. It contains also `View` extensions and `ViewModifiers` to apply tokens and styles on components and higher-level views. These are inherited from OUDS.
 
 Components are grouped in several categories.
 *Actions* component are for example buttons. *Navigations* group contains links, *inputs* group has checkboxes, radio buttons and switches, *layouts* group is dedicated to things like dividers.
