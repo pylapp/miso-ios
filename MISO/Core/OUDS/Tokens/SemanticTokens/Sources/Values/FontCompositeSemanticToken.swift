@@ -3,6 +3,7 @@
 // SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
 
 import CoreFoundation
+import CoreGraphics // Needed for XCFramework generation and API breaks checks
 import MISOTokensRaw
 
 /// An operator to make for example comparisons between ``FontCompositeSemanticToken``

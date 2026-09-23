@@ -9,7 +9,6 @@
 #
 # Builds dynamic XCFrameworks for the MISOSwiftUI
 # umbrella products.
-#
 # Output slices: iOS device (ios-arm64) and iOS Simulator (ios-arm64_x86_64-simulator).
 #
 # The script :
@@ -295,7 +294,6 @@ build_atomic_frameworks() {
     local -a atomic_modules
     read -ra atomic_modules <<< "$(get_atomic_modules "${product_name}")"
 
-    # Prepare the architecture list and SDK to use for the empty stub binary.
     local archs
     if [[ "${sdk_label}" == "iphoneos" ]]; then
         archs=("arm64")
@@ -645,7 +643,6 @@ ${atomic_list}
 \`xcodebuild -create-xcframework\` accepts only one \`.framework\` per
 (platform, arch) slice. Packing multiple frameworks in a single xcframework is not
 supported. The consumer therefore drag-and-drops the ${atomic_count} xcframeworks; only
-the umbrella carries actual code at runtime.
 
 ## Slices
 

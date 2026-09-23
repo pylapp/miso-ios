@@ -3,6 +3,7 @@
 // SPDX-FileCopyrightText: Copyright (c) Pierre-Yves Lapersonne
 // ✿✿✿✿ ʕ •ᴥ•ʔ/ ︻デ═一
 
+import CoreGraphics // Needed for XCFramework generation
 import Foundation
 import MISOTokensComponent
 import MISOTokensRaw

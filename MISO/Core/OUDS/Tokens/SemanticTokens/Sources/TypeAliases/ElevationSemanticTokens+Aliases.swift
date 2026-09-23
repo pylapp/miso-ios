@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
 
+import CoreGraphics // Needed for XCFramework generation and API brekaing chchecks
 import MISOTokensRaw
 
 /// Basically an elevation semantic token for X offset is a raw token for elevation, with the same final type, to keep grammar clean and clear with design system grammar.

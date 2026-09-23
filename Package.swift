@@ -25,6 +25,7 @@ let package = Package(
         // Embeds all libraries and all themes
         .library(
             name: "MISOSwiftUI",
+            type: .dynamic,
             targets: ["MISOSwiftUI"]),
 
         // Better user of products, choose only the one users want

@@ -29,3 +29,8 @@
 
 # Produced by .gitlab-ci.yml
 /.cache/
+
+# Produced by scripts/build-xcframework.sh
+/build/
+/dist/
+*.xcarchive

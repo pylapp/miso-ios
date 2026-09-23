@@ -380,32 +380,14 @@ Declare the token in the corresponding protocol (e.g., `SizeMultipleSemanticToke
 
 | Theme | Access Modifier | Override Allowed |
 |-------|-----------------|------------------|
-| **Orange** | `@objc open` | Yes - base theme for subclassing |
-| **OrangeCompact** | `@objc public final` | No |
-| **Sosh** | `@objc public final` | No |
-| **Wireframe** | `@objc public final` | No |
-
-### 11.3 Override Tests (Orange Theme Only)
-
-For `OrangeTheme`, add override tests to ensure subclasses can override token values:
-
-1. Add mock value in `MockTheme*TokensProvider` (e.g., `MockThemeSizeSemanticTokensProvider`)
-2. Add test in `ThemeOverrideOf*TokensTests` to verify the override works
-
-Example for `maxWidthBoxedText`:
-- Token declared in `SizeMultipleSemanticTokens` protocol
-- Implemented as `@objc open` in `OrangeTheme+SizeMultipleSemanticTokens`
-- Implemented as `@objc public final` in OrangeCompact, Sosh, Wireframe
-- Mock value in `MockThemeSizeSemanticTokensProvider`
-- Test in `ThemeOverrideOfSizeMultipleSemanticTokensTests`
-<<<<<<< HEAD
-=======
+| **BlueCoat** | `@objc open` | Yes - base theme for subclassing |
+| **FoxyRough** | `@objc open` | Yes |
 
 ## 12. XCFramework distribution and module stability ⚠️ CRITICAL
 
-OUDS is primarily distributed as a Swift Package, but it is ALSO built as a
-dynamic XCFramework (products `OUDSSwiftUIOrangeSosh` and `OUDSSwiftUIOrange`)
-for consumers that need a shared binary.
+OUMISODS is primarily distributed as a Swift Package, but it is ALSO built as a
+dynamic XCFramework (product `MISOSwiftUI`) for consumers that need
+a shared binary.
 
 This binary distribution requires compiling with
 `BUILD_LIBRARY_FOR_DISTRIBUTION=YES`, which triggers Swift's **module
@@ -427,7 +409,7 @@ here because 'CoreFoundation' was not imported by this file
 
 This applies even if:
 - Another module already imported by the file (`Foundation`, `SwiftUI`,
-  `OUDSTokensRaw`, …) transitively re-exports `CGFloat`.
+  `MISOTokensRaw`, …) transitively re-exports `CGFloat`.
 - The file compiles fine under standard SPM builds (which do NOT enforce
   module stability).
 
@@ -447,7 +429,7 @@ exposes a `CGFloat`-derived type must have its own `import CoreGraphics`.
 | Body of a method using `CGFloat` internally                             | No — bodies are not in the swiftinterface |
 | Type used only in `internal` / `private` API                            | No — out of public surface       |
 
-### 12.3 Convention in the OUDS codebase
+### 12.3 Convention in the MISO codebase
 
 When such an import is added purely to satisfy the XCFramework build (and
 not because the file semantically depends on `CoreGraphics` for its own
@@ -467,12 +449,12 @@ the codebase (iOS/macOS idiomatic convention).
 The same XCFramework build also requires that every SPM target explicitly
 declares in its `dependencies:` list ALL the modules that any of its source
 files `import`. Standard SPM tolerates transitive dependencies (a target
-that only declares `OUDSThemesContract` can still import `OUDSTokensRaw`
-because `OUDSThemesContract` itself depends on it); the Xcode 26 explicit
+that only declares `MISOThemesContract` can still import `MISOTokensRaw`
+because `MISOThemesContract` itself depends on it); the Xcode 26 explicit
 module scanner used during `xcodebuild archive` does not.
 
-When adding a new `import OUDSSomething` in a source file, always add
-`"OUDSSomething"` to the enclosing target's `dependencies:` array in
+When adding a new `import MISOSomething` in a source file, always add
+`"MISOSomething"` to the enclosing target's `dependencies:` array in
 `Package.swift`, even if it is already pulled in transitively.
 
 **Dependency lists MUST be kept sorted alphabetically in `Package.swift` for
@@ -483,7 +465,7 @@ applies to every target's `dependencies:` array (both `.target` and
 ### 12.5 Umbrella product linkage
 
 The umbrella product that is packaged as an XCFramework
-(`OUDSSwiftUIOrangeSosh`) is declared with `type: .dynamic` in
+(`MISOSwiftUI`) is declared with `type: .dynamic` in
 `Package.swift`. Do NOT pass `MACH_O_TYPE=mh_dylib` at the `xcodebuild`
 level — it would be applied to every target in the package graph, produce
 duplicated PIF targets (objfile + framework variants for the same module),
@@ -492,4 +474,3 @@ and confuse the Swift 6 explicit module scanner into emitting spurious
 
 The dynamic nature of the umbrella must be declared once, at the product
 level in `Package.swift`.
->>>>>>> b49273bd (ci: update toolchain to generate also `OUDSSwiftUIOrange` XCFramework)
