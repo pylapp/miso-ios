@@ -154,7 +154,7 @@ import SwiftUI
 ///
 /// Be sure the available texts are enough to explain to the users the navigation depending to its indicator type.
 ///
-/// - Version: 1.0.0 (Figma component design version)
+/// - Version: 1.2.0 (Figma component design version)
 /// - Since: OUDS 3.0.0
 @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public struct MISONavigationListItem: View {

@@ -39,6 +39,9 @@ Guides:
 - **`miso-ios-guide-vocabulary`** — glossary of MISO-specific terms (tokenator, token types, theme, …)
 - **`miso-ios-guide-create-theme`** — step-by-step guide to create a custom MISO theme (subclass an existing theme, from scratch on MISOTheme, mix of providers, local fonts)
 
+For pull request reviews and before commit:
+- **.github/copilot-instructions.md** — rules about code smells, architecture and guidelines
+
 ## Key files
 
 | File | Purpose |
