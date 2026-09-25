@@ -103,7 +103,7 @@ import SwiftUI
 /// For accessibility reasons, if the system settings for reducing motion is enabled, the loading indicator does not move.
 /// For ecodesign reasons, if the device is in low power mode, the loading indicator does not move.
 ///
-/// - Version: 3.3.0 (Figma component design version)
+/// - Version: 3.4.0 (Figma component design version)
 /// - Since: OUDS 0.10.0
 @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public struct MISOButton: View {
