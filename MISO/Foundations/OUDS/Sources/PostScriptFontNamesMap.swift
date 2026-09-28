@@ -177,15 +177,8 @@ nonisolated(unsafe) private var internalApplePostScriptFontNames: PostScriptFont
         PSFNMK("Helvetica Neue", nil /* normal */ ): "HelveticaNeue",
         PSFNMK("Helvetica Neue", Font.Weight.medium): "HelveticaNeue-Medium",
         PSFNMK("Helvetica Neue", Font.Weight.bold): "HelveticaNeue-Bold",
-        // NOTE: "Helvetica Neue 75" in Brand TTF has "HelveticaNeue-Bold" PostScript Name
 
-        // WARNING: Needs TTF font files not available in iOS, thus needed to be added in project
-        PSFNMK("Helvetica Neue Arabic", Font.Weight.light): "HelveticaNeueLTArabic-Light",
-        PSFNMK("Helvetica Neue Arabic", Font.Weight.regular): "HelveticaNeueLTArabic-Roman",
-        PSFNMK("Helvetica Neue Arabic", nil): "HelveticaNeueLTArabic-Roman",
-        PSFNMK("Helvetica Neue Arabic", Font.Weight.bold): "HelveticaNeueLTArabic-Bold",
-
-        // MARK: BlueCoat
+        // MARK: Blue Coat
 
         PSFNMK("Shantell Sans", Font.Weight.light): "ShantellSans-Light",
         PSFNMK("Shantell Sans", Font.Weight.regular): "ShantellSans-Regular",

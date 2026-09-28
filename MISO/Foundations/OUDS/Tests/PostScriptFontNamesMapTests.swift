@@ -188,28 +188,6 @@ struct PostScriptFontNamesMapTests {
         #expect(kApplePostScriptFontNames[PSFNMK("Helvetica Neue", Font.Weight.bold)] == "HelveticaNeue-Bold")
     }
 
-    // MARK: - Helvetica Neue Arabic
-
-    @Test
-    func helveticaNeueArabicLight() throws {
-        #expect(kApplePostScriptFontNames[PSFNMK("Helvetica Neue Arabic", Font.Weight.light)] == "HelveticaNeueLTArabic-Light")
-    }
-
-    @Test
-    func helveticaNeueArabicRegular() throws {
-        #expect(kApplePostScriptFontNames[PSFNMK("Helvetica Neue Arabic", Font.Weight.regular)] == "HelveticaNeueLTArabic-Roman")
-    }
-
-    @Test
-    func helveticaNeueArabicBold() throws {
-        #expect(kApplePostScriptFontNames[PSFNMK("Helvetica Neue Arabic", Font.Weight.bold)] == "HelveticaNeueLTArabic-Bold")
-    }
-
-    @Test
-    func helveticaNeueArabic() throws {
-        #expect(kApplePostScriptFontNames[PSFNMK("Helvetica Neue Arabic", nil)] == "HelveticaNeueLTArabic-Roman")
-    }
-
     // MARK: - Shantell Sans
 
     @Test

@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- For `text input` component, the label is duplicated if on two lines (Orange-OpenSource/ouds-ios#1763)
 - **BREAKING**: missing `maxWidthBoxedText` token in `SizeMultipleSemanticTokens` (Orange-OpenSource/ouds-ios#1714)
 
 ## [1.1.0](https://github.com/pylapp/miso-ios/releases/tag/1.0.0) - 2026-09-22
