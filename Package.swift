@@ -5,9 +5,6 @@
 
 import PackageDescription
 
-/// Exposing MISO through a Swift Package is a good start.
-/// Expose it through Pod or XCFramework should be investigated later.
-/// Defining here hierarchy between targets will prevent us to have cyclic dependencies and help to have separated responsibilities.
 let package = Package(
 
     // MARK: - Package setup
@@ -29,8 +26,6 @@ let package = Package(
         .library(
             name: "MISOSwiftUI",
             targets: ["MISOSwiftUI"]),
-
-        // MARK: Atomic products (OUDS)
 
         // Better user of products, choose only the one users want
         // Helps to isolate packages of MISO

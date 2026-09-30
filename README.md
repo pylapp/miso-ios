@@ -80,6 +80,19 @@ You can choose the _dependency rule_ you want. Keep in mind MISO iOS releases ar
 In your Xcode _targets_, add the libraries you need. Everything is splitted so as to let users choose the content to embed they want.
 The `MISOSwiftUI` library embeds everything except themes which are not *BlueCoat* basic root theme, but you may prefer instead tailor your imports.
 
+### Add the dependency (XCFramework)
+
+Get the XCFramework ZIP file from the [GitHub releases](https://github.com/pylapp/miso-ios/releases) of the version you want.
+Uncompress the ZIP, and if you want check its checksum or cryptographic signature.
+Otherwise uncompress the XCFramework ZIP, and drag and drop all the XCFrameworks (~10) in your Xcode project.
+Associate them to the target(s) you want.
+And, in your source code, when you use MISO items, import **MISOSwiftUI**
+
+> [!NOTE]
+> XCFramework is not the prefered solution to use MISO.
+> Thus the XCFrameworks available are tailored for iOS platform.
+> For more evolutions feel free to contact the maintainers.
+
 ### Instanciate and inject theme
 
 In the root view of your app, add the `MISOThemeableView` with inside the _theme_ object you want to apply.
@@ -112,6 +125,13 @@ If you need to get configuration details from the theme (colors, dimensions, etc
 > [!TIP]
 > Releases are immutable and in most of time cryptographically signed (commits, tags and artifacts).
 > You can verify their integrity with commands from GPG tool of GitHub CLI client.
+
+## 📦 Binary distribution (XCFramework)
+
+In addition to the standard Swift Package distribution, MISO is also published as a **dynamic XCFramework** for the `MISOSwiftUI` umbrella product
+This distribution is intended to solve the duplication / symbol-conflict problem that appears when several third-party XCFrameworks each embed their own copy of MISO in the same application.
+
+Unzip the XCFramework archive, add all ~10 XCFrameworks to your Xcode project, embed and sign only `MISOSwiftUI`, and import that dependency.
 
 ## 🪲 Bugs, feature requests and discussions
 
