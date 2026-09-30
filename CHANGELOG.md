@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- For `radio` components, bad color for unselected indicator with Sosh theme (Orange-OpenSource/ouds-ios#1779)
 - For `text input` component, the label is duplicated if on two lines (Orange-OpenSource/ouds-ios#1763)
 - **BREAKING**: missing `maxWidthBoxedText` token in `SizeMultipleSemanticTokens` (Orange-OpenSource/ouds-ios#1714)
 
