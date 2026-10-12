@@ -11,9 +11,9 @@ import MISOTokensSemantic
 extension BlueCoatThemeFontSemanticTokensProvider: FontSemanticTokens {
     /// Has for value token familySystem (= "Shantell Sans")
     @objc open var familyBody: FontFamilySemanticToken { familySystem }
-    /// Has for value token FontRawTokens.familyMonospaceSfMono (= "SF Mono")
-    @objc open var familyCode: FontFamilySemanticToken { FontRawTokens.familyMonospaceSfMono }
-    /// Has for value token familySystem (= "Shantell Sans")
+    /// Has for value token FontRawTokens.familyMonospaceMenlo (= "Menlo")
+    @objc open var familyCode: FontFamilySemanticToken { FontRawTokens.familyMonospaceMenlo }
+    /// Has for value token familySystem (= "Helvetica Neue")
     @objc open var familyDisplay: FontFamilySemanticToken { familySystem }
     /// Has for value token familySystem (= "Shantell Sans")
     @objc open var familyHeading: FontFamilySemanticToken { familySystem }
