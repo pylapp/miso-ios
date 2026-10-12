@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
 
+import MISOTokensSemantic
 import SwiftUI
 
 /// Text component providing the largest typography styles of the design system.
@@ -45,6 +46,7 @@ public struct MISODisplay: View { // TODO: #1580 - Add reference to documentatio
     private let size: Size
 
     @Environment(\.theme) private var theme
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     // MARK: - Size
 
@@ -104,6 +106,7 @@ public struct MISODisplay: View { // TODO: #1580 - Add reference to documentatio
     public var body: some View {
         styledText
             .foregroundColor(theme.colors.contentDefault)
+            .frame(maxWidth: maxWidth.dimension(for: horizontalSizeClass ?? .regular), alignment: .leading)
             .accessibilityAddTraits(.isHeader)
     }
 
@@ -117,6 +120,18 @@ public struct MISODisplay: View { // TODO: #1580 - Add reference to documentatio
             Text(text).displayMedium(theme)
         case .small:
             Text(text).displaySmall(theme)
+        }
+    }
+
+    /// Apply the correct maxWidth based on the requested size.
+    private var maxWidth: MultipleSizeSemanticToken {
+        switch size {
+        case .large:
+            theme.sizes.maxWidthDisplayLarge
+        case .medium:
+            theme.sizes.maxWidthDisplayMedium
+        case .small:
+            theme.sizes.maxWidthDisplaySmall
         }
     }
 }

@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
 
+import MISOTokensSemantic
 import SwiftUI
 
 /// Text component used for the main content of a screen (paragraphs, descriptions, helper texts, etc.).
@@ -40,6 +41,7 @@ public struct MISOBody: View { // TODO: #1580 - Add reference to documentation w
     private let weight: Weight
 
     @Environment(\.theme) private var theme
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     // MARK: - Size
 
@@ -109,6 +111,7 @@ public struct MISOBody: View { // TODO: #1580 - Add reference to documentation w
     public var body: some View {
         styledText
             .foregroundColor(theme.colors.contentDefault)
+            .frame(maxWidth: maxWidth.dimension(for: horizontalSizeClass ?? .regular), alignment: .leading)
     }
 
     /// Applies the correct typography modifier based on the requested size and weight combination.
@@ -133,6 +136,18 @@ public struct MISOBody: View { // TODO: #1580 - Add reference to documentation w
             Text(text).bodyModerateSmall(theme)
         case (.small, .strong):
             Text(text).bodyStrongSmall(theme)
+        }
+    }
+
+    /// Apply the correct maxWidth based on the requested size.
+    private var maxWidth: MultipleSizeSemanticToken {
+        switch size {
+        case .large:
+            theme.sizes.maxWidthBodyLarge
+        case .medium:
+            theme.sizes.maxWidthBodyMedium
+        case .small:
+            theme.sizes.maxWidthBodySmall
         }
     }
 }

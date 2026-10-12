@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- `typography` component to version v1.1.0 (Orange-OpenSource/ouds-ios#1722)
 - `alert message` component to version v1.2.0 (Orange-OpenSource/ouds-ios#1659)
 - `button` component to version v3.4.0 (Orange-OpenSource/ouds-ios#1653)
 - Make product exportable and usable as XCFramework (Orange-OpenSource/ouds-ios#1767)

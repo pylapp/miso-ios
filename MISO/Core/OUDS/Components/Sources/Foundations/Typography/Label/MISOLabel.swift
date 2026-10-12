@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
 
+import MISOTokensSemantic
 import SwiftUI
 
 /// Text component used for short labels attached to controls, form fields, chips, tags, captions and so on.
@@ -39,6 +40,7 @@ public struct MISOLabel: View { // TODO: #1580 - Add reference to documentation 
     private let weight: Weight
 
     @Environment(\.theme) private var theme
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     // MARK: - Size
 
@@ -111,6 +113,7 @@ public struct MISOLabel: View { // TODO: #1580 - Add reference to documentation 
     public var body: some View {
         styledText
             .foregroundColor(theme.colors.contentDefault)
+            .frame(maxWidth: maxWidth.dimension(for: horizontalSizeClass ?? .regular), alignment: .leading)
     }
 
     /// Applies the correct typography modifier based on the requested size and weight combination.
@@ -141,6 +144,20 @@ public struct MISOLabel: View { // TODO: #1580 - Add reference to documentation 
             Text(text).labelModerateSmall(theme)
         case (.small, .strong):
             Text(text).labelStrongSmall(theme)
+        }
+    }
+
+    /// Apply the correct maxWidth based on the requested size.
+    private var maxWidth: MultipleSizeSemanticToken {
+        switch size {
+        case .xLarge:
+            theme.sizes.maxWidthLabelXlarge
+        case .large:
+            theme.sizes.maxWidthLabelLarge
+        case .medium:
+            theme.sizes.maxWidthLabelMedium
+        case .small:
+            theme.sizes.maxWidthLabelSmall
         }
     }
 }
