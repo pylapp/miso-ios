@@ -148,6 +148,9 @@ struct SomeView: View {
     @Tab("Tag") {
         ![A tag component in light and dark modes with FoxyRough theme](component_tag_FoxyRough.png)        
     }
+    @Tab("Categorical tag") {
+        ![A categorical tag component in light and dark modes with FoxyRough theme](component_categoricalTag_FoxyRough.png)        
+    }        
     @Tab("Input tag") {
         ![An input tag component in light and dark modes with FoxyRough theme](component_inputTag_FoxyRough.png)
     }

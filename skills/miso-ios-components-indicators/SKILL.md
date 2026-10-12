@@ -43,6 +43,27 @@ MISOInputTag("Label") { /* remove action */ }
 
 ---
 
+## Categorical Tag
+
+Categories: `category1` to `category5` — each maps to a theme-defined background color.
+
+```swift
+MISOCategoricalTag(label: "Label")
+MISOCategoricalTag(label: "Label", category: .category2)
+MISOCategoricalTag(label: "Label", category: .category3, leading: .bullet)
+MISOCategoricalTag(label: "Label", category: .category4, leading: .icon(MISOImage(asset: Image(decorative: "ic_heart"))))
+MISOCategoricalTag(label: "Label", category: .category5, shape: .square, size: .small)
+```
+
+Notes:
+- Always emphasized (no muted appearance unlike MISOTag)
+- Uses `theme.categoricalTag.colorBgCategoryX` for background and `theme.categoricalTag.colorContent` for text/icon color
+- Supports bullet and custom icon (same as MISOTag)
+- Shape: `.rounded` (default) or `.square`
+- Size: `.default` (default) or `.small`
+
+---
+
 ## Circular Progress Indicator
 
 Statuses: `neutral`, `accent`, `positive`, `info`, `warning`, `negative` — Gap sizes: `default`, `small`

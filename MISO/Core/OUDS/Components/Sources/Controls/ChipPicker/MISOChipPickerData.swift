@@ -59,8 +59,8 @@ public struct MISOChipPickerData<Tag> where Tag: Hashable {
         @MainActor public static func icon(_ image: MISOImage, accessibilityLabel: String) -> Layout {
             precondition(image.image != nil, "MISOChipPickerData.Layout.icon(_:accessibilityLabel:) requires a reliable MISOImage")
             // swiftlint:disable:next force_unwrapping
-            let newOudsImage = MISOImage(asset: image.image!, accessibilityLabel: accessibilityLabel, renderingMode: image.renderingMode)
-            return .image(image: newOudsImage)
+            let newMisoImage = MISOImage(asset: image.image!, accessibilityLabel: accessibilityLabel, renderingMode: image.renderingMode)
+            return .image(image: newMisoImage)
         }
 
         /// Creates a text + icon layout from an ``MISOImage``.

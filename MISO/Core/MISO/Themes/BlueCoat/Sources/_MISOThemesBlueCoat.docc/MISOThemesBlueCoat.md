@@ -148,6 +148,9 @@ struct SomeView: View {
     @Tab("Tag") {
         ![A tag component in light and dark modes with BlueCoat theme](component_tag_BlueCoat.png)        
     }
+    @Tab("Categorical tag") {
+        ![A categorical tag component in light and dark modes with BlueCoat theme](component_categoricalTag_BlueCoat.png)        
+    }    
     @Tab("Input tag") {
         ![An input tag component in light and dark modes with BlueCoat theme](component_inputTag_BlueCoat.png)
     }

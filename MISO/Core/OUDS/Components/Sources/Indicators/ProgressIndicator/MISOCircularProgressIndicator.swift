@@ -147,8 +147,10 @@ public struct MISOCircularProgressIndicator: View { // TODO: #409 - Update docum
 
     // MARK: - Properties
 
-    /// Embeds all configuration details for the circular progress indicator
-    private let configuration: CircularProgressIndicatorConfiguration
+    /// Embeds all configuration details for the circular progress indicator.
+    /// Internal (not `private`) so unit tests can introspect the configuration produced by the public
+    /// initializers via `@testable import OUDSComponents`.
+    let configuration: CircularProgressIndicatorConfiguration
 
     // MARK: - Determinate Progress Indicator Helper Text
 
@@ -226,13 +228,23 @@ public struct MISOCircularProgressIndicator: View { // TODO: #409 - Update docum
                 helperText: String? = nil,
                 accessibility: MISOAccessibilityConfiguration? = nil)
     {
+        let resolvedHelperText: Self.HelperTextType? = if let helperText, !helperText.isEmpty {
+            .description(helperText)
+        } else {
+            // When no helper text is provided (or empty), keep helperTextType as nil so the internal
+            // VStack does not reserve space for an empty helper text slot. This keeps the indeterminate
+            // layout consistent with the determinate one (which also uses nil by default) and prevents
+            // a vertical misalignment when the indicator is embedded inside components such as
+            // MISOTag or MISOCategoricalTag in their loading state.
+            nil
+        }
         configuration = CircularProgressIndicatorConfiguration(progress: nil,
                                                                status: status,
                                                                track: track,
                                                                gapSize: gapSize,
                                                                size: size,
                                                                animated: true,
-                                                               helperText: .description(helperText ?? ""),
+                                                               helperText: resolvedHelperText,
                                                                accessibilityName: accessibility?.name,
                                                                accessibilityState: accessibility?.state)
     }

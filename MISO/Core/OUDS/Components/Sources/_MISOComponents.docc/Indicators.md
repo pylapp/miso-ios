@@ -165,6 +165,33 @@ MISOTag(loadingLabel: "Processing...", shape: .rounded, size: .small)
 MISOTag(loadingLabel: "Processing...", progress: 0.75)
 ```
 
+### Categorical Tag
+
+@TabNavigator {
+    @Tab("BlueCoat") {
+        ![A categorical tag component in light and dark modes with BlueCoat theme](component_tag_BlueCoat)
+    }
+    @Tab("FoxyRough") {
+        ![A categorical tag component in light and dark modes with FoxyRough theme](component_tag_FoxyRough)
+    }
+}
+
+An ``MISOCategoricalTag`` is like an ``MISOTag`` but without appearance notion and with categories instead of statuses.
+
+```swift
+     // Text only with category 1, rounded shape, default size
+     MISOCategoricalTag(label: "Label", category: .category1)
+
+     // Text with category 2 and bullet
+     MISOCategoricalTag(label: "Label", category: .category2, leading: .bullet)
+
+     // Text with category 3 and custom icon
+     MISOCategoricalTag(label: "Label", category: .category3, leading: .icon(MISOImage(asset: Image(decorative: "ic_heart"))))
+
+     // Small size, square shape
+     MISOCategoricalTag(label: "Label", category: .category4, shape: .square, size: .small)
+```
+
 ### Input Tag
 
 @TabNavigator {

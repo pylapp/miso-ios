@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](hhttps://github.com/pylapp/miso-ios/releases/compare/1.1.0...develop)
 
+### Added
+
+- `categorical tag` component (Orange-OpenSource/ouds-ios#1782)
+
 ### Changed
 
 - `alert message` component to version v1.2.0 (Orange-OpenSource/ouds-ios#1659)
