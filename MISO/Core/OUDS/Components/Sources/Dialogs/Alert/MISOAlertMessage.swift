@@ -56,7 +56,7 @@ import SwiftUI
 ///
 /// Always check the results of rich text mode with high contrast, light and dark modes, and Voice Over vocalization.
 ///
-/// - Version: 1.1.1 (Figma component design version)
+/// - Version: 1.2.0 (Figma component design version)
 /// - Since: OUDS 1.3.0
 @available(iOS 15, macOS 13, visionOS 1, tvOS 16, *)
 public struct MISOAlertMessage: View {
@@ -445,7 +445,7 @@ public struct MISOAlertMessage: View {
     public var body: some View {
         HStack(alignment: .top, spacing: theme.alert.spaceColumnGap) {
             AlertLeadingIcon(status: status)
-                .padding(.top, theme.alert.spacePaddingBlock)
+                .padding(.vertical, theme.alert.spacePaddingBlock)
             AlertMessageContent(text: text, status: status, description: description, bulletList: bulletList, link: link, onClose: onClose)
             AlertMessageAction(link: link, onClose: onClose)
         }
