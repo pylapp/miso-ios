@@ -118,6 +118,8 @@ public struct MISOButton: View {
     private let action: () -> Void
 
     @State private var isHover: Bool
+
+    @Environment(\.skeletonState) private var skeletonState
     @Environment(\.misoOnColoredSurface) private var onColoredSurface
 
     private enum `Type` {
@@ -355,7 +357,12 @@ public struct MISOButton: View {
             ML.fatal("An MISOButton with MISOButton.Appearance.{Negative | Brand} appearance has been detected as a direct or indirect child of an MISOColoredSurface, which is not allowed.")
         }
 
-        Button(action: action) {
+        Button {
+            if skeletonState == nil {
+                action()
+            }
+        }
+        label: {
             switch type {
             case let .icon(image):
                 ButtonIcon(image: image, size: size)

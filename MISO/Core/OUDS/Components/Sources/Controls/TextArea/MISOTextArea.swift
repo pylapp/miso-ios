@@ -464,6 +464,7 @@ public struct MISOTextArea: View {
                maxWidth: constrainedMaxWidth ? theme.textArea.sizeMaxWidth : .infinity,
                minHeight: theme.textArea.sizeMinHeightInput,
                alignment: .leading)
+        .skeleton()
     }
 }
 #endif

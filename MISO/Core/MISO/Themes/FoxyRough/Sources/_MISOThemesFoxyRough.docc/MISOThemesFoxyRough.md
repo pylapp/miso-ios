@@ -142,6 +142,10 @@ struct SomeView: View {
     }
 }
 
+#### Skeleton
+
+![A skeleton component in light and dark modes with FoxyRough theme](component_skeleton_FoxyRough.png)
+
 #### Tags
 
 @TabNavigator {

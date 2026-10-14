@@ -2,6 +2,8 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
 
+import MISOThemesContract
+import MISOTokensSemantic
 import SwiftUI
 
 // MARK: - Button Internal State
@@ -23,12 +25,24 @@ struct ButtonViewModifier: ViewModifier {
     let appearance: MISOButton.Appearance
     let state: ButtonInternalState
 
+    @Environment(\.skeletonState) private var skeletonState
+    @Environment(\.theme) private var theme
+
     // MARK: Body
 
     func body(content: Content) -> some View {
-        content
-            .modifier(ButtonForegroundModifier(appearance: appearance, state: state))
-            .modifier(ButtonBackgroundModifier(appearance: appearance, state: state))
-            .modifier(ButtonBorderModifier(appearance: appearance, state: state))
+        // check skeleton state here for eco-conception (avoid to apply content modifiers)
+        if skeletonState == nil {
+            content
+                .modifier(ButtonForegroundModifier(appearance: appearance, state: state))
+                .modifier(ButtonBackgroundModifier(appearance: appearance, state: state))
+                .modifier(ButtonBorderModifier(appearance: appearance, state: state))
+        } else {
+            content.skeleton(shape: RoundedRectangle(cornerRadius: radius))
+        }
+    }
+
+    private var radius: BorderRadiusSemanticToken {
+        theme.tuning.hasRoundedButtons ? theme.button.borderRadiusRounded : theme.button.borderRadiusDefault
     }
 }

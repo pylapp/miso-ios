@@ -142,6 +142,10 @@ struct SomeView: View {
     }
 }
 
+#### Skeleton
+
+![A skeleton component in light and dark modes with BlueCoat theme](component_skeleton_BlueCoat.png)
+
 #### Tags
 
 @TabNavigator {

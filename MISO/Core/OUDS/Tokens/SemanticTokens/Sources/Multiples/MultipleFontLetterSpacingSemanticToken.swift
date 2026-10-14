@@ -6,11 +6,10 @@ import CoreGraphics // Needed for XCFramework generation and API breaks checks
 import Foundation
 import MISOFoundations
 
-// swiftlint:disable line_length
-
 /// Kind of semantic tokens which will wrap a combination of ``MultipleFontLetterSpacingSemanticToken`` depending to size classes.
 /// Allows to gather the multiple-value tokens from *Figma* inside one object.
-/// If a font letter spacing token exists with its value depending to the size class (i.e. comapct or regular mode), it must be packed in such ``MultipleFontLetterSpacingSemanticToken``
+/// If a font letter spacing token exists with its value depending to the size class (i.e. comapct or regular mode),
+/// it must be packed in such ``MultipleFontLetterSpacingSemanticToken``
 ///
 /// ```swift
 ///         // Assuming in Figma with have a font letter spacing semantic token letterSpacingDisplayMedium,
@@ -77,5 +76,5 @@ public final class MultipleFontLetterSpacingSemanticToken: NSObject, Sendable {
 
     // NOTE: Cannot be Comparable
     // Indeed values are decimals which can be negative, positive or zero
-    // And are not homogenic: some vales one by one can be bigger then lower
-} // swiftlint:enable line_length
+    // And are not homogenic: some values one by one can be bigger than lower
+}

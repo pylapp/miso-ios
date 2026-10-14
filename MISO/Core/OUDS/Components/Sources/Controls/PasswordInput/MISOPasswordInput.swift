@@ -302,44 +302,45 @@ public struct MISOPasswordInput: View {
     // MARK: Body
 
     public var body: some View {
-        switch helperText {
-        case let .raw(rawHelperText):
-            MISOTextInput(label: label,
-                          text: password,
-                          placeholder: placeholder,
-                          prefix: prefix,
-                          leadingImage: leadingIcon,
-                          trailingAction: trailingAction,
-                          helperText: rawHelperText,
-                          isOutlined: isOutlined,
-                          constrainedMaxWidth: constrainedMaxWidth,
-                          status: status)
-                .environment(\.textInputAsSecureField, isHiddenPassword)
-        case let .attributed(richHelperText):
-            MISOTextInput(label: label,
-                          text: password,
-                          placeholder: placeholder,
-                          prefix: prefix,
-                          leadingImage: leadingIcon,
-                          trailingAction: trailingAction,
-                          helperText: richHelperText,
-                          isOutlined: isOutlined,
-                          constrainedMaxWidth: constrainedMaxWidth,
-                          status: status)
-                .environment(\.textInputAsSecureField, isHiddenPassword)
-        default:
-            MISOTextInput(label: label,
-                          text: password,
-                          placeholder: placeholder,
-                          prefix: prefix,
-                          leadingImage: leadingIcon,
-                          trailingAction: trailingAction,
-                          helperText: nil,
-                          isOutlined: isOutlined,
-                          constrainedMaxWidth: constrainedMaxWidth,
-                          status: status)
-                .environment(\.textInputAsSecureField, isHiddenPassword)
+        Group {
+            switch helperText {
+            case let .raw(rawHelperText):
+                MISOTextInput(label: label,
+                              text: password,
+                              placeholder: placeholder,
+                              prefix: prefix,
+                              leadingImage: leadingIcon,
+                              trailingAction: trailingAction,
+                              helperText: rawHelperText,
+                              isOutlined: isOutlined,
+                              constrainedMaxWidth: constrainedMaxWidth,
+                              status: status)
+            case let .attributed(richHelperText):
+                MISOTextInput(label: label,
+                              text: password,
+                              placeholder: placeholder,
+                              prefix: prefix,
+                              leadingImage: leadingIcon,
+                              trailingAction: trailingAction,
+                              helperText: richHelperText,
+                              isOutlined: isOutlined,
+                              constrainedMaxWidth: constrainedMaxWidth,
+                              status: status)
+            default:
+                MISOTextInput(label: label,
+                              text: password,
+                              placeholder: placeholder,
+                              prefix: prefix,
+                              leadingImage: leadingIcon,
+                              trailingAction: trailingAction,
+                              helperText: nil,
+                              isOutlined: isOutlined,
+                              constrainedMaxWidth: constrainedMaxWidth,
+                              status: status)
+            }
         }
+        .environment(\.textInputAsSecureField, isHiddenPassword)
+        .skeleton()
     }
 
     // MARK: - Helpers

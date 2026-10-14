@@ -72,5 +72,6 @@ struct ControlItem: View {
         } content: { interactionState in
             ControlItemContent(interactionState: interactionState, indicatorType: indicatorType, layoutData: layoutData)
         }
+        .skeleton(securityMargin: true)
     }
 }

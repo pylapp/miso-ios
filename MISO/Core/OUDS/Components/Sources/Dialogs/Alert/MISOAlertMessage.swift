@@ -455,6 +455,7 @@ public struct MISOAlertMessage: View {
         .modifier(AlertMessageBackgroundModifier(status: status))
         .modifier(AlertMessageBorderModifier(status: status))
         .accessibilityElement(children: .contain)
+        .skeleton()
     }
 
     private var minHeight: SizeSemanticToken {

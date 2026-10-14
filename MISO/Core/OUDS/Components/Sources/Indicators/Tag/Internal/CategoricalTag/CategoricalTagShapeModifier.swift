@@ -5,19 +5,25 @@
 import MISOTokensSemantic
 import SwiftUI
 
-struct TagShapeModifier: ViewModifier {
+struct CategoricalTagShapeModifier: ViewModifier {
 
-    // MARK: Stored properties
+    // MARK: Properties
 
     let shape: MISOTag.Shape
 
     @Environment(\.theme) private var theme
+    @Environment(\.skeletonState) private var skeletonState
 
     // MARK: Body
 
     func body(content: Content) -> some View {
-        content
-            .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+        if skeletonState == nil {
+            content
+                .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+        } else {
+            content
+                .skeleton(shape: RoundedRectangle(cornerRadius: cornerRadius))
+        }
     }
 
     // MARK: Helper
