@@ -7,6 +7,7 @@
 // swiftlint:disable identifier_name
 
 /// Gathers the components and themes versions exposed through Tokenator based on Figma tokens
+@available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public enum MISOVersions {
 
     // MARK: - Themes versions

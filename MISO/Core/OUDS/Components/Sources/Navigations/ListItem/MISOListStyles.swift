@@ -199,6 +199,7 @@ extension View {
     /// - Parameter style: The ``MISOListItemContentStyle``  style to apply on items.
     ///
     /// - Returns: A view with the style applied to its list items.
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func misoListContentStyle(_ style: MISOListItemContentStyle) -> some View {
         environment(\.misoListItemContentStyle, style)
     }
@@ -221,6 +222,7 @@ extension View {
     ///   Defaults to `.standard(divider: true, background: true)`.
     ///
     /// - Returns: A view with the card style applied to its list items, default set to `.standard(divider: true, background: true)`
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func misoListCardStyle(_ decoration: MISOListItemContentStyle.CardDecoration = .standard(divider: true, background: true)) -> some View {
         environment(\.misoListItemContentStyle, .card(decoration))
     }
@@ -245,6 +247,7 @@ extension View {
     ///     on interaction states (pressed on focussed)
     ///
     /// - Returns: A view with the item style applied to its list items, default set to `.item(divider: true, background: false)`
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func misoListItemStyle(divider: Bool = true, background: Bool = false) -> some View {
         environment(\.misoListItemContentStyle, .item(divider: divider, background: background))
     }
@@ -267,6 +270,7 @@ extension View {
     ///   When `false` (default), media elements are displayed with square corners.
     ///
     /// - Returns: A view with the rounded media setting applied to its list items, default set to *false*
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func misoListItemRoundedMedia(_ rounded: Bool = false) -> some View {
         environment(\.misoListItemRoundedMedia, rounded)
     }
@@ -292,6 +296,7 @@ extension View {
     ///   to the top of the row.
     ///
     /// - Returns: A view with the specified containers alignment applied to its list items.
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func misoListItemContainerAlignment(_ alignment: MISOListItemContainersAlignment = .center) -> some View {
         environment(\.misoListItemContainersAlignment, alignment)
     }
@@ -314,6 +319,7 @@ extension View {
     ///   Use `.standard` (default) for normal sizing, or `.small` for a compact layout.
     ///
     /// - Returns: A view with the specified size applied to its list items.
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func misoListItemSize(_ size: MISOListItemSize) -> some View {
         environment(\.misoListItemSize, size)
     }

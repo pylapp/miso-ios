@@ -8,6 +8,7 @@ import Foundation
 /// Enumerates the types of layouts a ``MISOCheckboxPicker`` can have
 ///
 /// - Since: OUDS 0.14.0
+@available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 @frozen public enum MISOCheckboxPickerPlacement {
 
     /// A `RootLabel` is in the end a String

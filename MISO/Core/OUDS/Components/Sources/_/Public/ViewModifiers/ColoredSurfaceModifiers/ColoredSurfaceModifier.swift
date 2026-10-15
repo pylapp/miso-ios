@@ -8,6 +8,7 @@ import SwiftUI
 /// `ViewModifier` which helps to apply a predefined color mode on a view.
 /// This mode is based on `MISOColoredSurface.SurfaceColor` and defines which tyê of color scheme
 /// and monochrome must be considered.
+@available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public struct MISOColoredSurfaceModifier: ViewModifier {
 
     // MARK: - Stored properties

@@ -27,6 +27,7 @@ import SwiftUI
 /// ```
 ///
 /// - Since: OUDS 2.3.0
+@available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public struct MISOInteractionButton<Content>: View where Content: View {
 
     // MARK: Properties
@@ -34,7 +35,6 @@ public struct MISOInteractionButton<Content>: View where Content: View {
     private let isReadOnly: Bool
     private let action: () -> Void
 
-    @ViewBuilder private let content: (MISOButtonInteractionState) -> Content
     @ViewBuilder private let content: (MISOButtonInteractionState) -> Content
 
     @Environment(\.skeletonState) private var skeletonState
@@ -106,6 +106,7 @@ public struct MISOInteractionButton<Content>: View where Content: View {
 /// ```
 ///
 /// - Since: OUDS 2.3.0
+@available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public struct MISOInteractionButtonStyle<Content>: ButtonStyle where Content: View {
 
     // MARK: Properties

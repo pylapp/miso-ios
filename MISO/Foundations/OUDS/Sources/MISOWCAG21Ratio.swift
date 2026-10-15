@@ -22,6 +22,7 @@ public typealias WCAG21Requirements = (textual: Bool, nonTextual: Bool)
 /// See for example [the following guidelines](https://system.design.orange.com/0c1af118d/p/2531b9-accessibility-compliance)
 ///
 /// - Since: OUDS 0.15.0
+@available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 @frozen public struct MISOWCAG21Ratio {
 
     // MARK: - Stored properties

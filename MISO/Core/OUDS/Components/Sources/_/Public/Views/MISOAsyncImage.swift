@@ -133,6 +133,7 @@ public struct MISOAsyncImage<Content>: View where Content: View {
 /// Represents the loading phase of an async image.
 ///
 /// - Since: OUDS 3.0.0
+@available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 @frozen public enum ImageLoadPhase {
 
     /// The image is currently loading.

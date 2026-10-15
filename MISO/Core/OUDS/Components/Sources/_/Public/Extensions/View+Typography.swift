@@ -14,6 +14,7 @@ extension View {
     /// The current `MISOTheme` must be given in parameter because `@Environment` property cannot be accessed through an extension or inside a method.
     /// - Parameter theme: The current `MISOTheme` to use to load the current font family and the suitable font semantic token.
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func displayLarge(_ theme: MISOTheme) -> some View {
         modifier(TypographyModifier(family: theme.fonts.familyDisplay, font: theme.fonts.displayLarge))
     }
@@ -22,6 +23,7 @@ extension View {
     /// The current `MISOTheme` must be given in parameter because `@Environment` property cannot be accessed through an extension or inside a method.
     /// - Parameter theme: The current `MISOTheme` to use to load the current font family and the suitable font semantic token.
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func displayMedium(_ theme: MISOTheme) -> some View {
         modifier(TypographyModifier(family: theme.fonts.familyDisplay, font: theme.fonts.displayMedium))
     }
@@ -30,6 +32,7 @@ extension View {
     /// The current `MISOTheme` must be given in parameter because `@Environment` property cannot be accessed through an extension or inside a method.
     /// - Parameter theme: The current `MISOTheme` to use to load the current font family and the suitable font semantic token.
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func displaySmall(_ theme: MISOTheme) -> some View {
         modifier(TypographyModifier(family: theme.fonts.familyDisplay, font: theme.fonts.displaySmall))
     }
@@ -38,6 +41,7 @@ extension View {
     /// The current `MISOTheme` must be given in parameter because `@Environment` property cannot be accessed through an extension or inside a method.
     /// - Parameter theme: The current `MISOTheme` to use to load the current font family and the suitable font semantic token.
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func headingXLarge(_ theme: MISOTheme) -> some View {
         modifier(TypographyModifier(family: theme.fonts.familyHeading, font: theme.fonts.headingXLarge))
     }
@@ -46,6 +50,7 @@ extension View {
     /// The current `MISOTheme` must be given in parameter because `@Environment` property cannot be accessed through an extension or inside a method.
     /// - Parameter theme: The current `MISOTheme` to use to load the current font family and the suitable font semantic token.
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func headingLarge(_ theme: MISOTheme) -> some View {
         modifier(TypographyModifier(family: theme.fonts.familyHeading, font: theme.fonts.headingLarge))
     }
@@ -54,6 +59,7 @@ extension View {
     /// The current `MISOTheme` must be given in parameter because `@Environment` property cannot be accessed through an extension or inside a method.
     /// - Parameter theme: The current `MISOTheme` to use to load the current font family and the suitable font semantic token.
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func headingMedium(_ theme: MISOTheme) -> some View {
         modifier(TypographyModifier(family: theme.fonts.familyHeading, font: theme.fonts.headingMedium))
     }
@@ -62,6 +68,7 @@ extension View {
     /// The current `MISOTheme` must be given in parameter because `@Environment` property cannot be accessed through an extension or inside a method.
     /// - Parameter theme: The current `MISOTheme` to use to load the current font family and the suitable font semantic token.
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func headingSmall(_ theme: MISOTheme) -> some View {
         modifier(TypographyModifier(family: theme.fonts.familyHeading, font: theme.fonts.headingSmall))
     }
@@ -70,6 +77,7 @@ extension View {
     /// The current `MISOTheme` must be given in parameter because `@Environment` property cannot be accessed through an extension or inside a method.
     /// - Parameter theme: The current `MISOTheme` to use to load the current font family and the suitable font semantic token.
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func bodyDefaultLarge(_ theme: MISOTheme) -> some View {
         modifier(TypographyModifier(family: theme.fonts.familyBody, font: theme.fonts.bodyDefaultLarge))
     }
@@ -78,6 +86,7 @@ extension View {
     /// The current `MISOTheme` must be given in parameter because `@Environment` property cannot be accessed through an extension or inside a method.
     /// - Parameter theme: The current `MISOTheme` to use to load the current font family and the suitable font semantic token.
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func bodyDefaultMedium(_ theme: MISOTheme) -> some View {
         modifier(TypographyModifier(family: theme.fonts.familyBody, font: theme.fonts.bodyDefaultMedium))
     }
@@ -86,6 +95,7 @@ extension View {
     /// The current `MISOTheme` must be given in parameter because `@Environment` property cannot be accessed through an extension or inside a method.
     /// - Parameter theme: The current `MISOTheme` to use to load the current font family and the suitable font semantic token.
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func bodyDefaultSmall(_ theme: MISOTheme) -> some View {
         modifier(TypographyModifier(family: theme.fonts.familyBody, font: theme.fonts.bodyDefaultSmall))
     }
@@ -94,6 +104,7 @@ extension View {
     /// The current `MISOTheme` must be given in parameter because `@Environment` property cannot be accessed through an extension or inside a method.
     /// - Parameter theme: The current `MISOTheme` to use to load the current font family and the suitable font semantic token.
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func bodyModerateLarge(_ theme: MISOTheme) -> some View {
         modifier(TypographyModifier(family: theme.fonts.familyBody, font: theme.fonts.bodyModerateLarge))
     }
@@ -102,6 +113,7 @@ extension View {
     /// The current `MISOTheme` must be given in parameter because `@Environment` property cannot be accessed through an extension or inside a method.
     /// - Parameter theme: The current `MISOTheme` to use to load the current font family and the suitable font semantic token.
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func bodyModerateMedium(_ theme: MISOTheme) -> some View {
         modifier(TypographyModifier(family: theme.fonts.familyBody, font: theme.fonts.bodyModerateMedium))
     }
@@ -110,6 +122,7 @@ extension View {
     /// The current `MISOTheme` must be given in parameter because `@Environment` property cannot be accessed through an extension or inside a method.
     /// - Parameter theme: The current `MISOTheme` to use to load the current font family and the suitable font semantic token.
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func bodyModerateSmall(_ theme: MISOTheme) -> some View {
         modifier(TypographyModifier(family: theme.fonts.familyBody, font: theme.fonts.bodyModerateSmall))
     }
@@ -118,6 +131,7 @@ extension View {
     /// The current `MISOTheme` must be given in parameter because `@Environment` property cannot be accessed through an extension or inside a method.
     /// - Parameter theme: The current `MISOTheme` to use to load the current font family and the suitable font semantic token.
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func bodyStrongLarge(_ theme: MISOTheme) -> some View {
         modifier(TypographyModifier(family: theme.fonts.familyBody, font: theme.fonts.bodyStrongLarge))
     }
@@ -126,6 +140,7 @@ extension View {
     /// The current `MISOTheme` must be given in parameter because `@Environment` property cannot be accessed through an extension or inside a method.
     /// - Parameter theme: The current `MISOTheme` to use to load the current font family and the suitable font semantic token.
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func bodyStrongMedium(_ theme: MISOTheme) -> some View {
         modifier(TypographyModifier(family: theme.fonts.familyBody, font: theme.fonts.bodyStrongMedium))
     }
@@ -134,6 +149,7 @@ extension View {
     /// The current `MISOTheme` must be given in parameter because `@Environment` property cannot be accessed through an extension or inside a method.
     /// - Parameter theme: The current `MISOTheme` to use to load the current font family and the suitable font semantic token.
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func bodyStrongSmall(_ theme: MISOTheme) -> some View {
         modifier(TypographyModifier(family: theme.fonts.familyBody, font: theme.fonts.bodyStrongSmall))
     }
@@ -142,6 +158,7 @@ extension View {
     /// The current `MISOTheme` must be given in parameter because `@Environment` property cannot be accessed through an extension or inside a method.
     /// - Parameter theme: The current `MISOTheme` to use to load the current font family and the suitable font semantic token.
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func labelDefaultXLarge(_ theme: MISOTheme) -> some View {
         modifier(TypographyModifier(family: theme.fonts.familyLabel, font: theme.fonts.labelDefaultXLarge))
     }
@@ -150,6 +167,7 @@ extension View {
     /// The current `MISOTheme` must be given in parameter because `@Environment` property cannot be accessed through an extension or inside a method.
     /// - Parameter theme: The current `MISOTheme` to use to load the current font family and the suitable font semantic token.
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func labelDefaultLarge(_ theme: MISOTheme) -> some View {
         modifier(TypographyModifier(family: theme.fonts.familyLabel, font: theme.fonts.labelDefaultLarge))
     }
@@ -158,6 +176,7 @@ extension View {
     /// The current `MISOTheme` must be given in parameter because `@Environment` property cannot be accessed through an extension or inside a method.
     /// - Parameter theme: The current `MISOTheme` to use to load the current font family and the suitable font semantic token.
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func labelDefaultMedium(_ theme: MISOTheme) -> some View {
         modifier(TypographyModifier(family: theme.fonts.familyLabel, font: theme.fonts.labelDefaultMedium))
     }
@@ -166,6 +185,7 @@ extension View {
     /// The current `MISOTheme` must be given in parameter because `@Environment` property cannot be accessed through an extension or inside a method.
     /// - Parameter theme: The current `MISOTheme` to use to load the current font family and the suitable font semantic token.
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func labelDefaultSmall(_ theme: MISOTheme) -> some View {
         modifier(TypographyModifier(family: theme.fonts.familyLabel, font: theme.fonts.labelDefaultSmall))
     }
@@ -174,6 +194,7 @@ extension View {
     /// The current `MISOTheme` must be given in parameter because `@Environment` property cannot be accessed through an extension or inside a method.
     /// - Parameter theme: The current `MISOTheme` to use to load the current font family and the suitable font semantic token.
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func labelModerateXLarge(_ theme: MISOTheme) -> some View {
         modifier(TypographyModifier(family: theme.fonts.familyLabel, font: theme.fonts.labelModerateXLarge))
     }
@@ -182,6 +203,7 @@ extension View {
     /// The current `MISOTheme` must be given in parameter because `@Environment` property cannot be accessed through an extension or inside a method.
     /// - Parameter theme: The current `MISOTheme` to use to load the current font family and the suitable font semantic token.
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func labelModerateLarge(_ theme: MISOTheme) -> some View {
         modifier(TypographyModifier(family: theme.fonts.familyLabel, font: theme.fonts.labelModerateLarge))
     }
@@ -190,6 +212,7 @@ extension View {
     /// The current `MISOTheme` must be given in parameter because `@Environment` property cannot be accessed through an extension or inside a method.
     /// - Parameter theme: The current `MISOTheme` to use to load the current font family and the suitable font semantic token.
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func labelModerateMedium(_ theme: MISOTheme) -> some View {
         modifier(TypographyModifier(family: theme.fonts.familyLabel, font: theme.fonts.labelModerateMedium))
     }
@@ -198,6 +221,7 @@ extension View {
     /// The current `MISOTheme` must be given in parameter because `@Environment` property cannot be accessed through an extension or inside a method.
     /// - Parameter theme: The current `MISOTheme` to use to load the current font family and the suitable font semantic token.
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func labelModerateSmall(_ theme: MISOTheme) -> some View {
         modifier(TypographyModifier(family: theme.fonts.familyLabel, font: theme.fonts.labelModerateSmall))
     }
@@ -206,6 +230,7 @@ extension View {
     /// The current `MISOTheme` must be given in parameter because `@Environment` property cannot be accessed through an extension or inside a method.
     /// - Parameter theme: The current `MISOTheme` to use to load the current font family and the suitable font semantic token.
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func labelStrongXLarge(_ theme: MISOTheme) -> some View {
         modifier(TypographyModifier(family: theme.fonts.familyLabel, font: theme.fonts.labelStrongXLarge))
     }
@@ -214,6 +239,7 @@ extension View {
     /// The current `MISOTheme` must be given in parameter because `@Environment` property cannot be accessed through an extension or inside a method.
     /// - Parameter theme: The current `MISOTheme` to use to load the current font family and the suitable font semantic token.
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func labelStrongLarge(_ theme: MISOTheme) -> some View {
         modifier(TypographyModifier(family: theme.fonts.familyLabel, font: theme.fonts.labelStrongLarge))
     }
@@ -222,6 +248,7 @@ extension View {
     /// The current `MISOTheme` must be given in parameter because `@Environment` property cannot be accessed through an extension or inside a method.
     /// - Parameter theme: The current `MISOTheme` to use to load the current font family and the suitable font semantic token.
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func labelStrongMedium(_ theme: MISOTheme) -> some View {
         modifier(TypographyModifier(family: theme.fonts.familyLabel, font: theme.fonts.labelStrongMedium))
     }
@@ -230,6 +257,7 @@ extension View {
     /// The current `MISOTheme` must be given in parameter because `@Environment` property cannot be accessed through an extension or inside a method.
     /// - Parameter theme: The current `MISOTheme` to use to load the current font family and the suitable font semantic token.
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func labelStrongSmall(_ theme: MISOTheme) -> some View {
         modifier(TypographyModifier(family: theme.fonts.familyLabel, font: theme.fonts.labelStrongSmall))
     }
@@ -238,6 +266,7 @@ extension View {
     /// The current `MISOTheme` must be given in parameter because `@Environment` property cannot be accessed through an extension or inside a method.
     /// - Parameter theme: The current `MISOTheme` to use to load the current font family and the suitable font semantic token.
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func codeMedium(_ theme: MISOTheme) -> some View {
         modifier(TypographyModifier(family: theme.fonts.familyCode, font: theme.fonts.codeMedium))
     }
@@ -247,6 +276,7 @@ extension View {
     /// Modifies the current `View` to apply a specific typography from a token?
     /// - Parameter token: The typography token
     /// - Returns some View: The current `View` but with new typography applied
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func font(_ token: MultipleFontCompositeSemanticToken) -> some View {
         modifier(TypographyModifier(font: token))
     }

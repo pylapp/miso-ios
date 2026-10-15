@@ -32,6 +32,7 @@ import MISOFoundations
 /// ```
 ///
 /// - Since: OUDS 0.8.0
+@available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public final class MultipleFontSizeSemanticToken: NSObject, Sendable, Comparable {
 
     /// For **extra-compact** and **compact** viewports

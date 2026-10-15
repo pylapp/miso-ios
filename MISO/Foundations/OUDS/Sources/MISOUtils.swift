@@ -7,6 +7,7 @@ import Foundation
 /// A set of utilities from MISO library shared with love ⸜(｡˃ ᵕ ˂)⸝♡♡♡
 ///
 /// - Since: OUDS 1.2.0
+@available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 @frozen public enum MYOUtils {
 
     // MARK: - Language detection

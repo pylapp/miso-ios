@@ -57,6 +57,7 @@ import SwiftUI
 /// but in the *Figma* kit this is composite raw tokens which are defined for ligh and dark mode as only one token.
 ///
 /// - Since: OUDS 0.8.0
+@available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public final class MultipleElevationCompositeRawToken: NSObject, Sendable {
 
     /// For **light** mode scheme
