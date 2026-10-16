@@ -1,4 +1,5 @@
 #!/bin/bash
+#
 # Software: MISO iOS
 # SPDX-License-Identifier: MIT
 # SPDX-FileCopyrightText: Copyright (c) Pierre-Yves Lapersonne
