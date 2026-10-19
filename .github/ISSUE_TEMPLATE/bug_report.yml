@@ -3,6 +3,7 @@ description: Tell us about a bug or issue you may have identified in MISO iOS (i
 title: "When / For / In / On ... "
 labels: ["🐞 bug", "🔍 triage"]
 assignees: ["pylapp"]
+type: Bug
 body:
   - type: checkboxes
     attributes:
@@ -104,3 +105,11 @@ body:
       description: Add code samples and / or Xcode sample project to show the bug you got and help maintainers to reproduce it. Except longer moment to solve the bug if nothing is provided.
     validations:
       required: false
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more info?
+      placeholder: ex. email@example.com
+    validations:
+      required: false      
