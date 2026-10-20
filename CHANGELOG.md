@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Flag to display full value instead of bullets in `PIN code input` component (Orange-OpenSource/ouds-ios#1762)
 - `Tuning` parameter for for Xcode previews
 - Tool to detect public API breakings (Orange-OpenSource/ouds-ios#1800)
 - `skeleton` on components (Orange-OpenSource/ouds-ios#1651)

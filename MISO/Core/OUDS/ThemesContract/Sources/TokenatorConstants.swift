@@ -59,8 +59,8 @@ public enum MISOVersions {
     public static let componentPasswordInputVersion = "1.3.1"
     /// Version of the Figma specifications for the component phone number input (1.3.1)
     public static let componentPhoneNumberInputVersion = "1.3.1"
-    /// Version of the Figma specifications for the component pin code input (1.3.0)
-    public static let componentPinCodeInputVersion = "1.3.0"
+    /// Version of the Figma specifications for the component pin code input (1.4.0)
+    public static let componentPinCodeInputVersion = "1.4.0"
     /// Version of the Figma specifications for the component quantity input (1.3.1)
     public static let componentQuantityInputVersion = "1.3.1"
     /// Version of the Figma specifications for the component quantity input (1.2.0)
