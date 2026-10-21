@@ -93,6 +93,13 @@ import SwiftUI
 ///            MISOBulletList.Item("Label 3")
 ///        }
 ///
+///        // 4. Items with localized or rich texts, through `MISOTextualContent`
+///        MISOBulletList {
+///            MISOBulletList.Item("Raw text") // Same as .raw("Raw text")
+///            MISOBulletList.Item(.localized("item_label", bundle: Bundle.module))
+///            MISOBulletList.Item(.rich(AttributedString(markdown: "A **rich** text"))) // Manage in your side errors for init
+///        }
+///
 ///        // Same Bullet list but items in third level with free icon as bullet
 ///        let icon = Image(decorative: "ic_heart")
 ///        MISOBulletList(type: .ordered) {
@@ -109,6 +116,8 @@ import SwiftUI
 ///
 /// ## Rich text recommendations
 ///
+/// The text of an item is an ``MISOTextualContent``: a raw `String` (a string literal is enough), a localized
+/// string with `.localized(_:tableName:bundle:)` or a rich text with `.rich(_:)` and an `AttributedString`.
 /// Rich text can be applied for bullet list whatever the `isBold` flag is.
 ///
 /// Strong text can be used sparingly within alert messages to highlight key information.
@@ -156,15 +165,24 @@ public struct MISOBulletList: View {
         /// Use the `subListType` , `subListTextStyle` and `subListHasBoldText`
         /// to change properties for those sub items, if needed.
         ///
+        /// The text is an ``MISOTextualContent``: a raw `String`, a localized string or a rich `AttributedString`.
+        /// A string literal is automatically converted to ``MISOTextualContent/raw(_:)``.
+        ///
         /// ```swift
         ///     MISOBulletList.Item("First point")
         ///     MISOBulletList.Item("Parent") {
         ///         MISOBulletList.Item("Child")
         ///     }
+        ///
+        ///     // Localized text
+        ///     MISOBulletList.Item(.localized("item_label", bundle: Bundle.module))
+        ///
+        ///     // Rich text
+        ///     MISOBulletList.Item(.rich(AttributedString(markdown: "First **important** point"))) // Manage in your side errors for init
         /// ```
         ///
         /// - Parameters:
-        ///    - text: The text of the item
+        ///    - text: The text of the item, raw, localized or rich
         ///    - subListType: The specific `MISOBulletList.Type` for the nested sub-list, if any. If `nil`,
         ///     the type is inherited from the parent list.
         ///    - subListTextStyle: The specific `MISOBulletList.TextStyle` for the nested sub-list, if any. If
@@ -172,75 +190,15 @@ public struct MISOBulletList: View {
         ///    - subListHasBoldText: Whether the text of the nested sub-list should be bold. If `nil`, the bold
         ///     setting is inherited from the parent list.
         ///    - subItems: The sub items builder to add to the current item. **Remark** only three levels are allowed.
-        public init(_ text: String,
+        ///
+        /// - Since: 3.2.0
+        public init(_ text: MISOTextualContent,
                     subListType: MISOBulletList.`Type`? = nil,
                     subListTextStyle: MISOBulletList.TextStyle? = nil,
                     subListHasBoldText: Bool? = nil,
                     @MISOBulletListItemBuilder subItems: () -> [MISOBulletList.Item] = { [] })
         {
-            self.text = .raw(text)
-            self.subListType = subListType
-            self.subListTextStyle = subListTextStyle
-            self.subListHasBoldText = subListHasBoldText
-            self.subItems = subItems()
-        }
-
-        /// Create the item with text and sub items, the text is a rich text.
-        /// Use the `subListType` , `subListTextStyle` and `subListHasBoldText`
-        /// to change properties for those sub items, if needed.
-        ///
-        /// ```swift
-        ///     MISOBulletList.Item(AttributedString(markdown: "First **important** point")) // Manage in your side errors for init
-        /// ```
-        ///
-        /// - Parameters:
-        ///    - richText: The rich text of the item
-        ///    - subListType: The specific `MISOBulletList.Type` for the nested sub-list, if any. If `nil`,
-        ///     the type is inherited from the parent list.
-        ///    - subListTextStyle: The specific `MISOBulletList.TextStyle` for the nested sub-list, if any. If
-        ///     `nil`, the text style is inherited from the parent list.
-        ///    - subListHasBoldText: Whether the text of the nested sub-list should be bold. If `nil`, the bold
-        ///     setting is inherited from the parent list.
-        ///    - subItems: The sub items builder to add to the current item. **Remark** only three levels are allowed.
-        public init(_ richText: AttributedString,
-                    subListType: MISOBulletList.`Type`? = nil,
-                    subListTextStyle: MISOBulletList.TextStyle? = nil,
-                    subListHasBoldText: Bool? = nil,
-                    @MISOBulletListItemBuilder subItems: () -> [MISOBulletList.Item] = { [] })
-        {
-            text = .rich(richText)
-            self.subListType = subListType
-            self.subListTextStyle = subListTextStyle
-            self.subListHasBoldText = subListHasBoldText
-            self.subItems = subItems()
-        }
-
-        /// Creates a bullet list item with a localized text, looking up the key in the given bundle.
-        ///
-        /// ```swift
-        ///     MISOBulletList.Item(LocalizedStringKey("item_label"), bundle: Bundle.module)
-        /// ```
-        ///
-        /// - Parameters:
-        ///    - key: A `LocalizedStringKey` used to look up the text in the given bundle
-        ///    - tableName: The name of the `.strings` file, or `nil` for the default
-        ///    - bundle: The bundle in which to look up the localized string. Defaults to `Bundle.main`.
-        ///    - subListType: The specific `MISOBulletList.Type` for the nested sub-list, if any. If `nil`,
-        ///     the type is inherited from the parent list.
-        ///    - subListTextStyle: The specific `MISOBulletList.TextStyle` for the nested sub-list, if any. If
-        ///     `nil`, the text style is inherited from the parent list.
-        ///    - subListHasBoldText: Whether the text of the nested sub-list should be bold. If `nil`, the bold
-        ///     setting is inherited from the parent list.
-        ///    - subItems: The sub items builder to add to the current item. **Remark** only three levels are allowed.
-        public init(_ key: LocalizedStringKey,
-                    tableName: String? = nil,
-                    bundle: Bundle = .main,
-                    subListType: MISOBulletList.`Type`? = nil,
-                    subListTextStyle: MISOBulletList.TextStyle? = nil,
-                    subListHasBoldText: Bool? = nil,
-                    @MISOBulletListItemBuilder subItems: () -> [MISOBulletList.Item] = { [] })
-        {
-            text = .raw(key.resolved(tableName: tableName, bundle: bundle))
+            self.text = text
             self.subListType = subListType
             self.subListTextStyle = subListTextStyle
             self.subListHasBoldText = subListHasBoldText

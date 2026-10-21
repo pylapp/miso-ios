@@ -26,65 +26,65 @@ import SwiftUI
 /// ```swift
 ///     // Trailing with a default label text
 ///     MISOStaticListItem(
-///         data: MISOListItemData(label: "Label"),
+///         data: MISOListItemData(label: .textual("Label")),
 ///         trailing: .text(.label("Info"))
 ///     )
 ///
 ///     // Trailing with a muted label
 ///     MISOStaticListItem(
-///         data: MISOListItemData(label: "Label"),
+///         data: MISOListItemData(label: .textual("Label")),
 ///         trailing: .text(.labelMuted("Secondary"))
 ///     )
 ///
 ///     // Trailing with label and extra label
 ///     MISOStaticListItem(
-///         data: MISOListItemData(label: "Label"),
+///         data: MISOListItemData(label: .textual("Label")),
 ///         trailing: .text(.labelAndExtraLabel("Label", "Extra"))
 ///     )
 ///
 ///     // Trailing with a badge according to type
 ///     MISOStaticListItem(
-///         data: MISOListItemData(label: "Notifications"),
+///         data: MISOListItemData(label: .textual("Notifications")),
 ///         trailing: .badge(.count(.init(3, accessibilityLabel: "3 notifications", status: .negative, size: .medium)))
 ///     )
 ///
 ///     // Trailing with a tag
 ///     let tag = MISOTag(label: "New", size: .small)
 ///     MISOStaticListItem(
-///         data: MISOListItemData(label: "Feature"),
+///         data: MISOListItemData(label: .textual("Feature")),
 ///         trailing: .tag(tag)
 ///     )
 ///
 ///     // Trailing with an icon
 ///     let icon = MISOListItemIcon(type: .info, size: .medium)
 ///     MISOStaticListItem(
-///         data: MISOListItemData(label: "Label"),
+///         data: MISOListItemData(label: .textual("Label")),
 ///         trailing: .icon(icon)
 ///     )
 ///
 ///     // Trailing with an image
 ///     let image = MISOListItemImage(asset: Image("il_placeholder"), size: .medium)
 ///     MISOStaticListItem(
-///         data: MISOListItemData(label: "Label"),
+///         data: MISOListItemData(label: .textual("Label")),
 ///         trailing: .image(image)
 ///     )
 ///
 ///     // Trailing with a country flag
 ///     MISOStaticListItem(
-///         data: MISOListItemData(label: "France"),
+///         data: MISOListItemData(label: .textual("France")),
 ///         trailing: .flag(.init(asset: Image("il_flag_fr"), description: "France"))
 ///     )
 ///
 ///     // Trailing with an avatar
 ///     let avatar = MISOListItemAvatar(type: .initials("AB"), size: .medium)
 ///     MISOStaticListItem(
-///         data: MISOListItemData(label: "Contact"),
+///         data: MISOListItemData(label: .textual("Contact")),
 ///         trailing: .avatar(avatar)
 ///     )
 ///
 ///     // Trailing with a custom view, e.g. a gauge showing a remaining SMS credit
 ///     MISOStaticListItem(
-///         data: MISOListItemData(label: "SMS credit"),
+///         data: MISOListItemData(label: .textual("SMS credit")),
 ///         trailing: .custom {
 ///             MISOCircularProgressIndicator(progress: 0.75)
 ///         }
@@ -207,7 +207,7 @@ import SwiftUI
     ///
     /// ```swift
     ///     MISOStaticListItem(
-    ///         data: MISOListItemData(label: "SMS credit"),
+    ///         data: MISOListItemData(label: .textual("SMS credit")),
     ///         trailing: .slot {
     ///             MISOCircularProgressIndicator(progress: 0.75)
     ///         }

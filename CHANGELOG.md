@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `list item` components inits with `MISOTextualContent` parameters for raw and attributed strings (Orange-OpenSource/ouds-ios#1812)
+- `text area` component `textual` helper text and `textualError` status with `MISOTextualContent` parameter for raw, localized and attributed strings (Orange-OpenSource/ouds-ios#1797)
+- `password input` components init with `MISOTextualContent` parameter for raw, localized and attributed strings in `helperText` (Orange-OpenSource/ouds-ios#1797)
+- `text input` components init with `MISOTextualContent` parameter for raw, localized and attributed strings in `helperText`, and `textualError` status (Orange-OpenSource/ouds-ios#1797)
+- `PIN code input` component init with `MISOTextualContent` parameter for raw, localized and attributed strings in `helperText`, and `textualError` status (Orange-OpenSource/ouds-ios#1797)
+- `checkbox item indeterminate` components init with `MISOTextualContent` parameter for raw, localized and attributed strings in `errorText` (Orange-OpenSource/ouds-ios#1797)
+- `radio item` components init with `MISOTextualContent` parameter for raw, localized and attributed strings in `errorText` (Orange-OpenSource/ouds-ios#1797)
+- `checkbox item` components init with `MISOTextualContent` parameter for raw, localized and attributed strings in `errorText` (Orange-OpenSource/ouds-ios#1797)
+- `switch item` components init with `MISOTextualContent` parameter for raw, localized and attributed strings in `errorText` (Orange-OpenSource/ouds-ios#1797)
+- `alert message` components init with `MISOTextualContent` parameter for raw, localized and attributed strings (Orange-OpenSource/ouds-ios#1797)
+- `bullet list` components init with `MISOTextualContent` parameter for raw, localized and attributed strings (Orange-OpenSource/ouds-ios#1797)
+- `list item` components inits with `MISOTextualContent` parameters for raw, localized and attributed strings (Orange-OpenSource/ouds-ios#1812)
 - Flag to display full value instead of bullets in `PIN code input` component (Orange-OpenSource/ouds-ios#1762)
 - `Tuning` parameter for for Xcode previews
 - Tool to detect public API breakings (Orange-OpenSource/ouds-ios#1800)
@@ -30,6 +41,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - All six `String` / `AttributedString` initializers of `MISOListItemData`; use the new unified initializers taking `MISOListItemData.Label` + `MISOTextualContent`
 - `MISOListItemData.Label.text(_:isBold:)`; use `.textual(_:isBold:)` or a string literal instead
+- `MISOTextArea.HelperText` cases `.plain(_:)` and `.rich(_:)`, and `MISOTextArea.Status` cases `.error(message:)` and `.richError(message:)`; use `.textual(_:)` and `.textualError(message:)`
+- All four `String` / `AttributedString` `helperText` initializers of `OUDSPasswordInput`; use the new unified initializers taking `MISOTextualContent`
+- All four `String` / `AttributedString` `helperText` initializers of `OUDSTextInput`, and `OUDSTextInput.Status` cases `.error(message:)` and `.richError(message:)`; use the new unified initializers taking `MISOTextualContent` and `.textualError(message:)`
+- All three `String` / `AttributedString` / `LocalizedStringKey` `helperText` initializers of `MISOPinCodeInput`, and `MISOPinCodeInput.Status` cases `.error(message:)` and `.richError(message:)`; use the new unified initializer taking `MISOTextualContent` and `.textualError(message:)`
+- Both `String` `errorText` initializers of `OUDSCheckboxItemIndeterminate`; use the new unified initializers taking `MISOTextualContent`
+- All four `String` / `AttributedString` `errorText` initializers of `OUDSRadioItem`; use the new unified initializers taking `MISOTextualContent`
+- All four `String` / `AttributedString` `errorText` initializers of `OUDSCheckboxItem`; use the new unified initializers taking `MISOTextualContent`
+- All four `String` / `AttributedString` `errorText` initializers of `OUDSSwitchItem`; use the new unified initializers taking `MISOTextualContent`
+- All eight `String` / `AttributedString` initializers of `OUDSAlertMessage`; use the new unified initializers taking `MISOTextualContent` for `description` and `bulletList`
+- `String`, `AttributedString` and `LocalizedStringKey` initializers of `OUDSBulletList.Item`; use the new unified initializer taking `MISOTextualContent`
+- `OUDSListItemData.Label.text(_:isBold:)`; use `.textual(_:isBold:)` or a string literal instead
+- All six `String` / `AttributedString` initializers of `OUDSListItemData`; use the new unified initializers taking `OUDSListItemData.Label` + `MISOTextualContent`
 
 ### Fixed
 

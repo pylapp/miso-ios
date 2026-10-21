@@ -63,12 +63,11 @@ Use ``MISOStaticListItem`` when the row is display-only and should not trigger a
 
 ```swift
 // Simple list item with a label only
-MISOStaticListItem(data: MISOListItemData(label: "Label"))
+MISOStaticListItem(data: MISOListItemData(label: .textual("Label")))
 
 // List item with full textual content
 MISOStaticListItem(data: MISOListItemData(
-    label: "Label",
-    hasBoldLabel: true,
+    label: .textual("Label", isBold: true),
     description: "Description",
     overline: "Overline",
     extraLabel: "Extra label",
@@ -79,20 +78,20 @@ MISOStaticListItem(data: MISOListItemData(
 let icon = MISOListItemIcon(status: .info, description: "", size: .medium)
 
 MISOStaticListItem(
-    data: MISOListItemData(label: "Notifications"),
+    data: MISOListItemData(label: .textual("Notifications")),
     leading: .icon(icon),
     trailing: .badge(.count(.init(3, accessibilityLabel: "3 notifications", status: .negative, size: .medium)))
 )
 
 // List item with a leading image (static asset)
 MISOStaticListItem(
-    data: MISOListItemData(label: "Product"),
+    data: MISOListItemData(label: .textual("Product")),
     leading: .image(MISOListItemImage(asset: Image("product_thumb"), size: .medium))
 )
 
 // List item with a leading async image (from URL)
 MISOStaticListItem(
-    data: MISOListItemData(label: "Remote Product"),
+    data: MISOListItemData(label: .textual("Remote Product")),
     leading: .image(MISOListItemImage(asyncImage: AsyncImage(url: URL(string: "https://example.com/image.png")), description: "Product image", size: .medium))
 )
 
@@ -104,13 +103,13 @@ let asyncImageWithPlaceholder = AsyncImage(url: URL(string: "https://example.com
 }
 
 MISOStaticListItem(
-    data: MISOListItemData(label: "Loading Product"),
+    data: MISOListItemData(label: .textual("Loading Product")),
     leading: .image(MISOListItemImage(asyncImage: asyncImageWithPlaceholder, description: "Product image", size: .medium))
 )
 
 // List item with a trailing image
 MISOStaticListItem(
-    data: MISOListItemData(label: "Status"),
+    data: MISOListItemData(label: .textual("Status")),
     trailing: .image(MISOListItemImage(asset: Image("status_icon"), size: .small))
 )
 
@@ -143,6 +142,37 @@ MISOStaticListItem(
 )
 ```
 
+##### Rich text content
+
+Every textual field (`label`, `description`, `overline`, `extraLabel`, `helperText`) accepts
+a raw `String`, a localized string or an `AttributedString`. The optional fields use ``MISOTextualContent``
+(`.raw` / `.localized` / `.rich`) while the label uses ``MISOListItemData/Label``
+(`.textual` / `.custom`, the `.text` case being deprecated since 3.2.0).
+
+String literals are accepted thanks to `ExpressibleByStringLiteral` on both types, so plain
+text call sites remain concise: `label: "Label", description: "Description"`.
+
+> Note: a bare literal label with no textual field (`MISOListItemData(label: "Label")`, or with only `textSlot` / `bottomSlot`) may select a
+> deprecated initializer and emit a deprecation warning. Write `label: .textual("Label")` in that case.
+
+```swift
+// Fully styled label and overline (user controls fonts, colors, markdown…)
+let styledLabel = AttributedString.from(text: "Premium",
+                                        foregroundColor: .orange,
+                                        font: .headline)
+let styledOverline = AttributedString.from(text: "FEATURED",
+                                           foregroundColor: .purple,
+                                           font: .caption)
+
+MISOStaticListItem(data: MISOListItemData(
+    label: .textual(.rich(styledLabel)),
+    description: "Plain description via string literal",
+    overline: .rich(styledOverline),
+    extraLabel: .localized("extra.label.key"),
+    helperText: .rich(AttributedString("A rich helper"))
+))
+```
+
 #### Navigable list item
 
 Use ``MISONavigationListItem`` when tapping the row should trigger an action. The ``MISONavigationListItemIndicatorType`` defines the visual indicator shown:
@@ -159,14 +189,14 @@ Use ``MISONavigationListItem`` when tapping the row should trigger an action. Th
 ```swift
 // Forward navigation (default)
 MISONavigationListItem(
-    data: MISOListItemData(label: "Next screen")
+    data: MISOListItemData(label: .textual("Next screen"))
 ) {
     // Navigate to next screen
 }
 
 // External navigation
 MISONavigationListItem(
-    data: MISOListItemData(label: "Open website"),
+    data: MISOListItemData(label: .textual("Open website")),
     indicatorType: .external
 ) {
     openURL(url)
@@ -174,7 +204,7 @@ MISONavigationListItem(
 
 // Backward navigation
 MISONavigationListItem(
-    data: MISOListItemData(label: "Go back"),
+    data: MISOListItemData(label: .textual("Go back")),
     indicatorType: .previous
 ) {
     // Navigate back
@@ -239,8 +269,8 @@ MISONavigationListItem(
 MISONavigationListItem(
     data: MISOListItemData(
         label: "Settings",
-        textSlot: { Text("Slot content") },
-        bottomSlot: { Text("Bottom content") },
+        textSlot: .init { Text("Slot content") },
+        bottomSlot: .init { Text("Bottom content") },
         helperText: "Helper text"
     )
 ) {

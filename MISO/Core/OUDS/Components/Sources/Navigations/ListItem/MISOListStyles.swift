@@ -16,7 +16,7 @@ import SwiftUI
 /// ## Code sample
 ///
 /// ```swift
-///     MISOStaticListItem(data: MISOListItemData(label: "Label"))
+///     MISOStaticListItem(data: MISOListItemData(label: .textual("Label")))
 ///         .misoListItemContainerAlignment(.top)
 /// ```
 ///
@@ -59,34 +59,34 @@ import SwiftUI
 ///
 /// ```swift
 ///     // Card style with outline only on interaction
-///     MISONavigationListItem(data: MISOListItemData(label: "Label"))
+///     MISONavigationListItem(data: MISOListItemData(label: .textual("Label")))
 ///         .misoListCardStyle(decoration: .outlined(onInteractionOnly: true))
 ///
 ///     // Card style with an outlined border on all states
-///     MISONavigationListItem(data: MISOListItemData(label: "Label"))
+///     MISONavigationListItem(data: MISOListItemData(label: .textual("Label")))
 ///         .misoListCardStyle(decoration: .outlined(onInteractionOnly: false))
 ///
 ///     // Card style with divider, background
-///     MISONavigationListItem(data: MISOListItemData(label: "Label"))
+///     MISONavigationListItem(data: MISOListItemData(label: .textual("Label")))
 ///         .misoListCardStyle(decoration: .standard(divider: true, background: true))
 ///
 ///     // Card style divider and without background
-///     MISONavigationListItem(data: MISOListItemData(label: "Label"))
+///     MISONavigationListItem(data: MISOListItemData(label: .textual("Label")))
 ///         .misoListCardStyle(decoration: .standard(divider: true, background: false))
 ///
 ///     // Item style with background and divider
-///     MISONavigationListItem(data: MISOListItemData(label: "Label"))
+///     MISONavigationListItem(data: MISOListItemData(label: .textual("Label")))
 ///         .misoListItemStyle(divider: true, .background: true)
 ///
 ///     // Item style with divider and without background
-///     MISONavigationListItem(data: MISOListItemData(label: "Label"))
+///     MISONavigationListItem(data: MISOListItemData(label: .textual("Label")))
 ///         .misoListItemStyle(divider: true, .background: false)
 ///
 ///     // Using global modifier
-///     MISONavigationListItem(data: MISOListItemData(label: "Label"))
+///     MISONavigationListItem(data: MISOListItemData(label: .textual("Label")))
 ///         .misoListContentStyle(.card(.outlined))
 ///
-///     MISONavigationListItem(data: MISOListItemData(label: "Label"))
+///     MISONavigationListItem(data: MISOListItemData(label: .textual("Label")))
 ///         .misoListContentStyle(.item(divider: true, background: false))
 /// ```
 ///
@@ -147,12 +147,12 @@ import SwiftUI
 ///
 /// ```swift
 ///     // Standard size (default)
-///     MISOStaticListItem(data: MISOListItemData(label: "Label"))
+///     MISOStaticListItem(data: MISOListItemData(label: .textual("Label")))
 ///         .misoListItemSize(.standard)
 ///
 ///     // Small size — overline and extraLabel are hidden,
 ///     // avatars and icons use their smallest variant
-///     MISOStaticListItem(data: MISOListItemData(label: "Label"))
+///     MISOStaticListItem(data: MISOListItemData(label: .textual("Label")))
 ///         .misoListItemSize(.small)
 /// ```
 ///
@@ -183,15 +183,15 @@ extension View {
     /// ```swift
     ///     // Set outlined card style
     ///     VStack {
-    ///         MISOStaticListItem(data: MISOListItemData(label: "Item 1"))
-    ///         MISOStaticListItem(data: MISOListItemData(label: "Item 2"))
+    ///         MISOStaticListItem(data: MISOListItemData(label: .textual("Item 1")))
+    ///         MISOStaticListItem(data: MISOListItemData(label: .textual("Item 2")))
     ///     }
     ///     .misoListContentStyle(.card(.outlined())
     ///
     ///     // Set item style with background and divider
     ///     VStack {
-    ///         MISOStaticListItem(data: MISOListItemData(label: "Item 1"))
-    ///         MISOStaticListItem(data: MISOListItemData(label: "Item 2"))
+    ///         MISOStaticListItem(data: MISOListItemData(label: .textual("Item 1")))
+    ///         MISOStaticListItem(data: MISOListItemData(label: .textual("Item 2")))
     ///     }
     ///     .misoListContentStyle(.item(divider: true, background: true))
     /// ```
@@ -212,8 +212,8 @@ extension View {
     ///
     /// ```swift
     ///     VStack {
-    ///         MISOStaticListItem(data: MISOListItemData(label: "Item 1"))
-    ///         MISOStaticListItem(data: MISOListItemData(label: "Item 2"))
+    ///         MISOStaticListItem(data: MISOListItemData(label: .textual("Item 1")))
+    ///         MISOStaticListItem(data: MISOListItemData(label: .textual("Item 2")))
     ///     }
     ///     .misoListCardStyle(.outlined())
     /// ```
@@ -235,8 +235,8 @@ extension View {
     ///
     /// ```swift
     ///     VStack {
-    ///         MISOStaticListItem(data: MISOListItemData(label: "Item 1"))
-    ///         MISOStaticListItem(data: MISOListItemData(label: "Item 2"))
+    ///         MISOStaticListItem(data: MISOListItemData(label: .textual("Item 1")))
+    ///         MISOStaticListItem(data: MISOListItemData(label: .textual("Item 2")))
     ///     }
     ///     .misoListItemStyle(divider: true, background: true)
     /// ```
@@ -260,7 +260,7 @@ extension View {
     ///
     /// ```swift
     ///     MISOStaticListItem(
-    ///         data: MISOListItemData(label: "Label"),
+    ///         data: MISOListItemData(label: .textual("Label")),
     ///         leading: .image(.init(asset: Image("il_placeholder"), size: .medium))
     ///     )
     ///     .misoListItemRoundedMedia(true)
@@ -309,8 +309,8 @@ extension View {
     ///
     /// ```swift
     ///     VStack {
-    ///         MISOStaticListItem(data: MISOListItemData(label: "Compact item"))
-    ///         MISOStaticListItem(data: MISOListItemData(label: "Another compact item"))
+    ///         MISOStaticListItem(data: MISOListItemData(label: .textual("Compact item")))
+    ///         MISOStaticListItem(data: MISOListItemData(label: .textual("Another compact item")))
     ///     }
     ///     .misoListItemSize(.small)
     /// ```

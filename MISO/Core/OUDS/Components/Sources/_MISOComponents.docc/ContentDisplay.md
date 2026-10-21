@@ -56,3 +56,18 @@ MISOBulletList(type: .ordered) {
     MISOBulletList.Item("Label 3")
 }
 ```
+
+The text of each item is an ``MISOTextualContent``: a raw `String` (a string literal is enough), a localized string or a rich text.
+
+```swift
+MISOBulletList {
+    // Raw text, same as .raw("Raw text")
+    MISOBulletList.Item("Raw text")
+
+    // Localized text
+    MISOBulletList.Item(.localized("item_label", bundle: Bundle.module))
+
+    // Rich text
+    MISOBulletList.Item(.rich(AttributedString(markdown: "A **rich** text"))) // Manage in your side errors for init
+}
+```

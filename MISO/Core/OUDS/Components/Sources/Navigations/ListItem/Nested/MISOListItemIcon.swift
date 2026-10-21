@@ -56,13 +56,13 @@ import SwiftUI
 ///
 ///     // Usage as leading element in a list item
 ///     MISOStaticListItem(
-///         data: MISOListItemData(label: "Information"),
+///         data: MISOListItemData(label: .textual("Information")),
 ///         leading: .icon(MISOListItemIcon(status: .info, description: "", size: .medium))
 ///     )
 ///
 ///     // Usage as trailing element in a list item
 ///     MISOStaticListItem(
-///         data: MISOListItemData(label: "Warning"),
+///         data: MISOListItemData(label: .textual("Warning")),
 ///         trailing: .icon(MISOListItemIcon(status: .warning, description: "", size: .medium))
 ///     )
 /// ```

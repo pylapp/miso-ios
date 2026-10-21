@@ -94,8 +94,18 @@ import SwiftUI
 ///     MISOCheckboxItemIndeterminate("We live in a fabled world",
 ///                                   selection: $selection,
 ///                                   isError: true,
-///                                   errorText: "Something wrong",
+///                                   errorText: .raw("Something wrong"),
 ///                                   hasDivider: true)
+///
+///     // The error message is an MISOTextualContent: raw, localized or rich text
+///     MISOCheckboxItemIndeterminate("We live in a fabled world",
+///                                   selection: $selection,
+///                                   isError: true,
+///                                   errorText: .localized("error_wording", bundle: Bundle.module))
+///     MISOCheckboxItemIndeterminate("We live in a fabled world",
+///                                   selection: $selection,
+///                                   isError: true,
+///                                   errorText: .rich(AttributedString(markdown: "You **must** select it"))) // Manage in your side errors for init
 ///
 ///     // A leading checkbox with a label, but disabled.
 ///     MISOCheckboxItemIndeterminate("Hello world", selection: $selection)
@@ -106,6 +116,44 @@ import SwiftUI
 ///     MISOCheckboxItemIndeterminate("Hello world", selection: $selection, isError: true).disabled(true) // fatal error
 ///     MISOCheckboxItemIndeterminate("Hello world", selection: $selection, isReadOnly: true).disabled(true) // fatal error
 /// ```
+///
+/// ## Rich text
+///
+/// Rich text can only be used for error messages.
+/// The error message is an ``MISOTextualContent``: a raw `String`, a localized string with `.localized(_:tableName:bundle:)`
+/// or a rich text with `.rich(_:)` and an `AttributedString`.
+///
+/// Strong text can be used sparingly to highlight key information within the content.
+/// No other text styles should be used.
+/// Underlined text must not be applied manually (e.g. in error message), as it is commonly associated with hyperlinks and may mislead users.
+/// Always check the results of rich text mode with high contrast, light and dark modes, and Voice Over vocalization.
+///
+/// ## Suggestions
+///
+/// According to the [documentation](https://r.orange.fr/r/S-ouds-doc-checkbox),
+/// the checkbox by default must be used in unselected state.
+///
+/// ## Design documentation
+///
+/// [unified-design-system.orange.com](https://r.orange.fr/r/S-ouds-doc-checkbox)
+///
+/// ## Themes rendering
+///
+/// ### Orange
+///
+/// ![A checkbox item component in light and dark modes with Orange theme](component_checkboxItem_Orange)
+///
+/// ### Orange Compact
+///
+/// ![A checkbox item component in light and dark modes with Orange Compact theme](component_checkboxItem_OrangeCompact)
+///
+/// ### Sosh
+///
+/// ![A checkbox item component in light and dark modes with Sosh theme](component_checkboxItem_Sosh)
+///
+/// ### Wireframe
+///
+/// ![A checkbox item component in light and dark modes with Wireframe theme](component_checkboxItem_Wireframe)
 ///
 /// - Version: 2.4.0 (Figma component design version)
 /// - Since: OUDS 0.12.0
@@ -130,6 +178,13 @@ public struct MISOCheckboxItemIndeterminate: View {
     ///     MISOCheckboxItemIndeterminate("Select all",
     ///                                   selection: $state,
     ///                                   image: MISOImage(asset: Image(decorative: "ic_heart")))
+    ///
+    ///     // The error text is an MISOTextualContent: raw, localized or rich
+    ///     MISOCheckboxItemIndeterminate("Select all",
+    ///                                   selection: $state,
+    ///                                   isError: true,
+    ///                                   errorText: .rich(AttributedString(markdown: "Please select **at least one** item")))
+    ///                                   // Manage in your side errors for init for AttributedString(markdown:)
     /// ```
     ///
     /// **The design system does not allow to have both an error situation and a read only mode for the component.**
@@ -144,20 +199,22 @@ public struct MISOCheckboxItemIndeterminate: View {
     ///   - image: An optional ``MISOImage`` encapsulating the asset, its flip flag and its rendering mode. Default set to `nil`.
     ///   - isReversed: `true` if the checkbox indicator must be in trailing position, `false` otherwise. Default to `false`
     ///   - isError: `true` if the look and feel of the component must reflect an error state, default set to `false`
-    ///   - errorText: An optional error message to display at the bottom. This message is ignored if `isError` is `false`.
+    ///   - errorText: An optional error message to display at the bottom, raw, localized or rich text. This message is ignored if `isError` is `false`.
     ///   - isReadOnly: True if component is in read only, i.e. not really disabled but user cannot interact with it yet, default set to `false`
     ///   - hasDivider: If `true` a divider is added at the bottom of the view, by default set to `false`
     ///   - constrainedMaxWidth: When `true`, the item width is constrained to a maximum value defined by the design system.
     ///     When `false`, no specific width constraint is applied, allowing the component to size itself or follow external
     ///     modifier. Defaults to `false`.
     ///   - action: An additional action to trigger when the checkbox has been pressed, default set to `nil`
+    ///
+    /// - Since: 3.2.0
     public init(_ label: String,
                 selection: Binding<MISOCheckboxIndicatorState>,
                 description: String? = nil,
                 image: MISOImage? = nil,
                 isReversed: Bool = false,
                 isError: Bool = false,
-                errorText: String? = nil,
+                errorText: MISOTextualContent? = nil,
                 isReadOnly: Bool = false,
                 hasDivider: Bool = false,
                 constrainedMaxWidth: Bool = false,
@@ -175,20 +232,12 @@ public struct MISOCheckboxItemIndeterminate: View {
             ML.warning("Description text given to an MISOCheckboxItemIndeterminate is defined but empty, is it expected? Prefer use of `nil` value instead")
         }
 
-        // swiftlint:disable force_unwrapping
-        if isError, errorText == nil || errorText!.isEmpty {
+        if isError, errorText?.isEmpty != false {
             ML.warning("Error text given to an MISOCheckboxItemIndeterminate must be defined in case of error")
         }
-        // swiftlint:enable force_unwrapping
 
         _selection = selection
         self.action = action
-
-        let errorTextContent: MISOTextualContent? = if let errorText {
-            .raw(errorText)
-        } else {
-            nil
-        }
 
         layoutData = .init(
             label: label.localized(),
@@ -197,7 +246,7 @@ public struct MISOCheckboxItemIndeterminate: View {
             icon: image,
             isOutlined: false,
             isError: isError,
-            errorText: errorTextContent,
+            errorText: errorText,
             isReadOnly: isReadOnly,
             hasDivider: hasDivider,
             constrainedMaxWidth: constrainedMaxWidth,
@@ -214,6 +263,13 @@ public struct MISOCheckboxItemIndeterminate: View {
     ///                                   bundle: Bundle.module,
     ///                                   selection: $state,
     ///                                   image: MISOImage(asset: Image(decorative: "ic_heart")))
+    ///
+    ///     // The error text is an MISOTextualContent: raw, localized or rich
+    ///     MISOCheckboxItemIndeterminate(LocalizedStringKey("select_all"),
+    ///                                   bundle: Bundle.module,
+    ///                                   selection: $state,
+    ///                                   isError: true,
+    ///                                   errorText: .localized("select_all_error", bundle: Bundle.module))
     /// ```
     ///
     /// **The design system does not allow to have both an error situation and a read only mode for the component.**
@@ -227,11 +283,13 @@ public struct MISOCheckboxItemIndeterminate: View {
     ///   - image: An optional ``MISOImage`` encapsulating the asset, its flip flag and its rendering mode. Default set to `nil`.
     ///   - isReversed: `true` if the checkbox indicator must be in trailing position, `false` otherwise. Default to `false`
     ///   - isError: `true` if the look and feel of the component must reflect an error state, default set to `false`
-    ///   - errorText: An optional error message to display at the bottom. This message is ignored if `isError` is `false`.
+    ///   - errorText: An optional error message to display at the bottom, raw, localized or rich text. This message is ignored if `isError` is `false`.
     ///   - isReadOnly: True if component is in read only, default set to `false`
     ///   - hasDivider: If `true` a divider is added at the bottom of the view, by default set to `false`
     ///   - constrainedMaxWidth: When `true`, the item width is constrained to a maximum value defined by the design system.
     ///   - action: An additional action to trigger when the checkbox has been pressed, default set to `nil`
+    ///
+    /// - Since: 3.2.0
     public init(_ key: LocalizedStringKey,
                 tableName: String? = nil,
                 bundle: Bundle = .main,
@@ -240,7 +298,7 @@ public struct MISOCheckboxItemIndeterminate: View {
                 image: MISOImage? = nil,
                 isReversed: Bool = false,
                 isError: Bool = false,
-                errorText: String? = nil,
+                errorText: MISOTextualContent? = nil,
                 isReadOnly: Bool = false,
                 hasDivider: Bool = false,
                 constrainedMaxWidth: Bool = false,

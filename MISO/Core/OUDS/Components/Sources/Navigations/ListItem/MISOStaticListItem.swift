@@ -18,7 +18,7 @@ import SwiftUI
 ///
 /// ```swift
 ///     // Simple list item with a label only
-///     MISOStaticListItem(data: MISOListItemData(label: "Label"))
+///     MISOStaticListItem(data: MISOListItemData(label: .textual("Label")))
 ///
 ///     // List item with more textual content
 ///     let data = MISOListItemData(
@@ -31,7 +31,7 @@ import SwiftUI
 ///
 ///     // List item with leading icon and trailing badge
 ///     MISOStaticListItem(
-///         data: MISOListItemData(label: "Label"),
+///         data: MISOListItemData(label: .textual("Label")),
 ///         leading: .icon(.init(type: .info, size: .medium)),
 ///         trailing: .badge(.count(.init(3, accessibilityLabel: "3 notifications", status: .negative, size: .medium)))
 ///     )
@@ -45,7 +45,7 @@ import SwiftUI
 ///
 ///     // List item with a custom view as trailing, e.g. a gauge showing a remaining SMS credit
 ///     MISOStaticListItem(
-///         data: MISOListItemData(label: "SMS credit"),
+///         data: MISOListItemData(label: .textual("SMS credit")),
 ///         trailing: .custom {
 ///             MISOCircularProgressIndicator(progress: 0.75)
 ///         }
@@ -55,7 +55,7 @@ import SwiftUI
 ///     MISOStaticListItem(
 ///         data: MISOListItemData(
 ///             label: "Label",
-///             textSlot: { Text("Additional content") },
+///             textSlot: .init { Text("Additional content") },
 ///             helperText: "Helper text"
 ///         )
 ///     )
@@ -64,7 +64,7 @@ import SwiftUI
 ///     MISOStaticListItem(
 ///         data: MISOListItemData(
 ///             label: "Label",
-///             bottomSlot: { Text("Bottom content") },
+///             bottomSlot: .init { Text("Bottom content") },
 ///             helperText: "Helper text"
 ///         )
 ///     )
@@ -106,7 +106,7 @@ import SwiftUI
 /// - ``SwiftUICore/View/misoListItemRoundedMedia(_:)`` — Defines whether media (images) should be displayed with rounded corners.
 ///
 /// ```swift
-///     MISOStaticListItem(data: MISOListItemData(label: "Label"))
+///     MISOStaticListItem(data: MISOListItemData(label: .textual("Label")))
 ///         .misoListItemSize(.small)
 ///         .misoListItemContainerAlignment(.top)
 ///         .misoListCardStyle(.outlined())

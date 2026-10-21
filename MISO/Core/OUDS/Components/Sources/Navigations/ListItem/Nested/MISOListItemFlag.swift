@@ -19,13 +19,13 @@ import SwiftUI
 ///
 ///     // Usage as leading element in a list item
 ///     MISOStaticListItem(
-///         data: MISOListItemData(label: "Information"),
+///         data: MISOListItemData(label: .textual("Information")),
 ///         leading: .flag(.init(asset: Image(decorative: "il_flag_fr"), description: "France"))
 ///     )
 ///
 ///     // Usage as trailing element in a list item
 ///     MISOStaticListItem(
-///         data: MISOListItemData(label: "Warning"),
+///         data: MISOListItemData(label: .textual("Warning")),
 ///         trailing: .flag(.init(asset: Image(decorative: "il_flag_fr"), description: "France"))
 ///     )
 /// ```

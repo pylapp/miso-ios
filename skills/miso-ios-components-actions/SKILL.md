@@ -14,6 +14,9 @@ license: MIT
 ```swift
 MISOButton(text: "Label", appearance: .default) {}
 MISOButton(text: "Label", appearance: .default, style: .loading()) {}
-MISOButton(text: "Label", icon: Image("ic"), appearance: .default, size: .small) {}
-MISOButton(icon: Image("ic"), accessibilityLabel: "Label", size: .small) {}
+MISOButton(text: "Label", image: MISOImage(asset: Image("ic")), appearance: .default, size: .small) {}
+// Icon only: the accessibility label is given to the MISOImage
+MISOButton(image: MISOImage(asset: Image("ic"), accessibilityLabel: "Label"), size: .small) {}
+// LocalizedStringKey:
+MISOButton(LocalizedStringKey("button_label"), bundle: Bundle.module, appearance: .default) {}
 ```

@@ -198,7 +198,7 @@ struct PinCodeInputContainer: View {
         // Compute at this level the typography to use to be sure environment values for size class
         // are retrieved in the suitable thread at the best moment
         let text = displayText(for: index)
-        let isSymbol = text == OUDSPinCodeInput.placeholderCharacter || text == OUDSPinCodeInput.obfuscationCharacter
+        let isSymbol = text == MISOPinCodeInput.placeholderCharacter || text == MISOPinCodeInput.obfuscationCharacter
         let uiFont = Font.makeFont(
             family: isSymbol ? nil : theme.fontFamily,
             from: theme.fonts.labelModerateLarge,

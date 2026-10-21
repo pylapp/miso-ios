@@ -45,13 +45,13 @@ import SwiftUI
 ///
 ///     // Usage as leading element in a list item
 ///     MISOStaticListItem(
-///         data: MISOListItemData(label: "Information"),
+///         data: MISOListItemData(label: .textual("Information")),
 ///         leading: .image(.init(asset: Image(decorative: "il_placeholder", size: .medium))
 ///     )
 ///
 ///     // Usage as trailing element in a list item
 ///     MISOStaticListItem(
-///         data: MISOListItemData(label: "Warning"),
+///         data: MISOListItemData(label: .textual("Warning")),
 ///         trailing: .image(.init(asset: Image(decorative: "il_placeholder", size: .medium))
 ///     )
 /// ```

@@ -245,7 +245,9 @@ The full map is readable at any time via `kApplePostScriptFontNames`. Unregister
 > Hyperlinks may be not accessible for Voice Over, Full Keyboard Access and Switch Control.
 > Prefer use other components like `Text` from SwiftUI.
 
-You may need to add *rich text* to some components which support `AttributedString` type parameters.
+You may need to add *rich text* to some components which support `AttributedString` through ``MISOTextualContent`` parameters.
+Wrap your `AttributedString` with `.rich(_:)`, for example `MISOBulletList.Item(.rich(myAttributedString))`.
+A raw `String` can be given directly as a string literal (or with `.raw(_:)`), and a localized string with `.localized(_:tableName:bundle:)`.
 For example you may want to display a text with clickable hyperlinks inside, and a style for the hyperlink.
 
 Font tokens like `theme.fonts.bodyDefaultMedium` are `MultipleFontCompositeSemanticToken` values, not SwiftUI `Font`.
@@ -270,7 +272,7 @@ let richTextHelperMessage = AttributedString.from(text: "You must read our priva
                                                   font: themeBodyFont,
                                                   urlConfigurations: urlConfigurations)
                                                   
-MISOPasswordInput("Enter your password", password: $password, helperText: richTextHelperMessage)
+MISOPasswordInput("Enter your password", password: $password, helperText: .rich(richTextHelperMessage))
 ```
 
 If you handle Markdown data, you can define your own styles for the hyperlinks:

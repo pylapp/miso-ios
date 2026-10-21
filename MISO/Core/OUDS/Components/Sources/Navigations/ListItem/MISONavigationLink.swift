@@ -97,7 +97,9 @@ public struct MISONavigationLink<Destination: View>: View {
     // MARK: - Body
 
     public var body: some View {
-        MISONavigationListItem(data: .init(label: title, hasBoldLabel: hasBoldLabel), indicatorType: indicatorType) {
+        MISONavigationListItem(data: .init(label: .textual(.raw(title), isBold: hasBoldLabel)),
+                               indicatorType: indicatorType)
+        {
             isActive = true
         }
         .misoListContentStyle(style)

@@ -33,14 +33,14 @@ import SwiftUI
 /// ```swift
 ///     // Simple navigable list item with forward navigation
 ///     MISONavigationListItem(
-///         data: MISOListItemData(label: "Next screen")
+///         data: MISOListItemData(label: .textual("Next screen"))
 ///     ) {
 ///         // Navigate to next screen
 ///     }
 ///
 ///     // List item with external navigation
 ///     MISONavigationListItem(
-///         data: MISOListItemData(label: "Open website"),
+///         data: MISOListItemData(label: .textual("Open website")),
 ///         indicatorType: .external
 ///     ) {
 ///         openURL(url)
@@ -48,7 +48,7 @@ import SwiftUI
 ///
 ///     // List item with backward navigation
 ///     MISONavigationListItem(
-///         data: MISOListItemData(label: "Go back"),
+///         data: MISOListItemData(label: .textual("Go back")),
 ///         indicatorType: .previous
 ///     ) {
 ///         // Navigate back
@@ -67,7 +67,7 @@ import SwiftUI
 ///
 ///     // List item with a custom view as trailing, e.g. a gauge showing a remaining SMS credit
 ///     MISONavigationListItem(
-///         data: MISOListItemData(label: "SMS credit"),
+///         data: MISOListItemData(label: .textual("SMS credit")),
 ///         trailing: .custom {
 ///             MISOCircularProgressIndicator(progress: 0.75)
 ///         }
@@ -79,7 +79,7 @@ import SwiftUI
 ///     MISONavigationListItem(
 ///         data: MISOListItemData(
 ///             label: "Settings",
-///             textSlot: { Text("Configure options") },
+///             textSlot: .init { Text("Configure options") },
 ///             helperText: "Helper text"
 ///         )
 ///     ) {
@@ -90,7 +90,7 @@ import SwiftUI
 ///     MISONavigationListItem(
 ///         data: MISOListItemData(
 ///             label: "Profile",
-///             bottomSlot: { Text("Additional info") },
+///             bottomSlot: .init { Text("Additional info") },
 ///             helperText: "Helper text"
 ///         )
 ///     ) {
@@ -135,7 +135,7 @@ import SwiftUI
 ///
 /// ```swift
 ///     MISONavigationListItem(
-///         data: MISOListItemData(label: "Settings"),
+///         data: MISOListItemData(label: .textual("Settings")),
 ///         indicatorType: .next
 ///     ) {
 ///         // Navigate to settings

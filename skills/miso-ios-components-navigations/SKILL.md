@@ -13,9 +13,9 @@ license: MIT
 
 ```swift
 MISOLink(text: "Text", size: .default) {}
-MISOLink(text: "Text", indicator: .back, size: .default) {}
-MISOLink(text: "Text", icon: MISOImage(asset: Image("ic")), size: .default) {}
-MISOLink(text: "Text", icon: MISOImage(asset: Image("ic"), renderingMode: .original), size: .default) {} // raw image (not tinted)
+MISOLink(text: "Text", indicator: .previous, size: .default) {}
+MISOLink(text: "Text", image: MISOImage(asset: Image("ic")), size: .default) {}
+MISOLink(text: "Text", image: MISOImage(asset: Image("ic"), renderingMode: .original), size: .default) {} // raw image (not tinted)
 ```
 
 ---
@@ -138,7 +138,7 @@ MISOToolBarItem { Menu("More") { Button("Option 1") {} } }
 })
 ```
 
-> Badge rendering: iOS ≤ 25 → `MISOBadge`; iOS 26+ top → native system badge; iOS 26+ bottom → `MISOBadge` forced.
+> Badge rendering: iOS ≤ 25 → `MISOBadgeStandard` / `MISOBadgeCount`; iOS 26+ top → native system badge; iOS 26+ bottom → `MISOBadgeStandard` / `MISOBadgeCount` forced.
 
 ---
 
@@ -162,8 +162,10 @@ MISOToolBarItem { Menu("More") { Button("Option 1") {} } }
 
 > **Rich text**: every textual field (label, description, overline, extraLabel, helperText) accepts
 > a raw `String`, a localized string or a styled `AttributedString`. Pass string literals directly
-> (`itemLabel: "Label"`, `description: "Desc"`), or use `.textual(.rich(...))` for the label and
+> (`label: "Label", description: "Desc"`), or use `.textual(.rich(...))` for the label and
 > `.rich(...)` / `.localized(...)` for the other fields. Never use the deprecated `Label.text`.
+> **Literal pitfall**: a bare literal label with no textual field (`MISOListItemData(label: "Label")`, or with only `textSlot` / `bottomSlot`)
+> may select a deprecated initializer (warning): write `label: .textual("Label")`. Same for a custom view label with a literal `overline`: write `overline: .raw("…")`.
 
 **Shared view modifiers:**
 
@@ -181,7 +183,7 @@ MISOToolBarItem { Menu("More") { Button("Option 1") {} } }
 
 ```swift
 // Minimal
-MISOStaticListItem(data: MISOListItemData(label: "Label"))
+MISOStaticListItem(data: MISOListItemData(label: .textual("Label")))
 
 // Full textual content
 MISOStaticListItem(data: MISOListItemData(
@@ -191,60 +193,82 @@ MISOStaticListItem(data: MISOListItemData(
     extraLabel: "Extra"
 ))
 
+// Rich text content for any textual field
+MISOStaticListItem(data: MISOListItemData(
+    label: .textual(.rich(AttributedString.from(text: "Premium", foregroundColor: .orange, font: .headline))),
+    description: .rich(myStyledDescription),
+    overline: "Plain overline",
+    helperText: .rich(AttributedString.from(text: "A rich helper", foregroundColor: .gray, font: .caption))
+))
+
+// Alternative: using theme colors
+MISOStaticListItem(data: MISOListItemData(
+    label: .textual(.rich(AttributedString.from(
+        text: "Important",
+        foregroundColor: Color(hexadecimalCode: theme.colors.repositoryNegativeHigh),
+        font: .body
+    ))),
+    description: .rich(AttributedString.from(
+        text: "Warning",
+        foregroundColor: Color(hexadecimalCode: theme.colors.repositoryOpacityWarningMedium),
+        font: .body
+    ))
+))
+
 // With leading icon
 MISOStaticListItem(
-    data: MISOListItemData(label: "Info"),
+    data: MISOListItemData(label: .textual("Info")),
     leading: .icon(MISOListItemIcon(status: .info, description: "", size: .medium))
 )
 
 // With trailing badge
 MISOStaticListItem(
-    data: MISOListItemData(label: "Notifications"),
+    data: MISOListItemData(label: .textual("Notifications")),
     trailing: .badge(.count(.init(3, accessibilityLabel: "3", status: .negative, size: .medium)))
 )
 
 // With avatar + tag
 MISOStaticListItem(
-    data: MISOListItemData(label: "Profile"),
+    data: MISOListItemData(label: .textual("Profile")),
     leading: .avatar(MISOListItemAvatar(type: .icon, size: .medium, accessibilityLabel: "")),
     trailing: .tag(MISOTag(label: "New", size: .small))
 )
 
 // With trailing text
 MISOStaticListItem(
-    data: MISOListItemData(label: "Status"),
+    data: MISOListItemData(label: .textual("Status")),
     trailing: .text(.labelMuted("Active"))
 )
 
 // With flag
 MISOStaticListItem(
-    data: MISOListItemData(label: "Country"),
+    data: MISOListItemData(label: .textual("Country")),
     leading: .flag(MISOListItemFlag(asset: Image("flag_fr"), description: "France"))
 )
 
 // With slot (view under texts, before helper text)
 MISOStaticListItem(
-    data: MISOListItemData(label: "With slot", textSlot: .init { Text("Additional content") })
+    data: MISOListItemData(label: .textual("With slot"), textSlot: .init { Text("Additional content") })
 )
 
 // With bottomSlot (view under main content, before helper text)
 MISOStaticListItem(
-    data: MISOListItemData(label: "With bottom slot", bottomSlot: .init { Text("Bottom content") })
+    data: MISOListItemData(label: .textual("With bottom slot"), bottomSlot: .init { Text("Bottom content") })
 )
 
 // With both slot and bottomSlot
 MISOStaticListItem(
     data: MISOListItemData(
         label: "Label",
-        textSlot: { Text("Slot content") },
-        bottomSlot: { Text("Bottom content") },
+        textSlot: .init { Text("Slot content") },
+        bottomSlot: .init { Text("Bottom content") },
         helperText: "Helper text"
     )
 )
 
 // With a custom view in leading/trailing (e.g. a gauge for a remaining SMS credit)
 MISOStaticListItem(
-    data: MISOListItemData(label: "SMS credit"),
+    data: MISOListItemData(label: .textual("SMS credit")),
     trailing: .custom {
         MISOCircularProgressIndicator(progress: 0.75)
     }
@@ -257,17 +281,17 @@ MISOStaticListItem(
 
 ```swift
 // Forward navigation (default)
-MISONavigationListItem(data: MISOListItemData(label: "Next")) {
+MISONavigationListItem(data: MISOListItemData(label: .textual("Next"))) {
     // action
 }
 
 // Backward navigation
-MISONavigationListItem(data: MISOListItemData(label: "Back"), indicatorType: .previous) {
+MISONavigationListItem(data: MISOListItemData(label: .textual("Back")), indicatorType: .previous) {
     // action
 }
 
 // External navigation
-MISONavigationListItem(data: MISOListItemData(label: "Website"), indicatorType: .external) {
+MISONavigationListItem(data: MISOListItemData(label: .textual("Website")), indicatorType: .external) {
     openURL(url)
 }
 
@@ -282,14 +306,14 @@ MISONavigationListItem(
 
 // With slot (view under texts, before helper text)
 MISONavigationListItem(
-    data: MISOListItemData(label: "Settings", textSlot: .init { Text("Configure options") })
+    data: MISOListItemData(label: .textual("Settings"), textSlot: .init { Text("Configure options") })
 ) {
     // navigate
 }
 
 // With bottomSlot (view under main content, before helper text)
 MISONavigationListItem(
-    data: MISOListItemData(label: "Profile", bottomSlot: .init { Text("Additional info") })
+    data: MISOListItemData(label: .textual("Profile"), bottomSlot: .init { Text("Additional info") })
 ) {
     // navigate
 }
@@ -308,7 +332,7 @@ MISONavigationListItem(
 
 // With a custom view in leading/trailing (e.g. a gauge for a remaining SMS credit)
 MISONavigationListItem(
-    data: MISOListItemData(label: "SMS credit"),
+    data: MISOListItemData(label: .textual("SMS credit")),
     trailing: .custom {
         MISOCircularProgressIndicator(progress: 0.75)
     }
@@ -318,7 +342,7 @@ MISONavigationListItem(
 
 // With external link + badge
 MISONavigationListItem(
-    data: MISOListItemData(label: "Documentation"),
+    data: MISOListItemData(label: .textual("Documentation")),
     indicatorType: .external,
     trailing: .badge(.standard(.init(accessibilityLabel: "New", status: .accent, size: .small)))
 ) {

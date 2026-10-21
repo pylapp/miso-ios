@@ -16,7 +16,7 @@ Count parameter must be of type `UInt8`.
 ```swift
 MISOBadgeStandard(accessibilityLabel: "Some label", status: .neutral, size: .medium)
 MISOBadgeCount(3, accessibilityLabel: "Some label", status: .neutral, size: .medium)
-MISOBadgeIcon(status: .neutral(icon: Image("ic")), accessibilityLabel: "Label", size: .medium)
+MISOBadgeIcon(status: .neutral(image: MISOImage(asset: Image("ic"))), accessibilityLabel: "Label", size: .medium)
 ```
 
 ---
@@ -25,12 +25,14 @@ MISOBadgeIcon(status: .neutral(icon: Image("ic")), accessibilityLabel: "Label", 
 
 ```swift
 MISOTag(label: "Label")
-MISOTag(label: "Label", status: .neutral(icon: MISOImage(asset: Image("ic"))))
-MISOTag(label: "Label", status: .neutral(icon: MISOImage(asset: Image("ic"), renderingMode: .original))) // raw image (not tinted)
-MISOTag(label: "Label", status: .neutral(icon: MISOImage(asset: Image("ic"), flipped: true))) // flipped for RTL
-MISOTag(label: "Label", status: .accent(icon: MISOImage(asset: Image("ic"))))
-MISOTag(label: "Label", status: .accent(icon: MISOImage(asset: Image("ic"), renderingMode: .original))) // raw image (not tinted)
+MISOTag(label: "Label", status: .neutral(image: MISOImage(asset: Image("ic"))))
+MISOTag(label: "Label", status: .neutral(image: MISOImage(asset: Image("ic"), renderingMode: .original))) // raw image (not tinted)
+MISOTag(label: "Label", status: .neutral(image: MISOImage(asset: Image("ic"), flipped: true))) // flipped for RTL
+MISOTag(label: "Label", status: .accent(image: MISOImage(asset: Image("ic"))))
+MISOTag(label: "Label", status: .accent(image: MISOImage(asset: Image("ic"), renderingMode: .original))) // raw image (not tinted)
 MISOTag(label: "Label", status: .neutral(bullet: true))
+// Loading tag (progress is optional, indeterminate by default)
+MISOTag(loadingLabel: "Loading", progress: 0.5)
 ```
 
 ---
@@ -38,7 +40,7 @@ MISOTag(label: "Label", status: .neutral(bullet: true))
 ## Input Tag
 
 ```swift
-MISOInputTag("Label") { /* remove action */ }
+MISOInputTag(label: "Label") { /* remove action */ }
 ```
 
 ---

@@ -35,7 +35,17 @@ Dialogs components are UI elements that display information, system feedback or 
     MISOAlertMessage(label: "Warning", status: .warning, description: "Some details about the warning") {
         // Do some tasks here to dismiss the alert message when clicked
     }
-        
+
+    // The description and the bullet list are MISOTextualContent values: raw (string literal),
+    // localized or rich text
+    MISOAlertMessage(label: "Label",
+                     description: .rich(AttributedString(markdown: "This is **an important notice**")), // Manage in your side errors for init
+                     bulletList: [
+                         "First thing",
+                         .localized("second_thing_wording", bundle: Bundle.module),
+                         .rich(AttributedString(markdown: "One **more thing**")), // Manage in your side errors for init
+                     ])
+
     // Add a custom icon for accent and neutral status
     // with original rendering mode (to avoid tints) or not.
     // By default, tinted, template mode.

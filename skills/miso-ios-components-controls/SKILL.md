@@ -15,14 +15,17 @@ These patterns apply to Checkbox, Radio, Switch, TextInput, TextArea, PinCodeInp
 
 | Pattern | Syntax |
 |---|---|
-| Error state | `isError: true, errorText: "Message"` |
-| Rich error | `errorText: AttributedString` |
-| Plain helper | `helperText: "…"` |
-| Rich helper | `helperText: AttributedString` |
-| Error status (inputs) | `status: .error(message: "…")` |
-| Rich error status | `status: .richError(message: AttributedString)` |
+| Error state | `isError: true, errorText: .raw("Message")` — `errorText` is an `MISOTextualContent` (`.raw`, `.localized`, `.rich`); prefer `.raw("…")` to a bare literal to avoid a deprecation warning |
+| Rich error | `errorText: .rich(AttributedString)` |
+| Plain helper | `helperText: .raw("…")` (`MISOTextArea`: `helperText: .textual("…")`) — `helperText` is an `MISOTextualContent` (`.raw`, `.localized`, `.rich`); prefer `.raw("…")` to a bare literal to avoid a deprecation warning |
+| Rich helper | `helperText: .rich(AttributedString)` (`MISOTextArea`: `helperText: .textual(.rich(AttributedString))`) |
+| Error status (inputs) | `status: .textualError(message: "…")` — message is an `MISOTextualContent` |
+| Rich error status | `status: .textualError(message: .rich(AttributedString))` |
 | Read-only | `isReadOnly: true` |
 | Disabled | `.disabled(true)` — never combine with `isError` or `isReadOnly` |
+
+> `MISOSwitchItem`, `MISOCheckboxItem`, `MISOCheckboxItemIndeterminate` and `MISORadioItem` `errorText` as `String` / `AttributedString` is **deprecated** since v3.2.0, use `MISOTextualContent`.
+> **Literal pitfall**: a bare `errorText: "abc"` may select a deprecated initializer (warning) because `AttributedString` is expressible by a string literal. Write `errorText: .raw("abc")`.
 
 > **Forbidden combinations** (fatal error at runtime): `isError` + `isReadOnly`, `isError` + `.disabled`, `isReadOnly` + `.disabled`
 
@@ -35,37 +38,39 @@ MISOCheckbox(isOn: $isOn, accessibilityLabel: "Label")
 MISOCheckboxIndeterminate(selection: $selection, accessibilityLabel: "Label")
 MISOCheckboxItem("Label", isOn: $isOn)
 MISOCheckboxItem("Label", isOn: $isOn, description: "Helper",
-                 icon: MISOImage(asset: Image(decorative: "ic")))
+                 image: MISOImage(asset: Image(decorative: "ic")))
 MISOCheckboxItem("Label", isOn: $isOn,
-                 icon: MISOImage(asset: Image(decorative: "ic")), isReversed: true)
+                 image: MISOImage(asset: Image(decorative: "ic")), isReversed: true)
 // Raw (non-tinted) image:
 MISOCheckboxItem("Label", isOn: $isOn,
-                 icon: MISOImage(asset: Image(decorative: "il_brand"), renderingMode: .original))
+                 image: MISOImage(asset: Image(decorative: "il_brand"), renderingMode: .original))
 // Flip icon for RTL:
 MISOCheckboxItem("Label", isOn: $isOn,
-                 icon: MISOImage(asset: Image(systemName: "figure.handball"),
+                 image: MISOImage(asset: Image(systemName: "figure.handball"),
                                  flipped: layoutDirection == .rightToLeft))
 // LocalizedStringKey:
 MISOCheckboxItem(LocalizedStringKey("agree_terms"), bundle: Bundle.module, isOn: $isOn,
-                 icon: MISOImage(asset: Image(decorative: "ic")))
-// Indeterminate (three states) — also accepts LocalizedStringKey:
+                 image: MISOImage(asset: Image(decorative: "ic")))
+// Indeterminate (three states) — also accepts LocalizedStringKey and an MISOTextualContent errorText:
 MISOCheckboxItemIndeterminate("Label", selection: $selection,
-                               icon: MISOImage(asset: Image(decorative: "ic")))
+                               image: MISOImage(asset: Image(decorative: "ic")))
 MISOCheckboxItemIndeterminate(LocalizedStringKey("select_all"), bundle: Bundle.module,
                                selection: $selection)
+// Error text: raw, localized or rich MISOTextualContent
+MISOCheckboxItem("Label", isOn: $isOn, isError: true, errorText: .rich(AttributedString(…)))
 // Error / helper / disabled → see "Common patterns" above
 ```
 
-> Parameter order: `(_ label:, isOn:, description:, icon:, isReversed:, isError:, errorText:, isReadOnly:, hasDivider:, constrainedMaxWidth:, action:)`
+> Parameter order: `(_ label:, isOn:, description:, image:, isReversed:, isError:, errorText:, isReadOnly:, hasDivider:, constrainedMaxWidth:, action:)`
 
 ```swift
-// Picker — icon is MISOImage?
+// Picker — image is MISOImage?
 MISOCheckboxPicker(selections: $selections, checkboxes: [
     .init(tag: "a", label: "Option A"),
     .init(tag: "b", label: "Option B", description: "Details", isReversed: true),
-    .init(tag: "c", label: "Option C", icon: MISOImage(asset: Image(systemName: "flame"))),
+    .init(tag: "c", label: "Option C", image: MISOImage(asset: Image(systemName: "flame"))),
     .init(tag: "d", label: "Option D",
-          icon: MISOImage(asset: Image(decorative: "il_brand"), renderingMode: .original)),
+          image: MISOImage(asset: Image(decorative: "il_brand"), renderingMode: .original)),
 ])
 MISOCheckboxPicker(selections: $selections, checkboxes: data,
                    placement: .verticalRooted("All options", .textAndCount))
@@ -80,25 +85,27 @@ MISOCheckboxPicker(selections: $selections, checkboxes: data,
 ```swift
 MISORadio(isOn: $isOn, accessibilityLabel: "Label")
 MISORadioItem("Label", isOn: $isOn)
-MISORadioItem("Label", isOn: $isOn, icon: MISOImage(asset: Image(decorative: "ic")))
+MISORadioItem("Label", isOn: $isOn, image: MISOImage(asset: Image(decorative: "ic")))
 // Raw (non-tinted) image:
 MISORadioItem("Label", isOn: $isOn,
-              icon: MISOImage(asset: Image(decorative: "il_brand"), renderingMode: .original))
+              image: MISOImage(asset: Image(decorative: "il_brand"), renderingMode: .original))
 // Flip icon for RTL:
 MISORadioItem("Label", isOn: $isOn,
-              icon: MISOImage(asset: Image(systemName: "chevron.right"),
+              image: MISOImage(asset: Image(systemName: "chevron.right"),
                               flipped: layoutDirection == .rightToLeft))
 // LocalizedStringKey:
 MISORadioItem(LocalizedStringKey("option_label"), bundle: Bundle.module, isOn: $isOn,
-              icon: MISOImage(asset: Image(decorative: "ic")))
+              image: MISOImage(asset: Image(decorative: "ic")))
+// Error text: raw, localized or rich MISOTextualContent
+MISORadioItem("Label", isOn: $isOn, isError: true, errorText: .rich(AttributedString(…)))
 // Error / helper / disabled → see "Common patterns" above
 MISORadioPicker(selection: $selection,
                 radios: [
                     .init(tag: "a", label: "Option A"),
                     .init(tag: "b", label: "Option B",
-                          icon: MISOImage(asset: Image(systemName: "flame"))),
+                          image: MISOImage(asset: Image(systemName: "flame"))),
                     .init(tag: "c", label: "Option C",
-                          icon: MISOImage(asset: Image(decorative: "il_brand"),
+                          image: MISOImage(asset: Image(decorative: "il_brand"),
                                          renderingMode: .original)),
                 ],
                 placement: .vertical)
@@ -112,17 +119,19 @@ MISORadioPicker(selection: $selection,
 MISOSwitch(isOn: $isOn, accessibilityLabel: "Label")
 MISOSwitchItem("Label", isOn: $isOn)
 MISOSwitchItem("Label", isOn: $isOn,
-               icon: MISOImage(asset: Image(decorative: "ic")))
+               image: MISOImage(asset: Image(decorative: "ic")))
 // Raw (non-tinted) image:
 MISOSwitchItem("Label", isOn: $isOn,
-               icon: MISOImage(asset: Image(decorative: "il_brand"), renderingMode: .original))
+               image: MISOImage(asset: Image(decorative: "il_brand"), renderingMode: .original))
 // Flip icon for RTL:
 MISOSwitchItem("Label", isOn: $isOn,
-               icon: MISOImage(asset: Image(systemName: "figure.handball"),
+               image: MISOImage(asset: Image(systemName: "figure.handball"),
                                flipped: layoutDirection == .rightToLeft))
 // LocalizedStringKey:
 MISOSwitchItem(LocalizedStringKey("wifi_setting"), bundle: Bundle.module, isOn: $isOn,
-               icon: MISOImage(asset: Image(decorative: "ic")))
+               image: MISOImage(asset: Image(decorative: "ic")))
+// Error text: raw, localized or rich MISOTextualContent
+MISOSwitchItem("Label", isOn: $isOn, isError: true, errorText: .rich(AttributedString(…)))
 // Error / helper / disabled → see "Common patterns" above
 ```
 
@@ -130,14 +139,22 @@ MISOSwitchItem(LocalizedStringKey("wifi_setting"), bundle: Bundle.module, isOn: 
 
 ## Pin Code Input
 
-Available lengths: `.four`, `.six` (default).
+Available lengths: `.four`, `.six` (default), `.eight`.
 
 ```swift
 MISOPinCodeInput($value)
 MISOPinCodeInput($value, length: .four, autofocus: true)
-MISOPinCodeInput($value, helperText: "Enter your PIN")
-// Error status → see "Common patterns" (status: .error / .richError)
+MISOPinCodeInput($value, helperText: .raw("Enter your PIN"))
+MISOPinCodeInput($value, helperText: .localized("pin_helper", bundle: Bundle.module))
+MISOPinCodeInput($value, helperText: .rich(AttributedString(…)))
+// Error status: .textualError(message: MISOTextualContent), raw (literal), localized or rich
+MISOPinCodeInput($value, status: .textualError(message: .rich(AttributedString(…))))
 ```
+
+> `MISOPinCodeInput` `helperText` as `String` / `AttributedString` / `LocalizedStringKey` (`helperText key:`) is **deprecated** since v3.2.0, use `MISOTextualContent`.
+> `Status.error(message:)` and `Status.richError(message:)` are **deprecated** too, use `Status.textualError(message:)`.
+> **Literal pitfall**: a bare `helperText: "abc"` may select a deprecated initializer (warning). Write `helperText: .raw("abc")`.
+> A literal in `status: .textualError(message: "abc")` is fine.
 
 ---
 
@@ -149,8 +166,16 @@ MISOPinCodeInput($value, helperText: "Enter your PIN")
 MISOPasswordInput(label: "Password", password: $password, isHiddenPassword: $isHidden)
 MISOPasswordInput(label: "Password", password: $password, isHiddenPassword: $isHidden,
                   placeholder: "Min. 8 chars", prefix: "🔑", lockIcon: true)
-// Helper / error status → see "Common patterns"
+// Helper text: raw (string literal), localized or rich MISOTextualContent
+MISOPasswordInput(label: "Password", password: $password, helperText: .raw("8 characters minimum"))
+MISOPasswordInput(label: "Password", password: $password, helperText: .rich(AttributedString(…)))
+// Error status: .textualError(message: MISOTextualContent), raw (literal), localized or rich
+MISOPasswordInput(label: "Password", password: $password, status: .textualError(message: "Too weak"))
 ```
+
+> `MISOPasswordInput` `helperText` as `String` / `AttributedString` is **deprecated** since v3.2.0, use `MISOTextualContent`.
+> `MISOTextInput.Status.error(message:)` and `.richError(message:)` are **deprecated** too, use `.textualError(message:)`.
+> **Literal pitfall**: a bare `helperText: "abc"` may select a deprecated initializer (warning). Write `helperText: .raw("abc")`.
 
 ---
 
@@ -158,15 +183,15 @@ MISOPasswordInput(label: "Password", password: $password, isHiddenPassword: $isH
 
 ```swift
 MISOSuggestionChip(text: "Label") {}
-MISOSuggestionChip(icon: MISOImage(asset: Image("ic")), text: "Label") {}
-MISOSuggestionChip(icon: MISOImage(asset: Image("ic"), renderingMode: .original), text: "Label") {} // raw image (not tinted)
-MISOSuggestionChip(icon: MISOImage(asset: Image("ic")), accessibilityLabel: "Label") {}
-MISOSuggestionChip(icon: MISOImage(asset: Image("ic"), renderingMode: .original), accessibilityLabel: "Label") {} // raw image (not tinted)
+MISOSuggestionChip(image: MISOImage(asset: Image("ic")), text: "Label") {}
+MISOSuggestionChip(image: MISOImage(asset: Image("ic"), renderingMode: .original), text: "Label") {} // raw image (not tinted)
+MISOSuggestionChip(image: MISOImage(asset: Image("ic")), accessibilityLabel: "Label") {}
+MISOSuggestionChip(image: MISOImage(asset: Image("ic"), renderingMode: .original), accessibilityLabel: "Label") {} // raw image (not tinted)
 MISOFilterChip(text: "Label") {}
-MISOFilterChip(icon: MISOImage(asset: Image("ic")), text: "Label") {}
-MISOFilterChip(icon: MISOImage(asset: Image("ic"), renderingMode: .original), text: "Label") {} // raw image (not tinted)
-MISOFilterChip(icon: MISOImage(asset: Image("ic")), accessibilityLabel: "Label") {}
-MISOFilterChip(icon: MISOImage(asset: Image("ic"), renderingMode: .original), accessibilityLabel: "Label") {} // raw image (not tinted)
+MISOFilterChip(image: MISOImage(asset: Image("ic")), text: "Label") {}
+MISOFilterChip(image: MISOImage(asset: Image("ic"), renderingMode: .original), text: "Label") {} // raw image (not tinted)
+MISOFilterChip(image: MISOImage(asset: Image("ic")), accessibilityLabel: "Label") {}
+MISOFilterChip(image: MISOImage(asset: Image("ic"), renderingMode: .original), accessibilityLabel: "Label") {} // raw image (not tinted)
 MISOChipPicker(title: "Title", selection: $selection, chips: [
     .init(tag: .value1, layout: .textAndIcon("Label", image: MISOImage(asset: Image("ic")))),
     .init(tag: .value2, layout: .textAndIcon("Brand", image: MISOImage(asset: Image("ic_brand"), renderingMode: .original))), // raw image
@@ -182,36 +207,49 @@ MISOChipPicker(title: "Title", selection: $selection, chips: [
 ```swift
 MISOTextInput(label: "Label", text: $text)
 MISOTextInput(label: "Label", text: $text, placeholder: "…", prefix: "Pre", suffix: "Suf")
-MISOTextInput(label: "Label", text: $text, leadingIcon: MISOImage(asset: Image("ic")))
+MISOTextInput(label: "Label", text: $text, leadingImage: MISOImage(asset: Image("ic")))
 MISOTextInput(label: "Label", text: $text,
-              leadingIcon: MISOImage(asset: Image("ic"), renderingMode: .original)) // raw image (not tinted)
+              leadingImage: MISOImage(asset: Image("ic"), renderingMode: .original)) // raw image (not tinted)
 MISOTextInput(label: "Label", text: $text,
-              leadingIcon: MISOImage(asset: Image("ic"), flipped: layoutDirection == .rightToLeft)) // flip for RTL
+              leadingImage: MISOImage(asset: Image("ic"), flipped: layoutDirection == .rightToLeft)) // flip for RTL
 MISOTextInput(label: "Label", text: $text,
-              trailingAction: .init(icon: MISOImage(asset: Image("ic")), actionHint: "Hint") {})
+              trailingAction: .init(image: MISOImage(asset: Image("ic")), actionHint: "Hint") {})
 MISOTextInput(label: "Label", text: $text,
-              trailingAction: .init(icon: MISOImage(asset: Image("ic"), renderingMode: .original),
+              trailingAction: .init(image: MISOImage(asset: Image("ic"), renderingMode: .original),
                                     actionHint: "Hint") {}) // raw image
-// Helper / error status → see "Common patterns"
+// Helper text: raw (string literal), localized or rich MISOTextualContent
+MISOTextInput(label: "Label", text: $text, helperText: .raw("Helper"))
+MISOTextInput(label: "Label", text: $text, helperText: .rich(AttributedString(…)))
+// Error status: .textualError(message: MISOTextualContent), raw (literal), localized or rich
+MISOTextInput(label: "Label", text: $text, status: .textualError(message: .localized("err", bundle: Bundle.module)))
 ```
+
+> `MISOTextInput` `helperText` as `String` / `AttributedString` is **deprecated** since v3.2.0, use `MISOTextualContent`.
+> `MISOTextInput.Status.error(message:)` and `.richError(message:)` are **deprecated** too, use `.textualError(message:)`.
+> **Literal pitfall**: a bare `helperText: "abc"` may select a deprecated initializer (warning). Write `helperText: .raw("abc")`.
 
 ---
 
 ## Text Area
 
-`helperText` type: `.plain(String)` | `.rich(AttributedString)` | `.charactersMaxCount(UInt16)`
+`helperText` type: `.textual(MISOTextualContent)` (raw string literal, `.raw`, `.localized` or `.rich`) | `.charactersMaxCount(UInt16)`
 
 ```swift
 MISOTextArea(label: "Label", text: $text)
 MISOTextArea(label: "Label", text: $text, placeholder: "Describe…")
-MISOTextArea(label: "Label", text: $text, helperText: .plain("Max 500 chars."))
+MISOTextArea(label: "Label", text: $text, helperText: .textual("Max 500 chars."))
+MISOTextArea(label: "Label", text: $text, helperText: .textual(.rich(AttributedString(…))))
 MISOTextArea(label: "Label", text: $text, helperText: .charactersMaxCount(500))
 MISOTextArea(label: "Label", text: $text,
              helperLink: .init(text: "Learn more") { openUrl(url) })
 // Fixed height — no vertical growth, scroll from first overflow line
 MISOTextArea(label: "Label", text: $text, constrainedMaxHeight: true)
-// Error status → see "Common patterns"
+// Error status: .textualError(message: MISOTextualContent), raw (literal), localized or rich
+MISOTextArea(label: "Label", text: $text, status: .textualError(message: .rich(AttributedString(…))))
 ```
+
+> `MISOTextArea.HelperText.plain(_:)` and `.rich(_:)` are **deprecated** since v3.2.0, use `.textual(_:)` with an `MISOTextualContent`.
+> `MISOTextArea.Status.error(message:)` and `.richError(message:)` are **deprecated** too, use `.textualError(message:)`.
 
 > Height is controlled by two component tokens on `theme.textArea`:
 > - `sizeMinHeightInput` (72 pt by default) — minimum height, always applied

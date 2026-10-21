@@ -15,11 +15,21 @@ import SwiftUI
 /// ## Code samples
 ///
 /// ```swift
-///     // Minimal: label only (String)
-///     let data = MISOListItemData(label: "Label")
+///     // Minimal: label only (string literal is implicitly converted to .textual(.raw))
+///     let data = MISOListItemData(label: .textual("Label"))
 ///
 ///     // Label with bold style
-///     let data = MISOListItemData(label: "Label", hasBoldLabel: true)
+///     let data = MISOListItemData(label: .textual("Label", isBold: true))
+///
+///     // Localized label
+///     let data = MISOListItemData(label: .textual(.localized("label.key")))
+///
+///     // Styled rich label (user-controlled font, color, markdown…)
+///     let data = MISOListItemData(
+///         label: .textual(.rich(AttributedString.from(text: "Label",
+///                                                         foregroundColor: .orange,
+///                                                         font: .headline)))
+///     )
 ///
 ///     // Custom view as label with accessibility label
 ///     let data = MISOListItemData(
@@ -42,11 +52,7 @@ import SwiftUI
 ///
 ///     // Full content with custom view label
 ///     let data = MISOListItemData(
-///         label: VStack(alignment: .leading) {
-///             Text("Title").font(.headline)
-///             Text("Subtitle").font(.caption)
-///         },
-///         accessibilityLabel: "Title, Subtitle",
+///         label: "Label",
 ///         description: "Description",
 ///         overline: "Overline",
 ///         extraLabel: "Extra Label",
@@ -57,9 +63,9 @@ import SwiftUI
 ///     // Same "overline" parameter name as the String variant, disambiguated by the value's type.
 ///     let data = MISOListItemData(
 ///         label: "Label",
-///         overline: .from(text: "Overline",
-///                         foregroundColor: theme.colors.contentBrandPrimary.color(for: colorScheme),
-///                         font: someFont)
+///         description: .rich(myStyledDescription),
+///         overline: "Plain overline",
+///         helperText: .rich(myStyledHelper)
 ///     )
 ///
 ///     // Usage with a static list item
@@ -160,7 +166,7 @@ public struct MISOListItemData {
     /// converted to `.textual(.raw(literal), isBold: false)` wherever a `Label` is expected.
     ///
     /// ```swift
-    ///     let data = MISOListItemData(itemLabel: "Hello") // same as .textual(.raw("Hello"), isBold: false)
+    ///     let data = MISOListItemData(label: .textual("Hello")) // same as .textual(.raw("Hello"), isBold: false)
     /// ```
     ///
     /// ## Accessibility
@@ -178,7 +184,7 @@ public struct MISOListItemData {
         /// - Parameters:
         ///   - text: The text string to display as the label.
         ///   - isBold: When `true`, the label is rendered with a bold font weight.
-        @available(*, deprecated, message: "Use case .textual(_:MISOTextualContent) instead. See MIGRATION.md v3.2.0.")
+        @available(*, deprecated, message: "Use case .textual(_:MISOTextualContent) instead. See MIGRATION.md v1.2.0.")
         case text(_: String, isBold: Bool = false)
 
         /// A text, which can be defined from a raw string, a localized string or attributed string
@@ -272,8 +278,11 @@ public struct MISOListItemData {
     /// string literal is automatically converted to ``MISOTextualContent/raw(_:)`` thanks to
     /// `ExpressibleByStringLiteral`.
     ///
+    /// When the label is a bare string literal and no textual field is given (or only `textSlot` / `bottomSlot`), prefer
+    /// `label: .textual("…")` so the compiler selects this initializer without any deprecation warning.
+    ///
     /// - Parameters:
-    ///   - itemLabel: The primary content of the list item (plain text, rich text or custom view).
+    ///   - label: The primary content of the list item (plain text, rich text or custom view).
     ///   - description: An optional secondary text displayed below the label. Defaults to `nil`.
     ///   - overline: An optional text displayed above the label. Defaults to `nil`.
     ///     **Ignored when the list item size is `.small`.**
@@ -285,7 +294,7 @@ public struct MISOListItemData {
     ///
     /// - Since: 3.2.0
     public init(
-        itemLabel: Label, // TODO: v4 - When older inits will be removed, renamed parameter to "label" instead of "itemLabel"
+        label: Label,
         description: MISOTextualContent? = nil,
         overline: MISOTextualContent? = nil,
         extraLabel: MISOTextualContent? = nil,
@@ -293,7 +302,7 @@ public struct MISOListItemData {
         textSlot: Slot? = nil,
         bottomSlot: Slot? = nil)
     {
-        labelContent = itemLabel
+        labelContent = label
         descriptionContent = description
         overlineContent = overline
         extraLabelContent = extraLabel
@@ -307,8 +316,11 @@ public struct MISOListItemData {
     /// Every optional textual field (`description`, `overline`, `extraLabel`, `helperText`) accepts
     /// either a plain `String` or a styled `AttributedString` through ``MISOTextualContent``.
     ///
+    /// For a raw `overline`, prefer `.raw("…")` to a bare string literal so the compiler selects this initializer
+    /// without any deprecation warning.
+    ///
     /// - Parameters:
-    ///   - viewLabel: A custom SwiftUI view to use as the primary label of the list item.
+    ///   - label: A custom SwiftUI view to use as the primary label of the list item.
     ///   - accessibilityLabel: A text used for Voice Over vocalization of the custom label.
     ///     This value is used to build the combined accessibility label of the list item text container.
     ///   - description: An optional secondary text displayed below the label. Defaults to `nil`.
@@ -322,7 +334,7 @@ public struct MISOListItemData {
     ///
     /// - Since: 3.2.0
     public init(
-        viewLabel: some View, // TODO: v4 - When older inits will be removed, renamed parameter to "label" instead of "viewLabel"
+        label: some View,
         accessibilityLabel: String,
         description: MISOTextualContent? = nil,
         overline: MISOTextualContent? = nil,
@@ -332,7 +344,7 @@ public struct MISOListItemData {
         bottomSlot: Slot? = nil)
     {
         self.init(
-            itemLabel: .custom(AnyView(viewLabel), accessibilityLabel: accessibilityLabel),
+            label: .custom(AnyView(label), accessibilityLabel: accessibilityLabel),
             description: description,
             overline: overline,
             extraLabel: extraLabel,

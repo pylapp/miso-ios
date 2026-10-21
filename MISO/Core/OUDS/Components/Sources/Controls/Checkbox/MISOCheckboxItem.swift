@@ -41,6 +41,10 @@ import SwiftUI
 /// ## Rich text
 ///
 /// Rich text can only be used for error messages.
+/// The error message is an ``MISOTextualContent``: a raw `String`, a localized string with `.localized(_:tableName:bundle:)`
+/// or a rich text with `.rich(_:)` and an `AttributedString`.
+/// Prefer `.raw(_:)` to a bare string literal for a raw message, so the compiler selects without any doubt the initializer
+/// taking an ``MISOTextualContent`` and does not emit a deprecation warning.
 ///
 /// Strong text can be used sparingly to highlight key information within the content.
 /// No other text styles should be used.
@@ -102,8 +106,18 @@ import SwiftUI
 ///     MISOCheckboxItem("We live in a fabled world",
 ///                      isOn: $isOn,
 ///                      isError: true,
-///                      errorText: "Something wrong",
+///                      errorText: .raw("Something wrong"),
 ///                      hasDivider: true)
+///
+///     // The error message is an MISOTextualContent: raw, localized or rich text
+///     MISOCheckboxItem("We live in a fabled world",
+///                      isOn: $isOn,
+///                      isError: true,
+///                      errorText: .localized("error_wording", bundle: Bundle.module))
+///     MISOCheckboxItem("We live in a fabled world",
+///                      isOn: $isOn,
+///                      isError: true,
+///                      errorText: .rich(AttributedString(markdown: "You **must** accept the ToS"))) // Manage in your side errors for init
 ///
 ///     // A leading checkbox with a label, but disabled.
 ///     MISOCheckboxItem("Hello world", isOn: $isOn)
@@ -129,7 +143,9 @@ public struct MISOCheckboxItem: View {
 
     @Environment(\.isEnabled) private var isEnabled
 
-    // MARK: - Initializers — String label + errorText: String?
+    // MARK: - Initializers
+
+    // swiftlint:disable function_default_parameter_at_end
 
     /// Creates a checkbox with label and optional helper text, icon, divider.
     ///
@@ -138,93 +154,12 @@ public struct MISOCheckboxItem: View {
     ///                      isOn: $isOn,
     ///                      description: "Very spicy",
     ///                      image: MISOImage(asset: Image(systemName: "flame")))
-    /// ```
     ///
-    /// **The design system does not allow to have both an error situation and a read only mode for the component.**
-    ///
-    /// **Remark: If `label` and `description` strings are wording keys from strings catalog stored in `Bundle.main`, they are automatically localized. Else, prefer to
-    /// provide the localized string if key is stored in another bundle.**
-    ///
-    /// - Parameters:
-    ///   - label: The main label text of the checkbox, must not be empty
-    ///   - isOn: A binding to a property that determines whether the indicator is ticked (selected) or not (unselected)
-    ///   - description: An additional helper text, a description, which should not be empty, default set to `nil`. Will be replaced by `errorText` in case of error.
-    ///   - image: An optional ``MISOImage`` encapsulating the asset, its flip flag and its rendering mode. Default set to `nil`.
-    ///   If defined, its accessibility label will be ignored.
-    ///   - isReversed: `true` if the checkbox indicator must be in trailing position, `false` otherwise. Default to `false`
-    ///   - isError: `true` if the look and feel of the component must reflect an error state, default set to `false`
-    ///   - errorText: An optional error message to display at the bottom. This message is ignored if `isError` is `false`.
-    ///   The `errorText` can be different if switch is selected or not.
-    ///   - isReadOnly: True if component is in read only, i.e. not really disabled but user cannot interact with it yet, default set to `false`
-    ///   - hasDivider: If `true` a divider is added at the bottom of the view, by default set to `false`
-    ///   - constrainedMaxWidth: When `true`, the item width is constrained to a maximum value defined by the design system.
-    ///     When `false`, no specific width constraint is applied, allowing the component to size itself or follow external
-    ///     modifier. Defaults to `false`.
-    ///   - action: An additional action to trigger when the checkbox has been pressed
-    public init(_ label: String,
-                isOn: Binding<Bool>,
-                description: String? = nil,
-                image: MISOImage? = nil,
-                isReversed: Bool = false,
-                isError: Bool = false,
-                errorText: String? = nil,
-                isReadOnly: Bool = false,
-                hasDivider: Bool = false,
-                constrainedMaxWidth: Bool = false,
-                action: (() -> Void)? = nil)
-    {
-        if isError, isReadOnly {
-            ML.fatal("It is forbidden by design to have an MISOCheckboxItem in an error context and in read only mode")
-        }
-
-        if label.isEmpty {
-            ML.warning("Label given to an MISOCheckboxItem is empty, prefer MISOCheckbox(isOn:accessibilityLabel:) instead")
-        }
-
-        if let description, description.isEmpty {
-            ML.warning("Description given to an MISOCheckboxItem is defined but empty, is it expected? Prefer use of `nil` value instead")
-        }
-
-        // swiftlint:disable force_unwrapping
-        if isError, errorText == nil || errorText!.isEmpty {
-            ML.warning("Error text given to an MISOCheckboxItem must be defined in case of error")
-        }
-        // swiftlint:enable force_unwrapping
-
-        _isOn = isOn
-
-        let errorTextContent: MISOTextualContent? = if let errorText {
-            .raw(errorText)
-        } else {
-            nil
-        }
-
-        layoutData = .init(
-            label: label.localized(),
-            extraLabel: nil,
-            description: description?.localized(),
-            icon: image,
-            isOutlined: false,
-            isError: isError,
-            errorText: errorTextContent,
-            isReadOnly: isReadOnly,
-            hasDivider: hasDivider,
-            constrainedMaxWidth: constrainedMaxWidth,
-            orientation: isReversed ? .reversed : .default)
-        self.action = action
-    }
-
-    // MARK: - Initializers — String label + errorText: AttributedString
-
-    // swiftlint:disable function_default_parameter_at_end
-    /// Creates a checkbox with label, optional helper text, icon, divider, and a rich attributed error text.
-    ///
-    /// ```swift
+    ///     // The error text is an MISOTextualContent: raw, localized or rich
     ///     MISOCheckboxItem("Virgin Holy Lava",
     ///                      isOn: $isOn,
-    ///                      description: "Very spicy",
-    ///                      image: MISOImage(asset: Image(systemName: "flame")),
-    ///                      errorText: AttributedString(markdown: "Please select **one flavor** for this drink"))
+    ///                      isError: true,
+    ///                      errorText: .rich(AttributedString(markdown: "Please select **one flavor** for this drink")))
     ///                    // Manage in your side errors for init for AttributedString(markdown:)
     /// ```
     ///
@@ -241,20 +176,23 @@ public struct MISOCheckboxItem: View {
     ///   If defined, its accessibility label will be ignored.
     ///   - isReversed: `true` if the checkbox indicator must be in trailing position, `false` otherwise. Default to `false`
     ///   - isError: `true` if the look and feel of the component must reflect an error state, default set to `false`
-    ///   - errorText: An error message to display at the bottom as rich `AttributedString`. This message is ignored if `isError` is `false`.
+    ///   - errorText: An optional error message to display at the bottom, raw, localized or rich text. This message is ignored if `isError` is `false`.
+    ///   The `errorText` can be different if checkbox is selected or not.
     ///   - isReadOnly: True if component is in read only, i.e. not really disabled but user cannot interact with it yet, default set to `false`
     ///   - hasDivider: If `true` a divider is added at the bottom of the view, by default set to `false`
     ///   - constrainedMaxWidth: When `true`, the item width is constrained to a maximum value defined by the design system.
     ///     When `false`, no specific width constraint is applied, allowing the component to size itself or follow external
     ///     modifier. Defaults to `false`.
     ///   - action: An additional action to trigger when the checkbox has been pressed
+    ///
+    /// - Since: 3.2.0
     public init(_ label: String,
                 isOn: Binding<Bool>,
                 description: String? = nil,
                 image: MISOImage? = nil,
                 isReversed: Bool = false,
                 isError: Bool = false,
-                errorText: AttributedString,
+                errorText: MISOTextualContent? = nil,
                 isReadOnly: Bool = false,
                 hasDivider: Bool = false,
                 constrainedMaxWidth: Bool = false,
@@ -272,7 +210,7 @@ public struct MISOCheckboxItem: View {
             ML.warning("Description given to an MISOCheckboxItem is defined but empty, is it expected? Prefer use of `nil` value instead")
         }
 
-        if isError, errorText.isEmpty {
+        if isError, errorText?.isEmpty != false {
             ML.warning("Error text given to an MISOCheckboxItem must be defined in case of error")
         }
 
@@ -285,7 +223,7 @@ public struct MISOCheckboxItem: View {
             icon: image,
             isOutlined: false,
             isError: isError,
-            errorText: .rich(errorText),
+            errorText: errorText,
             isReadOnly: isReadOnly,
             hasDivider: hasDivider,
             constrainedMaxWidth: constrainedMaxWidth,
@@ -293,11 +231,6 @@ public struct MISOCheckboxItem: View {
         self.action = action
     }
 
-    // swiftlint:enable function_default_parameter_at_end
-
-    // MARK: - Initializers — LocalizedStringKey + errorText: String?
-
-    // swiftlint:disable function_default_parameter_at_end
     /// Creates a checkbox with a localized label, looking up the key in the given bundle.
     ///
     /// ```swift
@@ -307,65 +240,13 @@ public struct MISOCheckboxItem: View {
     ///                      bundle: Bundle.module,
     ///                      isOn: $isOn,
     ///                      image: MISOImage(asset: Image(decorative: "ic_heart")))
-    /// ```
     ///
-    /// **The design system does not allow to have both an error situation and a read only mode for the component.**
-    ///
-    /// - Parameters:
-    ///   - key: A `LocalizedStringKey` used to look up the label in the given bundle
-    ///   - tableName: The name of the `.strings` file, or `nil` for the default
-    ///   - bundle: The bundle in which to look up the localized string. Defaults to `Bundle.main`.
-    ///   - isOn: A binding to a property that determines whether the indicator is ticked (selected) or not (unselected)
-    ///   - description: An additional helper text, a description, which should not be empty, default set to `nil`
-    ///   - image: An optional ``MISOImage`` encapsulating the asset, its flip flag and its rendering mode. Default set to `nil`.
-    ///   If defined, its accessibility label will be ignored.
-    ///   - isReversed: `true` if the checkbox indicator must be in trailing position, `false` otherwise. Default to `false`
-    ///   - isError: `true` if the look and feel of the component must reflect an error state, default set to `false`
-    ///   - errorText: An optional error message to display at the bottom. This message is ignored if `isError` is `false`.
-    ///   - isReadOnly: True if component is in read only, default set to `false`
-    ///   - hasDivider: If `true` a divider is added at the bottom of the view, by default set to `false`
-    ///   - constrainedMaxWidth: When `true`, the item width is constrained to a maximum value defined by the design system.
-    ///   - action: An additional action to trigger when the checkbox has been pressed
-    public init(_ key: LocalizedStringKey,
-                tableName: String? = nil,
-                bundle: Bundle = .main,
-                isOn: Binding<Bool>,
-                description: String? = nil,
-                image: MISOImage? = nil,
-                isReversed: Bool = false,
-                isError: Bool = false,
-                errorText: String? = nil,
-                isReadOnly: Bool = false,
-                hasDivider: Bool = false,
-                constrainedMaxWidth: Bool = false,
-                action: (() -> Void)? = nil)
-    {
-        self.init(key.resolved(tableName: tableName, bundle: bundle),
-                  isOn: isOn,
-                  description: description,
-                  image: image,
-                  isReversed: isReversed,
-                  isError: isError,
-                  errorText: errorText,
-                  isReadOnly: isReadOnly,
-                  hasDivider: hasDivider,
-                  constrainedMaxWidth: constrainedMaxWidth,
-                  action: action)
-    }
-
-    // swiftlint:enable function_default_parameter_at_end
-
-    // MARK: - Initializers — LocalizedStringKey + errorText: AttributedString
-
-    // swiftlint:disable function_default_parameter_at_end
-    /// Creates a checkbox with a localized label and a rich attributed error text.
-    ///
-    /// ```swift
+    ///     // The error text is an MISOTextualContent: raw, localized or rich
     ///     MISOCheckboxItem(LocalizedStringKey("agree_terms"),
     ///                      bundle: Bundle.module,
     ///                      isOn: $isOn,
-    ///                      errorText: AttributedString(markdown: "You **must** accept the ToS"))
-    ///                    // Manage in your side errors for init for AttributedString(markdown:)
+    ///                      isError: true,
+    ///                      errorText: .localized("agree_terms_error", bundle: Bundle.module))
     /// ```
     ///
     /// **The design system does not allow to have both an error situation and a read only mode for the component.**
@@ -375,16 +256,21 @@ public struct MISOCheckboxItem: View {
     ///   - tableName: The name of the `.strings` file, or `nil` for the default
     ///   - bundle: The bundle in which to look up the localized string. Defaults to `Bundle.main`.
     ///   - isOn: A binding to a property that determines whether the indicator is ticked (selected) or not (unselected)
-    ///   - description: An additional helper text, a description, which should not be empty, default set to `nil`
+    ///   - description: An additional helper text, a description, which should not be empty, default set to `nil`. Will be replaced by `errorText` in case of error.
     ///   - image: An optional ``MISOImage`` encapsulating the asset, its flip flag and its rendering mode. Default set to `nil`.
     ///   If defined, its accessibility label will be ignored.
     ///   - isReversed: `true` if the checkbox indicator must be in trailing position, `false` otherwise. Default to `false`
     ///   - isError: `true` if the look and feel of the component must reflect an error state, default set to `false`
-    ///   - errorText: An error message to display at the bottom as rich `AttributedString`. This message is ignored if `isError` is `false`.
-    ///   - isReadOnly: True if component is in read only, default set to `false`
+    ///   - errorText: An optional error message to display at the bottom, raw, localized or rich text. This message is ignored if `isError` is `false`.
+    ///   The `errorText` can be different if checkbox is selected or not.
+    ///   - isReadOnly: True if component is in read only, i.e. not really disabled but user cannot interact with it yet, default set to `false`
     ///   - hasDivider: If `true` a divider is added at the bottom of the view, by default set to `false`
     ///   - constrainedMaxWidth: When `true`, the item width is constrained to a maximum value defined by the design system.
+    ///     When `false`, no specific width constraint is applied, allowing the component to size itself or follow external
+    ///     modifier. Defaults to `false`.
     ///   - action: An additional action to trigger when the checkbox has been pressed
+    ///
+    /// - Since: 3.2.0
     public init(_ key: LocalizedStringKey,
                 tableName: String? = nil,
                 bundle: Bundle = .main,
@@ -393,7 +279,7 @@ public struct MISOCheckboxItem: View {
                 image: MISOImage? = nil,
                 isReversed: Bool = false,
                 isError: Bool = false,
-                errorText: AttributedString,
+                errorText: MISOTextualContent? = nil,
                 isReadOnly: Bool = false,
                 hasDivider: Bool = false,
                 constrainedMaxWidth: Bool = false,

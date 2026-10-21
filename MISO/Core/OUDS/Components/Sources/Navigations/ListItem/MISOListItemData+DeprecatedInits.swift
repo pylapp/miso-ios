@@ -47,7 +47,8 @@ extension MISOListItemData { // TODO: v4 - Remove these old inits
     ///   - bottomSlot: An optional custom view displayed under the main content and before the helper text. Defaults to `nil`.
     ///
     /// - Since: 3.0.0
-    @available(*, deprecated, message: "Use init(itemLabel:Label, ...) with MISOTextualContent parameters. See MIGRATION.md v3.2.0.")
+    @available(*, deprecated, message: "Use init(label: Label, ...) with MISOTextualContent parameters. See MIGRATION.md v1.2.0.")
+    @_disfavoredOverload
     public init(
         label: String,
         hasBoldLabel: Bool = false,
@@ -59,7 +60,7 @@ extension MISOListItemData { // TODO: v4 - Remove these old inits
         bottomSlot: Slot? = nil)
     {
         self.init(
-            itemLabel: .textual(.raw(label), isBold: hasBoldLabel),
+            label: .textual(.raw(label), isBold: hasBoldLabel),
             description: description.map { .raw($0) },
             overline: overline.map { .raw($0) },
             extraLabel: extraLabel.map { .raw($0) },
@@ -83,7 +84,8 @@ extension MISOListItemData { // TODO: v4 - Remove these old inits
     ///   - bottomSlot: An optional custom view displayed under the main content and before the helper text. Defaults to `nil`.
     ///
     /// - Since: 3.0.0
-    @available(*, deprecated, message: "Use init(itemLabel:Label, ...) with MISOTextualContent parameters. See MIGRATION.md v3.2.0.")
+    @available(*, deprecated, message: "Use init(label: Label, ...) with MISOTextualContent parameters. See MIGRATION.md v1.2.0.")
+    @_disfavoredOverload
     public init(
         label: String,
         overline: AttributedString,
@@ -95,7 +97,7 @@ extension MISOListItemData { // TODO: v4 - Remove these old inits
         bottomSlot: Slot? = nil)
     {
         self.init(
-            itemLabel: .textual(.raw(label), isBold: hasBoldLabel),
+            label: .textual(.raw(label), isBold: hasBoldLabel),
             description: description.map { .raw($0) },
             overline: .rich(overline),
             extraLabel: extraLabel.map { .raw($0) },
@@ -128,7 +130,8 @@ extension MISOListItemData { // TODO: v4 - Remove these old inits
     ///   - bottomSlot: An optional custom view displayed under the main content and before the helper text. Defaults to `nil`.
     ///
     /// - Since: 3.0.0
-    @available(*, deprecated, message: "Use init(viewLabel:some View, accessibilityLabel:, ...) with MISOTextualContent parameters. See MIGRATION.md v3.2.0.")
+    @available(*, deprecated, message: "Use init(label: some View, accessibilityLabel:, ...) with MISOTextualContent parameters. See MIGRATION.md v1.2.0.")
+    @_disfavoredOverload
     public init(
         label: some View,
         accessibilityLabel: String,
@@ -140,7 +143,7 @@ extension MISOListItemData { // TODO: v4 - Remove these old inits
         bottomSlot: Slot? = nil)
     {
         self.init(
-            itemLabel: .custom(AnyView(label), accessibilityLabel: accessibilityLabel),
+            label: .custom(AnyView(label), accessibilityLabel: accessibilityLabel),
             description: description.map { .raw($0) },
             overline: overline.map { .raw($0) },
             extraLabel: extraLabel.map { .raw($0) },
@@ -164,7 +167,8 @@ extension MISOListItemData { // TODO: v4 - Remove these old inits
     ///   - bottomSlot: An optional custom view displayed under the main content and before the helper text. Defaults to `nil`.
     ///
     /// - Since: 3.0.0
-    @available(*, deprecated, message: "Use init(viewLabel:some View, accessibilityLabel:, ...) with MISOTextualContent parameters. See MIGRATION.md v3.2.0.")
+    @available(*, deprecated, message: "Use init(label: some View, accessibilityLabel:, ...) with MISOTextualContent parameters. See MIGRATION.md v1.2.0.")
+    @_disfavoredOverload
     public init(
         label: some View,
         accessibilityLabel: String,
@@ -176,7 +180,7 @@ extension MISOListItemData { // TODO: v4 - Remove these old inits
         bottomSlot: Slot? = nil)
     {
         self.init(
-            itemLabel: .custom(AnyView(label), accessibilityLabel: accessibilityLabel),
+            label: .custom(AnyView(label), accessibilityLabel: accessibilityLabel),
             description: description.map { .raw($0) },
             overline: .rich(overline),
             extraLabel: extraLabel.map { .raw($0) },
@@ -204,7 +208,8 @@ extension MISOListItemData { // TODO: v4 - Remove these old inits
     ///   - bottomSlot: An optional custom view displayed under the main content and before the helper text. Defaults to `nil`.
     ///
     /// - Since: 3.0.0
-    @available(*, deprecated, message: "Use init(itemLabel:Label, ...) with MISOTextualContent parameters. See MIGRATION.md v3.2.0.")
+    @available(*, deprecated, message: "Use init(label: Label, ...) with MISOTextualContent parameters. See MIGRATION.md v1.2.0.")
+    @_disfavoredOverload
     public init(
         key: LocalizedStringKey,
         tableName: String? = nil,
@@ -218,7 +223,7 @@ extension MISOListItemData { // TODO: v4 - Remove these old inits
         bottomSlot: Slot? = nil)
     {
         self.init(
-            itemLabel: .textual(.localized(key, tableName: tableName, bundle: bundle), isBold: hasBoldLabel),
+            label: .textual(.localized(key, tableName: tableName, bundle: bundle), isBold: hasBoldLabel),
             description: description.map { .raw($0) },
             overline: overline.map { .raw($0) },
             extraLabel: extraLabel.map { .raw($0) },
@@ -244,7 +249,8 @@ extension MISOListItemData { // TODO: v4 - Remove these old inits
     ///   - bottomSlot: An optional custom view displayed under the main content and before the helper text. Defaults to `nil`.
     ///
     /// - Since: 3.0.0
-    @available(*, deprecated, message: "Use init(itemLabel:Label, ...) with MISOTextualContent parameters. See MIGRATION.md v3.2.0.")
+    @available(*, deprecated, message: "Use init(label: Label, ...) with MISOTextualContent parameters. See MIGRATION.md v1.2.0.")
+    @_disfavoredOverload
     public init(
         key: LocalizedStringKey,
         overline: AttributedString,
@@ -258,7 +264,7 @@ extension MISOListItemData { // TODO: v4 - Remove these old inits
         bottomSlot: Slot? = nil)
     {
         self.init(
-            itemLabel: .textual(.localized(key, tableName: tableName, bundle: bundle), isBold: hasBoldLabel),
+            label: .textual(.localized(key, tableName: tableName, bundle: bundle), isBold: hasBoldLabel),
             description: description.map { .raw($0) },
             overline: .rich(overline),
             extraLabel: extraLabel.map { .raw($0) },

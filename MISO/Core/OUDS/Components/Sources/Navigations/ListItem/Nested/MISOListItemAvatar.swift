@@ -69,7 +69,7 @@ import SwiftUI
 ///
 ///     // Usage as trailing element in a list item
 ///     MISOStaticListItem(
-///         data: MISOListItemData(label: "Contact"),
+///         data: MISOListItemData(label: .textual("Contact")),
 ///         trailing: .avatar(MISOListItemAvatar(type: .initials("AB"), size: .medium))
 ///     )
 /// ```

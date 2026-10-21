@@ -13,7 +13,7 @@ struct MISOListItemDataTests {
 
     // MARK: - overline (String)
 
-    @Test func `overline only exposes a raw overlineContent`() {
+    @Test func `overline as String resolves to a raw overlineContent`() {
         let data = MISOListItemData(label: "Label", overline: "Overline")
 
         guard case let .raw(text) = data.overlineContent else {
@@ -23,9 +23,9 @@ struct MISOListItemDataTests {
         #expect(text == "Overline")
     }
 
-    @Test func `overline as a string literal resolves to the String overload, not the AttributedString one`() {
-        // Ensures no ambiguity at the call site between the two `overline` overloads,
-        // since `AttributedString` also conforms to `ExpressibleByStringLiteral`.
+    @Test func `overline as a string literal resolves to a raw overlineContent, not an attributed one`() {
+        // Ensures no ambiguity at the call site: string literals convert to `.raw` through
+        // `ExpressibleByStringLiteral`, never to `.rich`.
         let data = MISOListItemData(label: "Label", overline: "Overline")
 
         guard case .raw = data.overlineContent else {
@@ -38,7 +38,7 @@ struct MISOListItemDataTests {
 
     @Test func `overline as AttributedString resolves to an attributed overlineContent`() {
         let attributed = AttributedString.from(text: "Overline", foregroundColor: Color.red, font: .body)
-        let data = MISOListItemData(label: "Label", overline: attributed)
+        let data = MISOListItemData(label: "Label", overline: .rich(attributed))
 
         guard case let .rich(text) = data.overlineContent else {
             Issue.record("Expected .rich overlineContent")
@@ -49,7 +49,7 @@ struct MISOListItemDataTests {
 
     @Test func `overline as AttributedString with custom view label resolves to an attributed overlineContent`() {
         let attributed = AttributedString.from(text: "Overline", foregroundColor: Color.red, font: .body)
-        let data = MISOListItemData(label: Text("Label"), accessibilityLabel: "Label", overline: attributed)
+        let data = MISOListItemData(label: Text("Label"), accessibilityLabel: "Label", overline: .rich(attributed))
 
         guard case let .rich(text) = data.overlineContent else {
             Issue.record("Expected .rich overlineContent")
@@ -60,7 +60,7 @@ struct MISOListItemDataTests {
 
     @Test func `overline as AttributedString with localized key label resolves to an attributed overlineContent`() {
         let attributed = AttributedString.from(text: "Overline", foregroundColor: Color.red, font: .body)
-        let data = MISOListItemData(key: "Label", overline: attributed)
+        let data = MISOListItemData(label: .textual(.localized("Label")), overline: .rich(attributed))
 
         guard case let .rich(text) = data.overlineContent else {
             Issue.record("Expected .rich overlineContent")
@@ -72,7 +72,7 @@ struct MISOListItemDataTests {
     // MARK: - Neither overline nor attributedOverline
 
     @Test func `no overline exposes a nil overlineContent`() {
-        let data = MISOListItemData(label: "Label")
+        let data = MISOListItemData(label: .textual(.raw("Label")))
 
         #expect(data.overlineContent == nil)
     }
@@ -80,7 +80,7 @@ struct MISOListItemDataTests {
     // MARK: - description, extraLabel, helperText as MISOTextualContent
 
     @Test func `description accepts a raw String through MISOTextualContent`() {
-        let data = MISOListItemData(itemLabel: .textual(.raw("Label")), description: "Hello")
+        let data = MISOListItemData(label: .textual(.raw("Label")), description: "Hello")
 
         guard case let .raw(text) = data.descriptionContent else {
             Issue.record("Expected .raw descriptionContent")
@@ -91,7 +91,7 @@ struct MISOListItemDataTests {
 
     @Test func `description accepts an AttributedString through MISOTextualContent`() {
         let attributed = AttributedString.from(text: "Hello", foregroundColor: Color.red, font: .body)
-        let data = MISOListItemData(itemLabel: "Label", description: .rich(attributed))
+        let data = MISOListItemData(label: "Label", description: .rich(attributed))
 
         guard case let .rich(text) = data.descriptionContent else {
             Issue.record("Expected .rich descriptionContent")
@@ -102,7 +102,7 @@ struct MISOListItemDataTests {
 
     @Test func `extraLabel accepts an AttributedString through MISOTextualContent`() {
         let attributed = AttributedString.from(text: "Extra", foregroundColor: Color.red, font: .body)
-        let data = MISOListItemData(itemLabel: "Label", extraLabel: .rich(attributed))
+        let data = MISOListItemData(label: "Label", extraLabel: .rich(attributed))
 
         guard case let .rich(text) = data.extraLabelContent else {
             Issue.record("Expected .rich extraLabelContent")
@@ -113,7 +113,7 @@ struct MISOListItemDataTests {
 
     @Test func `helperText accepts an AttributedString through MISOTextualContent`() {
         let attributed = AttributedString.from(text: "Helper", foregroundColor: Color.red, font: .body)
-        let data = MISOListItemData(itemLabel: .textual(.raw("Label")), helperText: .rich(attributed))
+        let data = MISOListItemData(label: .textual(.raw("Label")), helperText: .rich(attributed))
 
         guard case let .rich(text) = data.helperTextContent else {
             Issue.record("Expected .rich helperTextContent")
@@ -126,7 +126,7 @@ struct MISOListItemDataTests {
 
     @Test func `label as rich AttributedString stores a rich labelContent`() {
         let attributed = AttributedString.from(text: "Rich label", foregroundColor: Color.red, font: .body)
-        let data = MISOListItemData(itemLabel: .textual(.rich(attributed)))
+        let data = MISOListItemData(label: .textual(.rich(attributed)))
 
         guard case let .textual(content, _) = data.labelContent,
               case let .rich(text) = content
