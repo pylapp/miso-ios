@@ -184,7 +184,7 @@ public struct MISOCheckboxItemIndeterminate: View {
         _selection = selection
         self.action = action
 
-        let errorTextContent: TextualContent? = if let errorText {
+        let errorTextContent: MISOTextualContent? = if let errorText {
             .raw(errorText)
         } else {
             nil

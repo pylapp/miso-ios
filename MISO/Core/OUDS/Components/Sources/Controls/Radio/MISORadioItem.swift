@@ -211,7 +211,7 @@ public struct MISORadioItem: View {
 
         _isOn = isOn
 
-        let errorTextContent: TextualContent? = if let errorText {
+        let errorTextContent: MISOTextualContent? = if let errorText {
             .raw(errorText)
         } else {
             nil
@@ -314,7 +314,7 @@ public struct MISORadioItem: View {
             icon: image,
             isOutlined: isOutlined,
             isError: isError,
-            errorText: .attributed(errorText),
+            errorText: .rich(errorText),
             isReadOnly: isReadOnly,
             hasDivider: hasDivider,
             constrainedMaxWidth: constrainedMaxWidth,

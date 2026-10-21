@@ -190,7 +190,7 @@ public struct MISOTextInput: View {
     let suffix: String?
     let leadingIcon: MISOImage?
     let trailingAction: TrailingAction?
-    let helperText: TextualContent?
+    let helperText: MISOTextualContent?
     let helperLink: Helperlink?
     let status: Self.Status
     let isOutlined: Bool
@@ -410,7 +410,7 @@ public struct MISOTextInput: View {
     {
         self.label = label
         self.text = text
-        self.helperText = .attributed(helperText)
+        self.helperText = .rich(helperText)
         self.placeholder = placeholder
         self.prefix = prefix
         self.suffix = suffix

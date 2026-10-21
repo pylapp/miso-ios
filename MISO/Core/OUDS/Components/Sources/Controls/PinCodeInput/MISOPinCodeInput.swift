@@ -127,7 +127,7 @@ public struct MISOPinCodeInput: View {
     @Binding private var value: String
     private let length: Length
     private let hiddenCharacters: Bool
-    private let helperText: TextualContent?
+    private let helperText: MISOTextualContent?
     private let isOutlined: Bool
     private let status: Self.Status
     private let autofocus: Bool
@@ -231,7 +231,7 @@ public struct MISOPinCodeInput: View {
         _value = value
         self.length = length
         self.hiddenCharacters = hiddenCharacters
-        self.helperText = .attributed(helperText)
+        self.helperText = .rich(helperText)
         self.isOutlined = isOutlined
         self.status = status
         self.autofocus = autofocus

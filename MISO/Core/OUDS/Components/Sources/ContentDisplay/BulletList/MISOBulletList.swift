@@ -144,7 +144,7 @@ public struct MISOBulletList: View {
 
         // MARK: Properties
 
-        let text: TextualContent
+        let text: MISOTextualContent
         let subListType: MISOBulletList.`Type`?
         let subListTextStyle: MISOBulletList.TextStyle?
         let subListHasBoldText: Bool?
@@ -208,7 +208,7 @@ public struct MISOBulletList: View {
                     subListHasBoldText: Bool? = nil,
                     @MISOBulletListItemBuilder subItems: () -> [MISOBulletList.Item] = { [] })
         {
-            text = .attributed(richText)
+            text = .rich(richText)
             self.subListType = subListType
             self.subListTextStyle = subListTextStyle
             self.subListHasBoldText = subListHasBoldText

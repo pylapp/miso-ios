@@ -91,7 +91,7 @@ public struct MISOPasswordInput: View {
     let placeholder: String?
     let prefix: String?
     let lockIcon: Bool
-    let helperText: TextualContent?
+    let helperText: MISOTextualContent?
     let status: MISOTextInput.Status
     let isOutlined: Bool
     let constrainedMaxWidth: Bool
@@ -196,7 +196,7 @@ public struct MISOPasswordInput: View {
     {
         self.label = label
         self.password = password
-        self.helperText = .attributed(helperText)
+        self.helperText = .rich(helperText)
         self.placeholder = placeholder
         self.prefix = prefix
         self.lockIcon = lockIcon
@@ -315,7 +315,7 @@ public struct MISOPasswordInput: View {
                               isOutlined: isOutlined,
                               constrainedMaxWidth: constrainedMaxWidth,
                               status: status)
-            case let .attributed(richHelperText):
+            case let .rich(richHelperText):
                 MISOTextInput(label: label,
                               text: password,
                               placeholder: placeholder,

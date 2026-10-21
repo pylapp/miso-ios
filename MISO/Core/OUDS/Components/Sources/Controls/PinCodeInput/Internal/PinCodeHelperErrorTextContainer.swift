@@ -8,7 +8,7 @@ import SwiftUI
 
 struct PinCodeHelperErrorTextContainer: View {
 
-    let helperText: TextualContent?
+    let helperText: MISOTextualContent?
     let status: MISOPinCodeInput.Status
 
     @Environment(\.theme) private var theme

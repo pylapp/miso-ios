@@ -11,7 +11,7 @@ struct ListItemHelperTextContainer: View {
 
     // MARK: Properties
 
-    let text: TextualContent?
+    let text: MISOTextualContent?
     let interactionState: MISOButtonInteractionState
 
     @Environment(\.theme) private var theme

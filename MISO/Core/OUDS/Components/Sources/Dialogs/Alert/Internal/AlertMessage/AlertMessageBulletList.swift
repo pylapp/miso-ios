@@ -9,9 +9,8 @@ struct AlertMessageBulletListItem: View {
 
     // MARK: - Properties
 
-    let text: TextualContent
+    let text: MISOTextualContent
     let status: MISOAlertStatus
-
     @Environment(\.theme) private var theme
     @Environment(\.verticalSizeClass) private var verticalSizeClass
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass

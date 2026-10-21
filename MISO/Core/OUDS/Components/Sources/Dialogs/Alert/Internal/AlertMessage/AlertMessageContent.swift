@@ -11,8 +11,8 @@ struct AlertMessageContent: View {
 
     let text: String
     let status: MISOAlertStatus
-    let description: TextualContent?
-    let bulletList: [TextualContent]
+    let description: MISOTextualContent?
+    let bulletList: [MISOTextualContent]
     let link: MISOAlertMessage.Link?
     let onClose: (() -> Void)?
 

@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `list item` components inits with `MISOTextualContent` parameters for raw and attributed strings (Orange-OpenSource/ouds-ios#1812)
 - Flag to display full value instead of bullets in `PIN code input` component (Orange-OpenSource/ouds-ios#1762)
 - `Tuning` parameter for for Xcode previews
 - Tool to detect public API breakings (Orange-OpenSource/ouds-ios#1800)
@@ -24,6 +25,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Make product exportable and usable as XCFramework (Orange-OpenSource/ouds-ios#1767)
 - In `circular progress indicator`, set helper text in two texts to fix alignment (Orange-OpenSource/ouds-ios#1753)
 - `list item` component to version v1.2.0 (Orange-OpenSource/ouds-ios#1714)
+
+### Deprecated
+
+- All six `String` / `AttributedString` initializers of `MISOListItemData`; use the new unified initializers taking `MISOListItemData.Label` + `MISOTextualContent`
+- `MISOListItemData.Label.text(_:isBold:)`; use `.textual(_:isBold:)` or a string literal instead
 
 ### Fixed
 

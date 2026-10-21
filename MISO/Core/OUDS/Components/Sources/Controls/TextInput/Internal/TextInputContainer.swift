@@ -18,7 +18,7 @@ struct TextInputContainer: View {
     let trailingAction: MISOTextInput.TrailingAction?
     let isOutlined: Bool
     let status: MISOTextInput.Status
-    let accessibilityHint: TextualContent?
+    let accessibilityHint: MISOTextualContent?
     @State var hover: Bool = false
 
     @FocusState private var focused: Bool

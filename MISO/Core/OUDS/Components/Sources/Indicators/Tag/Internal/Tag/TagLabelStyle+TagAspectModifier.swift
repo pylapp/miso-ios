@@ -10,11 +10,10 @@ struct TagAspectModifier: ViewModifier {
 
     let appearance: MISOTag.Appearance
     let shape: MISOTag.Shape
-    let size: MISOTag.Size
     let type: MISOTag.`Type`
 
-    @Environment(\.skeletonState) private var skeletonState
     @Environment(\.theme) private var theme
+    @Environment(\.skeletonState) private var skeletonState
 
     func body(content: Content) -> some View {
         if skeletonState == nil {

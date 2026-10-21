@@ -151,11 +151,19 @@ MISOToolBarItem { Menu("More") { Button("Option 1") {} } }
 | Type | Purpose |
 |------|---------|
 | `MISOListItemData` | Textual data: label, description, overline, extraLabel, helperText, textSlot, bottomSlot |
+| `MISOListItemData.Label` | Label content: `.textual(MISOTextualContent, isBold:)`, `.custom(AnyView, accessibilityLabel:)` (`.text` is deprecated); string-literal convertible |
+| `MISOTextualContent` | Shared text payload for `description` / `overline` / `extraLabel` / `helperText`: `.raw(String)`, `.localized(LocalizedStringKey, tableName:, bundle:)` or `.rich(AttributedString)`; string-literal convertible |
+
 | `MISOListItemLeading` | Leading element: icon, image, flag, avatar, custom view |
 | `MISOListItemTrailing` | Trailing element: text, badge, tag, icon, image, flag, avatar, custom view |
 
 > `.custom { ... }` accepts any `@ViewBuilder` content (e.g. `MISOCircularProgressIndicator`, custom control). Unlike `.flag`/`.avatar`,
 > it is **not** auto-hidden from accessibility — the custom view must carry its own accessibility label/value.
+
+> **Rich text**: every textual field (label, description, overline, extraLabel, helperText) accepts
+> a raw `String`, a localized string or a styled `AttributedString`. Pass string literals directly
+> (`itemLabel: "Label"`, `description: "Desc"`), or use `.textual(.rich(...))` for the label and
+> `.rich(...)` / `.localized(...)` for the other fields. Never use the deprecated `Label.text`.
 
 **Shared view modifiers:**
 

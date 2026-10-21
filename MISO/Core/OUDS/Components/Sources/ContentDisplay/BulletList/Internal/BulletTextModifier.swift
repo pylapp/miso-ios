@@ -11,7 +11,7 @@ struct BulletListLabel: View {
 
     // MARK: Properties
 
-    let label: TextualContent
+    let label: MISOTextualContent
     let textStyle: MISOBulletList.TextStyle
     let isBold: Bool
 

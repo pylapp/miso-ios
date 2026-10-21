@@ -8,8 +8,9 @@ import SwiftUI
 /// ``MISOStaticListItem`` or ``MISONavigationListItem``.
 ///
 /// ``MISOListItemData`` groups all the text-based information that a list item can display:
-/// a mandatory label (either a `String` or a custom `View`), and optional description, overline,
-/// extra label, and helper text, and slots.
+/// a mandatory label (an ``MISOTextualContent`` or a custom `View`) and optional
+/// description, overline, extra label and helper text. Every textual field accepts a raw `String`,
+/// a localized string or an `AttributedString` through ``MISOTextualContent``, plus optional slots.
 ///
 /// ## Code samples
 ///
@@ -88,7 +89,7 @@ import SwiftUI
 /// ## Custom view label
 ///
 /// When providing a custom view as label:
-/// - The `hasBoldLabel` property is not applicable; all styling is controlled by the provided view.
+/// - Bold styling is not applicable; all styling is controlled by the provided view.
 /// - You must provide an `accessibilityLabel` parameter so that Voice Over can vocalize the label.
 ///   This `accessibilityLabel` is used in the combined accessibility label of the list item text container.
 /// - You must also check the accessibility of your custom views (navigation with switch control and full keyboard access, dynamic types, contrast ratios)
@@ -139,32 +140,51 @@ public struct MISOListItemData {
 
     /// Represents the content of a label within a list item.
     ///
-    /// The label can be either a plain text string or a custom SwiftUI view.
+    /// The label can be either a textual content (raw string, localized string or user-styled
+    /// `AttributedString`) or an arbitrary SwiftUI view.
     ///
     /// ## Cases
     ///
-    /// - **`.text(String, isBold: Bool)`**: A plain text string used as the label.
+    /// - **`.textual(MISOTextualContent, isBold: Bool)`**: A raw, localized or rich text used as the label.
     ///   The `isBold` parameter controls whether the text is rendered with a bold font weight.
+    ///   For `.rich`, the styling (font, color, markdown…) is entirely controlled by the caller.
+    /// - **`.text(String, isBold: Bool)`**: Deprecated since 3.2.0, use `.textual` instead.
     /// - **`.custom(AnyView, accessibilityLabel: String)`**: A custom SwiftUI view used as the label,
     ///   together with an accessibility label used for Voice Over vocalization.
     ///   When using a custom view, the bold styling is not applicable since it is entirely
     ///   controlled by the provided view.
     ///
+    /// ## String literal convenience
+    ///
+    /// `Label` conforms to `ExpressibleByStringLiteral`, so a plain string literal is implicitly
+    /// converted to `.textual(.raw(literal), isBold: false)` wherever a `Label` is expected.
+    ///
+    /// ```swift
+    ///     let data = MISOListItemData(itemLabel: "Hello") // same as .textual(.raw("Hello"), isBold: false)
+    /// ```
+    ///
     /// ## Accessibility
     ///
     /// When using `.custom`, the ``stringValue`` property returns the provided `accessibilityLabel`.
+    /// For `.textual`, it returns the plain-string projection of the content.
     /// This value is used by the text container to build the combined accessibility label
     /// for the list item text parts, ensuring Voice Over can vocalize the label even when it is
     /// an arbitrary view.
     ///
     /// - Since: OUDS 3.0.0
-    public enum Label {
+    @frozen public enum Label: ExpressibleByStringLiteral {
         /// A plain text string label.
         ///
         /// - Parameters:
         ///   - text: The text string to display as the label.
         ///   - isBold: When `true`, the label is rendered with a bold font weight.
+        @available(*, deprecated, message: "Use case .textual(_:MISOTextualContent) instead. See MIGRATION.md v3.2.0.")
         case text(_: String, isBold: Bool = false)
+
+        /// A text, which can be defined from a raw string, a localized string or attributed string
+        ///
+        /// - Since: 3.2.0
+        case textual(_: MISOTextualContent, isBold: Bool = false) // TODO: v4 - When .case text removed, rename from "textual" to "text"
 
         /// A custom SwiftUI view used as the label, with an accessibility label for Voice Over.
         ///
@@ -173,13 +193,21 @@ public struct MISOListItemData {
         ///   - accessibilityLabel: A text used for Voice Over vocalization of the label.
         case custom(_ view: AnyView, accessibilityLabel: String)
 
+        /// Creates a ``textual(_:isBold:)`` label from a string literal (`isBold: false`).
+        public init(stringLiteral value: String) {
+            self = .textual(.raw(value), isBold: false)
+        }
+
         /// Returns the string value for accessibility purposes.
-        /// For `.text`, returns the text itself.
+        /// For `.text` (deprecated), returns the text itself.
+        /// For `.textual`, returns the plain-string projection.
         /// For `.custom`, returns the provided `accessibilityLabel`.
         public var stringValue: String {
             switch self {
             case let .text(string, _):
                 string
+            case let .textual(content, _):
+                content.rawValue
             case let .custom(_, accessibilityLabel):
                 accessibilityLabel
             }
@@ -188,20 +216,13 @@ public struct MISOListItemData {
 
     // MARK: - Properties
 
-    /// The primary content of the list item. Can be a plain text or a custom view.
+    /// The primary content of the list item. Can be a plain text, a styled rich text or a custom view.
     /// See ``MISOListItemData/Label`` for available options.
     let labelContent: Label
 
     /// An optional secondary text displayed below the label.
-    let description: String?
-
-    /// An optional small text displayed above the label, often used for categories or metadata.
-    /// **Ignored when the list item size is `.small`.**
-    ///
-    /// Set when the `overline: String?` initializer parameter is used. Mutually exclusive with
-    /// ``attributedOverline``: use the dedicated initializers taking an `overline: AttributedString`
-    /// parameter to provide a styled overline instead (same parameter name, disambiguated by type).
-    let overline: String?
+    /// Accepts either a plain `String` or a styled `AttributedString` through ``MISOTextualContent``.
+    let descriptionContent: MISOTextualContent?
 
     /// An optional small text displayed above the label, as a user-styled `AttributedString`
     /// (font, color, etc. fully controlled by the caller).
@@ -217,14 +238,16 @@ public struct MISOListItemData {
     ///         overline: .from(text: "Overline", foregroundColor: someColor, font: someFont)
     ///     )
     /// ```
-    let attributedOverline: AttributedString?
+    let overlineContent: MISOTextualContent?
 
     /// An optional additional text displayed below the description.
+    /// Accepts either a plain `String` or a styled `AttributedString` through ``MISOTextualContent``.
     /// **Ignored when the list item size is `.small`.**
-    let extraLabel: String?
+    let extraLabelContent: MISOTextualContent?
 
     /// An optional supporting text displayed below the list item row, outside the main content area.
-    let helperText: String?
+    /// Accepts either a plain `String` or a styled `AttributedString` through ``MISOTextualContent``.
+    let helperTextContent: MISOTextualContent?
 
     /// An optional custom view displayed under the texts (overline, label, extra label, description)
     /// but before the helper text.
@@ -240,13 +263,17 @@ public struct MISOListItemData {
     /// **Note:** Not displayed in small size (via ``SwiftUICore/View/misoListItemSize(_:)``).
     let bottomSlot: Slot?
 
-    // MARK: - Initializers
+    // MARK: - Initializers (unified, v3.2)
 
-    /// Creates a new list item data model with a text label.
+    /// Creates a new list item data model with a label and optional textual fields.
+    ///
+    /// Every optional textual field (`description`, `overline`, `extraLabel`, `helperText`) accepts
+    /// either a plain `String` or a styled `AttributedString` through ``MISOTextualContent``. A plain
+    /// string literal is automatically converted to ``MISOTextualContent/raw(_:)`` thanks to
+    /// `ExpressibleByStringLiteral`.
     ///
     /// - Parameters:
-    ///   - label: The primary text of the list item.
-    ///   - hasBoldLabel: When `true`, the label is rendered in bold. Defaults to `false`.
+    ///   - itemLabel: The primary content of the list item (plain text, rich text or custom view).
     ///   - description: An optional secondary text displayed below the label. Defaults to `nil`.
     ///   - overline: An optional text displayed above the label. Defaults to `nil`.
     ///     **Ignored when the list item size is `.small`.**
@@ -255,82 +282,33 @@ public struct MISOListItemData {
     ///   - helperText: An optional supporting text displayed below the list item row. Defaults to `nil`.
     ///   - textSlot: An optional custom view displayed under the texts but before the helper text. Defaults to `nil`.
     ///   - bottomSlot: An optional custom view displayed under the main content and before the helper text. Defaults to `nil`.
+    ///
+    /// - Since: 3.2.0
     public init(
-        label: String,
-        hasBoldLabel: Bool = false,
-        description: String? = nil,
-        overline: String? = nil,
-        extraLabel: String? = nil,
-        helperText: String? = nil,
+        itemLabel: Label, // TODO: v4 - When older inits will be removed, renamed parameter to "label" instead of "itemLabel"
+        description: MISOTextualContent? = nil,
+        overline: MISOTextualContent? = nil,
+        extraLabel: MISOTextualContent? = nil,
+        helperText: MISOTextualContent? = nil,
         textSlot: Slot? = nil,
         bottomSlot: Slot? = nil)
     {
-        labelContent = .text(label, isBold: hasBoldLabel)
-        self.description = description
-        self.overline = overline
-        attributedOverline = nil
-        self.extraLabel = extraLabel
-        self.helperText = helperText
+        labelContent = itemLabel
+        descriptionContent = description
+        overlineContent = overline
+        extraLabelContent = extraLabel
+        helperTextContent = helperText
         self.textSlot = textSlot
         self.bottomSlot = bottomSlot
     }
 
-    /// Creates a new list item data model with a text label and a styled `AttributedString` overline.
+    /// Creates a new list item data model with a custom SwiftUI view as label and optional textual fields.
+    ///
+    /// Every optional textual field (`description`, `overline`, `extraLabel`, `helperText`) accepts
+    /// either a plain `String` or a styled `AttributedString` through ``MISOTextualContent``.
     ///
     /// - Parameters:
-    ///   - label: The primary text of the list item.
-    ///   - overline: A user-styled text displayed above the label.
-    ///     **Ignored when the list item size is `.small`.**
-    ///   - hasBoldLabel: When `true`, the label is rendered in bold. Defaults to `false`.
-    ///   - description: An optional secondary text displayed below the label. Defaults to `nil`.
-    ///   - extraLabel: An optional additional text displayed below the description. Defaults to `nil`.
-    ///     **Ignored when the list item size is `.small`.**
-    ///   - helperText: An optional supporting text displayed below the list item row. Defaults to `nil`.
-    ///   - textSlot: An optional custom view displayed under the texts but before the helper text. Defaults to `nil`.
-    ///   - bottomSlot: An optional custom view displayed under the main content and before the helper text. Defaults to `nil`.
-    public init(
-        label: String,
-        overline: AttributedString,
-        hasBoldLabel: Bool = false,
-        description: String? = nil,
-        extraLabel: String? = nil,
-        helperText: String? = nil,
-        textSlot: Slot? = nil,
-        bottomSlot: Slot? = nil)
-    {
-        labelContent = .text(label, isBold: hasBoldLabel)
-        self.description = description
-        self.overline = nil
-        attributedOverline = overline
-        self.extraLabel = extraLabel
-        self.helperText = helperText
-        self.textSlot = textSlot
-        self.bottomSlot = bottomSlot
-    }
-
-    /// Creates a new list item data model with a custom view as label.
-    ///
-    /// When using a custom view label, the bold styling is not applicable since
-    /// the styling is entirely controlled by the provided view.
-    ///
-    /// The `accessibilityLabel` parameter is **required** and used by Voice Over to vocalize
-    /// the label. It is included in the combined accessibility label built by the text container,
-    /// alongside the overline, extra label, and description.
-    ///
-    /// ```swift
-    ///     let data = MISOListItemData(
-    ///         label: HStack {
-    ///             Image(systemName: "star.fill")
-    ///             Text("Favorite")
-    ///         },
-    ///         accessibilityLabel: "Favorite",
-    ///         description: "A custom label example"
-    ///     )
-    ///     MISOStaticListItem(data: data)
-    /// ```
-    ///
-    /// - Parameters:
-    ///   - label: A custom SwiftUI view to use as the primary label of the list item.
+    ///   - viewLabel: A custom SwiftUI view to use as the primary label of the list item.
     ///   - accessibilityLabel: A text used for Voice Over vocalization of the custom label.
     ///     This value is used to build the combined accessibility label of the list item text container.
     ///   - description: An optional secondary text displayed below the label. Defaults to `nil`.
@@ -341,148 +319,25 @@ public struct MISOListItemData {
     ///   - helperText: An optional supporting text displayed below the list item row. Defaults to `nil`.
     ///   - textSlot: An optional custom view displayed under the texts but before the helper text. Defaults to `nil`.
     ///   - bottomSlot: An optional custom view displayed under the main content and before the helper text. Defaults to `nil`.
-    public init(
-        label: some View,
-        accessibilityLabel: String,
-        description: String? = nil,
-        overline: String? = nil,
-        extraLabel: String? = nil,
-        helperText: String? = nil,
-        textSlot: Slot? = nil,
-        bottomSlot: Slot? = nil)
-    {
-        labelContent = .custom(AnyView(label), accessibilityLabel: accessibilityLabel)
-        self.description = description
-        self.overline = overline
-        attributedOverline = nil
-        self.extraLabel = extraLabel
-        self.helperText = helperText
-        self.textSlot = textSlot
-        self.bottomSlot = bottomSlot
-    }
-
-    /// Creates a new list item data model with a custom view as label and a styled `AttributedString` overline.
     ///
-    /// - Parameters:
-    ///   - label: A custom SwiftUI view to use as the primary label of the list item.
-    ///   - accessibilityLabel: A text used for Voice Over vocalization of the custom label.
-    ///     This value is used to build the combined accessibility label of the list item text container.
-    ///   - overline: A user-styled text displayed above the label.
-    ///     **Ignored when the list item size is `.small`.**
-    ///   - description: An optional secondary text displayed below the label. Defaults to `nil`.
-    ///   - extraLabel: An optional additional text displayed below the description. Defaults to `nil`.
-    ///     **Ignored when the list item size is `.small`.**
-    ///   - helperText: An optional supporting text displayed below the list item row. Defaults to `nil`.
-    ///   - textSlot: An optional custom view displayed under the texts but before the helper text. Defaults to `nil`.
-    ///   - bottomSlot: An optional custom view displayed under the main content and before the helper text. Defaults to `nil`.
+    /// - Since: 3.2.0
     public init(
-        label: some View,
+        viewLabel: some View, // TODO: v4 - When older inits will be removed, renamed parameter to "label" instead of "viewLabel"
         accessibilityLabel: String,
-        overline: AttributedString,
-        description: String? = nil,
-        extraLabel: String? = nil,
-        helperText: String? = nil,
-        textSlot: Slot? = nil,
-        bottomSlot: Slot? = nil)
-    {
-        labelContent = .custom(AnyView(label), accessibilityLabel: accessibilityLabel)
-        self.description = description
-        self.overline = nil
-        attributedOverline = overline
-        self.extraLabel = extraLabel
-        self.helperText = helperText
-        self.textSlot = textSlot
-        self.bottomSlot = bottomSlot
-    }
-
-    /// Creates a new list item data model with a localized text label.
-    ///
-    /// - Parameters:
-    ///   - key: A `LocalizedStringKey` used to look up the label in the given bundle
-    ///   - tableName: The name of the `.strings` file, or `nil` for the default
-    ///   - bundle: The bundle in which to look up the localized string. Defaults to `Bundle.main`.
-    ///   - hasBoldLabel: When `true`, the label is rendered in bold. Defaults to `false`.
-    ///   - description: An optional secondary text displayed below the label. Defaults to `nil`.
-    ///   - overline: An optional text displayed above the label. Defaults to `nil`.
-    ///     **Ignored when the list item size is `.small`.**
-    ///   - extraLabel: An optional additional text displayed below the description. Defaults to `nil`.
-    ///     **Ignored when the list item size is `.small`.**
-    ///   - helperText: An optional supporting text displayed below the list item row. Defaults to `nil`.
-    ///   - textSlot: An optional custom view displayed under the texts but before the helper text. Defaults to `nil`.
-    ///   - bottomSlot: An optional custom view displayed under the main content and before the helper text. Defaults to `nil`.
-    public init(
-        key: LocalizedStringKey,
-        tableName: String? = nil,
-        bundle: Bundle = .main,
-        hasBoldLabel: Bool = false,
-        description: String? = nil,
-        overline: String? = nil,
-        extraLabel: String? = nil,
-        helperText: String? = nil,
+        description: MISOTextualContent? = nil,
+        overline: MISOTextualContent? = nil,
+        extraLabel: MISOTextualContent? = nil,
+        helperText: MISOTextualContent? = nil,
         textSlot: Slot? = nil,
         bottomSlot: Slot? = nil)
     {
         self.init(
-            label: key.resolved(tableName: tableName, bundle: bundle),
-            hasBoldLabel: hasBoldLabel,
+            itemLabel: .custom(AnyView(viewLabel), accessibilityLabel: accessibilityLabel),
             description: description,
             overline: overline,
             extraLabel: extraLabel,
             helperText: helperText,
             textSlot: textSlot,
             bottomSlot: bottomSlot)
-    }
-
-    /// Creates a new list item data model with a localized text label and a styled `AttributedString` overline.
-    ///
-    /// - Parameters:
-    ///   - key: A `LocalizedStringKey` used to look up the label in the given bundle
-    ///   - overline: A user-styled text displayed above the label.
-    ///     **Ignored when the list item size is `.small`.**
-    ///   - tableName: The name of the `.strings` file, or `nil` for the default
-    ///   - bundle: The bundle in which to look up the localized string. Defaults to `Bundle.main`.
-    ///   - hasBoldLabel: When `true`, the label is rendered in bold. Defaults to `false`.
-    ///   - description: An optional secondary text displayed below the label. Defaults to `nil`.
-    ///   - extraLabel: An optional additional text displayed below the description. Defaults to `nil`.
-    ///     **Ignored when the list item size is `.small`.**
-    ///   - helperText: An optional supporting text displayed below the list item row. Defaults to `nil`.
-    ///   - textSlot: An optional custom view displayed under the texts but before the helper text. Defaults to `nil`.
-    ///   - bottomSlot: An optional custom view displayed under the main content and before the helper text. Defaults to `nil`.
-    public init(
-        key: LocalizedStringKey,
-        overline: AttributedString,
-        tableName: String? = nil,
-        bundle: Bundle = .main,
-        hasBoldLabel: Bool = false,
-        description: String? = nil,
-        extraLabel: String? = nil,
-        helperText: String? = nil,
-        textSlot: Slot? = nil,
-        bottomSlot: Slot? = nil)
-    {
-        self.init(
-            label: key.resolved(tableName: tableName, bundle: bundle),
-            overline: overline,
-            hasBoldLabel: hasBoldLabel,
-            description: description,
-            extraLabel: extraLabel,
-            helperText: helperText,
-            textSlot: textSlot,
-            bottomSlot: bottomSlot)
-    }
-
-    // MARK: - Overline Content
-
-    /// The overline resolved as a ``TextualContent``, either `.raw` (from `overline`) or
-    /// `.attributed` (from `attributedOverline`), `attributedOverline` taking precedence if both
-    /// were somehow set. Returns `nil` if none is defined.
-    var overlineContent: TextualContent? {
-        if let attributedOverline {
-            return .attributed(attributedOverline)
-        }
-        if let overline {
-            return .raw(overline)
-        }
-        return nil
     }
 }

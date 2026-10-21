@@ -181,7 +181,7 @@ public struct MISOSwitchItem: View {
 
         _isOn = isOn
 
-        let errorTextContent: TextualContent? = if let errorText {
+        let errorTextContent: MISOTextualContent? = if let errorText {
             .raw(errorText)
         } else {
             nil
@@ -268,7 +268,7 @@ public struct MISOSwitchItem: View {
             icon: image,
             isOutlined: false,
             isError: isError,
-            errorText: .attributed(errorText),
+            errorText: .rich(errorText),
             isReadOnly: isReadOnly,
             hasDivider: hasDivider,
             constrainedMaxWidth: constrainedMaxWidth,

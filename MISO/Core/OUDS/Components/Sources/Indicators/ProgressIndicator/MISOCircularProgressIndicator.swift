@@ -149,7 +149,7 @@ public struct MISOCircularProgressIndicator: View { // TODO: #409 - Update docum
 
     /// Embeds all configuration details for the circular progress indicator.
     /// Internal (not `private`) so unit tests can introspect the configuration produced by the public
-    /// initializers via `@testable import OUDSComponents`.
+    /// initializers via `@testable import MISOComponents`.
     let configuration: CircularProgressIndicatorConfiguration
 
     // MARK: - Determinate Progress Indicator Helper Text

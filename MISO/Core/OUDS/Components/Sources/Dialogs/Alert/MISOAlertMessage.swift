@@ -65,8 +65,8 @@ public struct MISOAlertMessage: View {
 
     private let text: String
     private let status: MISOAlertStatus
-    private let description: TextualContent?
-    private let bulletList: [TextualContent]
+    private let description: MISOTextualContent?
+    private let bulletList: [MISOTextualContent]
     private let link: Self.Link?
     private let onClose: (() -> Void)?
 
@@ -197,7 +197,7 @@ public struct MISOAlertMessage: View {
             ML.warning("The label for the MISOAlertMessage must not be empty!")
         }
         self.status = status
-        self.description = .attributed(description)
+        self.description = .rich(description)
         self.link = link
         self.onClose = onClose
         self.bulletList = bulletList.map { .raw($0) }
@@ -246,7 +246,7 @@ public struct MISOAlertMessage: View {
         }
         self.link = link
         self.onClose = onClose
-        self.bulletList = bulletList.map { .attributed($0) }
+        self.bulletList = bulletList.map { .rich($0) }
     }
 
     /// Creates an alert message with description and bullet list containing rich texts.
@@ -286,10 +286,10 @@ public struct MISOAlertMessage: View {
             ML.warning("The label for the MISOAlertMessage must not be empty!")
         }
         self.status = status
-        self.description = .attributed(description)
+        self.description = .rich(description)
         self.link = link
         self.onClose = onClose
-        self.bulletList = bulletList.map { .attributed($0) }
+        self.bulletList = bulletList.map { .rich($0) }
     }
 
     /// Creates an alert message with a localized label, looking up the key in the given bundle.
