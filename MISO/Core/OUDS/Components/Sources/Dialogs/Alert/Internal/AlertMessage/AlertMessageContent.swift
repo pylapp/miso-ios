@@ -14,6 +14,7 @@ struct AlertMessageContent: View {
     let description: MISOTextualContent?
     let bulletList: [MISOTextualContent]
     let link: MISOAlertMessage.Link?
+    let disableVoiceOverAnnouncement: Bool
     let onClose: (() -> Void)?
 
     @Environment(\.theme) private var theme
@@ -63,7 +64,9 @@ struct AlertMessageContent: View {
         .padding(.vertical, theme.alert.spacePaddingBlock)
         .fixedSize(horizontal: false, vertical: true)
         .onAppear {
-            VoiceOverUtils.announce(accessibilityLabel)
+            if !disableVoiceOverAnnouncement {
+                VoiceOverUtils.announce(accessibilityLabel)
+            }
         }
     }
 

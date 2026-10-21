@@ -19,6 +19,7 @@ MISOAlertMessage(label: "Label",
                  status: .neutral(image: MISOImage(asset: Image("ic_heart"), renderingMode: .original)), // .original to avoid to have tinted images
                  bulletList: ["A", "B"],
                  link: .init(text: "More", position: .bottom) {},
+                 disableVoiceOverAnnouncement: true, // default false: VoiceOver announces the alert on appear
                  onClose: {})
 // description and bulletList elements are MISOTextualContent: raw (string literal), localized or rich
 MISOAlertMessage(label: "Label",
@@ -40,4 +41,5 @@ Statuses: `neutral`, `accent`, `positive`, `info`, `warning`, `negative`
 MISOInlineAlert(label: "Label")
 MISOInlineAlert(label: "Label", status: .warning)
 MISOInlineAlert(label: "Label", status: .accent(image: MISOImage(asset: Image("ic_heart"))))
+MISOInlineAlert(label: "Label", status: .info, disableVoiceOverAnnouncement: true) // default false: VoiceOver announces the alert on appear
 ```
