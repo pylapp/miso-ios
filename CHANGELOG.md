@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **BREAKING**: Update protocol `ColorModeMultipleSemanticTokens` with missing tokens
 - Availability details for Apple platforms on public API (Orange-OpenSource/ouds-ios#1815) 
 - Documentation for some components with DSM hyperlinks (Orange-OpenSource/ouds-ios#1813)
 - `typography` component to version v1.1.0 (Orange-OpenSource/ouds-ios#1722)
