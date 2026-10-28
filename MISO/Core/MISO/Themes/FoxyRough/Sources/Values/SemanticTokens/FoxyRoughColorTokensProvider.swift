@@ -4,7 +4,6 @@
 // ✿✿✿✿ ʕ •ᴥ•ʔ/ ︻デ═一
 
 import MISOThemesMISOBlueCoat
-import MISOTokensRaw
 import MISOTokensSemantic
 
 /// Semantic color token provider for the FoxyRough theme.

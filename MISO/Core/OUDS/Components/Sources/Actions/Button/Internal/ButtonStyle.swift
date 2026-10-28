@@ -29,7 +29,6 @@ struct StyleForButton: ButtonStyle {
     private let isHover: Bool
     private let isFullWidth: Bool
 
-    @Environment(\.theme) private var theme
     @Environment(\.isEnabled) private var isEnabled
 
     // MARK: Initializer
