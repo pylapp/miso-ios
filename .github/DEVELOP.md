@@ -562,3 +562,22 @@ To sync *MISO iOS*. with *OUDS iOS*, several steps mut be applied:
 2. Never keep assets from OUDS to MISO if such assets are proprietary or not under FLOSS license
 3. Evolutions of OUDS must be place in suitable locations wiht one of the OUDS folders in the root of the hierarchy
 4. Copyrights must be clear (SPDX license identifiers, copyright owners)
+
+Add OUDS iOS as remote, named "upstream", through SSH:
+```shell
+git remote add upstream git@github.com:Orange-OpenSource/ouds-ios
+```
+
+To fetch with OUDS iOS:
+```shell
+git config remote.upstream.tagOpt --no-tags
+git fetch usptream
+```
+
+OUDS is older than MISO, thus fetching with OUDS to sync MISO can bring useless tags.
+To get tags and keep only origin ones:
+```shell
+git tag -l | xargs -r git tag -d
+git fetch origin --tags
+git push origin --tags
+```
