@@ -5,7 +5,7 @@
 # SPDX-License-Identifier: MIT
 
 # -----------------------------------------------------------------------------
-# Compare the public API surface of the OUDS Swift Package between two Git
+# Compare the public API surface of the MISO Swift Package between two Git
 # refs (tags, branches, commits), using `swift-api-digester` from the Xcode
 # toolchain.
 #
@@ -20,7 +20,7 @@
 #   --platforms <list>   Comma-separated: ios, ios-sim, macos, tvos, watchos,
 #                        visionos. Default: all of them.
 #   --product <name>     Umbrella library product from Package.swift
-#                        Default: OUDSSwiftUI.
+#                        Default: MISOSwiftUI.
 #   --verbose            More logs.
 #   -h | --help          Show this help.
 #
@@ -37,22 +37,22 @@ set -euo pipefail
 
 # All products defined in Swift Package for OUDS any user can use 
 ATOMIC_MODULES=(
-    OUDSFoundations
-    OUDSTokensRaw
-    OUDSTokensSemantic
-    OUDSTokensComponent
-    OUDSThemesContract
-    OUDSThemesOrange
-    OUDSThemesOrangeCompact
-    OUDSThemesSosh
-    OUDSThemesWireframe
-    OUDSThemesWhiteLabel
-    OUDSComponents
-    OUDSModules
+    MISOThemesContract
+    MISOModules
+    MISOComponents
+    MISOTokensComponent
+    MISOTokensSemantic
+    MISOTokensRaw
+    MISOFoundations
+    MISOModulesAppServices
+    MISOThemesMISOBlueCoat
+    MISOThemesMISOFoxyRough
+    MISOComponentsMISO
+    MISOFoundationsMISO
 )
 
 # Highest level product containing anything
-UMBRELLA_PRODUCT="OUDSSwiftUI"
+UMBRELLA_PRODUCT="MISOSwiftUI"
 
 # Matches the lowest supported version of each supported platforms
 # For OUDS: iOS 15, macOS 13, tvOS 16, watchOS 11, visionOS 1
@@ -68,7 +68,7 @@ platform_triple() {
     esac
 }
 
-TEMP_DIFF_DIR="ouds-api-diff"
+TEMP_DIFF_DIR="miso-api-diff"
 
 # Configuration
 # -------------
