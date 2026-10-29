@@ -288,7 +288,7 @@ public struct MISOTextInput: View {
         ///     MISOTextInput(label: "Email", text: $text, status: .textualError(message: .raw("Invalid email")))
         /// ```
         ///
-        /// - Since: 3.2.0
+        /// - Since: OUDS 3.2.0
         case textualError(message: MISOTextualContent) // TODO: v4 - When .error and .richError removed, rename from "textualError" to "error"
 
         /// The `loading` state indicates that the system is processing or retrieving data related to the
@@ -381,7 +381,7 @@ public struct MISOTextInput: View {
     ///    - constrainedMaxWidth: When `true`, the width is constrained, defaults to `false`
     ///    - status: The current status of the text input, default set to *enabled*
     ///
-    /// - Since: 3.2.0
+    /// - Since: OUDS 3.2.0
     public init(label: String,
                 text: Binding<String>,
                 placeholder: String? = nil,
@@ -439,7 +439,7 @@ public struct MISOTextInput: View {
     ///    - constrainedMaxWidth: When `true`, the width is constrained, defaults to `false`
     ///    - status: The current status of the text input, default set to *enabled*
     ///
-    /// - Since: 3.2.0
+    /// - Since: OUDS 3.2.0
     public init(_ key: LocalizedStringKey,
                 tableName: String? = nil,
                 bundle: Bundle = .main,

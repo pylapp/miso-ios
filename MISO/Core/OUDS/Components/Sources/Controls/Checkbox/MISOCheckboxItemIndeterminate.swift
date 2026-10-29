@@ -189,7 +189,7 @@ public struct MISOCheckboxItemIndeterminate: View {
     ///     modifier. Defaults to `false`.
     ///   - action: An additional action to trigger when the checkbox has been pressed, default set to `nil`
     ///
-    /// - Since: 3.2.0
+    /// - Since: OUDS 3.2.0
     public init(_ label: String,
                 selection: Binding<MISOCheckboxIndicatorState>,
                 description: String? = nil,
@@ -271,7 +271,7 @@ public struct MISOCheckboxItemIndeterminate: View {
     ///   - constrainedMaxWidth: When `true`, the item width is constrained to a maximum value defined by the design system.
     ///   - action: An additional action to trigger when the checkbox has been pressed, default set to `nil`
     ///
-    /// - Since: 3.2.0
+    /// - Since: OUDS 3.2.0
     public init(_ key: LocalizedStringKey,
                 tableName: String? = nil,
                 bundle: Bundle = .main,

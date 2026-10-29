@@ -86,7 +86,7 @@ public struct MISOCategoricalTag: View {
 
     /// The category of a `MISOCategoricalTag` determines the background color of the tag.
     ///
-    /// - Since: 3.2.0
+    /// - Since: OUDS 3.2.0
     @frozen public enum Category: CaseIterable {
 
         /// Category 1
@@ -107,7 +107,7 @@ public struct MISOCategoricalTag: View {
 
     /// The leading element of a `MISOCategoricalTag`.
     ///
-    /// - Since: 3.2.0
+    /// - Since: OUDS 3.2.0
     @frozen public enum Leading { // TODO: v4 - Mutualize with MISOTag
 
         /// No leading element

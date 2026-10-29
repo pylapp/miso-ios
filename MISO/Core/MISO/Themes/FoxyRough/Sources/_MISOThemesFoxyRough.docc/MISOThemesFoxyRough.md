@@ -14,7 +14,7 @@ This FoxyRough theme is a theme with tints of red and gray, "Lipstick on a Grey 
 
 ## Overview
 
-> Note: The FoxyRough theme uses the WinkyRoug font family
+> Note: The FoxyRough theme uses the WinkyRough font family
 
 > Important: The FoxyRough theme does not embed charts colors yet.
 

@@ -191,7 +191,7 @@ public struct MISOBulletList: View {
         ///     setting is inherited from the parent list.
         ///    - subItems: The sub items builder to add to the current item. **Remark** only three levels are allowed.
         ///
-        /// - Since: 3.2.0
+        /// - Since: OUDS 3.2.0
         public init(_ text: MISOTextualContent,
                     subListType: MISOBulletList.`Type`? = nil,
                     subListTextStyle: MISOBulletList.TextStyle? = nil,

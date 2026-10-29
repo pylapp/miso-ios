@@ -58,7 +58,7 @@ import SwiftUI
 /// in order to make Voice Over able to focus and vocalize the loading state of the component.
 ///
 /// - Version: 1.0.0 (Figma component design version)
-/// - Since: 3.2.0
+/// - Since: OUDS 3.2.0
 @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public struct MISOSkeleton<Shape: SwiftUI.Shape>: View {
 
@@ -124,7 +124,7 @@ extension View {
     /// `showSkeleton(isVisible:isAnimated:)
     ///
     /// - Parameter securityMargin: Whether to apply vertical padding to the skeleton. Defaults to `false`.
-    /// - Since: 3.2.0
+    /// - Since: OUDS 3.2.0
     @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func skeleton(securityMargin: Bool = false) -> some View {
         modifier(SkeletonModifier(securityMargin: securityMargin, shape: Rectangle()))
@@ -138,7 +138,7 @@ extension View {
     /// - Parameters:
     ///    - shape: The shape applied on the skeleton.
     ///    - securityMargin: Whether to apply vertical padding to the skeleton. Defaults to `false`.
-    /// - Since: 3.2.0
+    /// - Since: OUDS 3.2.0
     @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func skeleton(shape: some SwiftUI.Shape, securityMargin: Bool = false) -> some View {
         modifier(SkeletonModifier(securityMargin: securityMargin, shape: shape))
@@ -150,7 +150,7 @@ extension View {
     /// - Parameters:
     ///    - isVisible: Flag to present the skeleton for components managing this layout.
     ///    - isAnimated: Flag to animate the shimer effect on the skeleton. `true` by default.
-    /// - Since: 3.2.0
+    /// - Since: OUDS 3.2.0
     @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func showSkeleton(isVisible: Bool, isAnimated: Bool = true) -> some View {
         modifier(SkeletonStateModifier(isVisible: isVisible, isAnimated: isAnimated))

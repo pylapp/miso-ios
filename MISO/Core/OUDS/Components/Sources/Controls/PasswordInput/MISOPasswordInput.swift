@@ -148,7 +148,7 @@ public struct MISOPasswordInput: View {
     ///      modifier. Defaults to `false`.
     ///    - status: The current status of the password input base on `MISOTextInput.Status`, by default to set *enabled*
     ///
-    /// - Since: 3.2.0
+    /// - Since: OUDS 3.2.0
     public init(label: String,
                 password: Binding<String>,
                 isHiddenPassword: Binding<Bool> = .constant(true),
@@ -205,7 +205,7 @@ public struct MISOPasswordInput: View {
     ///      modifier. Defaults to `false`.
     ///    - status: The current status of the password input base on `MISOTextInput.Status`, by default to set *enabled*
     ///
-    /// - Since: 3.2.0
+    /// - Since: OUDS 3.2.0
     public init(_ key: LocalizedStringKey,
                 tableName: String? = nil,
                 bundle: Bundle = .main,

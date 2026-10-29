@@ -185,7 +185,7 @@ public struct MISOCheckboxItem: View {
     ///     modifier. Defaults to `false`.
     ///   - action: An additional action to trigger when the checkbox has been pressed
     ///
-    /// - Since: 3.2.0
+    /// - Since: OUDS 3.2.0
     public init(_ label: String,
                 isOn: Binding<Bool>,
                 description: String? = nil,
@@ -270,7 +270,7 @@ public struct MISOCheckboxItem: View {
     ///     modifier. Defaults to `false`.
     ///   - action: An additional action to trigger when the checkbox has been pressed
     ///
-    /// - Since: 3.2.0
+    /// - Since: OUDS 3.2.0
     public init(_ key: LocalizedStringKey,
                 tableName: String? = nil,
                 bundle: Bundle = .main,

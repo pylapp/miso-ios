@@ -189,7 +189,7 @@ public struct MISOListItemData {
 
         /// A text, which can be defined from a raw string, a localized string or attributed string
         ///
-        /// - Since: 3.2.0
+        /// - Since: OUDS 3.2.0
         case textual(_: MISOTextualContent, isBold: Bool = false) // TODO: v4 - When .case text removed, rename from "textual" to "text"
 
         /// A custom SwiftUI view used as the label, with an accessibility label for Voice Over.
@@ -292,7 +292,7 @@ public struct MISOListItemData {
     ///   - textSlot: An optional custom view displayed under the texts but before the helper text. Defaults to `nil`.
     ///   - bottomSlot: An optional custom view displayed under the main content and before the helper text. Defaults to `nil`.
     ///
-    /// - Since: 3.2.0
+    /// - Since: OUDS 3.2.0
     public init(
         label: Label,
         description: MISOTextualContent? = nil,
@@ -332,7 +332,7 @@ public struct MISOListItemData {
     ///   - textSlot: An optional custom view displayed under the texts but before the helper text. Defaults to `nil`.
     ///   - bottomSlot: An optional custom view displayed under the main content and before the helper text. Defaults to `nil`.
     ///
-    /// - Since: 3.2.0
+    /// - Since: OUDS 3.2.0
     public init(
         label: some View,
         accessibilityLabel: String,

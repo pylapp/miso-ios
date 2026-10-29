@@ -46,7 +46,7 @@ extension MISOListItemData { // TODO: v4 - Remove these old inits
     ///   - textSlot: An optional custom view displayed under the texts but before the helper text. Defaults to `nil`.
     ///   - bottomSlot: An optional custom view displayed under the main content and before the helper text. Defaults to `nil`.
     ///
-    /// - Since: 3.0.0
+    /// - Since: OUDS 3.0.0
     @available(*, deprecated, message: "Use init(label: Label, ...) with MISOTextualContent parameters. See MIGRATION.md v1.2.0.")
     @_disfavoredOverload
     public init(
@@ -83,7 +83,7 @@ extension MISOListItemData { // TODO: v4 - Remove these old inits
     ///   - textSlot: An optional custom view displayed under the texts but before the helper text. Defaults to `nil`.
     ///   - bottomSlot: An optional custom view displayed under the main content and before the helper text. Defaults to `nil`.
     ///
-    /// - Since: 3.0.0
+    /// - Since: OUDS 3.0.0
     @available(*, deprecated, message: "Use init(label: Label, ...) with MISOTextualContent parameters. See MIGRATION.md v1.2.0.")
     @_disfavoredOverload
     public init(
@@ -129,7 +129,7 @@ extension MISOListItemData { // TODO: v4 - Remove these old inits
     ///   - textSlot: An optional custom view displayed under the texts but before the helper text. Defaults to `nil`.
     ///   - bottomSlot: An optional custom view displayed under the main content and before the helper text. Defaults to `nil`.
     ///
-    /// - Since: 3.0.0
+    /// - Since: OUDS 3.0.0
     @available(*, deprecated, message: "Use init(label: some View, accessibilityLabel:, ...) with MISOTextualContent parameters. See MIGRATION.md v1.2.0.")
     @_disfavoredOverload
     public init(
@@ -166,7 +166,7 @@ extension MISOListItemData { // TODO: v4 - Remove these old inits
     ///   - textSlot: An optional custom view displayed under the texts but before the helper text. Defaults to `nil`.
     ///   - bottomSlot: An optional custom view displayed under the main content and before the helper text. Defaults to `nil`.
     ///
-    /// - Since: 3.0.0
+    /// - Since: OUDS 3.0.0
     @available(*, deprecated, message: "Use init(label: some View, accessibilityLabel:, ...) with MISOTextualContent parameters. See MIGRATION.md v1.2.0.")
     @_disfavoredOverload
     public init(
@@ -207,7 +207,7 @@ extension MISOListItemData { // TODO: v4 - Remove these old inits
     ///   - textSlot: An optional custom view displayed under the texts but before the helper text. Defaults to `nil`.
     ///   - bottomSlot: An optional custom view displayed under the main content and before the helper text. Defaults to `nil`.
     ///
-    /// - Since: 3.0.0
+    /// - Since: OUDS 3.0.0
     @available(*, deprecated, message: "Use init(label: Label, ...) with MISOTextualContent parameters. See MIGRATION.md v1.2.0.")
     @_disfavoredOverload
     public init(
@@ -248,7 +248,7 @@ extension MISOListItemData { // TODO: v4 - Remove these old inits
     ///   - textSlot: An optional custom view displayed under the texts but before the helper text. Defaults to `nil`.
     ///   - bottomSlot: An optional custom view displayed under the main content and before the helper text. Defaults to `nil`.
     ///
-    /// - Since: 3.0.0
+    /// - Since: OUDS 3.0.0
     @available(*, deprecated, message: "Use init(label: Label, ...) with MISOTextualContent parameters. See MIGRATION.md v1.2.0.")
     @_disfavoredOverload
     public init(

@@ -24,7 +24,7 @@ import SwiftUI
 ///     let helper: MISOTextualContent = .rich(AttributedString("Styled helper"))
 /// ```
 ///
-/// - Since: 3.2.0
+/// - Since: OUDS 3.2.0
 @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 @frozen
 public enum MISOTextualContent: @unchecked Sendable, ExpressibleByStringLiteral {

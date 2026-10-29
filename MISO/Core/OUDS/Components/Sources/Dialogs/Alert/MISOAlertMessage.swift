@@ -169,7 +169,7 @@ public struct MISOAlertMessage: View {
     ///   includes a close button, allowing the user to dismiss it when he has acknowledged the message.  Some alerts must remain visible to ensure
     ///   user is aware of important information; others can be closed to reduce visual clutter.
     ///
-    /// - Since: 3.2.0
+    /// - Since: OUDS 3.2.0
     public init(label: String,
                 status: MISOAlertStatus = .positive,
                 description: MISOTextualContent? = nil,
@@ -225,7 +225,7 @@ public struct MISOAlertMessage: View {
     ///   includes a close button, allowing the user to dismiss it when he has acknowledged the message.  Some alerts must remain visible to ensure
     ///   user is aware of important information; others can be closed to reduce visual clutter.
     ///
-    /// - Since: 3.2.0
+    /// - Since: OUDS 3.2.0
     public init(_ key: LocalizedStringKey,
                 tableName: String? = nil,
                 bundle: Bundle = .main,

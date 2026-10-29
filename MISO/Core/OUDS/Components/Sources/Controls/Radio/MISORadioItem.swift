@@ -195,7 +195,7 @@ public struct MISORadioItem: View {
     ///     modifier. Defaults to `false`.
     ///   - action: An additional action to trigger when the radio button has been pressed
     ///
-    /// - Since: 3.2.0
+    /// - Since: OUDS 3.2.0
     public init(_ label: String,
                 isOn: Binding<Bool>,
                 extraLabel: String? = nil,
@@ -282,7 +282,7 @@ public struct MISORadioItem: View {
     ///     modifier. Defaults to `false`.
     ///   - action: An additional action to trigger when the radio button has been pressed
     ///
-    /// - Since: 3.2.0
+    /// - Since: OUDS 3.2.0
     public init(_ key: LocalizedStringKey,
                 tableName: String? = nil,
                 bundle: Bundle = .main,

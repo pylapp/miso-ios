@@ -188,7 +188,7 @@ public struct MISOPinCodeInput: View {
         ///     MISOPinCodeInput($pinCode, status: .textualError(message: .raw("The code is not correct")))
         /// ```
         ///
-        /// - Since: 3.2.0
+        /// - Since: OUDS 3.2.0
         case textualError(message: MISOTextualContent) // TODO: v4 - When .error and .richError removed, rename from "textualError" to "error"
 
         // MARK: Equatable
@@ -236,7 +236,7 @@ public struct MISOPinCodeInput: View {
     ///   - status: Default set to *.enabled*, defines if there is an error context or not
     ///   - autofocus: If *true*, automatically focuses the first available field on appear, default set to *false*
     ///
-    /// - Since: 3.2.0
+    /// - Since: OUDS 3.2.0
     public init(_ value: Binding<String>,
                 length: MISOPinCodeInput.Length = .six,
                 hiddenCharacters: Bool = true,
