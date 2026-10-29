@@ -137,24 +137,6 @@ import SwiftUI
 ///
 /// [unified-design-system.orange.com](https://r.orange.fr/r/S-ouds-doc-checkbox)
 ///
-/// ## Themes rendering
-///
-/// ### Orange
-///
-/// ![A checkbox item component in light and dark modes with Orange theme](component_checkboxItem_Orange)
-///
-/// ### Orange Compact
-///
-/// ![A checkbox item component in light and dark modes with Orange Compact theme](component_checkboxItem_OrangeCompact)
-///
-/// ### Sosh
-///
-/// ![A checkbox item component in light and dark modes with Sosh theme](component_checkboxItem_Sosh)
-///
-/// ### Wireframe
-///
-/// ![A checkbox item component in light and dark modes with Wireframe theme](component_checkboxItem_Wireframe)
-///
 /// - Version: 2.4.0 (Figma component design version)
 /// - Since: OUDS 0.12.0
 @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
