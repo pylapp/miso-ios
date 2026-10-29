@@ -9,7 +9,6 @@ import SwiftUI
 struct InputContainer: View {
 
     let text: Binding<String>
-    let label: String
     let placeholder: String?
     let prefix: String?
     let suffix: String?
@@ -37,7 +36,7 @@ struct InputContainer: View {
             }
 
             // Input text container
-            InputText(label: placeholder ?? label,
+            InputText(label: placeholder ?? "",
                       text: text,
                       status: status,
                       accessibilityLabel: accessibilityLabel,

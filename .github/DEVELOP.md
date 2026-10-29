@@ -20,6 +20,8 @@
 - [Dead code](#dead-code)
 - [Software Bill of Materials](#software-bill-of-materials)
 - [Update of dependencies](#update-of-dependencies)
+- [Generate XCFramework](#generate-xcframework)
+- [Check API breakings](#check-api-breakings)
 - [CI/CD](#cicd)
 - [Use of GenAI](#use-of-genai)
 - [Use of robots](#use-of-robots)
@@ -418,6 +420,56 @@ To update dependencies of the project, supossing *Renovate* for example provides
 - Update the SBOM
 - Make a nice commit message (e.g. `chore(deps):`) for the merge
 
+## Generate XCFramework
+
+Some users may need to use MISO iOS through an XCFramework, and not commonly with sources compiled through the repository with Swift Package Manager.
+Thus, **before creation of GitHub release**, run the script below:
+
+```bash
+./scripts/build-xcframework.sh VERSION
+```
+
+where VERSION will be the tag of the current version / version to ship (e.g. 3.1.0-rc.1, 3.1.0 etc.).
+
+> [!IMPORTANT]
+> Because GitHub releases are immutable, we need to create the XCFramework BEFORE creating the release on GitHub
+> so as to attach the artefacts to the associated release.
+
+> [!NOTE]
+> The user for its own project will need to make a drag and drop of all XCFrameworks defined in the result ZIP,
+> add them to the targets they want,
+> and consume them with for example the umbrella import of MISOSwiftUI.
+
+An .xcframework is Apple's container for shipping a single logical library across multiple platform/architecture slices (iOS device, iOS simulator, macOS, etc.). 
+Its Info.plist enforces a strict rule: each slice identifier (e.g. ios-arm64) may appear exactly once in the AvailableLibraries array.
+Consequently, `xcodebuild -create-xcframework` rejects any attempt to bundle multiple frameworks that target the same slice, failing with a library with the identifier 'ios-arm64' already exists. There is no supported way — via Apple tooling — to pack several distinct frameworks inside one xcframework.
+
+MISO is architected as many (~10) SPM modules re-exported by an umbrella (MISOSwiftUI) via @_exported import.
+Even though the umbrella dylib statically links all the atomic code and contains every public symbol at runtime, the Swift compiler still needs to load each atomic module's `.swiftmodule` at compile time to type-check consumer code (because public type identities remain qualified by their originating module, e.g. `MISOThemesContract.MISOTheme`). 
+Since we cannot merge everything into a single xcframework and cannot ship the atomic swiftmodules inside the umbrella's Modules/ directory (Xcode's module resolver won't pick them up there), the pragmatic distribution is ten separate xcframeworks: one umbrella carrying all the code (*Embed & Sign*) plus nine atomic swiftmodule-only stubs with empty binaries (*Do Not Embed*). Consumers who find drag-and-dropping ten xcframeworks tedious can wrap them all behind a single Package.swift with binaryTarget entries, which SPM then transparently manages as one dependency.
+
+Because the documentation is very heavy in MISO (because of how Apple generates the doc), it cannot be embedded in the XCFrameworks. Thus users need to pick DocC archive from GitHub releases or check the onmine documentation through the website.
+
+## Check API breakings
+
+A script should be used to check if any public API has been broken.
+
+To check for all supported platforms for MISO, since version v3.1.0 to HEAD:
+```shell
+./scripts/check-API-break.sh 3.1.0 HEAD
+```
+
+To specify some platforms, since version v3.1.0 to HEAD, in verbose mode:
+```shell
+./scripts/check-API-break.sh 3.1.0 HEAD --verbose --platforms ios,tvos
+```
+
+> [!IMPORTANT]
+> Always have a human reading the sources and the diff to find any breaks.
+> The tool used in this script, swift-api-digester, does not consider sources breaks as API breaks.
+> Thus a parameter with a default value in the past but mandatory today won't fail the script
+> and will pass silently.
+
 ## CI/CD
 
 ### GitHub Action
@@ -510,3 +562,22 @@ To sync *MISO iOS*. with *OUDS iOS*, several steps mut be applied:
 2. Never keep assets from OUDS to MISO if such assets are proprietary or not under FLOSS license
 3. Evolutions of OUDS must be place in suitable locations wiht one of the OUDS folders in the root of the hierarchy
 4. Copyrights must be clear (SPDX license identifiers, copyright owners)
+
+Add OUDS iOS as remote, named "upstream", through SSH:
+```shell
+git remote add upstream git@github.com:Orange-OpenSource/ouds-ios
+```
+
+To fetch with OUDS iOS:
+```shell
+git config remote.upstream.tagOpt --no-tags
+git fetch usptream
+```
+
+OUDS is older than MISO, thus fetching with OUDS to sync MISO can bring useless tags.
+To get tags and keep only origin ones:
+```shell
+git tag -l | xargs -r git tag -d
+git fetch origin --tags
+git push origin --tags
+```

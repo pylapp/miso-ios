@@ -169,6 +169,10 @@ struct BlueCoatThemeTests {
         #expect(theme.tag is BlueCoatThemeTagComponentTokensProvider)
     }
 
+    @Test func defaultCategoricalTagComponentTokensProvider() {
+        #expect(theme.categoricalTag is BlueCoatThemeCategoricalTagComponentTokensProvider)
+    }
+
     @Test func defaultInputTagComponentTokensProvider() {
         #expect(theme.inputTag is BlueCoatThemeInputTagComponentTokensProvider)
     }

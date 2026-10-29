@@ -18,7 +18,7 @@ struct TextInputContainer: View {
     let trailingAction: MISOTextInput.TrailingAction?
     let isOutlined: Bool
     let status: MISOTextInput.Status
-    let accessibilityHint: TextualContent?
+    let accessibilityHint: MISOTextualContent?
     @State var hover: Bool = false
 
     @FocusState private var focused: Bool
@@ -55,7 +55,6 @@ struct TextInputContainer: View {
                         }
 
                         InputContainer(text: text,
-                                       label: labelPosition == .top ? "" : label,
                                        placeholder: placeholder,
                                        prefix: prefix,
                                        suffix: suffix,
@@ -102,7 +101,7 @@ struct TextInputContainer: View {
             theme.textInput.spacePaddingInlineTrailingAction
         } else {
             switch status {
-            case .error, .richError, .loading:
+            case .error, .richError, .textualError, .loading:
                 theme.textInput.spacePaddingInlineTrailingAction
             default:
                 theme.textInput.spacePaddingInlineDefault
@@ -143,6 +142,8 @@ struct TextInputContainer: View {
             "core_common_onError_a11y".localized() + ": \(message)"
         case let .richError(message):
             "core_common_onError_a11y".localized() + ": \(String(message.characters))"
+        case let .textualError(message):
+            "core_common_onError_a11y".localized() + ": \(message.rawValue)"
         case .loading:
             "core_common_loading_a11y".localized()
         case .enabled:

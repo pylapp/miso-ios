@@ -2,25 +2,28 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
 
+import MISOThemesContract
 import MISOTokensSemantic
 import SwiftUI
 
-struct TagShapeModifier: ViewModifier {
+struct TagAspectModifier: ViewModifier {
 
-    // MARK: Stored properties
-
+    let appearance: MISOTag.Appearance
     let shape: MISOTag.Shape
+    let type: MISOTag.`Type`
 
     @Environment(\.theme) private var theme
-
-    // MARK: Body
+    @Environment(\.skeletonState) private var skeletonState
 
     func body(content: Content) -> some View {
-        content
-            .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+        if skeletonState == nil {
+            content
+                .modifier(TagBackgroundModifier(appearance: appearance, type: type))
+                .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+        } else {
+            content.skeleton(shape: RoundedRectangle(cornerRadius: cornerRadius))
+        }
     }
-
-    // MARK: Helper
 
     private var cornerRadius: CGFloat {
         switch shape {

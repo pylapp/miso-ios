@@ -10,7 +10,7 @@ Do not add @PageImage(purpose: card) because not managed for landing page of onl
 See https://github.com/swiftlang/swift-docc/issues/1283
 -->
 
-Nothing public yet.
+Nothing public yet. Exclusive to MISO.
 
 ## Overview
 

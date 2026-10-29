@@ -14,7 +14,8 @@
         "miso-ios-components-layouts",
         "miso-ios-components-navigations",
         "miso-ios-guide-vocabulary",
-        "miso-ios-guide-create-theme"
+        "miso-ios-guide-create-theme",
+        "miso-ios-guide-migration"
       ]
     }
   ]

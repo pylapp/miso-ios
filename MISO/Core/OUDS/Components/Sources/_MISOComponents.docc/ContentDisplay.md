@@ -5,7 +5,7 @@
     @PageImage(purpose: card, source: "ic_folder_categories")
 }
 
-Some components can be used for **content display**.
+Some components can be used for **content display**. These are inherited from OUDS.
 
 ## Overview
 
@@ -54,5 +54,20 @@ MISOBulletList(type: .ordered) {
     }
     MISOBulletList.Item("Label 2")
     MISOBulletList.Item("Label 3")
+}
+```
+
+The text of each item is an ``MISOTextualContent``: a raw `String` (a string literal is enough), a localized string or a rich text.
+
+```swift
+MISOBulletList {
+    // Raw text, same as .raw("Raw text")
+    MISOBulletList.Item("Raw text")
+
+    // Localized text
+    MISOBulletList.Item(.localized("item_label", bundle: Bundle.module))
+
+    // Rich text
+    MISOBulletList.Item(.rich(AttributedString(markdown: "A **rich** text"))) // Manage in your side errors for init
 }
 ```

@@ -3,6 +3,7 @@
 // SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
 
 import MISOFoundations
+import MISOTokensSemantic
 import SwiftUI
 
 /// Text component used to structure the hierarchy of a screen.
@@ -54,7 +55,7 @@ import SwiftUI
 /// The component adds the `.isHeader` accessibility trait so that assistive technologies (like *VoiceOver*)
 /// announce the text as a header. When a marker is drawn, it is hidden from assistive technologies (decorative).
 ///
-/// - Version: 1.0.0 (Figma component design version)
+/// - Version: 1.1.0 (Figma component design version)
 /// - Since: OUDS 3.0.0
 @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public struct MISOHeading: View {
@@ -68,6 +69,7 @@ public struct MISOHeading: View {
 
     @Environment(\.theme) private var theme
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     // MARK: - Size
 
@@ -193,6 +195,7 @@ public struct MISOHeading: View {
             VStack(alignment: .leading, spacing: theme.spaces.fixedNone) {
                 styledText
                     .foregroundColor(theme.colors.contentDefault)
+                    .frame(maxWidth: maxWidth.dimension(for: horizontalSizeClass ?? .regular), alignment: .leading)
                 HeadingMarker()
             }
             .accessibilityElement(children: .combine)
@@ -200,6 +203,7 @@ public struct MISOHeading: View {
         } else {
             styledText
                 .foregroundColor(theme.colors.contentDefault)
+                .frame(maxWidth: maxWidth.dimension(for: horizontalSizeClass ?? .regular), alignment: .leading)
                 .accessibilityAddTraits(.isHeader)
         }
     }
@@ -252,5 +256,19 @@ public struct MISOHeading: View {
         }
         attributed[range].foregroundColor = theme.colors.contentBrandSecondary.color(for: colorScheme)
         return Text(attributed)
+    }
+
+    /// Apply the correct maxWidth based on the requested size.
+    private var maxWidth: MultipleSizeSemanticToken {
+        switch size {
+        case .xLarge:
+            theme.sizes.maxWidthHeadingXlarge
+        case .large:
+            theme.sizes.maxWidthHeadingLarge
+        case .medium:
+            theme.sizes.maxWidthHeadingMedium
+        case .small:
+            theme.sizes.maxWidthHeadingSmall
+        }
     }
 }

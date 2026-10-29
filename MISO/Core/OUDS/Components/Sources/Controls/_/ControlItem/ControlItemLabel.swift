@@ -28,7 +28,7 @@ struct ControlItemLabel: View {
         let icon: MISOImage?
         let isOutlined: Bool
         let isError: Bool
-        let errorText: TextualContent?
+        let errorText: MISOTextualContent?
         let isReadOnly: Bool
         let hasDivider: Bool
         let constrainedMaxWidth: Bool

@@ -43,15 +43,15 @@ Import the _Swift Package_ product which suits your needs:
 Umbrella                  | Description                          
 ------------------------- | ------------------------------------- 
 MISOSwiftUI               | All libraries listed above and the BlueCoat theme
-MISOSwiftUIBlueCoat      | All libraries listed above but with only BlueCoat theme
 
 ### Chose your theme
 
-The *MISO* framework provides today one theme:
+The *MISO* framework provides today several themes:
 
 Theme                     | Description                          
 ------------------------- | ------------------------------------- 
-BlueCoat                 | For mockups, prototypes and prooves of concepts without any brand-flavoured styles
+BlueCoat                  | Basic theme of the framework, quite blue and a bit cold
+FoxyRough                 | Hotter, red and gray
 
 ### Apply a theme
 

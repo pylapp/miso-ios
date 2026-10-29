@@ -107,9 +107,10 @@ RoundedRectangle(cornerRadius: 8)
 
 ## 6. Images in MISO components
 
-**Never call SwiftUI modifiers on an `Image` that is passed as a parameter to an MISO component.**
+**Never call SwiftUI modifiers on an `Image` that is wrapped in an `MISOImage` and passed to an MISO component.**
 
-MISO components accept `Image` — the bare SwiftUI type. Calling any modifier on it (including `.accessibilityHidden(true)`) changes the type to `some View` and produces a compile error.
+MISO components accept an `MISOImage` (which wraps the bare SwiftUI `Image` with its flip flag, accessibility label and rendering mode), through parameters named `image:`.
+Calling any modifier on the `Image` (including `.accessibilityHidden(true)`) changes its type to `some View` and produces a compile error.
 
 > The component handles the accessibility of its own images internally. You must not alter them from the call site.
 
@@ -117,23 +118,24 @@ MISO components accept `Image` — the bare SwiftUI type. Calling any modifier o
 ```swift
 MISOButton(
     text: "Add",
-    icon: Image(systemName: "plus").accessibilityHidden(true), // ❌ compile error: Image → some View
+    image: MISOImage(asset: Image(systemName: "plus").accessibilityHidden(true)), // ❌ compile error: Image modifier → some View
     appearance: .default) {}
 
 MISOLink(
     text: "Back",
-    icon: MISOImage(asset: Image(systemName: "chevron.left").accessibilityHidden(true)), // ❌ compile error: Image modifier → some View
+    image: MISOImage(asset: Image(systemName: "chevron.left").accessibilityHidden(true)), // ❌ compile error: Image modifier → some View
     size: .default) {}
 ```
 
 **Always do this — pass a bare `Image` inside `MISOImage`, swiftlint comment on the line before:**
 ```swift
 // swiftlint:disable:next accessibility_label_for_image
-MISOButton(text: "Add", icon: Image(systemName: "plus"), appearance: .default) {}
+MISOButton(text: "Add", image: MISOImage(asset: Image(systemName: "plus")), appearance: .default) {}
 
 // swiftlint:disable:next accessibility_label_for_image
-MISOLink(text: "Back", icon: MISOImage(asset: Image(systemName: "chevron.left")), size: .default) {}
+MISOLink(text: "Back", image: MISOImage(asset: Image(systemName: "chevron.left")), size: .default) {}
 
+// Exception: MISOToolBarItem still takes a bare `Image`
 // swiftlint:disable:next accessibility_label_for_image
 MISOToolBarItem(icon: Image("ic_share"), accessibilityLabel: "Share") {}
 ```
@@ -354,9 +356,87 @@ let theme = BlueCoatTheme(fontFamily: localizedHelveticaFont())
 
 ---
 
-## 12. Component skills
+## 12. Styled text with `.rich(AttributedString)`
 
-Load the matching skill for the component family you need. Each family skill mirrors `MISO/Core/OUDS/Components/Sources/<Family>/` in the repo — these families are inherited from the OUDS upstream project.
+Several MISO components accept styled text via `MISOTextualContent` or `MISOListItemData.Label`. Use `.rich(AttributedString)` to apply custom colors and fonts.
+
+**Important**: Use `AttributedString.from(text:foregroundColor:font:)` to create styled text. The Swift standard library's `AttributedString("text", foregroundColor:)` initializer does **not** exist.
+
+### Basic colored text
+
+```swift
+import MISOSwiftUI
+import SwiftUI
+
+// Color only (font is optional)
+let redText = AttributedString.from(text: "Error", foregroundColor: .red)
+
+// Color + font
+let styledText = AttributedString.from(
+    text: "Warning",
+    foregroundColor: Color(hexadecimalCode: theme.colors.repositoryNegativeHigh),
+    font: .body
+)
+
+// Using theme colors
+let greenText = AttributedString.from(
+    text: "Success",
+    foregroundColor: Color(hexadecimalCode: theme.colors.repositoryOpacityPositiveMedium),
+    font: .headline
+)
+```
+
+### In MISOListItemData
+
+```swift
+MISOStaticListItem(
+    data: MISOListItemData(
+        label: .textual(.rich(AttributedString.from(
+            text: "Payment problems",
+            foregroundColor: Color(hexadecimalCode: theme.colors.repositoryNegativeHigh),
+            font: .body
+        ))),
+        description: .rich(AttributedString.from(
+            text: "Action required",
+            foregroundColor: Color(hexadecimalCode: theme.colors.repositoryNegativeHigh),
+            font: .body
+        )),
+        overline: .rich(AttributedString.from(
+            text: "Services activated",
+            foregroundColor: Color(hexadecimalCode: theme.colors.repositoryOpacityPositiveMedium),
+            font: .body
+        )),
+        extraLabel: .rich(AttributedString.from(
+            text: "offers available",
+            foregroundColor: .orange,
+            font: .body
+        ))
+    ),
+    trailing: .badge(.count(MISOBadgeCount(1, accessibilityLabel: "1", status: .negative, size: .medium)))
+)
+```
+
+### In other components
+
+The same `MISOTextualContent` (`"literal"` / `.raw(_:)`, `.localized(_:tableName:bundle:)`, `.rich(_:)`) is used by:
+
+| Component | Parameters |
+|---|---|
+| `MISOListItemData` | `label` (through `.textual(_:isBold:)`), `description`, `overline`, `extraLabel`, `helperText` |
+| `MISOBulletList.Item` | the text (first parameter) |
+| `MISOAlertMessage` | `description`, `bulletList` (array of `MISOTextualContent`) |
+| `MISOSwitchItem`, `MISOCheckboxItem`, `MISOCheckboxItemIndeterminate`, `MISORadioItem` | `errorText` |
+| `MISOPinCodeInput`, `MISOTextInput`, `MISOPasswordInput` | `helperText`, and `status: .textualError(message:)` |
+| `MISOTextArea` | `helperText: .textual(_:)`, and `status: .textualError(message:)` |
+
+> **Literal pitfall**: `AttributedString` is itself expressible by a string literal, so a bare literal on a parameter which had an `AttributedString` overload
+> may select a deprecated initializer (warning). Prefer `.raw("…")` (or `label: .textual("…")` for `MISOListItemData`).
+
+---
+
+## 13. Component skills
+
+Load the matching skill for the component family you need. Each family skill mirrors `MISO/Core/MISO/Components/Sources/<Family>/` in the repo — these families are inherited from the MISO upstream project.
 
 | Family | Skill | Components |
 |---|---|---|
@@ -369,7 +449,7 @@ Load the matching skill for the component family you need. Each family skill mir
 | Layouts | `miso-ios-components-layouts` | MISOColoredSurface, MISOHorizontalDivider, MISOVerticalDivider |
 | Navigations | `miso-ios-components-navigations` | MISOLink, MISOTabBar, MISOToolBarItem / `toolBarTop` / `toolBarBottom` |
 
-MISO also ships components and modules that are **exclusive to MISO** (not inherited from OUDS):
+MISO also ships components and modules that are **exclusive to MISO** (not inherited from MISO):
 
 | Family | Skill | Components / types | Source |
 |---|---|---|---|

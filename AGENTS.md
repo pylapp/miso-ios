@@ -38,6 +38,10 @@ Components and modules (exclusive to MISO, not inherited from OUDS):
 Guides:
 - **`miso-ios-guide-vocabulary`** — glossary of MISO-specific terms (tokenator, token types, theme, …)
 - **`miso-ios-guide-create-theme`** — step-by-step guide to create a custom MISO theme (subclass an existing theme, from scratch on MISOTheme, mix of providers, local fonts)
+- **`miso-ios-guide-migration`** — migration guide from v1.1.0 to v1.2.0 (`MISOTextualContent`, deprecated String / AttributedString / LocalizedStringKey initializers, `.textualError`, …)
+
+For pull request reviews and before commit:
+- **.github/copilot-instructions.md** — rules about code smells, architecture and guidelines
 
 ## Key files
 
@@ -52,6 +56,7 @@ Guides:
 - Always load the **`miso-ios-guide-vocabulary`** skill before discussing tokens or themes.
 - Always load the **`miso-ios-framework-usage`** skill first before writing or reviewing any code that uses MISO. Then also load the matching **`miso-ios-components-<family>`** skill (`actions`, `content-display`, `controls`, `dialogs`, `foundations`, `indicators`, `layouts`, `navigations`) for the specific component family you are working with, or **`miso-ios-components-exclusive`** / **`miso-ios-modules-exclusive`** for MISO-only components and modules.
 - Always load the **`miso-ios-guide-create-theme`** skill when the user wants to create a custom MISO theme or brand theme.
+- Always load the **`miso-ios-guide-migration`** skill when the user wants to migrate MISO code to v1.2.0 or when deprecated MISO text APIs are detected.
 - Before committing: format → build → fix errors → run tests → lint (see `.github/copilot-instructions.md` §3).
 - Use `#available` for iOS 26 SDK APIs (min deployment is iOS 15).
 - Use `#if os(…)` for platform-specific code.

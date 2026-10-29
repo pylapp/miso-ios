@@ -246,33 +246,37 @@ public struct MISOLink: View {
 
     public var body: some View {
         Button(action: action) {
-            switch layout {
-            case let .indicator(navigationIndicator):
-                Label {
-                    Text(LocalizedStringKey(text))
-                } icon: {
-                    Image(decorative: resourceName(for: navigationIndicator), bundle: theme.resourcesBundle)
-                        .renderingMode(.template)
-                        .resizable()
-                        .toFlip(layoutDirection == .rightToLeft)
-                }
-            case .textOnly:
-                Label {
-                    Text(LocalizedStringKey(text))
-                } icon: {
-                    EmptyView()
-                }
-            case let .textAndIcon(misoImage):
-                Label {
-                    Text(LocalizedStringKey(text))
-                } icon: {
-                    if let asset = misoImage.asset {
-                        asset
-                            .renderingMode(misoImage.renderingMode)
+            Group {
+                switch layout {
+                case let .indicator(navigationIndicator):
+                    Label {
+                        Text(LocalizedStringKey(text))
+                    } icon: {
+                        Image(decorative: resourceName(for: navigationIndicator), bundle: theme.resourcesBundle)
+                            .renderingMode(.template)
                             .resizable()
+                            .toFlip(layoutDirection == .rightToLeft)
+                    }
+                case .textOnly:
+                    Label {
+                        Text(LocalizedStringKey(text))
+                    } icon: {
+                        EmptyView()
+                    }
+                case let .textAndIcon(misoImage):
+                    Label {
+                        Text(LocalizedStringKey(text))
+                    } icon: {
+                        if let asset = misoImage.asset {
+                            asset
+                                .renderingMode(misoImage.renderingMode)
+                                .resizable()
+                        }
                     }
                 }
             }
+            .modifier(LinkFrameModifier(size: size, density: density, isFullWidth: isFullWidth))
+            .skeleton()
         }
         .buttonStyle(LinkButtonStyle(layout: layout, size: size, density: density, isFullWidth: isFullWidth))
         .accessibilityRemoveTraits(.isButton)

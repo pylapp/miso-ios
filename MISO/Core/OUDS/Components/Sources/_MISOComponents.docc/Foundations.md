@@ -5,7 +5,7 @@
     @PageImage(purpose: card, source: "ic_folder_categories")
 }
 
-Some components can be used for **typography**.
+Some components can be used for **typography**. These are inherited from OUDS.
 
 ## Overview
 

@@ -10,7 +10,7 @@ Do not add @PageImage(purpose: card) because not managed for landing page of onl
 See https://github.com/swiftlang/swift-docc/issues/1283
 -->
 
-The catalog of all modules provided by MISO.
+The catalog of all modules provided by MISO. Inherited from OUDS.
 A module can be seen as a set of features with some dedicated components.
 
 ## Overview

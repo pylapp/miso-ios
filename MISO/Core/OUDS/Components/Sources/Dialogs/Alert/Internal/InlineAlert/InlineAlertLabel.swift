@@ -11,6 +11,7 @@ struct InlineAlertLabel: View {
 
     let text: String
     let status: MISOAlertStatus
+    let disableVoiceOverAnnouncement: Bool
 
     @Environment(\.theme) private var theme
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
@@ -22,7 +23,9 @@ struct InlineAlertLabel: View {
             .frame(maxWidth: theme.sizes.maxWidthLabelLarge.dimension(for: horizontalSizeClass ?? .regular), alignment: .leading)
             .accessibilityLabel(accessibilityLabel)
             .onAppear {
-                VoiceOverUtils.announce(accessibilityLabel)
+                if !disableVoiceOverAnnouncement {
+                    VoiceOverUtils.announce(accessibilityLabel)
+                }
             }
     }
 
@@ -48,7 +51,7 @@ struct InlineAlertLabel: View {
         case .warning:
             "core_shared_warning_a11y".localized() + ","
         case .negative:
-            "core_ashared_negative_a11y".localized() + ","
+            "core_shared_negative_a11y".localized() + ","
         case .info:
             "core_alertMessage_info_a11y".localized() + ","
         default:

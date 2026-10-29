@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
 
+import CoreGraphics // Needed for XCFramework generation and API breaks checks
 import Foundation
 import ImageIO
 

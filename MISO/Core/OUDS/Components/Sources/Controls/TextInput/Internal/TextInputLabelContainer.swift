@@ -61,7 +61,7 @@ struct TextInputLabelContainer: View {
         switch status {
         case .enabled, .loading, .readOnly:
             theme.colors.contentMuted
-        case .error, .richError:
+        case .error, .richError, .textualError:
             switch interactionState {
             case .idle:
                 theme.colors.actionNegativeEnabled

@@ -19,13 +19,13 @@ import SwiftUI
 ///
 ///     // Usage as leading element in a list item
 ///     MISOStaticListItem(
-///         data: MISOListItemData(label: "Information"),
+///         data: MISOListItemData(label: .textual("Information")),
 ///         leading: .flag(.init(asset: Image(decorative: "il_flag_fr"), description: "France"))
 ///     )
 ///
 ///     // Usage as trailing element in a list item
 ///     MISOStaticListItem(
-///         data: MISOListItemData(label: "Warning"),
+///         data: MISOListItemData(label: .textual("Warning")),
 ///         trailing: .flag(.init(asset: Image(decorative: "il_flag_fr"), description: "France"))
 ///     )
 /// ```
@@ -64,15 +64,10 @@ public struct MISOListItemFlag: View {
     // MARK: Body
 
     public var body: some View {
-        HStack {
-            MISOImage(asset: asset, accessibilityLabel: description, renderingMode: .original)
-                .aspectRatio(contentMode: .fit)
-                .frame(height: flagHeight)
-                .opacity(opacity)
-        }
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel(description)
-        .frame(minWidth: minWidth, alignment: .center)
+        MISOImage(asset: asset, accessibilityLabel: description, renderingMode: .original)
+            .aspectRatio(contentMode: .fit)
+            .frame(width: flagWidth)
+            .opacity(opacity)
     }
 
     // MARK: Helpers
@@ -81,11 +76,7 @@ public struct MISOListItemFlag: View {
         isEnabled ? theme.opacities.opaque : theme.opacities.disabled
     }
 
-    private var flagHeight: SizeSemanticToken {
-        theme.listItem.sizeFlagHeight * dynamicTypeSize.percentageRate / 100
-    }
-
-    private var minWidth: SizeSemanticToken {
+    private var flagWidth: SizeSemanticToken {
         let rawSize = if itemSize == .small {
             theme.listItem.sizeAssetSmall
         } else {

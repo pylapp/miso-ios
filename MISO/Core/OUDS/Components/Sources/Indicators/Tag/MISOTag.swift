@@ -128,7 +128,7 @@ public struct MISOTag: View {
     // MARK: - Configuration enums
 
     /// The internal type of tag
-    enum `Type` {
+    enum `Type` { // TODO: v4 - Mutualize with OUDSCategoricalTag
         /// Tag with label and status
         case status(label: String, status: Status)
 

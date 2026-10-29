@@ -10,7 +10,7 @@ Do not add @PageImage(purpose: card) because not managed for landing page of onl
 See https://github.com/swiftlang/swift-docc/issues/1283
 -->
 
-The catalog of all components provided by MISO. It contains also `View` extensions and `ViewModifiers` to apply tokens and styles on components and higher-level views.
+The catalog of all components provided by MISO. It contains also `View` extensions and `ViewModifiers` to apply tokens and styles on components and higher-level views. These are inherited from OUDS.
 
 Components are grouped in several categories.
 *Actions* component are for example buttons. *Navigations* group contains links, *inputs* group has checkboxes, radio buttons and switches, *layouts* group is dedicated to things like dividers.
@@ -245,7 +245,9 @@ The full map is readable at any time via `kApplePostScriptFontNames`. Unregister
 > Hyperlinks may be not accessible for Voice Over, Full Keyboard Access and Switch Control.
 > Prefer use other components like `Text` from SwiftUI.
 
-You may need to add *rich text* to some components which support `AttributedString` type parameters.
+You may need to add *rich text* to some components which support `AttributedString` through ``MISOTextualContent`` parameters.
+Wrap your `AttributedString` with `.rich(_:)`, for example `MISOBulletList.Item(.rich(myAttributedString))`.
+A raw `String` can be given directly as a string literal (or with `.raw(_:)`), and a localized string with `.localized(_:tableName:bundle:)`.
 For example you may want to display a text with clickable hyperlinks inside, and a style for the hyperlink.
 
 Font tokens like `theme.fonts.bodyDefaultMedium` are `MultipleFontCompositeSemanticToken` values, not SwiftUI `Font`.
@@ -270,7 +272,7 @@ let richTextHelperMessage = AttributedString.from(text: "You must read our priva
                                                   font: themeBodyFont,
                                                   urlConfigurations: urlConfigurations)
                                                   
-MISOPasswordInput("Enter your password", password: $password, helperText: richTextHelperMessage)
+MISOPasswordInput("Enter your password", password: $password, helperText: .rich(richTextHelperMessage))
 ```
 
 If you handle Markdown data, you can define your own styles for the hyperlinks:
@@ -298,3 +300,9 @@ let simpleText = AttributedString.from(text: "Some plain text",
 let simpleMarkdown = AttributedString.from(markdown: someMarkdown,
                                            foregroundColor: theme.colors.contentDefault.color(for: colorScheme))
 ```
+
+<!--
+NOTE: This is the landing page of the MISOComponents products.
+It should contain high-level API and other topics which cannot be placed elsewhere.
+For components, prefer to update the suitable catalog.
+-->

@@ -10,7 +10,7 @@ Do not add @PageImage(purpose: card) because not managed for landing page of onl
 See https://github.com/swiftlang/swift-docc/issues/1283
 -->
 
-This BlueCoat theme is a blue theme, quite smooth and simple.
+This BlueCoat theme is a blue theme, quite smooth and simple, provided by MISO and not OUDS.
 
 ## Overview
 
@@ -142,12 +142,19 @@ struct SomeView: View {
     }
 }
 
+#### Skeleton
+
+![A skeleton component in light and dark modes with BlueCoat theme](component_skeleton_BlueCoat.png)
+
 #### Tags
 
 @TabNavigator {
     @Tab("Tag") {
         ![A tag component in light and dark modes with BlueCoat theme](component_tag_BlueCoat.png)        
     }
+    @Tab("Categorical tag") {
+        ![A categorical tag component in light and dark modes with BlueCoat theme](component_categoricalTag_BlueCoat.png)        
+    }    
     @Tab("Input tag") {
         ![An input tag component in light and dark modes with BlueCoat theme](component_inputTag_BlueCoat.png)
     }

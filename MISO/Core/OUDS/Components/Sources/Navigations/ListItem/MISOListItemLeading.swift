@@ -27,33 +27,33 @@ import SwiftUI
 ///     // Leading with a status icon
 ///     let icon = MISOListItemIcon(type: .info, size: .medium)
 ///     MISOStaticListItem(
-///         data: MISOListItemData(label: "Label"),
+///         data: MISOListItemData(label: .textual("Label")),
 ///         leading: .icon(icon)
 ///     )
 ///
 ///     // Leading with an image
 ///     let image = MISOListItemImage(asset: Image("il_placeholder"), size: .medium)
 ///     MISOStaticListItem(
-///         data: MISOListItemData(label: "Label"),
+///         data: MISOListItemData(label: .textual("Label")),
 ///         leading: .image(image)
 ///     )
 ///
 ///     // Leading with a country flag
 ///     MISOStaticListItem(
-///         data: MISOListItemData(label: "France"),
+///         data: MISOListItemData(label: .textual("France")),
 ///         leading: .flag(.init(asset: Image("il_flag_fr"), description: "France"))
 ///     )
 ///
 ///     // Leading with an avatar
 ///     let avatar = MISOListItemAvatar(type: .icon, size: .medium)
 ///     MISOStaticListItem(
-///         data: MISOListItemData(label: "Profile"),
+///         data: MISOListItemData(label: .textual("Profile")),
 ///         leading: .avatar(avatar)
 ///     )
 ///
 ///     // Leading with a custom view, e.g. a gauge showing a remaining SMS credit
 ///     MISOStaticListItem(
-///         data: MISOListItemData(label: "SMS credit"),
+///         data: MISOListItemData(label: .textual("SMS credit")),
 ///         leading: .slot {
 ///             MISOCircularProgressIndicator(progress: 0.75)
 ///         }
@@ -120,7 +120,7 @@ import SwiftUI
     ///
     /// ```swift
     ///     MISOStaticListItem(
-    ///         data: MISOListItemData(label: "SMS credit"),
+    ///         data: MISOListItemData(label: .textual("SMS credit")),
     ///         leading: .slot {
     ///             MISOCircularProgressIndicator(progress: 0.75)
     ///         }

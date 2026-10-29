@@ -16,7 +16,7 @@ import SwiftUI
 /// ## Code sample
 ///
 /// ```swift
-///     MISOStaticListItem(data: MISOListItemData(label: "Label"))
+///     MISOStaticListItem(data: MISOListItemData(label: .textual("Label")))
 ///         .misoListItemContainerAlignment(.top)
 /// ```
 ///
@@ -59,34 +59,34 @@ import SwiftUI
 ///
 /// ```swift
 ///     // Card style with outline only on interaction
-///     MISONavigationListItem(data: MISOListItemData(label: "Label"))
+///     MISONavigationListItem(data: MISOListItemData(label: .textual("Label")))
 ///         .misoListCardStyle(decoration: .outlined(onInteractionOnly: true))
 ///
 ///     // Card style with an outlined border on all states
-///     MISONavigationListItem(data: MISOListItemData(label: "Label"))
+///     MISONavigationListItem(data: MISOListItemData(label: .textual("Label")))
 ///         .misoListCardStyle(decoration: .outlined(onInteractionOnly: false))
 ///
 ///     // Card style with divider, background
-///     MISONavigationListItem(data: MISOListItemData(label: "Label"))
+///     MISONavigationListItem(data: MISOListItemData(label: .textual("Label")))
 ///         .misoListCardStyle(decoration: .standard(divider: true, background: true))
 ///
 ///     // Card style divider and without background
-///     MISONavigationListItem(data: MISOListItemData(label: "Label"))
+///     MISONavigationListItem(data: MISOListItemData(label: .textual("Label")))
 ///         .misoListCardStyle(decoration: .standard(divider: true, background: false))
 ///
 ///     // Item style with background and divider
-///     MISONavigationListItem(data: MISOListItemData(label: "Label"))
+///     MISONavigationListItem(data: MISOListItemData(label: .textual("Label")))
 ///         .misoListItemStyle(divider: true, .background: true)
 ///
 ///     // Item style with divider and without background
-///     MISONavigationListItem(data: MISOListItemData(label: "Label"))
+///     MISONavigationListItem(data: MISOListItemData(label: .textual("Label")))
 ///         .misoListItemStyle(divider: true, .background: false)
 ///
 ///     // Using global modifier
-///     MISONavigationListItem(data: MISOListItemData(label: "Label"))
+///     MISONavigationListItem(data: MISOListItemData(label: .textual("Label")))
 ///         .misoListContentStyle(.card(.outlined))
 ///
-///     MISONavigationListItem(data: MISOListItemData(label: "Label"))
+///     MISONavigationListItem(data: MISOListItemData(label: .textual("Label")))
 ///         .misoListContentStyle(.item(divider: true, background: false))
 /// ```
 ///
@@ -147,12 +147,12 @@ import SwiftUI
 ///
 /// ```swift
 ///     // Standard size (default)
-///     MISOStaticListItem(data: MISOListItemData(label: "Label"))
+///     MISOStaticListItem(data: MISOListItemData(label: .textual("Label")))
 ///         .misoListItemSize(.standard)
 ///
 ///     // Small size — overline and extraLabel are hidden,
 ///     // avatars and icons use their smallest variant
-///     MISOStaticListItem(data: MISOListItemData(label: "Label"))
+///     MISOStaticListItem(data: MISOListItemData(label: .textual("Label")))
 ///         .misoListItemSize(.small)
 /// ```
 ///
@@ -183,15 +183,15 @@ extension View {
     /// ```swift
     ///     // Set outlined card style
     ///     VStack {
-    ///         MISOStaticListItem(data: MISOListItemData(label: "Item 1"))
-    ///         MISOStaticListItem(data: MISOListItemData(label: "Item 2"))
+    ///         MISOStaticListItem(data: MISOListItemData(label: .textual("Item 1")))
+    ///         MISOStaticListItem(data: MISOListItemData(label: .textual("Item 2")))
     ///     }
     ///     .misoListContentStyle(.card(.outlined())
     ///
     ///     // Set item style with background and divider
     ///     VStack {
-    ///         MISOStaticListItem(data: MISOListItemData(label: "Item 1"))
-    ///         MISOStaticListItem(data: MISOListItemData(label: "Item 2"))
+    ///         MISOStaticListItem(data: MISOListItemData(label: .textual("Item 1")))
+    ///         MISOStaticListItem(data: MISOListItemData(label: .textual("Item 2")))
     ///     }
     ///     .misoListContentStyle(.item(divider: true, background: true))
     /// ```
@@ -199,6 +199,7 @@ extension View {
     /// - Parameter style: The ``MISOListItemContentStyle``  style to apply on items.
     ///
     /// - Returns: A view with the style applied to its list items.
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func misoListContentStyle(_ style: MISOListItemContentStyle) -> some View {
         environment(\.misoListItemContentStyle, style)
     }
@@ -211,8 +212,8 @@ extension View {
     ///
     /// ```swift
     ///     VStack {
-    ///         MISOStaticListItem(data: MISOListItemData(label: "Item 1"))
-    ///         MISOStaticListItem(data: MISOListItemData(label: "Item 2"))
+    ///         MISOStaticListItem(data: MISOListItemData(label: .textual("Item 1")))
+    ///         MISOStaticListItem(data: MISOListItemData(label: .textual("Item 2")))
     ///     }
     ///     .misoListCardStyle(.outlined())
     /// ```
@@ -221,6 +222,7 @@ extension View {
     ///   Defaults to `.standard(divider: true, background: true)`.
     ///
     /// - Returns: A view with the card style applied to its list items, default set to `.standard(divider: true, background: true)`
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func misoListCardStyle(_ decoration: MISOListItemContentStyle.CardDecoration = .standard(divider: true, background: true)) -> some View {
         environment(\.misoListItemContentStyle, .card(decoration))
     }
@@ -233,8 +235,8 @@ extension View {
     ///
     /// ```swift
     ///     VStack {
-    ///         MISOStaticListItem(data: MISOListItemData(label: "Item 1"))
-    ///         MISOStaticListItem(data: MISOListItemData(label: "Item 2"))
+    ///         MISOStaticListItem(data: MISOListItemData(label: .textual("Item 1")))
+    ///         MISOStaticListItem(data: MISOListItemData(label: .textual("Item 2")))
     ///     }
     ///     .misoListItemStyle(divider: true, background: true)
     /// ```
@@ -245,6 +247,7 @@ extension View {
     ///     on interaction states (pressed on focussed)
     ///
     /// - Returns: A view with the item style applied to its list items, default set to `.item(divider: true, background: false)`
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func misoListItemStyle(divider: Bool = true, background: Bool = false) -> some View {
         environment(\.misoListItemContentStyle, .item(divider: divider, background: background))
     }
@@ -257,7 +260,7 @@ extension View {
     ///
     /// ```swift
     ///     MISOStaticListItem(
-    ///         data: MISOListItemData(label: "Label"),
+    ///         data: MISOListItemData(label: .textual("Label")),
     ///         leading: .image(.init(asset: Image("il_placeholder"), size: .medium))
     ///     )
     ///     .misoListItemRoundedMedia(true)
@@ -267,6 +270,7 @@ extension View {
     ///   When `false` (default), media elements are displayed with square corners.
     ///
     /// - Returns: A view with the rounded media setting applied to its list items, default set to *false*
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func misoListItemRoundedMedia(_ rounded: Bool = false) -> some View {
         environment(\.misoListItemRoundedMedia, rounded)
     }
@@ -292,6 +296,7 @@ extension View {
     ///   to the top of the row.
     ///
     /// - Returns: A view with the specified containers alignment applied to its list items.
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func misoListItemContainerAlignment(_ alignment: MISOListItemContainersAlignment = .center) -> some View {
         environment(\.misoListItemContainersAlignment, alignment)
     }
@@ -304,8 +309,8 @@ extension View {
     ///
     /// ```swift
     ///     VStack {
-    ///         MISOStaticListItem(data: MISOListItemData(label: "Compact item"))
-    ///         MISOStaticListItem(data: MISOListItemData(label: "Another compact item"))
+    ///         MISOStaticListItem(data: MISOListItemData(label: .textual("Compact item")))
+    ///         MISOStaticListItem(data: MISOListItemData(label: .textual("Another compact item")))
     ///     }
     ///     .misoListItemSize(.small)
     /// ```
@@ -314,6 +319,7 @@ extension View {
     ///   Use `.standard` (default) for normal sizing, or `.small` for a compact layout.
     ///
     /// - Returns: A view with the specified size applied to its list items.
+    @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
     public func misoListItemSize(_ size: MISOListItemSize) -> some View {
         environment(\.misoListItemSize, size)
     }

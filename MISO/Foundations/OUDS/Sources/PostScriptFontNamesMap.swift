@@ -10,6 +10,7 @@ import SwiftUI
 public typealias PSFNMK = PostScriptFontNamesMapKey
 
 /// Key of the map containing PostScript name to use for a font depending to its family name and weight.
+@available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 @frozen public struct PostScriptFontNamesMapKey: Hashable, CustomStringConvertible {
 
     /// The font family name as defined in raw tokens
@@ -107,6 +108,7 @@ public typealias PostScriptFontNamesMap = [PostScriptFontNamesMapKey: String]
 /// - Parameters:
 ///    - identifier: The PostScript identifier as defined in police books
 ///    - key: The combination of font name and weight
+@available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public func registerFont(postScript identifier: String, forCombination key: PostScriptFontNamesMapKey) {
     internalApplePostScriptFontNames[key] = identifier
 }
@@ -137,24 +139,11 @@ nonisolated(unsafe) private var internalApplePostScriptFontNames: PostScriptFont
 
         // "Noto Sans" defined in FontRawTokens but does not exist as is in font books
 
-        PSFNMK("SF Pro", Font.Weight.ultraLight): "SFPro-Ultralight",
-        PSFNMK("SF Pro", Font.Weight.thin): "SFPro-Thin",
-        PSFNMK("SF Pro", Font.Weight.light): "SFPro-Light",
-        PSFNMK("SF Pro", Font.Weight.regular): "SFPro-Regular",
-        PSFNMK("SF Pro", nil /* courant */ ): "SFPro-Regular",
-        PSFNMK("SF Pro", Font.Weight.medium): "SFPro-Medium",
-        PSFNMK("SF Pro", Font.Weight.semibold): "SFPro-Semibold",
-        PSFNMK("SF Pro", Font.Weight.bold): "SFPro-Bold",
-        PSFNMK("SF Pro", Font.Weight.heavy): "SFPro-Heavy",
-        PSFNMK("SF Pro", Font.Weight.black): "SFPro-Black",
+        // "SF Pro" defined in FontRawTokens but does not exist at all in font books
+        // Even if Apple native system font, not available by name
 
-        PSFNMK("SF Mono", Font.Weight.light): "SFMono-Light",
-        PSFNMK("SF Mono", Font.Weight.regular): "SFMono-Regular",
-        PSFNMK("SF Mono", nil /* courant */ ): "SFMono-Regular",
-        PSFNMK("SF Mono", Font.Weight.medium): "SFMono-Medium",
-        PSFNMK("SF Mono", Font.Weight.semibold): "SFMono-Semibold",
-        PSFNMK("SF Mono", Font.Weight.bold): "SFMono-Bold",
-        PSFNMK("SF Mono", Font.Weight.heavy): "SFMono-Heavy",
+        // "SF Mono" defined in FontRawTokens but does not exist at all in font books
+        // Even if Apple native monospaced system font, not available by name
 
         // "Roboto" defined in FontRawTokens but does not exist at all in font books
 
@@ -167,8 +156,6 @@ nonisolated(unsafe) private var internalApplePostScriptFontNames: PostScriptFont
 
         // "SF Mono" defined in FontRawTokens but does not exist at all in font books
 
-        // MARK: Brand
-
         PSFNMK("Helvetica Neue", Font.Weight.ultraLight): "HelveticaNeue-Ultralight",
         PSFNMK("Helvetica Neue", Font.Weight.thin): "HelveticaNeue-Thin",
         PSFNMK("Helvetica Neue", Font.Weight.light): "HelveticaNeue-Light",
@@ -177,15 +164,8 @@ nonisolated(unsafe) private var internalApplePostScriptFontNames: PostScriptFont
         PSFNMK("Helvetica Neue", nil /* normal */ ): "HelveticaNeue",
         PSFNMK("Helvetica Neue", Font.Weight.medium): "HelveticaNeue-Medium",
         PSFNMK("Helvetica Neue", Font.Weight.bold): "HelveticaNeue-Bold",
-        // NOTE: "Helvetica Neue 75" in Brand TTF has "HelveticaNeue-Bold" PostScript Name
 
-        // WARNING: Needs TTF font files not available in iOS, thus needed to be added in project
-        PSFNMK("Helvetica Neue Arabic", Font.Weight.light): "HelveticaNeueLTArabic-Light",
-        PSFNMK("Helvetica Neue Arabic", Font.Weight.regular): "HelveticaNeueLTArabic-Roman",
-        PSFNMK("Helvetica Neue Arabic", nil): "HelveticaNeueLTArabic-Roman",
-        PSFNMK("Helvetica Neue Arabic", Font.Weight.bold): "HelveticaNeueLTArabic-Bold",
-
-        // MARK: BlueCoat
+        // MARK: Blue Coat
 
         PSFNMK("Shantell Sans", Font.Weight.light): "ShantellSans-Light",
         PSFNMK("Shantell Sans", Font.Weight.regular): "ShantellSans-Regular",

@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
 
+import CoreGraphics // Needed for XCFramework generation and API breaks checks
 import Foundation
 import MISOTokensSemantic
 
@@ -146,7 +147,7 @@ open class MISOTheme: @unchecked Sendable, Equatable {
     /// All components tokens related to select input components like `MISOSelectInput`
     public let selectInput: AllSelectInputComponentTokensProvider
 
-    /// All components tokens related to skeleto components
+    /// All components tokens related to skeleton components
     public let skeleton: AllSkeletonComponentTokensProvider
 
     /// All components tokens related to switch / toggle components like `MISOSwitch`

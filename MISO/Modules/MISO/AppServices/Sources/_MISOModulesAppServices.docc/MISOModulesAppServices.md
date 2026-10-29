@@ -7,6 +7,7 @@
 }
 
 A module which permits to check app state and display information about it.
+Exclusive to MISO.
 
 ## Overview
 

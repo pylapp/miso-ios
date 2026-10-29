@@ -11,7 +11,7 @@ import SwiftUI
 /// ## Code samples
 ///
 /// ```swift
-///   MISOFixedIcon(image: someOudsImage, size: someTokenOfSize)
+///   MISOFixedIcon(image: someImage, size: someTokenOfSize)
 /// ```
 ///
 /// - Since: OUDS 2.3.0
@@ -38,7 +38,7 @@ public struct MISOFixedIcon: View {
 /// ## Code samples
 ///
 /// ```swift
-///   MISOScaledIcon(image: someOudsImage, size: someTokenOfSize)
+///   MISOScaledIcon(image: someImage, size: someTokenOfSize)
 /// ```
 ///
 /// - Since: OUDS 2.3.0

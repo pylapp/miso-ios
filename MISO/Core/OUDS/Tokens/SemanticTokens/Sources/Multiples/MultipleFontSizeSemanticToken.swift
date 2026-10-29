@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
 
+import CoreGraphics // Needed for XCFramework generation and API breaks checks
 import Foundation
 import MISOFoundations
 
@@ -31,6 +32,7 @@ import MISOFoundations
 /// ```
 ///
 /// - Since: OUDS 0.8.0
+@available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public final class MultipleFontSizeSemanticToken: NSObject, Sendable, Comparable {
 
     /// For **extra-compact** and **compact** viewports

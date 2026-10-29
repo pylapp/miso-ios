@@ -5,7 +5,7 @@
     @PageImage(purpose: card, source: "ic_folder_categories")
 }
 
-Some components can be used for **layouts**.
+Some components can be used for **layouts**. These are inherited from OUDS.
 
 ## Overview
 

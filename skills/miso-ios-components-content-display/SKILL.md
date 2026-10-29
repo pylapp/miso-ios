@@ -1,6 +1,6 @@
 ---
 name: miso-ios-components-content-display
-description: Usage and code examples for MISO iOS Content Display components — MISOBulletList (unordered, ordered, nested items, AttributedString labels). Load the miso-ios-framework-usage skill first for imports, themes, and shared rules.
+description: Usage and code examples for OUDS iOS Content Display components — MISOBulletList (unordered, ordered, nested items, raw / localized / rich `MISOTextualContent` texts). Load the miso-ios-framework-usage skill first for imports, themes, and shared rules.
 license: MIT
 ---
 
@@ -20,5 +20,10 @@ MISOBulletList(type: .ordered) {
     MISOBulletList.Item("Label 1") { MISOBulletList.Item("Label 1.1") }
 }
 
-MISOBulletList { MISOBulletList.Item(AttributedString(…)) }
+// Item text is an MISOTextualContent: raw (string literal), localized or rich
+MISOBulletList {
+    MISOBulletList.Item("Raw text")
+    MISOBulletList.Item(.localized("item_label", bundle: Bundle.module))
+    MISOBulletList.Item(.rich(AttributedString(…)))
+}
 ```

@@ -103,7 +103,7 @@ import SwiftUI
 /// For accessibility reasons, if the system settings for reducing motion is enabled, the loading indicator does not move.
 /// For ecodesign reasons, if the device is in low power mode, the loading indicator does not move.
 ///
-/// - Version: 3.3.0 (Figma component design version)
+/// - Version: 3.4.0 (Figma component design version)
 /// - Since: OUDS 0.10.0
 @available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 public struct MISOButton: View {
@@ -118,6 +118,8 @@ public struct MISOButton: View {
     private let action: () -> Void
 
     @State private var isHover: Bool
+
+    @Environment(\.skeletonState) private var skeletonState
     @Environment(\.misoOnColoredSurface) private var onColoredSurface
 
     private enum `Type` {
@@ -355,7 +357,12 @@ public struct MISOButton: View {
             ML.fatal("An MISOButton with MISOButton.Appearance.{Negative | Brand} appearance has been detected as a direct or indirect child of an MISOColoredSurface, which is not allowed.")
         }
 
-        Button(action: action) {
+        Button {
+            if skeletonState == nil {
+                action()
+            }
+        }
+        label: {
             switch type {
             case let .icon(image):
                 ButtonIcon(image: image, size: size)

@@ -3,6 +3,7 @@
 // SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
 
 import CoreFoundation
+import CoreGraphics // Needed for XCFramework generation and API breaks checks
 import MISOTokensRaw
 
 /// An operator to make for example comparisons between ``FontCompositeSemanticToken``
@@ -14,6 +15,7 @@ infix operator <|
 /// All these elements are *raw tokens*, and together define a *composite raw token* for *font* thing.
 ///
 /// - Since: OUDS 0.22.0
+@available(iOS 15, macOS 13, visionOS 1, watchOS 11, tvOS 16, *)
 @frozen public struct FontCompositeSemanticToken: Equatable, Sendable {
 
     // Font family is not included here because this is the only thing which can vary

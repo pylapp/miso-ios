@@ -5,7 +5,7 @@
     @PageImage(purpose: card, source: "ic_folder_categories")
 }
 
-Some components can be used for **indicators**.
+Some components can be used for **indicators**. These are inherited from OUDS.
 
 ## Overview
 
@@ -122,6 +122,78 @@ MISOLinearProgressIndicator(progress: 0.5, helperText: .percent(description: "Up
 MISOLinearProgressIndicator(status: .info, helperText: "Processing…", helperTextAlignment: .start)
 ```
 
+### Skeletons
+
+@TabNavigator {
+    @Tab("BlueCoat") {
+        @Video(source: "component_skeleton_BlueCoat.video")
+    }
+    @Tab("FoxyRough") {
+        @Video(source: "component_skeleton_FoxyRough.video")
+    }
+}
+
+A skeleton is a UI element that indicates when content is loading. The ``MISOSkeleton`` enhances user experience by
+temporarily replacing content with gray areas or animations that simulate the visual structure of the forthcoming content.
+
+#### Activate skeleton for MISO components
+
+Lot of components in MISO library propose their own skeleton representation according to skeleton state set in the SwiftUI environment. 
+Apply `showSkeleton(isVisible:isAnimated:)` to update the state on the view and its children 
+to inform all components in the hierarchy to be displayed in skeleton. 
+
+```swift
+    @State var isLoading = false
+
+    var body: some View {
+        VStack {
+            MISOHeading("My header")
+            MISOAlertMessage(label: "Some text here", description: "You should read this text")
+            MISOButton(text: "Do some action") { isLoading = true }
+        }
+        .showSkeleton(isVisible: isLoading) 
+    }
+```
+
+### Draw skeletons  
+
+It is possible to define a skeleton using ``MISOSkeleton`` and a frame.
+
+```swift
+    VStack {
+        // Heading skeleton
+        MISOSkeleton(securityMargin: true).frame(width: 180, height: 48)
+
+        // Body skeleton
+        MISOSkeleton(securityMargin: true).frame(width: 300, height: 150)
+
+        // Footer skeleton
+        MISOSkeleton(securityMargin: true).frame(width: 180, height: 54)
+    }
+```
+
+### Prepare Views for skeleton layout
+
+The `skeleton` helper applies skeleton on top of a View; the skeleton layout will be rendered with `showSkeleton(isVisible:)`.
+
+```swift
+    var body: some View {
+        VStack(spacing: 20) {
+            Text("The title")
+                .skeleton()
+            
+            Button {    
+            } label: {
+                VStack {
+                    Text("Title")
+                    Label("Subtitle", systemImage: "phone")
+                }
+            }
+            .skeleton()
+        }
+    }
+```
+
 ### Tag
 
 @TabNavigator {
@@ -163,6 +235,33 @@ MISOTag(loadingLabel: "Processing...", shape: .rounded, size: .small)
 
 // Tag with determinate circular progress indicator, with rounded shape in default size
 MISOTag(loadingLabel: "Processing...", progress: 0.75)
+```
+
+### Categorical Tag
+
+@TabNavigator {
+    @Tab("BlueCoat") {
+        ![A categorical tag component in light and dark modes with BlueCoat theme](component_tag_BlueCoat)
+    }
+    @Tab("FoxyRough") {
+        ![A categorical tag component in light and dark modes with FoxyRough theme](component_tag_FoxyRough)
+    }
+}
+
+An ``MISOCategoricalTag`` is like an ``MISOTag`` but without appearance notion and with categories instead of statuses.
+
+```swift
+     // Text only with category 1, rounded shape, default size
+     MISOCategoricalTag(label: "Label", category: .category1)
+
+     // Text with category 2 and bullet
+     MISOCategoricalTag(label: "Label", category: .category2, leading: .bullet)
+
+     // Text with category 3 and custom icon
+     MISOCategoricalTag(label: "Label", category: .category3, leading: .icon(MISOImage(asset: Image(decorative: "ic_heart"))))
+
+     // Small size, square shape
+     MISOCategoricalTag(label: "Label", category: .category4, shape: .square, size: .small)
 ```
 
 ### Input Tag
