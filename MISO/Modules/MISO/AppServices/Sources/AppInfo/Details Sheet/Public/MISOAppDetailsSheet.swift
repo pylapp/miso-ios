@@ -8,6 +8,7 @@
 import MISOComponents
 import MISOComponentsMISO
 import MISOFoundationsMISO
+import MISOThemesContract
 import MISOTokensRaw
 import SwiftUI
 

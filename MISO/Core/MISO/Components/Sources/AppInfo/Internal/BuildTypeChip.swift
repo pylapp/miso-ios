@@ -4,6 +4,7 @@
 // ✿✿✿✿ ʕ •ᴥ•ʔ/ ︻デ═一
 
 import MISOComponents
+import MISOThemesContract
 import MISOTokensSemantic
 import SwiftUI
 

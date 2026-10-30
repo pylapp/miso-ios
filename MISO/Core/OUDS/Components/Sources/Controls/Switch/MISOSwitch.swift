@@ -3,6 +3,7 @@
 // SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
 
 import MISOFoundations
+import MISOThemesContract
 import MISOTokensComponent
 import SwiftUI
 
@@ -41,8 +42,8 @@ public struct MISOSwitch: View {
     private let accessibilityLabel: String
     private let isReadOnly: Bool
 
-    @Environment(\.isEnabled) private var isEnabled
     @Environment(\.theme) private var theme
+    @Environment(\.isEnabled) private var isEnabled
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     // MARK: - Initializers

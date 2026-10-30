@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
 
-import CoreGraphics // Needed for XCFramework generation and API brekaing chchecks
+import CoreGraphics // Needed for XCFramework generation and API breaks checks
 import MISOTokensRaw
 
 /// The global design system tools uses verbs of semantic token for font family, which is basically a raw token for font family

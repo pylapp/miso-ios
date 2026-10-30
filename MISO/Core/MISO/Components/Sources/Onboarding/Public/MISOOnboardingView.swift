@@ -6,6 +6,7 @@
 #if !os(macOS)
 
 import MISOComponents
+import MISOThemesContract
 import SwiftUI
 
 /// Full-screen onboarding scomponent.

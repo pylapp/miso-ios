@@ -3,6 +3,7 @@
 // SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
 
 import MISOFoundations
+import MISOThemesContract
 import SwiftUI
 #if canImport(UIKit) // Conditional import and use of UIKit for documentation generation (see #628 #626)
 import UIKit

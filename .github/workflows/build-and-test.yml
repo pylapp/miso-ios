@@ -42,15 +42,15 @@ concurrency:
 jobs:
   # Build the library
   build:
-    runs-on: macos-26
+    runs-on: macos-27
     timeout-minutes: 60
     steps:
       - name: Checkout code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Set up Xcode 26.4.1
+      - name: Set up Xcode 27.1.0
         run: |
-          sudo xcode-select -s /Applications/Xcode_26.4.1.app/Contents/Developer
+          sudo xcode-select -s /Applications/Xcode_27.1.0.app/Contents/Developer
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b # v1.321.0, https://github.com/ruby/setup-ruby
@@ -67,15 +67,15 @@ jobs:
 
   # Test the library with unit tests
   unit-test:
-    runs-on: macos-26
+    runs-on: macos-27
     timeout-minutes: 60
     steps:
       - name: Checkout code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Set up Xcode 26.4.1
+      - name: Set up Xcode 27.1.0
         run: |
-          sudo xcode-select -s /Applications/Xcode_26.4.1.app/Contents/Developer
+          sudo xcode-select -s /Applications/Xcode_27.1.0.app/Contents/Developer
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b # v1.321.0, https://github.com/ruby/setup-ruby

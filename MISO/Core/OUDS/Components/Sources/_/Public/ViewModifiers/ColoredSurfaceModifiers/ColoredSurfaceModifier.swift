@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
 
+import MISOThemesContract
 import MISOTokensSemantic
 import SwiftUI
 
@@ -14,6 +15,7 @@ public struct MISOColoredSurfaceModifier: ViewModifier {
     // MARK: - Stored properties
 
     let backgroundSurfaceColor: MISOColoredSurface.SurfaceColor
+
     @Environment(\.theme) private var theme
     @Environment(\.colorScheme) private var colorScheme
 

@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
 
+import MISOThemesContract
 import SwiftUI
 
 /// Text component used to render *code snippets* and technical values using a monospaced typography.

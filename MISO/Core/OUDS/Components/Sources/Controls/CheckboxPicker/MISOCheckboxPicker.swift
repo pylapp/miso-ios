@@ -4,6 +4,7 @@
 
 #if !os(watchOS) && !os(tvOS)
 import MISOFoundations
+import MISOThemesContract
 import MISOTokensSemantic
 import SwiftUI
 
@@ -106,9 +107,9 @@ public struct MISOCheckboxPicker<Tag>: View where Tag: Hashable {
 
     // MARK: - Environment variables
 
+    @Environment(\.theme) private var theme
     @Environment(\.isEnabled) private var isEnabled
     @Environment(\.layoutDirection) private var layoutDirection
-    @Environment(\.theme) private var theme
 
     // MARK: - Init
 

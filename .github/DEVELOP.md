@@ -31,7 +31,7 @@
 
 > [!IMPORTANT]
 > You must have an iOS-ready environment to contribute to the project or at least build it.
-> Thus macOS is mandatory and Xcode 26.5.
+> Thus macOS is mandatory and Xcode 27.1.
 
 > [!IMPORTANT]
 > You should check wether or not you have the tools in use in the project like Fastlane, SwiftLint, SwiftFormat, etc.
@@ -119,10 +119,10 @@ source ~/.zshrc
 ruby --version
 ```
 
-We use also for our GitLab CI runners **Xcode 26.5**, we suggest you use this version or newer if you want (but not recommended).
+We use also for our GitLab CI runners **Xcode 27.1**, we suggest you use this version or newer if you want (but not recommended).
 
 > [!IMPORTANT]
-> Xcode 26.5 and Swift 6.3 are used for this project. You must use this configuration.
+> Xcode 27.1 and Swift 6.3 are used for this project. You must use this configuration.
 > No retrocompatibility is planned.
 
 ## Build MISO Package

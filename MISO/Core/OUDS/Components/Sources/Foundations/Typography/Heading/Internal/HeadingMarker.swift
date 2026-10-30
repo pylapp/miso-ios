@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
 
+import MISOThemesContract
 import SwiftUI
 
 /// Internal decorative marker displayed below a large ``MISOHeading`` when the current theme supports it.

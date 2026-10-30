@@ -43,7 +43,7 @@
 ![watchOS 11](https://img.shields.io/badge/watchOS-11-FF1AB2?style=for-the-badge)
 ![tvOS 16](https://img.shields.io/badge/tvOS-16-FF1AB2?style=for-the-badge)
 
-[![Xcode 26.5](https://img.shields.io/badge/Xcode-26.5-blue?style=for-the-badge)](https://developer.apple.com/documentation/xcode-release-notes/xcode-26_5-release-notes)
+[[![Xcode 27.1](https://img.shields.io/badge/Xcode-27.1-blue?style=for-the-badge)](https://developer.apple.com/documentation/xcode-release-notes/xcode-27_1-release-notes)
 
 ## ℹ️ About MISO
 

@@ -3,6 +3,7 @@
 // SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
 
 #if !os(watchOS) && !os(tvOS)
+import MISOThemesContract
 import SwiftUI
 
 // MARK: - MISO PIN Code Input

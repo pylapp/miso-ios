@@ -3,6 +3,7 @@
 // SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
 
 import MISOFoundations // NOTE: "unused" false positive by periphery (https://github.com/peripheryapp/periphery/issues/943)
+import MISOThemesContract
 import MISOTokensRaw
 import MISOTokensSemantic
 import SwiftUI

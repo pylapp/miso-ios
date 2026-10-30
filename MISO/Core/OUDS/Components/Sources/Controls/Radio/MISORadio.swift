@@ -3,6 +3,7 @@
 // SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
 
 import MISOFoundations
+import MISOThemesContract
 import MISOTokensComponent
 import SwiftUI
 

@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MIT
 // SPDX-FileCopyrightText: Copyright (c) Orange SA, Pierre-Yves Lapersonne
 
+import MISOThemesContract
 import MISOTokensSemantic
 import SwiftUI
 
@@ -12,8 +13,8 @@ struct TagBackgroundModifier: ViewModifier {
     let appearance: MISOTag.Appearance
     let type: MISOTag.`Type`
 
-    @Environment(\.isEnabled) private var isEnabled
     @Environment(\.theme) private var theme
+    @Environment(\.isEnabled) private var isEnabled
 
     // MARK: Body
 

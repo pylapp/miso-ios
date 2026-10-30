@@ -4,6 +4,7 @@
 
 #if !os(watchOS) && !os(tvOS)
 import MISOFoundations
+import MISOThemesContract
 import MISOTokensSemantic
 import SwiftUI
 
