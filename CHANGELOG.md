@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Clip pages of `onboarding view` to to have next page a bit displayed in the previous one (pylapp/miso-ios#51)
 - Keep `bullet lit` items in leading position and compute sizes with this anchor (pylapp/miso-ios#36)
 
 ## [1.2.0](https://github.com/pylapp/miso-ios/releases/tag/1.2.0) - 2026-10-29

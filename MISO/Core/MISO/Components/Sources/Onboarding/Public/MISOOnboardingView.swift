@@ -113,6 +113,7 @@ public struct MISOOnboardingView: View {
                     .offset(x: -CGFloat(currentPage) * geo.size.width)
                     .animation(.easeInOut(duration: 0.3), value: currentPage)
                 }
+                .clipped()
 
                 if showProgressIndicator {
                     // Always mounted (space reserved) once `showProgressIndicator` is `true`, so the
