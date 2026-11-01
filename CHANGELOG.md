@@ -4,16 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.2.0](https://github.com/pylapp/miso-ios/releases/tag/1.2.0) - 2026-10-29
 ## [Unreleased](https://github.com/Orange-OpenSource/ouds-ios/compare/3.2.0...develop)
 
-### Changed
+### Fixed
 
-- Move to Xcode 27.1 (Orange-OpenSource/ouds-ios#1558)
-- **BREAKING**: Update protocol `ColorModeMultipleSemanticTokens` with missing tokens
-- **BREAKING**: No more `tuning` possible for `White Label` and `Wireframe` themes (Orange-OpenSource/ouds-ios#1829)
+- Keep `bullet lit` items in leading position and compute sizes with this anchor (pylapp/miso-ios#36)
 
-## [3.2.0](https://github.com/Orange-OpenSource/ouds-ios/compare/3.1.0...3.2.0) - 2026-10-21
+## [1.2.0](https://github.com/pylapp/miso-ios/releases/tag/1.2.0) - 2026-10-29
 
 ### Added
 
@@ -37,9 +34,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Move to Xcode 27.1 (Orange-OpenSource/ouds-ios#1558)
+- **BREAKING**: Update protocol `ColorModeMultipleSemanticTokens` with missing tokens
+- **BREAKING**: No more `tuning` possible for `White Label` and `Wireframe` themes (Orange-OpenSource/ouds-ios#1829)
 - **BREAKING**: Update protocol `ColorModeMultipleSemanticTokens` with missing tokens
 - Availability details for Apple platforms on public API (Orange-OpenSource/ouds-ios#1815) 
-- Documentation for some components with DSM hyperlinks (Orange-OpenSource/ouds-ios#1813)
 - `typography` component to version v1.1.0 (Orange-OpenSource/ouds-ios#1722)
 - `alert message` component to version v1.2.0 (Orange-OpenSource/ouds-ios#1659)
 - `button` component to version v3.4.0 (Orange-OpenSource/ouds-ios#1653)

@@ -68,7 +68,8 @@ struct FrameModifier: ViewModifier {
             content
                 .limitedWidth(minWidth: 0,
                               maxWidth: maxWidth.dimension(for: horizontalSizeClass ?? .regular),
-                              minHeight: 0)
+                              minHeight: 0,
+                              anchor: .leading)
         } else {
             content
                 .frame(maxWidth: maxWidth.dimension(for: horizontalSizeClass ?? .regular), alignment: .leading)
